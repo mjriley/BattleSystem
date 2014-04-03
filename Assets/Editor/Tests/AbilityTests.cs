@@ -16,45 +16,11 @@ namespace Tests
 	public class AbilityTests
 	{
 		[Test]
-		public void SafeExecuteWithNoTargets()
-		{
-			Character c = new Character(70);
-			
-			Ability ability = new Ability("Test Ability", "Normal", 20, 20, c);
-			
-			Character[] targets = new Character[] {};
-			
-			ability.Execute(targets);
-			
-			// No assert necessary to check that an exception is not thrown
-		}
-		
-		[Test]
-		public void SingleTargetDamage()
-		{
-			Character c = new Character(70);
-			
-			Ability ability = new Ability("Test Ability", "Normal", 20, 20, c);
-			
-			Character target = new Character(50);
-			Character[] targets = new Character[] {target};
-			
-			ability.Execute(targets);
-			
-			Assert.AreEqual(30, target.CurrentHP);
-		}
-		
-		[Test]
 		public void AbilityDeductsUsage()
 		{
-			Character c = new Character(70);
+			Ability ability = new Ability("Test Ability", "Normal", 20, 20);
 			
-			Ability ability = new Ability("Test Ability", "Normal", 20, 20, c);
-			
-			Character target = new Character(50);
-			Character[] targets = new Character[] {target};
-			
-			ability.Execute(targets);
+			ability.Use();
 			
 			Assert.AreEqual(19, ability.CurrentUses);
 		}
@@ -63,13 +29,9 @@ namespace Tests
 		[ExpectedException(typeof(Exception))]
 		public void ExceptionOnZeroUses()
 		{
-			Character c = new Character(70);
+			Ability ability = new Ability("Test Ability", "Normal", 20, 0);
 			
-			Ability ability = new Ability("Test Ability", "Normal", 20, 0, c);
-			
-			Character[] targets = new Character[] {};
-			
-			ability.Execute(targets);
+			ability.Use();
 		}
 	}
 }

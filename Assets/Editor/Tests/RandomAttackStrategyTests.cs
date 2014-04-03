@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Tests
@@ -7,38 +8,85 @@ namespace Tests
 	[TestFixture]
 	public class RandomAttackStrategyTests
 	{
+	
+		Character m_actor;
+		Ability m_ability;
+		RandomAttackStrategy m_strategy;
+		
+		Character[] m_allies;
+		Character[] m_enemies;
+	
+		[SetUp]
+		public void Init()
+		{
+			m_actor = new Character(70);
+			m_ability = new Ability("Ability 1", "Normal", 20, 20);
+			
+			Random presetGenerator = new Random(0);
+			m_strategy = new RandomAttackStrategy(presetGenerator);
+			
+			m_actor.addAbility(m_ability);
+			
+			m_allies = new Character[] {};
+			
+			Character enemy = new Character(70);
+			m_enemies = new Character[] { enemy };
+		}
+		
 		[Test]
 		public void CorrectAbilityCalled()
 		{
-			Character c = new Character(70);
-			Ability a1 = new Ability("Test Ability", "Normal", 20, 20, c);
-			Ability a2 = new Ability("Unselected", "Normal", 20, 20, c);
-			Ability a3 = new Ability("Unselected", "Normal", 20, 20, c);
-			Ability a4 = new Ability("Unselected", "Normal", 20, 20, c);
+			Ability a2 = new Ability("Ability 2", "Normal", 20, 20);
+			Ability a3 = new Ability("Ability 3", "Normal", 20, 20);
+			Ability a4 = new Ability("Ability 4", "Normal", 20, 20);
 			
-			c.setAbility(0, a1);
-			c.setAbility(1, a2);
-			c.setAbility(2, a3);
-			c.setAbility(3, a4);
+			m_actor.addAbility(a2);
+			m_actor.addAbility(a3);
+			m_actor.addAbility(a4);
 			
-			Random presetGenerator = new Random(0);
+			AbilityUse turnInfo = m_strategy.Execute(m_actor, m_allies, m_enemies);
 			
-			IAttackStrategy strategy = new RandomAttackStrategy(presetGenerator);
+			Assert.AreEqual(a4.Name, turnInfo.ability.Name);
+		}
+		
+		[Test]
+		public void FindCorrectTarget()
+		{
+			Character e1 = new Character(10);
+			Character e2 = new Character(20);
+			Character e3 = new Character(30);
 			
-			strategy.Execute(c, new Character[] {});
+			Character[] enemies = { e1, e2, e3 };
 			
-			uint[] uses = {a1.CurrentUses, a2.CurrentUses, a3.CurrentUses, a4.CurrentUses};
-				
-			uint[] expected = { 20, 20, 20, 19 };
+			AbilityUse turnInfo = m_strategy.Execute(m_actor, m_allies, enemies);
 			
-			string message = "";
-			foreach (uint i in uses)
-			{
-				message += i + " ";
-			}
+			Assert.AreEqual(e3, turnInfo.targets.First());
+		}
+		
+		[Test]
+		public void SkipInsufficientPPAbilities()
+		{
+			Ability a2 = new Ability("0 PP Ability", "Normal", 20, 0);
 			
-			//Assert.Fail("results are: " + message);
-			Assert.AreEqual(expected, uses);
+			m_actor.addAbility(a2);
+			
+			AbilityUse turnInfo = m_strategy.Execute(m_actor, m_allies, m_enemies);
+			
+			Assert.AreEqual(m_ability.Name, turnInfo.ability.Name);
+		}
+		
+		[Test]
+		public void SkipTurnOnNoPPLeft()
+		{
+			Ability a1 = new Ability("Ability 1", "Normal", 20, 0);
+			Ability a2 = new Ability("Ability 2", "Normal", 20, 0);
+			
+			m_actor.replaceAbility(0, a1);
+			m_actor.addAbility(a2);
+			
+			AbilityUse turnInfo = m_strategy.Execute(m_actor, m_allies, m_enemies);
+			
+			Assert.IsNull(turnInfo.ability);
 		}
 	}
 }

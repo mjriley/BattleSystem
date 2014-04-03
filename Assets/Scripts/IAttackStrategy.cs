@@ -1,4 +1,6 @@
-﻿public interface IAttackStrategy
+﻿using System.Collections.Generic;
+
+public interface IAttackStrategy
 {
-	void Execute(Character actor, Character[] targets);
+	AbilityUse Execute(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies);
 }

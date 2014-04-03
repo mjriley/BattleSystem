@@ -2,8 +2,6 @@
 
 public class Ability
 {
-	private Character m_parent;
-	
 	private string m_name;
 	public string Name
 	{
@@ -32,28 +30,23 @@ public class Ability
 	public uint CurrentUses
 	{
 		get { return m_currentUses; }
+		set { m_currentUses = value; }
 	}
 	
-	public Ability(string name, string type, int damageAmount, uint maxUses, Character c)
+	public Ability(string name, string type, int damageAmount, uint maxUses)
 	{
 		m_name = name;
 		m_type = type;
 		m_damageAmount = damageAmount;
 		m_maxUses = maxUses;
 		m_currentUses = m_maxUses;
-		m_parent = c;
 	}
 	
-	public void Execute(Character[] targets)
+	public void Use()
 	{
 		if (m_currentUses <= 0)
 		{
 			throw new Exception("No ability charges left");
-		}
-		
-		foreach (Character target in targets)
-		{
-			target.TakeDamage(m_damageAmount);
 		}
 		
 		m_currentUses -= 1;
