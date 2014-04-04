@@ -1,0 +1,35 @@
+A Wild <X> appeared!
+Go! <Y>!
+
+What will <Y> do?
+
+-- Fight
+<Y> used <Abiilty Name>!
+A critical hit!
+It's not very effective...
+It's super effective!
+
+<Y> grew to Lvl. <#>!
+
+<Y>'s Special Attack rose!
+<Y>'s Special Defense rose!
+
+The wild <X> used <Ability Name>!
+
+The wild <X>'s HP is full!
+
+The wild <X> transformed into <Y>!
+
+The wild <X> fainted!
+
+
+<Y> gained <#> Exp. Points!
+
+You got away safely!
+
+
+First -- set up the game state machine object from within the start event of the display (or elsewhere)
+Second -- subscribe to the game machine's different events
+ - General Message should be one
+ - State change should be another -- mainly, when we need user input
+ - use a callback for RetrieveUserInput
