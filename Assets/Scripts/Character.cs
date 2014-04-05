@@ -10,16 +10,23 @@ public class Character
 	private int m_maxHP;
 	private int m_currentHP;
 	private List<Ability> m_abilities = new List<Ability>();
+	private string m_name;
 	
 	private IAttackStrategy m_strategy;
+	
+	public string Name
+	{
+		get { return m_name; }
+	}
 	
 	public int CurrentHP
 	{
 		get { return m_currentHP; }
 	}
 	
-	public Character(int maxHP, IAttackStrategy strategy = null)
+	public Character(string name, int maxHP, IAttackStrategy strategy = null)
 	{
+		m_name = name;
 		m_maxHP = maxHP;
 		m_currentHP = m_maxHP;
 		
@@ -61,23 +68,25 @@ public class Character
 		return 1;
 	}
 	
-	public void handleTurn(IEnumerable<Character> allies, IEnumerable<Character> enemies)
+	public AbilityUse getTurnAbility(IEnumerable<Character> allies, IEnumerable<Character> enemies)
 	{
-		uint usageCost = getUsageCost();
+		//uint usageCost = getUsageCost();
 		
 		AbilityUse turnInfo = m_strategy.Execute(this, allies, enemies);
 		
-		if (turnInfo.ability == null)
-		{
-			return;
-		}
+		return turnInfo;
 		
-		foreach (Character target in turnInfo.targets)
-		{
-			target.TakeDamage(turnInfo.ability.DamageAmount);
-		}
-		
-		turnInfo.ability.CurrentUses -= usageCost;
+//		if (turnInfo.ability == null)
+//		{
+//			return;
+//		}
+//		
+//		foreach (Character target in turnInfo.targets)
+//		{
+//			target.TakeDamage(turnInfo.ability.DamageAmount);
+//		}
+//		
+//		turnInfo.ability.CurrentUses -= usageCost;
 	}
 
 }

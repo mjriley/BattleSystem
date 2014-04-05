@@ -81,6 +81,6 @@ public class RandomAttackStrategy : IAttackStrategy
 	
 		List<Character> targets = DetermineTargets(ability, actor, allies, enemies);
 		
-		return new AbilityUse(targets, ability);
+		return new AbilityUse(actor, targets, ability);
 	}
 }

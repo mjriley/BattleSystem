@@ -6,9 +6,9 @@ public class UserInputStrategy : IAttackStrategy
 
 	public delegate int GetUserInput();
 	
-	private GetUserInput m_inputDelegate;
+	private BattleSystem.PlayerAbilityChoiceHandler m_inputDelegate;
 	
-	public UserInputStrategy(GetUserInput inputDelegate)
+	public UserInputStrategy(BattleSystem.PlayerAbilityChoiceHandler inputDelegate)
 	{
 		m_inputDelegate = inputDelegate;
 	}
@@ -16,10 +16,10 @@ public class UserInputStrategy : IAttackStrategy
 	public AbilityUse Execute(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
 	{
 		System.Console.WriteLine("Hello World");
-		int abilityIndex = m_inputDelegate();
+		int abilityIndex = m_inputDelegate(actor.getAbilities());
 		List<Character> targets = new List<Character>();
 		targets.Add(enemies.First());
-		return new AbilityUse(targets, actor.getAbilities()[abilityIndex]);
+		return new AbilityUse(actor, targets, actor.getAbilities()[abilityIndex]);
 	}
 }
 
