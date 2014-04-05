@@ -15,6 +15,8 @@ public class Display : MonoBehaviour {
 	
 	bool m_waitingForInput = false;
 	int m_pressedIndex = 0;
+	
+	bool m_handledCurrentText = true;
 
 
 	private Character m_character;
@@ -44,10 +46,10 @@ public class Display : MonoBehaviour {
 		
 		//yield return StartCoroutine(DoInit());
 		
-		m_system = new BattleSystem(this.HandleText, this.GetPlayerChoice);
+		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed, this.GetPlayerChoice);
 		m_system.CreatePlayerPokemon();
 		
-		m_system.Start();
+		//m_system.Start();
 	}
 	
 	void HandleText(string message)
@@ -55,12 +57,20 @@ public class Display : MonoBehaviour {
 		// do something
 		m_statusText = message;
 		
-		StartCoroutine(Wait());
+		m_handledCurrentText = false;
+		
+		StartCoroutine("Wait");
+	}
+	
+	bool CurrentMessageProcessed()
+	{
+		return m_handledCurrentText;
 	}
 	
 	IEnumerator Wait()
 	{
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(10);
+		m_handledCurrentText = true;
 	}
 	
 	int GetPlayerChoice(List<Ability> abilities)
@@ -76,27 +86,16 @@ public class Display : MonoBehaviour {
 //		m_character.handleTurn(null, m_enemies);
 //		hasStarted = !hasStarted;
 //	}
-
-
-	
-	int GetUserInput()
-	{
-		m_waitingForInput = true;
-		StartCoroutine(WaitForButtonPress());
-		return m_pressedIndex;
-	}
-	
-	IEnumerator WaitForButtonPress()
-	{
-		while (!m_waitingForInput)
-		{
-			yield return null;
-		}
-	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
+		if (Input.GetKeyDown("space"))
+		{
+			StopCoroutine("Wait");
+			m_handledCurrentText = true;
+		}
+		m_system.Update();
 	}
 	
 	void OnGUI()

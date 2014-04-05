@@ -5,3 +5,4 @@ web_player/
 *.sln
 *.csproj
 *.DS_Store
+*.swp

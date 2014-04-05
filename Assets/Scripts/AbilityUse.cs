@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public struct AbilityUse
+public class AbilityUse
 {
 	public Character actor;
 	public List<Character> targets;
