@@ -73,18 +73,19 @@ public class Character
 	public void UpdateBattleConditions(IEnumerable<Character> enemies)
 	{
 		m_enemies = enemies;
+		m_strategy.UpdateConditions(this, null, m_enemies);
 	}
 	
 	public AbilityUse getTurn()
 	{
-		return m_strategy.Execute(this, null, m_enemies);
+		return m_strategy.Execute();
 	}
 	
 	public AbilityUse getTurnAbility(IEnumerable<Character> allies, IEnumerable<Character> enemies)
 	{
 		//uint usageCost = getUsageCost();
 		
-		AbilityUse turnInfo = m_strategy.Execute(this, allies, enemies);
+		AbilityUse turnInfo = m_strategy.Execute();
 		
 		return turnInfo;
 		

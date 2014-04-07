@@ -1,14 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Display.cs">
     <Files>
-      <File FileName="Assets/Scripts/Display.cs" Line="97" Column="3" />
-      <File FileName="Assets/Scripts/BattleSystem.cs" Line="124" Column="30" />
-      <File FileName="Assets/Scripts/Character.cs" Line="78" Column="23" />
+      <File FileName="Assets/Scripts/Display.cs" Line="159" Column="3" />
+      <File FileName="Assets/Scripts/BattleSystem.cs" Line="76" Column="2" />
+      <File FileName="Assets/Scripts/UserInputStrategy.cs" Line="21" Column="2" />
+      <File FileName="Assets/Scripts/Character.cs" Line="88" Column="45" />
       <File FileName="Assets/Scripts/IAttackStrategy.cs" Line="7" Column="1" />
-      <File FileName="Assets/Scripts/UserInputStrategy.cs" Line="19" Column="9" />
-      <File FileName="Assets/Scripts/AbilityUse.cs" Line="11" Column="6" />
-      <File FileName="Assets/Scripts/RandomAttackStrategy.cs" Line="63" Column="1" />
+      <File FileName="Assets/Scripts/RandomAttackStrategy.cs" Line="90" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

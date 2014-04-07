@@ -18,15 +18,17 @@ public class BattleSystem
 	public delegate void TextAlertHandler(string message);
 	
 	private IsMessageProcessed m_messageProcessed;
-	private PlayerAbilityChoiceHandler m_abilityHandler;
 	private TextAlertHandler m_textHandler;
+	
+	private UserInputStrategy.ReceiveConditions m_abilityDisplayHandler;
 	
 	public enum State
 	{
 		NewEncounter,
 		GetAbility,
 		WaitingOnAbility,
-		NextText
+		NextText,
+		Idle
 	};
 	
 	public enum MessageState
@@ -38,13 +40,13 @@ public class BattleSystem
 	private MessageState m_currentMessageState = MessageState.Ready;
 	
 	private State m_currentState = State.NewEncounter;
+	private State m_nextState = State.NewEncounter;
 	private string m_status = "";
 	
-	public BattleSystem(TextAlertHandler textHandler, IsMessageProcessed messageChecker, PlayerAbilityChoiceHandler abilityHandler, Random generator = null)
+	public BattleSystem(TextAlertHandler textHandler, IsMessageProcessed messageChecker, Random generator = null)
 	{
 		m_messageProcessed = messageChecker;
 		m_textHandler = textHandler;
-		m_abilityHandler = abilityHandler;
 		
 		m_generator = generator;
 		if (m_generator == null)
@@ -54,10 +56,10 @@ public class BattleSystem
 	}
 	
 	
-	public void CreatePlayerPokemon()
+	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, UserInputStrategy.GetUserInput abilityChoiceHandler)
 	{
-		//UserInputStrategy userStrategy = new UserInputStrategy(m_abilityHandler);
-		RandomAttackStrategy userStrategy = new RandomAttackStrategy();
+		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
+		//RandomAttackStrategy userStrategy = new RandomAttackStrategy();
 		Character player_pokemon = new Character("My Pokemon", 70, userStrategy);
 		
 		Ability ability0 = new Ability("Ability 0", "Normal", 50, 20);
@@ -106,6 +108,10 @@ public class BattleSystem
 				m_currentMessageState = MessageState.Waiting;
 				m_textHandler(m_status);
 			}
+			else
+			{
+				m_currentState = m_nextState;
+			}
 		}
 		else if (m_currentMessageState == MessageState.Waiting)
 		{
@@ -123,7 +129,9 @@ public class BattleSystem
 			m_enemies.Add(m_enemy);
 			m_messages.Enqueue("A Wild " + m_enemy.Name + " appeared!");
 			m_messages.Enqueue("Go! " + m_activePokemon.Name + "!");
-			m_currentState = State.GetAbility;
+			//m_currentState = State.GetAbility;
+			m_currentState = State.Idle;
+			m_nextState = State.GetAbility;
 		}
 		else if (m_currentState == State.GetAbility)
 		{
@@ -133,7 +141,9 @@ public class BattleSystem
 			
 			//m_abilityHandler(m_activePokemon.getAbilities());
 			
-			m_currentState = State.WaitingOnAbility;
+			//m_currentState = State.WaitingOnAbility;
+			m_currentState = State.Idle;
+			m_nextState = State.WaitingOnAbility;
 		}
 		else if (m_currentState == State.WaitingOnAbility)
 		{
@@ -149,7 +159,9 @@ public class BattleSystem
 				
 				m_messages.Enqueue(enemyTurn.actor.Name + " used " + enemyTurn.ability.Name + "!");
 				
-				m_currentState = State.GetAbility;
+				//m_currentState = State.GetAbility;
+				m_currentState = State.Idle;
+				m_nextState = State.GetAbility;
 			}
 		}
 	}

@@ -6,6 +6,8 @@ public class RandomAttackStrategy : IAttackStrategy
 {
 	private System.Random m_generator;
 	
+	private AbilityUse m_turnInfo;
+	
 	/*******
 	 * Basic Constructor
 	 * the generator parameter is provided for testing purposes
@@ -71,16 +73,21 @@ public class RandomAttackStrategy : IAttackStrategy
 		return targets;
 	}
 	
-	/*********
-	 * Determine an ability to use on a target, at random
-	 * Returns an AbilityUse struct
-	 ***************/
-	public AbilityUse Execute(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
+	public void UpdateConditions(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
 	{
 		Ability ability = DetermineAbility(actor);
 	
 		List<Character> targets = DetermineTargets(ability, actor, allies, enemies);
 		
-		return new AbilityUse(actor, targets, ability);
+		m_turnInfo = new AbilityUse(actor, targets, ability);
+	}
+	
+	/*********
+	 * Determine an ability to use on a target, at random
+	 * Returns an AbilityUse struct
+	 ***************/
+	public AbilityUse Execute()
+	{
+		return m_turnInfo;
 	}
 }

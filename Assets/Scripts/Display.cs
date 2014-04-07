@@ -9,12 +9,18 @@ public class Display : MonoBehaviour {
 	public GUIStyle style;
 	
 	public GUIStyle abilityNameStyle;
+	public GUIStyle abilityDetailsStyle;
 	public GUIStyle typeNameStyle;
+	public GUIStyle statusStyle;
+	
+	public int tagOffset = 10;
 	
 	bool hasStarted = false;
 	
 	bool m_waitingForInput = false;
 	int m_pressedIndex = 0;
+	
+	private List<Ability> m_abilities;
 	
 	bool m_handledCurrentText = true;
 
@@ -46,8 +52,8 @@ public class Display : MonoBehaviour {
 		
 		//yield return StartCoroutine(DoInit());
 		
-		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed, this.GetPlayerChoice);
-		m_system.CreatePlayerPokemon();
+		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
+		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetAbilityChoice);
 		
 		//m_system.Start();
 	}
@@ -62,6 +68,22 @@ public class Display : MonoBehaviour {
 		StartCoroutine("Wait");
 	}
 	
+	void HandleAbilities(List<Ability> abilities)
+	{
+		m_abilities = abilities;
+		m_waitingForInput = true;
+	}
+	
+	int GetAbilityChoice()
+	{
+		if (!m_waitingForInput)
+		{
+			return m_pressedIndex;
+		}
+		
+		return -1;
+	}
+	
 	bool CurrentMessageProcessed()
 	{
 		return m_handledCurrentText;
@@ -69,85 +91,106 @@ public class Display : MonoBehaviour {
 	
 	IEnumerator Wait()
 	{
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(4);
+		m_statusText = "";
 		m_handledCurrentText = true;
 	}
 	
-	int GetPlayerChoice(List<Ability> abilities)
+	void DoneWithText()
 	{
-		// do something
-		
-		return 1;
+		StopCoroutine ("Wait");
+		m_handledCurrentText = true;
 	}
 	
-//	private IEnumerator DoInit()
-//	{
-//		yield return new WaitForSeconds(5);
-//		m_character.handleTurn(null, m_enemies);
-//		hasStarted = !hasStarted;
-//	}
+	void processButtonClick(int index)
+	{
+		m_pressedIndex = index;
+		m_waitingForInput = false;
+		DoneWithText();
+	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown("space"))
+		if (Input.GetKeyDown("space") && !m_waitingForInput)
 		{
-			StopCoroutine("Wait");
-			m_handledCurrentText = true;
+			DoneWithText();
+		}
+		
+		if (m_waitingForInput)
+		{
+			if (Input.GetKeyDown("1"))
+			{
+				processButtonClick(0);
+			}
+			else if (Input.GetKeyDown("2"))
+			{
+				processButtonClick(1);
+			}
+			else if (Input.GetKeyDown("3"))
+			{
+				processButtonClick(2);
+			}
+			else if (Input.GetKeyDown("4"))
+			{
+				processButtonClick(3);
+			}
 		}
 		m_system.Update();
 	}
 	
 	void OnGUI()
 	{
-//		if (m_waitingForInput)
-//		{
-//	
-//			//GUI.color = Color.yellow;
-//	//		GUI.DrawTexture(new Rect(10, 10, 200, 90), baseTexture);
-//	//		
-//	//		
-//	//		GUI.DrawTexture(new Rect(460, 10, -200, 90), baseTexture);
-//	//		
-//	//		GUI.DrawTexture (new Rect(10, 120, 200, 90), baseTexture);
-//	//		
-//	//		GUI.DrawTexture (new Rect(460, 120, -200, 90), baseTexture);
-//	//		
-//	//		GUI.Box (new Rect(10, 10, 100, 90), typeTexture, style);
-//	//		
-//	//		GUI.Label (new Rect(10, 10, 100, 90), "Me First", abilityNameStyle);
-//	//		GUI.Label (new Rect(10, 10, 100, 90), "Normal", typeNameStyle);
-//			
-//			if (GUI.Button(new Rect(10, 10, 200, 90), baseTexture))
-//			{
-//				m_pressedIndex = 0;
-//				m_waitingForInput = false;
-//			}
-//			
-//			if (GUI.Button(new Rect(260, 10, 200, 90), baseTexture))
-//			{
-//				m_pressedIndex = 1;
-//				m_waitingForInput = false;
-//			}
-//			
-//			if (GUI.Button(new Rect(10, 120, 200, 90), baseTexture))
-//			{
-//				m_pressedIndex = 2;
-//				m_waitingForInput = false;
-//			}
-//			
-//			if (GUI.Button(new Rect(260, 120, 200, 90), baseTexture))
-//			{
-//				m_pressedIndex = 3;
-//				m_waitingForInput = false;
-//			}
-//		}
+		int buttonHeight = 90;
+		int padding = 50;
+		
+		int buttonWidth = (Screen.width - padding) / 2;
+		
+		if (m_waitingForInput)
+		{
+			GUI.DrawTexture(new Rect(0, 0, buttonWidth, buttonHeight), baseTexture);
+			GUI.Box(new Rect(tagOffset, buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
+			GUI.Label(new Rect(0, 0, buttonWidth, buttonHeight / 2), m_abilities[0].Name, abilityNameStyle);
+			GUI.Label(new Rect(0, buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
+			if (GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), ""))
+			{
+				processButtonClick(0);
+			}
+			
+			GUI.DrawTexture(new Rect(Screen.width, 0, -buttonWidth, buttonHeight), baseTexture);
+			GUI.Box(new Rect((Screen.width + padding) / 2 + tagOffset, buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
+			GUI.Label(new Rect((Screen.width + padding) / 2, 0, buttonWidth, buttonHeight / 2), m_abilities[1].Name, abilityNameStyle);
+			GUI.Label(new Rect((Screen.width + padding) / 2, buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
+			if (GUI.Button(new Rect((Screen.width + padding) / 2, 0, buttonWidth, buttonHeight), ""))
+			{
+				processButtonClick(1);
+			}
+			
+			GUI.DrawTexture(new Rect(0, 120, buttonWidth, buttonHeight), baseTexture);
+			GUI.Box(new Rect(tagOffset, 120 + buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
+			GUI.Label(new Rect(0, 120, buttonWidth, buttonHeight / 2), m_abilities[2].Name, abilityNameStyle);
+			GUI.Label(new Rect(0, 120 + buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
+			if (GUI.Button(new Rect(0, 120, buttonWidth, 90), ""))
+			{
+				processButtonClick(2);
+			}
+			
+			GUI.DrawTexture (new Rect(Screen.width, 120, -buttonWidth, buttonHeight), baseTexture);
+			GUI.Box(new Rect((Screen.width + padding) / 2 + tagOffset, 120 + buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
+			GUI.Label(new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight / 2), m_abilities[3].Name, abilityNameStyle);
+			GUI.Label(new Rect((Screen.width + padding) / 2, 120 + buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
+			if (GUI.Button(new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight), ""))
+			{
+				processButtonClick(3);
+			}
+		}
 		
 		//GUI.color = Color.black;
 		//GUI.Box(new Rect(150, 10, 100, 90), texture, style);
 //		else
 //		{
-			GUI.Label(new Rect(10, 10, 200, 90), m_statusText);
+			GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
+			GUI.Box(new Rect(0, Screen.height - 50, Screen.width, 50), m_statusText, statusStyle);
 //		}
 	}
 }
