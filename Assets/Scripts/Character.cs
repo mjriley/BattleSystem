@@ -6,6 +6,11 @@ using System.Linq;
 
 public class Character
 {
+	public enum Sex
+	{
+		Male,
+		Female
+	}
 	
 	private int m_maxHP;
 	private int m_currentHP;
@@ -26,9 +31,16 @@ public class Character
 		get { return m_currentHP; }
 	}
 	
-	public Character(string name, int maxHP, IAttackStrategy strategy = null)
+	private Sex m_gender;
+	public Sex Gender
+	{
+		get { return m_gender; }
+	}
+	
+	public Character(string name, Sex gender, int maxHP, IAttackStrategy strategy = null)
 	{
 		m_name = name;
+		m_gender = gender;
 		m_maxHP = maxHP;
 		m_currentHP = m_maxHP;
 		

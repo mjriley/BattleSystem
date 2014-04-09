@@ -6,6 +6,8 @@ public class Display : MonoBehaviour {
 
 	public Texture2D baseTexture;
 	public Texture2D typeTexture;
+	
+	
 	public GUIStyle style;
 	
 	public GUIStyle abilityNameStyle;
@@ -14,8 +16,6 @@ public class Display : MonoBehaviour {
 	public GUIStyle statusStyle;
 	
 	public int tagOffset = 10;
-	
-	bool hasStarted = false;
 	
 	bool m_waitingForInput = false;
 	int m_pressedIndex = 0;
@@ -139,6 +139,15 @@ public class Display : MonoBehaviour {
 		m_system.Update();
 	}
 	
+	public int pokemonNameHeight = 20;
+	public int pokemonNameWidth = 70;
+	public int statusHeight = 50;
+	
+	public int healthDisplayWidth = 439;
+	public int healthDisplayHeight = 77;
+	
+	public GUIStyle m_playerNameStyle;	
+	
 	void OnGUI()
 	{
 		int buttonHeight = 90;
@@ -175,7 +184,7 @@ public class Display : MonoBehaviour {
 				processButtonClick(2);
 			}
 			
-			GUI.DrawTexture (new Rect(Screen.width, 120, -buttonWidth, buttonHeight), baseTexture);
+			GUI.DrawTexture(new Rect(Screen.width, 120, -buttonWidth, buttonHeight), baseTexture);
 			GUI.Box(new Rect((Screen.width + padding) / 2 + tagOffset, 120 + buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
 			GUI.Label(new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight / 2), m_abilities[3].Name, abilityNameStyle);
 			GUI.Label(new Rect((Screen.width + padding) / 2, 120 + buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
@@ -183,14 +192,18 @@ public class Display : MonoBehaviour {
 			{
 				processButtonClick(3);
 			}
+			
 		}
 		
-		//GUI.color = Color.black;
-		//GUI.Box(new Rect(150, 10, 100, 90), texture, style);
-//		else
-//		{
-			GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
-			GUI.Box(new Rect(0, Screen.height - 50, Screen.width, 50), m_statusText, statusStyle);
-//		}
+		Vector2 playerSizeInfo = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
+		Rect playerRect = new Rect(0, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);	
+		PlayerStatusDisplay.Display(playerRect, "Goober", Character.Sex.Male, m_playerNameStyle);
+		
+		Rect aiRect = new Rect(Screen.width - playerSizeInfo.x, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);
+		PlayerStatusDisplay.Display(aiRect, "AI Pokemon", Character.Sex.Female, m_playerNameStyle);
+		
+		GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
+		GUI.Box(new Rect(0, Screen.height - statusHeight, Screen.width, statusHeight), m_statusText, statusStyle);
 	}
+	
 }

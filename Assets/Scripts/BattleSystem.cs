@@ -60,7 +60,7 @@ public class BattleSystem
 	{
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
 		//RandomAttackStrategy userStrategy = new RandomAttackStrategy();
-		Character player_pokemon = new Character("My Pokemon", 70, userStrategy);
+		Character player_pokemon = new Character("My Pokemon", Character.Sex.Male, 70, userStrategy);
 		
 		Ability ability0 = new Ability("Ability 0", "Normal", 50, 20);
 		Ability ability1 = new Ability("Ability 1", "Normal", 10, 20);
@@ -183,7 +183,7 @@ public class BattleSystem
 		
 		RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
 		
-		Character enemy = new Character(name, 70, enemy_strategy);
+		Character enemy = new Character(name, Character.Sex.Female, 70, enemy_strategy);
 		Ability ability0 = new Ability("Enemy Ability 0", "Normal", 20, 20);
 		Ability ability1 = new Ability("Enemy Ability 1", "Normal", 20, 20);
 		Ability ability2 = new Ability("Enemy Ability 2", "Normal", 20, 20);
