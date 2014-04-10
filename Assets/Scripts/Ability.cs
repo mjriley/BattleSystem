@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Ability
 {
@@ -42,13 +43,30 @@ public class Ability
 		m_currentUses = m_maxUses;
 	}
 	
-	public void Use()
+	// TODO: Figure out a proper return value to show what happened
+	public void Execute(Character actor, List<Character> enemies)
 	{
 		if (m_currentUses <= 0)
 		{
 			throw new Exception("No ability charges left");
 		}
 		
+		if (enemies != null && enemies.Count > 0)
+		{
+			enemies[0].TakeDamage(m_damageAmount);
+		}
+		
 		m_currentUses -= 1;
+		
 	}
+	
+//	public void Use()
+//	{
+//		if (m_currentUses <= 0)
+//		{
+//			throw new Exception("No ability charges left");
+//		}
+//		
+//		m_currentUses -= 1;
+//	}
 }

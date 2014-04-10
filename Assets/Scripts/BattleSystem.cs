@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+
 public class BattleSystem
 {
 	List<Character> m_playerPokemon = new List<Character>();
@@ -17,6 +18,9 @@ public class BattleSystem
 	public delegate int PlayerAbilityChoiceHandler(List<Ability> abilities);
 	public delegate void TextAlertHandler(string message);
 	
+	public delegate void StateChangedHandler(object sender, BattleArgs e);
+	public event StateChangedHandler StateChanged;
+	
 	private IsMessageProcessed m_messageProcessed;
 	private TextAlertHandler m_textHandler;
 	
@@ -25,11 +29,21 @@ public class BattleSystem
 	public enum State
 	{
 		NewEncounter,
+		BattleIntro,
+		InBattle
+	};
+	
+	private enum InternalState
+	{
+		NewEncounter,
 		GetAbility,
 		WaitingOnAbility,
 		NextText,
 		Idle
 	};
+	
+	private State m_externalState = State.NewEncounter;
+	public State BattleState { get { return m_externalState; } }
 	
 	public enum MessageState
 	{
@@ -39,8 +53,8 @@ public class BattleSystem
 	
 	private MessageState m_currentMessageState = MessageState.Ready;
 	
-	private State m_currentState = State.NewEncounter;
-	private State m_nextState = State.NewEncounter;
+	private InternalState m_currentState = InternalState.NewEncounter;
+	private InternalState m_nextState = InternalState.NewEncounter;
 	private string m_status = "";
 	
 	public BattleSystem(TextAlertHandler textHandler, IsMessageProcessed messageChecker, Random generator = null)
@@ -55,11 +69,25 @@ public class BattleSystem
 		}
 	}
 	
+	private void StateChange(State newState)
+	{
+		if (m_externalState != newState)
+		{
+			m_externalState = newState;
+			
+			if (StateChanged != null)
+			{	
+				BattleArgs e = new BattleArgs();
+				e.State = m_externalState;
+				StateChanged(this, e);
+			}
+		}
+	}
+	
 	
 	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, UserInputStrategy.GetUserInput abilityChoiceHandler)
 	{
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
-		//RandomAttackStrategy userStrategy = new RandomAttackStrategy();
 		Character player_pokemon = new Character("My Pokemon", Character.Sex.Male, 70, userStrategy);
 		
 		Ability ability0 = new Ability("Ability 0", "Normal", 50, 20);
@@ -73,28 +101,6 @@ public class BattleSystem
 		
 		addPlayerPokemon(player_pokemon);
 		setActivePokemon(0);
-	}
-	
-	
-	public void Start()
-	{
-		Character enemy = generateEnemyPokemon();
-//		do
-//		{
-			List<Character> allies = new List<Character>();
-			allies.Add(m_activePokemon);
-			
-			List<Character> enemies = new List<Character>();
-			enemies.Add(enemy);
-			AbilityUse player_turn = m_activePokemon.getTurnAbility(null, enemies);
-			AbilityUse enemy_turn = enemy.getTurnAbility(null, allies);
-			
-			// determine order of the turns in the queue
-			
-			resolveTurn(player_turn);
-			resolveTurn(enemy_turn);
-			
-//		} while (!m_activePokemon.isDead() && !enemy.isDead());
 	}
 	
 	public void Update()
@@ -123,45 +129,46 @@ public class BattleSystem
 		}
 		
 		// handle logic
-		if (m_currentState == State.NewEncounter)
+		if (m_currentState == InternalState.NewEncounter)
 		{
 			m_enemy = generateEnemyPokemon();
 			m_enemies.Add(m_enemy);
 			m_messages.Enqueue("A Wild " + m_enemy.Name + " appeared!");
 			m_messages.Enqueue("Go! " + m_activePokemon.Name + "!");
-			//m_currentState = State.GetAbility;
-			m_currentState = State.Idle;
-			m_nextState = State.GetAbility;
+			m_currentState = InternalState.Idle;
+			m_nextState = InternalState.GetAbility;
+			
+			StateChange(State.BattleIntro);
 		}
-		else if (m_currentState == State.GetAbility)
+		else if (m_currentState == InternalState.GetAbility)
 		{
 			m_messages.Enqueue("What will " + m_activePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
 			m_activePokemon.UpdateBattleConditions(m_enemies);
 			
-			//m_abilityHandler(m_activePokemon.getAbilities());
+			m_currentState = InternalState.Idle;
+			m_nextState = InternalState.WaitingOnAbility;
 			
-			//m_currentState = State.WaitingOnAbility;
-			m_currentState = State.Idle;
-			m_nextState = State.WaitingOnAbility;
+			StateChange(State.InBattle);
 		}
-		else if (m_currentState == State.WaitingOnAbility)
+		else if (m_currentState == InternalState.WaitingOnAbility)
 		{
 			AbilityUse turnInfo = m_activePokemon.getTurn();
 			
 			// if turnInfo is null, we're still waiting
 			if (turnInfo != null)
 			{
+				turnInfo.ability.Execute(m_activePokemon, m_enemies);
 				m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
 				
 				m_enemy.UpdateBattleConditions(m_playerPokemon);
 				AbilityUse enemyTurn = m_enemy.getTurn();
 				
+				enemyTurn.ability.Execute(m_enemy, m_playerPokemon);
 				m_messages.Enqueue(enemyTurn.actor.Name + " used " + enemyTurn.ability.Name + "!");
 				
-				//m_currentState = State.GetAbility;
-				m_currentState = State.Idle;
-				m_nextState = State.GetAbility;
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.GetAbility;
 			}
 		}
 	}
@@ -201,4 +208,9 @@ public class BattleSystem
 	{
 		m_textHandler(turnInfo.actor.Name + " used ability " + turnInfo.ability.Name);
 	}
+}
+
+public class BattleArgs : EventArgs
+{
+	public BattleSystem.State State { get; set; }
 }

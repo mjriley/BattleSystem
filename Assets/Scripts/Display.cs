@@ -34,28 +34,10 @@ public class Display : MonoBehaviour {
 	private string m_statusText = "";
 
 	// Use this for initialization
-	void Start () {
-//		m_strategy = new UserInputStrategy(new UserInputStrategy.GetUserInput(GetUserInput));
-//		m_character = new Character(70, m_strategy);
-//		Ability ability1 = new Ability("Ability 1", "Normal", 20, 20);
-//		Ability ability2 = new Ability("Ability 2", "Normal", 20, 20);
-//		Ability ability3 = new Ability("Ability 3", "Normal", 20, 20);
-//		Ability ability4 = new Ability("Ability 4", "Normal", 20, 20);
-//		m_character.addAbility(ability1);
-//		m_character.addAbility(ability2);
-//		m_character.addAbility(ability3);
-//		m_character.addAbility(ability4);
-//		
-//		Character enemy = new Character(70);
-//		m_enemies = new List<Character>();
-//		m_enemies.Add(enemy);
-		
-		//yield return StartCoroutine(DoInit());
-		
+	void Start ()
+	{
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
 		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetAbilityChoice);
-		
-		//m_system.Start();
 	}
 	
 	void HandleText(string message)
@@ -157,50 +139,40 @@ public class Display : MonoBehaviour {
 		
 		if (m_waitingForInput)
 		{
-			GUI.DrawTexture(new Rect(0, 0, buttonWidth, buttonHeight), baseTexture);
-			GUI.Box(new Rect(tagOffset, buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
-			GUI.Label(new Rect(0, 0, buttonWidth, buttonHeight / 2), m_abilities[0].Name, abilityNameStyle);
-			GUI.Label(new Rect(0, buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
-			if (GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), ""))
+			Rect buttonBounds = new Rect(0, 0, buttonWidth, buttonHeight);
+			if (AbilityButton.Display(buttonBounds, m_abilities[0], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
 			{
 				processButtonClick(0);
 			}
 			
-			GUI.DrawTexture(new Rect(Screen.width, 0, -buttonWidth, buttonHeight), baseTexture);
-			GUI.Box(new Rect((Screen.width + padding) / 2 + tagOffset, buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
-			GUI.Label(new Rect((Screen.width + padding) / 2, 0, buttonWidth, buttonHeight / 2), m_abilities[1].Name, abilityNameStyle);
-			GUI.Label(new Rect((Screen.width + padding) / 2, buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
-			if (GUI.Button(new Rect((Screen.width + padding) / 2, 0, buttonWidth, buttonHeight), ""))
+			buttonBounds = new Rect((Screen.width + padding) / 2, 0, buttonWidth, buttonHeight);
+			if (AbilityButton.Display(buttonBounds, m_abilities[1], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
 			{
 				processButtonClick(1);
 			}
 			
-			GUI.DrawTexture(new Rect(0, 120, buttonWidth, buttonHeight), baseTexture);
-			GUI.Box(new Rect(tagOffset, 120 + buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
-			GUI.Label(new Rect(0, 120, buttonWidth, buttonHeight / 2), m_abilities[2].Name, abilityNameStyle);
-			GUI.Label(new Rect(0, 120 + buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
-			if (GUI.Button(new Rect(0, 120, buttonWidth, 90), ""))
+			buttonBounds = new Rect(0, 120, buttonWidth, buttonHeight);
+			if (AbilityButton.Display(buttonBounds, m_abilities[2], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
 			{
 				processButtonClick(2);
 			}
 			
-			GUI.DrawTexture(new Rect(Screen.width, 120, -buttonWidth, buttonHeight), baseTexture);
-			GUI.Box(new Rect((Screen.width + padding) / 2 + tagOffset, 120 + buttonHeight / 2 + 10, 70, 25), "Normal", typeNameStyle);
-			GUI.Label(new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight / 2), m_abilities[3].Name, abilityNameStyle);
-			GUI.Label(new Rect((Screen.width + padding) / 2, 120 + buttonHeight / 2, buttonWidth, buttonHeight / 2), "PP 23/25", abilityDetailsStyle);
-			if (GUI.Button(new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight), ""))
+			buttonBounds = new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight);
+			if (AbilityButton.Display(buttonBounds, m_abilities[3], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
 			{
 				processButtonClick(3);
 			}
-			
 		}
 		
-		Vector2 playerSizeInfo = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
-		Rect playerRect = new Rect(0, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);	
-		PlayerStatusDisplay.Display(playerRect, "Goober", Character.Sex.Male, m_playerNameStyle);
-		
-		Rect aiRect = new Rect(Screen.width - playerSizeInfo.x, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);
-		PlayerStatusDisplay.Display(aiRect, "AI Pokemon", Character.Sex.Female, m_playerNameStyle);
+		if (m_system.BattleState == BattleSystem.State.InBattle)
+		{
+			Vector2 playerSizeInfo = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
+			Rect playerRect = new Rect(0, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);	
+			PlayerStatusDisplay.Display(playerRect, "Goober", Character.Sex.Male, m_playerNameStyle);
+			
+			Rect aiRect = new Rect(Screen.width - playerSizeInfo.x, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);
+			PlayerStatusDisplay.Display(aiRect, "AI Pokemon", Character.Sex.Female, m_playerNameStyle);
+		}
 		
 		GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
 		GUI.Box(new Rect(0, Screen.height - statusHeight, Screen.width, statusHeight), m_statusText, statusStyle);
