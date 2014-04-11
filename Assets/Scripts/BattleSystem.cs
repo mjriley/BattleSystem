@@ -9,7 +9,7 @@ public class BattleSystem
 	Character m_activePokemon = null;
 	public Character ActivePokemon { get { return m_activePokemon; } }
 	
-	List<Character> m_enemies = new List<Character>();
+	List<Character> m_enemies;
 	Character m_enemy = null;
 	public List<Character> Enemies { get { return m_enemies; } }
 	
@@ -90,6 +90,35 @@ public class BattleSystem
 		}
 	}
 	
+	private bool IsTeamEliminated(List<Character> team)
+	{
+		foreach (Character pokemon in team)
+		{
+			if (!pokemon.isDead())
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private bool DidPlayerWin()
+	{
+		return IsTeamEliminated(m_enemies);
+	}
+	
+	private bool DidEnemyWin()
+	{
+		return IsTeamEliminated(m_playerPokemon);
+	}
+	
+	private void Restart()
+	{
+		m_currentState = InternalState.Idle;
+		m_nextState = InternalState.NewEncounter;
+	}
+	
 	
 	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, UserInputStrategy.GetUserInput abilityChoiceHandler)
 	{
@@ -138,6 +167,7 @@ public class BattleSystem
 		if (m_currentState == InternalState.NewEncounter)
 		{
 			m_enemy = generateEnemyPokemon();
+			m_enemies = new List<Character>();
 			m_enemies.Add(m_enemy);
 			m_messages.Enqueue("A Wild " + m_enemy.Name + " appeared!");
 			m_messages.Enqueue("Go! " + m_activePokemon.Name + "!");
@@ -184,8 +214,40 @@ public class BattleSystem
 				turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
 				m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
 				
-				m_currentState = InternalState.Idle;
-				m_nextState = InternalState.ExecutingAbilities;
+				bool victoryCheck = false;
+				
+				foreach (Character target in turnInfo.targets)
+				{
+					if (target.isDead())
+					{
+						m_messages.Enqueue(target.Name + " fainted!");
+						victoryCheck = true;
+					}
+				}
+				
+				if (victoryCheck)
+				{
+					if (DidPlayerWin())
+					{
+						m_messages.Enqueue("Player Won!");
+						Restart();
+					}
+					else if (DidEnemyWin())
+					{
+						m_messages.Enqueue("Enemy Won!");
+						Restart();
+					}
+					else
+					{
+						m_currentState = InternalState.Idle;
+						m_nextState = InternalState.ExecutingAbilities;
+					}
+				}
+				else
+				{
+					m_currentState = InternalState.Idle;
+					m_nextState = InternalState.ExecutingAbilities;
+				}
 			}
 			else
 			{

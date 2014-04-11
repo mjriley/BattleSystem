@@ -34,7 +34,7 @@ public class Display : MonoBehaviour {
 	private string m_statusText = "";
 
 	// Use this for initialization
-	void Start ()
+	void Start()
 	{
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
 		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetAbilityChoice);

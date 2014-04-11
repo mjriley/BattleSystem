@@ -49,6 +49,11 @@ public class Character
 		m_strategy = strategy;
 	}
 	
+	public void Reset()
+	{
+		m_currentHP = m_maxHP;
+	}
+	
 	public void TakeDamage(int damage)
 	{
 		m_currentHP -= damage;
