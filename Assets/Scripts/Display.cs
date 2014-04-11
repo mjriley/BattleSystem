@@ -39,6 +39,12 @@ public class Display : MonoBehaviour {
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
 		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetAbilityChoice);
 		m_character = m_system.ActivePokemon;
+		
+		GameObject playerDisplay = GameObject.FindGameObjectWithTag("PlayerDisplay");
+		GameObject enemyDisplay = GameObject.FindGameObjectWithTag("EnemyDisplay");
+		
+		playerDisplay.GetComponent<SpriteRenderer>().enabled = true;
+		enemyDisplay.GetComponent<SpriteRenderer>().enabled = true;
 	}
 	
 	void HandleText(string message)
