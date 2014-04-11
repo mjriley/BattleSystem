@@ -67,7 +67,6 @@ public class PlayerStatusDisplay : MonoBehaviour
 			GUI.color = new Color(0, 1.0f, 0);
 			float healthWidth = 81.0f;
 			float healthRatio = (float)pokemon.CurrentHP / (float)pokemon.MaxHP;
-			Debug.Log("Current Health: " + pokemon.CurrentHP + " Max Health: " + pokemon.MaxHP + " ratio: " + healthRatio);
 			GUI.DrawTexture(new Rect(53, contentSize.y + 5, healthWidth * healthRatio, 14), m_healthTexture);
 			GUI.color = prevColor;
 			

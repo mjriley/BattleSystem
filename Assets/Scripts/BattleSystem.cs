@@ -14,6 +14,7 @@ public class BattleSystem
 	public List<Character> Enemies { get { return m_enemies; } }
 	
 	Queue<string> m_messages = new Queue<string>();
+	Queue<AbilityUse> m_pendingAbilities = new Queue<AbilityUse>();
 	
 	Random m_generator = null;
 	
@@ -40,8 +41,9 @@ public class BattleSystem
 	private enum InternalState
 	{
 		NewEncounter,
-		GetAbility,
-		WaitingOnAbility,
+		GetAbilities,
+		WaitingOnAbilities,
+		ExecutingAbilities,
 		NextText,
 		Idle
 	};
@@ -140,39 +142,55 @@ public class BattleSystem
 			m_messages.Enqueue("A Wild " + m_enemy.Name + " appeared!");
 			m_messages.Enqueue("Go! " + m_activePokemon.Name + "!");
 			m_currentState = InternalState.Idle;
-			m_nextState = InternalState.GetAbility;
+			m_nextState = InternalState.GetAbilities;
 			
 			StateChange(State.BattleIntro);
 		}
-		else if (m_currentState == InternalState.GetAbility)
+		else if (m_currentState == InternalState.GetAbilities)
 		{
 			m_messages.Enqueue("What will " + m_activePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
 			m_activePokemon.UpdateBattleConditions(m_enemies);
+			m_enemy.UpdateBattleConditions(m_playerPokemon);
 			
 			m_currentState = InternalState.Idle;
-			m_nextState = InternalState.WaitingOnAbility;
+			m_nextState = InternalState.WaitingOnAbilities;
 			
 			StateChange(State.InBattle);
 		}
-		else if (m_currentState == InternalState.WaitingOnAbility)
+		else if (m_currentState == InternalState.WaitingOnAbilities)
 		{
 			AbilityUse turnInfo = m_activePokemon.getTurn();
 			
 			// if turnInfo is null, we're still waiting
 			if (turnInfo != null)
 			{
-				turnInfo.ability.Execute(m_activePokemon, m_enemies);
-				m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
-				
-				m_enemy.UpdateBattleConditions(m_playerPokemon);
+				// this would have to be moved elsewhere if the enemy was a real player;
+				// all abilities could/should be fetched at the same time/asynchronously
 				AbilityUse enemyTurn = m_enemy.getTurn();
 				
-				enemyTurn.ability.Execute(m_enemy, m_playerPokemon);
-				m_messages.Enqueue(enemyTurn.actor.Name + " used " + enemyTurn.ability.Name + "!");
+				m_pendingAbilities.Enqueue(turnInfo);
+				m_pendingAbilities.Enqueue(enemyTurn);
 				
 				m_currentState = InternalState.Idle;
-				m_nextState = InternalState.GetAbility;
+				m_nextState = InternalState.ExecutingAbilities;
+			}
+		}
+		else if (m_currentState == InternalState.ExecutingAbilities)
+		{
+			if (m_pendingAbilities.Count > 0)
+			{
+				AbilityUse turnInfo = m_pendingAbilities.Dequeue();
+				turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
+				m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
+				
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.ExecutingAbilities;
+			}
+			else
+			{
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.GetAbilities;
 			}
 		}
 	}
