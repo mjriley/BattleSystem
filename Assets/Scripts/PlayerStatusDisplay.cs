@@ -36,11 +36,11 @@ public class PlayerStatusDisplay : MonoBehaviour
 		return new Vector2(width, height);
 	}
 	
-	public static void Display(Rect screenRect, string playerName, Character.Sex gender, GUIStyle style)
+	public static void Display(Rect screenRect, Character pokemon, GUIStyle style)
 	{
 		Init();
 		
-		GUIContent playerContent = new GUIContent(playerName);
+		GUIContent playerContent = new GUIContent(pokemon.Name);
 		Vector2 contentSize = style.CalcSize(playerContent);
 		
 		GUIContent lvlContent = new GUIContent("Lv. 35");
@@ -51,7 +51,7 @@ public class PlayerStatusDisplay : MonoBehaviour
 		float maxWidth = m_healthOutlineTexture.width;
 		float nameBarWidth = contentSize.x + genderIconSize + lvlSize.x;
 		
-		Texture2D genderTexture = (gender == Character.Sex.Male) ? m_maleTexture : m_femaleTexture;
+		Texture2D genderTexture = (pokemon.Gender == Character.Sex.Male) ? m_maleTexture : m_femaleTexture;
 		
 		GUI.BeginGroup(screenRect);
 			GUI.BeginGroup(new Rect((maxWidth - nameBarWidth) / 2, 0, maxWidth, contentSize.y));
@@ -65,7 +65,10 @@ public class PlayerStatusDisplay : MonoBehaviour
 			GUI.DrawTexture(new Rect(0, contentSize.y, m_healthOutlineTexture.width, m_healthOutlineTexture.height), m_healthOutlineTexture);
 			Color prevColor = GUI.color;
 			GUI.color = new Color(0, 1.0f, 0);
-			GUI.DrawTexture(new Rect(53, contentSize.y + 5, 81, 14), m_healthTexture);
+			float healthWidth = 81.0f;
+			float healthRatio = (float)pokemon.CurrentHP / (float)pokemon.MaxHP;
+			Debug.Log("Current Health: " + pokemon.CurrentHP + " Max Health: " + pokemon.MaxHP + " ratio: " + healthRatio);
+			GUI.DrawTexture(new Rect(53, contentSize.y + 5, healthWidth * healthRatio, 14), m_healthTexture);
 			GUI.color = prevColor;
 			
 			GUI.Label(new Rect(0, contentSize.y + m_healthOutlineTexture.height, maxWidth, contentSize.y), "100/100", style);

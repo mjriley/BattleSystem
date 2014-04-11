@@ -31,6 +31,8 @@ public class Character
 		get { return m_currentHP; }
 	}
 	
+	public int MaxHP { get { return m_maxHP; } }
+	
 	private Sex m_gender;
 	public Sex Gender
 	{

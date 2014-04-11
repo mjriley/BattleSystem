@@ -5,9 +5,13 @@ using System.Collections.Generic;
 public class BattleSystem
 {
 	List<Character> m_playerPokemon = new List<Character>();
+	
 	Character m_activePokemon = null;
+	public Character ActivePokemon { get { return m_activePokemon; } }
+	
 	List<Character> m_enemies = new List<Character>();
 	Character m_enemy = null;
+	public List<Character> Enemies { get { return m_enemies; } }
 	
 	Queue<string> m_messages = new Queue<string>();
 	
