@@ -9,8 +9,8 @@ public class Ability
 		get { return m_name; }
 	}
 	
-	private string m_type;
-	public string Type
+	private BattleType m_type;
+	public BattleType Type
 	{
 		get { return m_type; }
 	}
@@ -40,7 +40,7 @@ public class Ability
 		get { return m_accuracy; }
 	}
 	
-	public Ability(string name, string type, int damageAmount, int accuracy, uint maxUses)
+	public Ability(string name, BattleType type, int damageAmount, int accuracy, uint maxUses)
 	{
 		m_name = name;
 		m_type = type;
@@ -58,9 +58,18 @@ public class Ability
 			throw new Exception("No ability charges left");
 		}
 		
-		if (enemies != null && enemies.Count > 0)
+		if (enemies == null || enemies.Count <= 0)
 		{
-			enemies[0].TakeDamage(m_damageAmount);
+			throw new Exception("No valid targets!");
+		}
+		
+		Character target = enemies[0];
+		float multiplier = DamageCalculations.getDamageMultiplier(m_type, target.Types);
+		
+		int amount = (int)(m_damageAmount * multiplier);
+		if (amount != 0)
+		{
+			enemies[0].TakeDamage(amount);
 		}
 		
 		m_currentUses -= 1;
@@ -68,7 +77,18 @@ public class Ability
 		AbilityStatus status = new AbilityStatus();
 		status.isDone = true;
 		status.messages = new List<string>();
-		status.messages.Add("Was effective!");
+		if (multiplier > 1)
+		{
+			status.messages.Add("It's super effective!");
+		}
+		else if (multiplier == 0)
+		{
+			status.messages.Add("It doesn't affect the opposing " + target.Name + "...");
+		}
+		else if (multiplier < 1)
+		{
+			status.messages.Add("It's not very effective...");
+		}
 		
 		return status;
 	}

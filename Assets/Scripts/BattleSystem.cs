@@ -121,6 +121,7 @@ public class BattleSystem
 	{
 		m_currentState = InternalState.Idle;
 		m_nextState = InternalState.NewEncounter;
+		m_pendingAbilities.Clear();
 	}
 	
 	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, UserInputStrategy.GetUserInput abilityChoiceHandler)
@@ -129,29 +130,29 @@ public class BattleSystem
 		
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
 		
-		Character pikachu = new Character("Pikachu", Character.Sex.Male, 70, userStrategy);
-		pikachu.addAbility(new FlyAbility("Fly", "Flying", 50, 95, 20));
-		pikachu.addAbility(new Ability("Bubble", "Water", 20, 100, 30));
-		pikachu.addAbility(new Ability("Ember", "Fire", 40, 100, 25));
-		pikachu.addAbility(new Ability("Vine Whip", "Grass", 35, 100, 10));
+		Character pikachu = new Character("Pikachu", Character.Sex.Male, 70, BattleType.Electric, userStrategy);
+		pikachu.addAbility(new FlyAbility("Fly", BattleType.Flying, 50, 95, 20));
+		pikachu.addAbility(new Ability("Bubble", BattleType.Water, 20, 100, 30));
+		pikachu.addAbility(new Ability("Ember", BattleType.Fire, 40, 100, 25));
+		pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));
 		
-		Character chespin = new Character("Chespin", Character.Sex.Male, 70, userStrategy);
-		chespin.addAbility(new Ability("Ability 0", "Grass", 20, 100, 20));
-		chespin.addAbility(new Ability("Ability 1", "Grass", 20, 100, 20));
-		chespin.addAbility(new Ability("Ability 2", "Grass", 20, 100, 20));
-		chespin.addAbility(new Ability("Ability 3", "Grass", 20, 100, 20));
+		Character chespin = new Character("Chespin", Character.Sex.Male, 70, BattleType.Grass, userStrategy);
+		chespin.addAbility(new Ability("Ability 0", BattleType.Grass, 20, 100, 20));
+		chespin.addAbility(new Ability("Ability 1", BattleType.Grass, 20, 100, 20));
+		chespin.addAbility(new Ability("Ability 2", BattleType.Grass, 20, 100, 20));
+		chespin.addAbility(new Ability("Ability 3", BattleType.Grass, 20, 100, 20));
 		
-		Character squirtle = new Character("Squirtle", Character.Sex.Male, 70, userStrategy);
-		squirtle.addAbility(new Ability("Ability 0", "Water", 20, 100, 20));
-		squirtle.addAbility(new Ability("Ability 1", "Water", 20, 100, 20));
-		squirtle.addAbility(new Ability("Ability 2", "Water", 20, 100, 20));
-		squirtle.addAbility(new Ability("Ability 3", "Water", 20, 100, 20));
+		Character squirtle = new Character("Squirtle", Character.Sex.Male, 70, BattleType.Water, userStrategy);
+		squirtle.addAbility(new Ability("Ability 0", BattleType.Water, 20, 100, 20));
+		squirtle.addAbility(new Ability("Ability 1", BattleType.Water, 20, 100, 20));
+		squirtle.addAbility(new Ability("Ability 2", BattleType.Water, 20, 100, 20));
+		squirtle.addAbility(new Ability("Ability 3", BattleType.Water, 20, 100, 20));
 		
-		Character charmander = new Character("Charmander", Character.Sex.Male, 70, userStrategy);
-		charmander.addAbility(new Ability("Ability 0", "Fire", 20, 100, 20));
-		charmander.addAbility(new Ability("Ability 1", "Fire", 20, 100, 20));
-		charmander.addAbility(new Ability("Ability 2", "Fire", 20, 100, 20));
-		charmander.addAbility(new Ability("Ability 3", "Fire", 20, 100, 20));
+		Character charmander = new Character("Charmander", Character.Sex.Male, 70, BattleType.Fire, userStrategy);
+		charmander.addAbility(new Ability("Ability 0", BattleType.Fire, 20, 100, 20));
+		charmander.addAbility(new Ability("Ability 1", BattleType.Fire, 20, 100, 20));
+		charmander.addAbility(new Ability("Ability 2", BattleType.Fire, 20, 100, 20));
+		charmander.addAbility(new Ability("Ability 3", BattleType.Fire, 20, 100, 20));
 		
 		m_player.AddPokemon(pikachu);
 		m_player.AddPokemon(chespin);
@@ -170,11 +171,11 @@ public class BattleSystem
 		
 		RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
 		
-		Character enemy = new Character(name, Character.Sex.Female, 70, enemy_strategy);
-		Ability ability0 = new Ability("Enemy Ability 0", "Normal", 20, 100, 20);
-		Ability ability1 = new Ability("Enemy Ability 1", "Normal", 20, 100, 20);
-		Ability ability2 = new Ability("Enemy Ability 2", "Normal", 20, 100, 20);
-		Ability ability3 = new Ability("Enemy Ability 3", "Normal", 20, 100, 20);
+		Character enemy = new Character(name, Character.Sex.Female, 70, BattleType.Water, enemy_strategy);
+		Ability ability0 = new Ability("Enemy Ability 0", BattleType.Normal, 20, 100, 20);
+		Ability ability1 = new Ability("Enemy Ability 1", BattleType.Normal, 20, 100, 20);
+		Ability ability2 = new Ability("Enemy Ability 2", BattleType.Normal, 20, 100, 20);
+		Ability ability3 = new Ability("Enemy Ability 3", BattleType.Normal, 20, 100, 20);
 		
 		enemy.addAbility(ability0);
 		enemy.addAbility(ability1);
@@ -229,7 +230,10 @@ public class BattleSystem
 			m_messages.Enqueue("What will " + m_activePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
 			m_activePokemon.UpdateBattleConditions(m_enemy.Pokemon);
-			m_activeEnemy.UpdateBattleConditions(m_player.Pokemon);
+			
+			List<Character> currentPokemon = new List<Character>();
+			currentPokemon.Add(m_activePokemon);
+			m_activeEnemy.UpdateBattleConditions(currentPokemon);
 			
 			m_currentState = InternalState.Idle;
 			m_nextState = InternalState.WaitingOnAbilities;

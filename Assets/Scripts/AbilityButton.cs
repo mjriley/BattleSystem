@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ public class AbilityButton : MonoBehaviour
 	
 	private static int m_tagOffset = 40;
 	
-	private static Dictionary<string, Color> typeColors = new Dictionary<string, Color>();
+	private static Dictionary<BattleType, Color> typeColors = new Dictionary<BattleType, Color>();
 	
 	private static Color makeIntColor(int r, int g, int b)
 	{
@@ -26,10 +27,10 @@ public class AbilityButton : MonoBehaviour
 			m_isInit = true;
 		}
 		
-		typeColors["Fire"] = makeIntColor(240, 128, 48);
-		typeColors["Water"] = makeIntColor(104, 144, 240);
-		typeColors["Grass"] = makeIntColor(120, 200, 80);
-		typeColors["Flying"] = makeIntColor(168, 144, 240);
+		typeColors[BattleType.Fire] = makeIntColor(240, 128, 48);
+		typeColors[BattleType.Water] = makeIntColor(104, 144, 240);
+		typeColors[BattleType.Grass] = makeIntColor(120, 200, 80);
+		typeColors[BattleType.Flying] = makeIntColor(168, 144, 240);
 	}
 	
 	public static bool Display(Rect rect, Ability ability, bool drawReversed, GUIStyle typeNameStyle, GUIStyle abilityNameStyle, GUIStyle abilityDetailsStyle, GUIStyle buttonStyle)
@@ -58,7 +59,7 @@ public class AbilityButton : MonoBehaviour
 			GUI.DrawTexture(fullBounds, m_baseTexture);
 			GUI.DrawTexture(tagBounds, m_tagTexture);
 			GUI.color = previousColor;
-			GUI.Label(tagBounds, ability.Type, typeNameStyle);
+			GUI.Label(tagBounds, Enum.GetName(typeof(BattleType), ability.Type), typeNameStyle);
 			GUI.Label(new Rect(0, 0, rect.width, rect.height / 2), ability.Name, abilityNameStyle);
 			GUI.Label(new Rect(0, rect.height / 2, rect.width, rect.height / 2), "PP " + ability.CurrentUses + "/" + ability.MaxUses, abilityDetailsStyle);
 			result = GUI.Button(new Rect(0, 0, rect.width, rect.height), "", buttonStyle);

@@ -17,6 +17,8 @@ public class Character
 	private List<Ability> m_abilities = new List<Ability>();
 	private string m_name;
 	
+	private List<BattleType> m_types = new List<BattleType>();
+	
 	private bool m_isInvisible = false;
 	public bool IsInvisible
 	{
@@ -40,13 +42,20 @@ public class Character
 	
 	public int MaxHP { get { return m_maxHP; } }
 	
+	public List<BattleType> Types { get { return m_types; } }
+	
 	private Sex m_gender;
 	public Sex Gender
 	{
 		get { return m_gender; }
 	}
 	
-	public Character(string name, Sex gender, int maxHP, IAttackStrategy strategy = null)
+	public Character(string name, Sex gender, int maxHP, BattleType type, IAttackStrategy strategy) :
+		this(name, gender, maxHP, type, BattleType._None, strategy)
+	{
+	}
+	
+	public Character(string name, Sex gender, int maxHP, BattleType type1, BattleType type2, IAttackStrategy strategy = null)
 	{
 		m_name = name;
 		m_gender = gender;
@@ -54,6 +63,12 @@ public class Character
 		m_currentHP = m_maxHP;
 		
 		m_strategy = strategy;
+		
+		m_types.Add(type1);
+		if (type2 != BattleType._None)
+		{
+			m_types.Add(type2);
+		}
 	}
 	
 	public void Reset()

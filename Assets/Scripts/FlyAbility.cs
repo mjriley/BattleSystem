@@ -4,7 +4,7 @@ public class FlyAbility : Ability
 {
 	private int m_currentTurn = 0;
 	
-	public FlyAbility(string name, string type, int damageAmount, int accuracy, uint maxUses)
+	public FlyAbility(string name, BattleType type, int damageAmount, int accuracy, uint maxUses)
 	: base(name, type, damageAmount, accuracy, maxUses)
 	{
 	}
