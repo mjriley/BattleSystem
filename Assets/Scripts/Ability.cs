@@ -77,6 +77,8 @@ public class Ability : IAbility
 		AbilityStatus status = new AbilityStatus();
 		status.isDone = true;
 		status.messages = new List<string>();
+		
+		status.messages.Add(actor.Name + " used " + Name + "!");
 		if (multiplier > 1)
 		{
 			status.messages.Add("It's super effective!");

@@ -265,7 +265,12 @@ public class BattleSystem
 			{
 				AbilityUse turnInfo = m_pendingAbilities.Dequeue();
 				AbilityStatus status = turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
-				m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
+				//m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
+				
+				if (!status.isDone)
+				{
+					m_pendingAbilities.Enqueue(turnInfo);
+				}
 				
 				if (status.messages != null)
 				{

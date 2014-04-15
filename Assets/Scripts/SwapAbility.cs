@@ -4,6 +4,14 @@ public class SwapAbility : IAbility
 {
 	private int m_newIndex;
 	
+	private enum State
+	{
+		Recall,
+		Deploy
+	};
+	
+	private State m_currentState = State.Recall;
+	
 	public SwapAbility(int newIndex)
 	{
 		m_newIndex = newIndex;
@@ -13,13 +21,20 @@ public class SwapAbility : IAbility
 	
 	public AbilityStatus Execute(Character actor, List<Character> enemies)
 	{
-		actor.Owner.setActivePokemon(m_newIndex);
-		
 		AbilityStatus result = new AbilityStatus();
-		result.isDone = true;
 		result.messages = new List<string>();
-		result.messages.Add(actor.Name + "! Come back!\nSwap out!");
-		result.messages.Add("Go! " + actor.Owner.ActivePokemon.Name + "!");
+		if (m_currentState == State.Recall)
+		{
+			result.isDone = false;
+			result.messages.Add(actor.Name + "! Come back!\nSwap out!");
+			m_currentState = State.Deploy;
+		}
+		else if (m_currentState == State.Deploy)
+		{
+			result.isDone = true;
+			actor.Owner.setActivePokemon(m_newIndex);
+			result.messages.Add("Go! " + actor.Owner.ActivePokemon.Name + "!");
+		}
 		
 		return result;
 	}
