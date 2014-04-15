@@ -14,6 +14,7 @@ public class Display : MonoBehaviour {
 	public GUIStyle abilityDetailsStyle;
 	public GUIStyle typeNameStyle;
 	public GUIStyle statusStyle;
+	public GUIStyle buttonStyle;
 	
 	public int tagOffset = 10;
 	
@@ -148,25 +149,25 @@ public class Display : MonoBehaviour {
 		if (m_waitingForInput)
 		{
 			Rect buttonBounds = new Rect(0, 0, buttonWidth, buttonHeight);
-			if (AbilityButton.Display(buttonBounds, m_abilities[0], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
+			if (AbilityButton.Display(buttonBounds, m_abilities[0], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle, buttonStyle))
 			{
 				processButtonClick(0);
 			}
 			
 			buttonBounds = new Rect((Screen.width + padding) / 2, 0, buttonWidth, buttonHeight);
-			if (AbilityButton.Display(buttonBounds, m_abilities[1], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
+			if (AbilityButton.Display(buttonBounds, m_abilities[1], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle, buttonStyle))
 			{
 				processButtonClick(1);
 			}
 			
 			buttonBounds = new Rect(0, 120, buttonWidth, buttonHeight);
-			if (AbilityButton.Display(buttonBounds, m_abilities[2], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
+			if (AbilityButton.Display(buttonBounds, m_abilities[2], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle, buttonStyle))
 			{
 				processButtonClick(2);
 			}
 			
 			buttonBounds = new Rect((Screen.width + padding) / 2, 120, buttonWidth, buttonHeight);
-			if (AbilityButton.Display(buttonBounds, m_abilities[3], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle))
+			if (AbilityButton.Display(buttonBounds, m_abilities[3], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle, buttonStyle))
 			{
 				processButtonClick(3);
 			}

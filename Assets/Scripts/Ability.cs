@@ -34,17 +34,24 @@ public class Ability
 		set { m_currentUses = value; }
 	}
 	
-	public Ability(string name, string type, int damageAmount, uint maxUses)
+	private int m_accuracy;
+	public int Accuracy
+	{
+		get { return m_accuracy; }
+	}
+	
+	public Ability(string name, string type, int damageAmount, int accuracy, uint maxUses)
 	{
 		m_name = name;
 		m_type = type;
 		m_damageAmount = damageAmount;
 		m_maxUses = maxUses;
 		m_currentUses = m_maxUses;
+		m_accuracy = accuracy;
 	}
 	
 	// TODO: Figure out a proper return value to show what happened
-	public void Execute(Character actor, List<Character> enemies)
+	public virtual AbilityStatus Execute(Character actor, List<Character> enemies)
 	{
 		if (m_currentUses <= 0)
 		{
@@ -58,6 +65,12 @@ public class Ability
 		
 		m_currentUses -= 1;
 		
+		AbilityStatus status = new AbilityStatus();
+		status.isDone = true;
+		status.messages = new List<string>();
+		status.messages.Add("Was effective!");
+		
+		return status;
 	}
 	
 //	public void Use()

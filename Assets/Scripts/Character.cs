@@ -17,6 +17,13 @@ public class Character
 	private List<Ability> m_abilities = new List<Ability>();
 	private string m_name;
 	
+	private bool m_isInvisible = false;
+	public bool IsInvisible
+	{
+		get { return m_isInvisible; }
+		set { m_isInvisible = value; }
+	}
+	
 	private IEnumerable<Character> m_enemies;
 	
 	private IAttackStrategy m_strategy;

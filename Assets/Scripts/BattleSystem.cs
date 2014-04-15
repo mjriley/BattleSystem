@@ -125,10 +125,10 @@ public class BattleSystem
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
 		Character player_pokemon = new Character("My Pokemon", Character.Sex.Male, 70, userStrategy);
 		
-		Ability ability0 = new Ability("Ability 0", "Normal", 50, 20);
-		Ability ability1 = new Ability("Ability 1", "Normal", 10, 20);
-		Ability ability2 = new Ability("Ability 2", "Normal", 10, 20);
-		Ability ability3 = new Ability("Ability 3", "Normal", 10, 20);
+		Ability ability0 = new FlyAbility("Fly", "Flying", 50, 95, 20);
+		Ability ability1 = new Ability("Bubble", "Water", 20, 100, 30);
+		Ability ability2 = new Ability("Ember", "Fire", 40, 100, 25);
+		Ability ability3 = new Ability("Vine Whip", "Grass", 35, 100, 10);
 		player_pokemon.addAbility(ability0);
 		player_pokemon.addAbility(ability1);
 		player_pokemon.addAbility(ability2);
@@ -211,8 +211,16 @@ public class BattleSystem
 			if (m_pendingAbilities.Count > 0)
 			{
 				AbilityUse turnInfo = m_pendingAbilities.Dequeue();
-				turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
+				AbilityStatus status = turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
 				m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
+				
+				if (status.messages != null)
+				{
+					foreach (string message in status.messages)
+					{
+						m_messages.Enqueue(message);
+					}
+				}
 				
 				bool victoryCheck = false;
 				
@@ -275,10 +283,10 @@ public class BattleSystem
 		RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
 		
 		Character enemy = new Character(name, Character.Sex.Female, 70, enemy_strategy);
-		Ability ability0 = new Ability("Enemy Ability 0", "Normal", 20, 20);
-		Ability ability1 = new Ability("Enemy Ability 1", "Normal", 20, 20);
-		Ability ability2 = new Ability("Enemy Ability 2", "Normal", 20, 20);
-		Ability ability3 = new Ability("Enemy Ability 3", "Normal", 20, 20);
+		Ability ability0 = new Ability("Enemy Ability 0", "Normal", 20, 100, 20);
+		Ability ability1 = new Ability("Enemy Ability 1", "Normal", 20, 100, 20);
+		Ability ability2 = new Ability("Enemy Ability 2", "Normal", 20, 100, 20);
+		Ability ability3 = new Ability("Enemy Ability 3", "Normal", 20, 100, 20);
 		
 		enemy.addAbility(ability0);
 		enemy.addAbility(ability1);
