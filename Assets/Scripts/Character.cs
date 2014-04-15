@@ -17,6 +17,13 @@ public class Character
 	private List<Ability> m_abilities = new List<Ability>();
 	private string m_name;
 	
+	private WeakReference m_refOwner;
+	public Player Owner
+	{
+		get { return (Player)m_refOwner.Target; }
+		set { m_refOwner = new WeakReference(value); }
+	}
+	
 	private List<BattleType> m_types = new List<BattleType>();
 	
 	private bool m_isInvisible = false;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Ability
+public class Ability : IAbility
 {
 	private string m_name;
 	public string Name

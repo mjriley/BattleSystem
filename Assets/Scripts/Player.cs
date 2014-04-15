@@ -14,6 +14,13 @@ public class Player
 		get { return m_pokemon; }
 	}
 	
+	private int m_activePokemonIndex = 0;
+	public Character ActivePokemon { get { return m_pokemon[m_activePokemonIndex]; } }
+	public void setActivePokemon(int index)
+	{
+		m_activePokemonIndex = index;
+	}
+	
 	public Player(string name)
 	{
 		m_name = name;
@@ -21,6 +28,7 @@ public class Player
 	
 	public void AddPokemon(Character pokemon)
 	{
+		pokemon.Owner = this;
 		m_pokemon.Add(pokemon);
 	}
 }

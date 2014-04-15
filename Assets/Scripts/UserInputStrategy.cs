@@ -4,13 +4,12 @@ using System.Linq;
 public class UserInputStrategy : IAttackStrategy
 {
 	public delegate void ReceiveConditions(List<Ability> abilities);
-	public delegate int GetUserInput();
+	public delegate IAbility GetUserInput();
 	
 	private ReceiveConditions m_conditionsDelegate;
 	private GetUserInput m_inputDelegate;
 	
 	private Character m_actor;
-	private IEnumerable<Character> m_allies;
 	private IEnumerable<Character> m_enemies;
 	
 	
@@ -23,7 +22,6 @@ public class UserInputStrategy : IAttackStrategy
 	public void UpdateConditions(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
 	{
 		m_actor = actor;
-		m_allies = allies;
 		m_enemies = enemies;
 		
 		m_conditionsDelegate(actor.getAbilities());
@@ -31,15 +29,16 @@ public class UserInputStrategy : IAttackStrategy
 	
 	public AbilityUse Execute()
 	{
-		int abilityIndex = m_inputDelegate();
-		if (abilityIndex == -1)
+		IAbility ability = m_inputDelegate();
+		if (ability == null)
 		{
 			return null;
 		}
 		
 		List<Character> targets = new List<Character>();
 		targets.Add(m_enemies.First());
-		return new AbilityUse(m_actor, targets, m_actor.getAbilities()[abilityIndex]);
+		return new AbilityUse(m_actor, targets, ability);
+		//return new AbilityUse(m_actor, targets, m_actor.getAbilities()[abilityIndex]);
 	}
 }
 

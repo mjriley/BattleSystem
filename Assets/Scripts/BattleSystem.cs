@@ -10,10 +10,10 @@ public class BattleSystem
 	private Player m_enemy;
 	public Player EnemyPlayer { get { return m_enemy; } }
 	
-	Character m_activePokemon = null;
-	public Character ActivePokemon { get { return m_activePokemon; } }
-	
-	Character m_activeEnemy = null;
+//	Character m_activePokemon = null;
+//	public Character ActivePokemon { get { return m_activePokemon; } }
+//	
+//	Character m_activeEnemy = null;
 	
 	public List<Character> Enemies { get { return m_enemy.Pokemon; } }
 	
@@ -159,7 +159,7 @@ public class BattleSystem
 		m_player.AddPokemon(squirtle);
 		m_player.AddPokemon(charmander);
 		
-		setActivePokemon(0);
+		//setActivePokemon(0);
 	}
 	
 	public Player generateEnemy()
@@ -184,7 +184,7 @@ public class BattleSystem
 		
 		player.AddPokemon(enemy);
 		
-		m_activeEnemy = enemy;
+		//m_activeEnemy = enemy;
 		
 		return player;
 	}
@@ -219,7 +219,7 @@ public class BattleSystem
 		{
 			m_enemy = generateEnemy();
 			m_messages.Enqueue("A Wild " + m_enemy.Name + " appeared!");
-			m_messages.Enqueue("Go! " + m_activePokemon.Name + "!");
+			m_messages.Enqueue("Go! " + m_player.ActivePokemon.Name + "!");
 			m_currentState = InternalState.Idle;
 			m_nextState = InternalState.GetAbilities;
 			
@@ -227,13 +227,13 @@ public class BattleSystem
 		}
 		else if (m_currentState == InternalState.GetAbilities)
 		{
-			m_messages.Enqueue("What will " + m_activePokemon.Name + " do?");
+			m_messages.Enqueue("What will " + m_player.ActivePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
-			m_activePokemon.UpdateBattleConditions(m_enemy.Pokemon);
+			m_player.ActivePokemon.UpdateBattleConditions(m_enemy.Pokemon);
 			
 			List<Character> currentPokemon = new List<Character>();
-			currentPokemon.Add(m_activePokemon);
-			m_activeEnemy.UpdateBattleConditions(currentPokemon);
+			currentPokemon.Add(m_player.ActivePokemon);
+			m_enemy.ActivePokemon.UpdateBattleConditions(currentPokemon);
 			
 			m_currentState = InternalState.Idle;
 			m_nextState = InternalState.WaitingOnAbilities;
@@ -242,14 +242,15 @@ public class BattleSystem
 		}
 		else if (m_currentState == InternalState.WaitingOnAbilities)
 		{
-			AbilityUse turnInfo = m_activePokemon.getTurn();
+			//AbilityUse turnInfo = m_activePokemon.getTurn();
+			AbilityUse turnInfo = m_player.ActivePokemon.getTurn();
 			
 			// if turnInfo is null, we're still waiting
 			if (turnInfo != null)
 			{
 				// this would have to be moved elsewhere if the enemy was a real player;
 				// all abilities could/should be fetched at the same time/asynchronously
-				AbilityUse enemyTurn = m_activeEnemy.getTurn();
+				AbilityUse enemyTurn = m_enemy.ActivePokemon.getTurn();
 				
 				m_pendingAbilities.Enqueue(turnInfo);
 				m_pendingAbilities.Enqueue(enemyTurn);
@@ -317,10 +318,10 @@ public class BattleSystem
 		}
 	}
 	
-	public void setActivePokemon(uint index)
-	{
-		m_activePokemon = m_player.Pokemon[(int)index];
-	}
+//	public void setActivePokemon(uint index)
+//	{
+//		m_activePokemon = m_player.Pokemon[(int)index];
+//	}
 	
 	
 	private void resolveTurn(AbilityUse turnInfo)
