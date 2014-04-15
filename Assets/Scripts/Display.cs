@@ -26,6 +26,8 @@ public class Display : MonoBehaviour {
 	bool m_handledCurrentText = true;
 
 
+	private Player m_userPlayer;
+	private Player m_enemyPlayer;
 	private Character m_character;
 	private List<Character> m_enemies;
 	private UserInputStrategy m_strategy;
@@ -39,6 +41,7 @@ public class Display : MonoBehaviour {
 	{
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
 		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetAbilityChoice);
+		m_userPlayer = m_system.UserPlayer;
 		m_character = m_system.ActivePokemon;
 		
 		GameObject playerDisplay = GameObject.FindGameObjectWithTag("PlayerDisplay");
@@ -60,6 +63,7 @@ public class Display : MonoBehaviour {
 	
 	void HandleAbilities(List<Ability> abilities)
 	{
+		m_enemyPlayer = m_system.EnemyPlayer;
 		m_enemies = m_system.Enemies;
 		m_abilities = abilities;
 		m_waitingForInput = true;
@@ -178,11 +182,11 @@ public class Display : MonoBehaviour {
 			Vector2 playerSizeInfo = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
 			Rect playerRect = new Rect(0, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);	
 			//PlayerStatusDisplay.Display(playerRect, "Goober", Character.Sex.Male, m_playerNameStyle);
-			PlayerStatusDisplay.Display(playerRect, m_character, m_playerNameStyle);
+			PlayerStatusDisplay.Display(playerRect, m_character, m_userPlayer, m_playerNameStyle);
 			
 			Rect aiRect = new Rect(Screen.width - playerSizeInfo.x, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);
 			//PlayerStatusDisplay.Display(aiRect, "AI Pokemon", Character.Sex.Female, m_playerNameStyle);
-			PlayerStatusDisplay.Display(aiRect, m_enemies[0], m_playerNameStyle);
+			PlayerStatusDisplay.Display(aiRect, m_enemies[0], m_enemyPlayer, m_playerNameStyle);
 		}
 		
 		GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);

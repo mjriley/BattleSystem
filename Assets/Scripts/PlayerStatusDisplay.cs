@@ -10,6 +10,8 @@ public class PlayerStatusDisplay : MonoBehaviour
 	private static Texture2D m_healthTexture;
 	private static Texture2D m_healthOutlineTexture;
 	
+	private static Texture2D m_ballTexture;
+	
 	private static void Init()
 	{
 		if (!m_isInit)
@@ -18,6 +20,7 @@ public class PlayerStatusDisplay : MonoBehaviour
 			m_femaleTexture = Resources.Load<Texture2D>("Textures/female");
 			m_healthTexture = Resources.Load<Texture2D>("Textures/white_tile");
 			m_healthOutlineTexture = Resources.Load<Texture2D>("Textures/HealthOutline");
+			m_ballTexture = Resources.Load<Texture2D>("Textures/pokeball");
 			
 			m_isInit = true;
 		}
@@ -31,12 +34,12 @@ public class PlayerStatusDisplay : MonoBehaviour
 		Vector2 textSize = style.CalcSize(content);
 		
 		float width = m_healthOutlineTexture.width;
-		float height = textSize.y * 2 + m_healthOutlineTexture.height;
+		float height = textSize.y * 2 + m_healthOutlineTexture.height + m_ballTexture.height;
 		
 		return new Vector2(width, height);
 	}
 	
-	public static void Display(Rect screenRect, Character pokemon, GUIStyle style)
+	public static void Display(Rect screenRect, Character pokemon, Player player, GUIStyle style)
 	{
 		Init();
 		
@@ -71,6 +74,11 @@ public class PlayerStatusDisplay : MonoBehaviour
 			GUI.color = prevColor;
 			
 			GUI.Label(new Rect(0, contentSize.y + m_healthOutlineTexture.height, maxWidth, contentSize.y), "100/100", style);
+			
+			for (int i = 0; i < player.Pokemon.Count; ++i)
+			{	
+				GUI.DrawTexture(new Rect(i * m_ballTexture.width, contentSize.y * 2 + m_healthOutlineTexture.height, m_ballTexture.width, m_ballTexture.height), m_ballTexture);
+			}
 		GUI.EndGroup();
 	}
 }

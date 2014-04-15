@@ -4,14 +4,18 @@ using System.Collections.Generic;
 
 public class BattleSystem
 {
-	List<Character> m_playerPokemon = new List<Character>();
+	private Player m_player;
+	public Player UserPlayer { get { return m_player; } }
+	
+	private Player m_enemy;
+	public Player EnemyPlayer { get { return m_enemy; } }
 	
 	Character m_activePokemon = null;
 	public Character ActivePokemon { get { return m_activePokemon; } }
 	
-	List<Character> m_enemies;
-	Character m_enemy = null;
-	public List<Character> Enemies { get { return m_enemies; } }
+	Character m_activeEnemy = null;
+	
+	public List<Character> Enemies { get { return m_enemy.Pokemon; } }
 	
 	Queue<string> m_messages = new Queue<string>();
 	Queue<AbilityUse> m_pendingAbilities = new Queue<AbilityUse>();
@@ -105,12 +109,12 @@ public class BattleSystem
 	
 	private bool DidPlayerWin()
 	{
-		return IsTeamEliminated(m_enemies);
+		return IsTeamEliminated(m_enemy.Pokemon);
 	}
 	
 	private bool DidEnemyWin()
 	{
-		return IsTeamEliminated(m_playerPokemon);
+		return IsTeamEliminated(m_player.Pokemon);
 	}
 	
 	private void Restart()
@@ -119,23 +123,69 @@ public class BattleSystem
 		m_nextState = InternalState.NewEncounter;
 	}
 	
-	
 	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, UserInputStrategy.GetUserInput abilityChoiceHandler)
 	{
+		m_player = new Player("Human");
+		
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
-		Character player_pokemon = new Character("My Pokemon", Character.Sex.Male, 70, userStrategy);
 		
-		Ability ability0 = new FlyAbility("Fly", "Flying", 50, 95, 20);
-		Ability ability1 = new Ability("Bubble", "Water", 20, 100, 30);
-		Ability ability2 = new Ability("Ember", "Fire", 40, 100, 25);
-		Ability ability3 = new Ability("Vine Whip", "Grass", 35, 100, 10);
-		player_pokemon.addAbility(ability0);
-		player_pokemon.addAbility(ability1);
-		player_pokemon.addAbility(ability2);
-		player_pokemon.addAbility(ability3);
+		Character pikachu = new Character("Pikachu", Character.Sex.Male, 70, userStrategy);
+		pikachu.addAbility(new FlyAbility("Fly", "Flying", 50, 95, 20));
+		pikachu.addAbility(new Ability("Bubble", "Water", 20, 100, 30));
+		pikachu.addAbility(new Ability("Ember", "Fire", 40, 100, 25));
+		pikachu.addAbility(new Ability("Vine Whip", "Grass", 35, 100, 10));
 		
-		addPlayerPokemon(player_pokemon);
+		Character chespin = new Character("Chespin", Character.Sex.Male, 70, userStrategy);
+		chespin.addAbility(new Ability("Ability 0", "Grass", 20, 100, 20));
+		chespin.addAbility(new Ability("Ability 1", "Grass", 20, 100, 20));
+		chespin.addAbility(new Ability("Ability 2", "Grass", 20, 100, 20));
+		chespin.addAbility(new Ability("Ability 3", "Grass", 20, 100, 20));
+		
+		Character squirtle = new Character("Squirtle", Character.Sex.Male, 70, userStrategy);
+		squirtle.addAbility(new Ability("Ability 0", "Water", 20, 100, 20));
+		squirtle.addAbility(new Ability("Ability 1", "Water", 20, 100, 20));
+		squirtle.addAbility(new Ability("Ability 2", "Water", 20, 100, 20));
+		squirtle.addAbility(new Ability("Ability 3", "Water", 20, 100, 20));
+		
+		Character charmander = new Character("Charmander", Character.Sex.Male, 70, userStrategy);
+		charmander.addAbility(new Ability("Ability 0", "Fire", 20, 100, 20));
+		charmander.addAbility(new Ability("Ability 1", "Fire", 20, 100, 20));
+		charmander.addAbility(new Ability("Ability 2", "Fire", 20, 100, 20));
+		charmander.addAbility(new Ability("Ability 3", "Fire", 20, 100, 20));
+		
+		m_player.AddPokemon(pikachu);
+		m_player.AddPokemon(chespin);
+		m_player.AddPokemon(squirtle);
+		m_player.AddPokemon(charmander);
+		
 		setActivePokemon(0);
+	}
+	
+	public Player generateEnemy()
+	{
+		Player player = new Player("Enemy");
+		
+		int index = m_generator.Next(0, Pokemon.Names.Length);
+		string name = Pokemon.Names[index];
+		
+		RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
+		
+		Character enemy = new Character(name, Character.Sex.Female, 70, enemy_strategy);
+		Ability ability0 = new Ability("Enemy Ability 0", "Normal", 20, 100, 20);
+		Ability ability1 = new Ability("Enemy Ability 1", "Normal", 20, 100, 20);
+		Ability ability2 = new Ability("Enemy Ability 2", "Normal", 20, 100, 20);
+		Ability ability3 = new Ability("Enemy Ability 3", "Normal", 20, 100, 20);
+		
+		enemy.addAbility(ability0);
+		enemy.addAbility(ability1);
+		enemy.addAbility(ability2);
+		enemy.addAbility(ability3);
+		
+		player.AddPokemon(enemy);
+		
+		m_activeEnemy = enemy;
+		
+		return player;
 	}
 	
 	public void Update()
@@ -166,9 +216,7 @@ public class BattleSystem
 		// handle logic
 		if (m_currentState == InternalState.NewEncounter)
 		{
-			m_enemy = generateEnemyPokemon();
-			m_enemies = new List<Character>();
-			m_enemies.Add(m_enemy);
+			m_enemy = generateEnemy();
 			m_messages.Enqueue("A Wild " + m_enemy.Name + " appeared!");
 			m_messages.Enqueue("Go! " + m_activePokemon.Name + "!");
 			m_currentState = InternalState.Idle;
@@ -180,8 +228,8 @@ public class BattleSystem
 		{
 			m_messages.Enqueue("What will " + m_activePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
-			m_activePokemon.UpdateBattleConditions(m_enemies);
-			m_enemy.UpdateBattleConditions(m_playerPokemon);
+			m_activePokemon.UpdateBattleConditions(m_enemy.Pokemon);
+			m_activeEnemy.UpdateBattleConditions(m_player.Pokemon);
 			
 			m_currentState = InternalState.Idle;
 			m_nextState = InternalState.WaitingOnAbilities;
@@ -197,7 +245,7 @@ public class BattleSystem
 			{
 				// this would have to be moved elsewhere if the enemy was a real player;
 				// all abilities could/should be fetched at the same time/asynchronously
-				AbilityUse enemyTurn = m_enemy.getTurn();
+				AbilityUse enemyTurn = m_activeEnemy.getTurn();
 				
 				m_pendingAbilities.Enqueue(turnInfo);
 				m_pendingAbilities.Enqueue(enemyTurn);
@@ -265,36 +313,11 @@ public class BattleSystem
 		}
 	}
 	
-	public void addPlayerPokemon(Character pokemon)
-	{
-		m_playerPokemon.Add(pokemon);
-	}
-	
 	public void setActivePokemon(uint index)
 	{
-		m_activePokemon = m_playerPokemon[(int)index];
+		m_activePokemon = m_player.Pokemon[(int)index];
 	}
 	
-	public Character generateEnemyPokemon()
-	{
-		int index = m_generator.Next(0, Pokemon.Names.Length);
-		string name = Pokemon.Names[index];
-		
-		RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
-		
-		Character enemy = new Character(name, Character.Sex.Female, 70, enemy_strategy);
-		Ability ability0 = new Ability("Enemy Ability 0", "Normal", 20, 100, 20);
-		Ability ability1 = new Ability("Enemy Ability 1", "Normal", 20, 100, 20);
-		Ability ability2 = new Ability("Enemy Ability 2", "Normal", 20, 100, 20);
-		Ability ability3 = new Ability("Enemy Ability 3", "Normal", 20, 100, 20);
-		
-		enemy.addAbility(ability0);
-		enemy.addAbility(ability1);
-		enemy.addAbility(ability2);
-		enemy.addAbility(ability3);
-		
-		return enemy;
-	}
 	
 	private void resolveTurn(AbilityUse turnInfo)
 	{
