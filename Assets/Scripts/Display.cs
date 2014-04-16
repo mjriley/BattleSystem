@@ -28,7 +28,8 @@ public class Display : MonoBehaviour {
 	
 	//bool m_waitingForInput = false;
 	//int m_pressedIndex = 0;
-	IAbility m_selectedAbility;
+	//IAbility m_selectedAbility;
+	ITurnAction m_selectedAction;
 	
 	private List<Ability> m_abilities;
 	
@@ -49,7 +50,7 @@ public class Display : MonoBehaviour {
 	void Start()
 	{
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
-		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetAbilityChoice);
+		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetTurnAction);
 		m_userPlayer = m_system.UserPlayer;
 		//m_character = m_system.ActivePokemon;
 		
@@ -80,14 +81,15 @@ public class Display : MonoBehaviour {
 		m_currentState = State.DisplayAbilities;
 	}
 	
-	IAbility GetAbilityChoice()
+	ITurnAction GetTurnAction()
 	{
 		//if (!m_waitingForInput)
 		if (m_currentState == State.SubmitAbilityChoice)
 		{
 			m_currentState = State.Default;
 			//return m_pressedIndex;
-			return m_selectedAbility;
+			//return m_selectedAbility;
+			return m_selectedAction;
 		}
 		
 		//return -1;
@@ -115,7 +117,8 @@ public class Display : MonoBehaviour {
 	void processButtonClick(int index)
 	{
 		//m_pressedIndex = index;
-		m_selectedAbility = m_abilities[index];
+		m_selectedAction = new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, m_abilities[index]);
+		//m_selectedAbility = m_abilities[index];
 		//m_waitingForInput = false;
 		DoneWithText();
 		
@@ -124,7 +127,7 @@ public class Display : MonoBehaviour {
 	
 	void SubmitSwapAbility(int index)
 	{
-		m_selectedAbility = new SwapAbility(index);
+		m_selectedAction = new SwapAbility(m_userPlayer, index);
 		
 		DoneWithText();
 		

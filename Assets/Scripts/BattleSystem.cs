@@ -18,7 +18,7 @@ public class BattleSystem
 	public List<Character> Enemies { get { return m_enemy.Pokemon; } }
 	
 	Queue<string> m_messages = new Queue<string>();
-	Queue<AbilityUse> m_pendingAbilities = new Queue<AbilityUse>();
+	Queue<ITurnAction> m_pendingAbilities = new Queue<ITurnAction>();
 	
 	Random m_generator = null;
 	
@@ -229,11 +229,11 @@ public class BattleSystem
 		{
 			m_messages.Enqueue("What will " + m_player.ActivePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
-			m_player.ActivePokemon.UpdateBattleConditions(m_enemy.Pokemon);
+			m_player.ActivePokemon.UpdateBattleConditions(m_enemy);
 			
 			List<Character> currentPokemon = new List<Character>();
 			currentPokemon.Add(m_player.ActivePokemon);
-			m_enemy.ActivePokemon.UpdateBattleConditions(currentPokemon);
+			m_enemy.ActivePokemon.UpdateBattleConditions(m_player);
 			
 			m_currentState = InternalState.Idle;
 			m_nextState = InternalState.WaitingOnAbilities;
@@ -243,16 +243,16 @@ public class BattleSystem
 		else if (m_currentState == InternalState.WaitingOnAbilities)
 		{
 			//AbilityUse turnInfo = m_activePokemon.getTurn();
-			AbilityUse turnInfo = m_player.ActivePokemon.getTurn();
+			ITurnAction playerTurn = m_player.ActivePokemon.getTurn();
 			
 			// if turnInfo is null, we're still waiting
-			if (turnInfo != null)
+			if (playerTurn != null)
 			{
 				// this would have to be moved elsewhere if the enemy was a real player;
 				// all abilities could/should be fetched at the same time/asynchronously
-				AbilityUse enemyTurn = m_enemy.ActivePokemon.getTurn();
+				ITurnAction enemyTurn = m_enemy.ActivePokemon.getTurn();
 				
-				m_pendingAbilities.Enqueue(turnInfo);
+				m_pendingAbilities.Enqueue(playerTurn);
 				m_pendingAbilities.Enqueue(enemyTurn);
 				
 				m_currentState = InternalState.Idle;
@@ -263,13 +263,20 @@ public class BattleSystem
 		{
 			if (m_pendingAbilities.Count > 0)
 			{
-				AbilityUse turnInfo = m_pendingAbilities.Dequeue();
-				AbilityStatus status = turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
+				//AbilityUse turnInfo = m_pendingAbilities.Dequeue();
+				//ITurnAction turnAction = m_pendingAbilities.Dequeue();
+				ITurnAction turnAction = m_pendingAbilities.Peek();
+				//AbilityStatus status = turnInfo.ability.Execute(turnInfo.actor, turnInfo.targets);
+				ActionStatus status = turnAction.Execute(); 
 				//m_messages.Enqueue(turnInfo.actor.Name + " used " + turnInfo.ability.Name + "!");
 				
-				if (!status.isDone)
+//				if (!status.isComplete)
+//				{
+//					m_pendingAbilities.Enqueue(turnAction);
+//				}
+				if (status.isComplete)
 				{
-					m_pendingAbilities.Enqueue(turnInfo);
+					m_pendingAbilities.Dequeue();
 				}
 				
 				if (status.messages != null)
@@ -282,14 +289,28 @@ public class BattleSystem
 				
 				bool victoryCheck = false;
 				
-				foreach (Character target in turnInfo.targets)
+//				foreach (Character target in turnInfo.targets)
+//				{
+//					if (target.isDead())
+//					{
+//						m_messages.Enqueue(target.Name + " fainted!");
+//						victoryCheck = true;
+//					}
+//				}
+				
+				// figure out where to put this logic
+				if (m_player.ActivePokemon.isDead())
 				{
-					if (target.isDead())
-					{
-						m_messages.Enqueue(target.Name + " fainted!");
-						victoryCheck = true;
-					}
+					m_messages.Enqueue(m_player.ActivePokemon.Name + " fainted!");
+					victoryCheck = true;
 				}
+				
+				if (m_enemy.ActivePokemon.isDead())
+				{
+					m_messages.Enqueue(m_enemy.ActivePokemon.Name + " fainted!");
+					victoryCheck = true;
+				}
+
 				
 				if (victoryCheck)
 				{
@@ -323,16 +344,6 @@ public class BattleSystem
 		}
 	}
 	
-//	public void setActivePokemon(uint index)
-//	{
-//		m_activePokemon = m_player.Pokemon[(int)index];
-//	}
-	
-	
-	private void resolveTurn(AbilityUse turnInfo)
-	{
-		m_textHandler(turnInfo.actor.Name + " used ability " + turnInfo.ability.Name);
-	}
 }
 
 public class BattleArgs : EventArgs

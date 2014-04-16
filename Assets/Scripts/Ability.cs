@@ -51,32 +51,26 @@ public class Ability : IAbility
 	}
 	
 	// TODO: Figure out a proper return value to show what happened
-	public virtual AbilityStatus Execute(Character actor, List<Character> enemies)
+	public virtual ActionStatus Execute(Character actor, Player targetPlayer)
 	{
 		if (m_currentUses <= 0)
 		{
 			throw new Exception("No ability charges left");
 		}
 		
-		if (enemies == null || enemies.Count <= 0)
-		{
-			throw new Exception("No valid targets!");
-		}
-		
-		Character target = enemies[0];
+		Character target = targetPlayer.ActivePokemon;
 		float multiplier = DamageCalculations.getDamageMultiplier(m_type, target.Types);
 		
 		int amount = (int)(m_damageAmount * multiplier);
 		if (amount != 0)
 		{
-			enemies[0].TakeDamage(amount);
+			target.TakeDamage(amount);
 		}
 		
 		m_currentUses -= 1;
 		
-		AbilityStatus status = new AbilityStatus();
-		status.isDone = true;
-		status.messages = new List<string>();
+		ActionStatus status = new ActionStatus();
+		status.isComplete = true;
 		
 		status.messages.Add(actor.Name + " used " + Name + "!");
 		if (multiplier > 1)

@@ -33,8 +33,6 @@ public class Character
 		set { m_isInvisible = value; }
 	}
 	
-	private IEnumerable<Character> m_enemies;
-	
 	private IAttackStrategy m_strategy;
 	
 	public string Name
@@ -118,36 +116,35 @@ public class Character
 		return 1;
 	}
 	
-	public void UpdateBattleConditions(IEnumerable<Character> enemies)
+	public void UpdateBattleConditions(Player enemyPlayer)
 	{
-		m_enemies = enemies;
-		m_strategy.UpdateConditions(this, null, m_enemies);
+		m_strategy.UpdateConditions(this, enemyPlayer);
 	}
 	
-	public AbilityUse getTurn()
+	public ITurnAction getTurn()
 	{
 		return m_strategy.Execute();
 	}
 	
-	public AbilityUse getTurnAbility(IEnumerable<Character> allies, IEnumerable<Character> enemies)
-	{
-		//uint usageCost = getUsageCost();
-		
-		AbilityUse turnInfo = m_strategy.Execute();
-		
-		return turnInfo;
-		
-//		if (turnInfo.ability == null)
-//		{
-//			return;
-//		}
+//	public AbilityUse getTurnAbility(IEnumerable<Character> allies, IEnumerable<Character> enemies)
+//	{
+//		//uint usageCost = getUsageCost();
 //		
-//		foreach (Character target in turnInfo.targets)
-//		{
-//			target.TakeDamage(turnInfo.ability.DamageAmount);
-//		}
+//		AbilityUse turnInfo = m_strategy.Execute();
 //		
-//		turnInfo.ability.CurrentUses -= usageCost;
-	}
+//		return turnInfo;
+//		
+////		if (turnInfo.ability == null)
+////		{
+////			return;
+////		}
+////		
+////		foreach (Character target in turnInfo.targets)
+////		{
+////			target.TakeDamage(turnInfo.ability.DamageAmount);
+////		}
+////		
+////		turnInfo.ability.CurrentUses -= usageCost;
+//	}
 
 }

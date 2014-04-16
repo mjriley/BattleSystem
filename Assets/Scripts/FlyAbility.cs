@@ -9,9 +9,9 @@ public class FlyAbility : Ability
 	{
 	}
 	
-	public override AbilityStatus Execute(Character actor, List<Character> enemies)
+	public override ActionStatus Execute(Character actor, Player targetPlayer)
 	{
-		AbilityStatus status;
+		ActionStatus status;
 		
 		if (m_currentTurn == 0)
 		{
@@ -19,9 +19,8 @@ public class FlyAbility : Ability
 			actor.IsInvisible = true;
 			++m_currentTurn;
 			
-			status = new AbilityStatus();
-			status.isDone = true;
-			status.messages = new List<string>();
+			status = new ActionStatus();
+			status.isComplete = true;
 			status.messages.Add("Flew up in the air!");
 		}
 		else
@@ -30,7 +29,7 @@ public class FlyAbility : Ability
 			actor.IsInvisible = false;
 			
 			// do damage
-			status = base.Execute(actor, enemies);
+			status = base.Execute(actor, targetPlayer);
 			
 			// reset the ability state
 			m_currentTurn = 0;

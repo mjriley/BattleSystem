@@ -1,15 +1,19 @@
-using System.Collections.Generic;
 
-public class AbilityUse
+public class AbilityUse : ITurnAction
 {
-	public Character actor;
-	public List<Character> targets;
-	public IAbility ability;
+	public Character m_actor;
+	public Player m_targetPlayer;
+	public IAbility m_ability;
 	
-	public AbilityUse(Character actor, List<Character> targets, IAbility ability)
+	public AbilityUse(Character actor, Player targetPlayer, IAbility ability)
 	{
-		this.actor = actor;
-		this.targets = targets;
-		this.ability = ability;
+		m_actor = actor;
+		m_targetPlayer = targetPlayer;
+		m_ability = ability;
+	}
+	
+	public virtual ActionStatus Execute()
+	{
+		return m_ability.Execute(m_actor, m_targetPlayer);
 	}
 }

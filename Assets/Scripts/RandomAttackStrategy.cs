@@ -58,35 +58,35 @@ public class RandomAttackStrategy : IAttackStrategy
 	 * Attempts to find the target to use the provided ability on
 	 * Returns a list of the target or null if no target could be found
 	 **********/
-	private List<Character> DetermineTargets(Ability ability, Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
-	{
-		List<Character> targets = null;
-		
-		if (enemies.Count() > 0)
-		{
-			int targetIndex = m_generator.Next(0, enemies.Count());
-			
-			targets = new List<Character>();
-			targets.Add(enemies.ElementAt(targetIndex));
-		}
-		
-		return targets;
-	}
+//	private List<Character> DetermineTargets(Ability ability, Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
+//	{
+//		List<Character> targets = null;
+//		
+//		if (enemies.Count() > 0)
+//		{
+//			int targetIndex = m_generator.Next(0, enemies.Count());
+//			
+//			targets = new List<Character>();
+//			targets.Add(enemies.ElementAt(targetIndex));
+//		}
+//		
+//		return targets;
+//	}
 	
-	public void UpdateConditions(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies)
+	public void UpdateConditions(Character actor, Player enemyPlayer)
 	{
 		Ability ability = DetermineAbility(actor);
 	
-		List<Character> targets = DetermineTargets(ability, actor, allies, enemies);
+		//List<Character> targets = DetermineTargets(ability, actor, allies, enemies);
 		
-		m_turnInfo = new AbilityUse(actor, targets, ability);
+		m_turnInfo = new AbilityUse(actor, enemyPlayer, ability);
 	}
 	
 	/*********
 	 * Determine an ability to use on a target, at random
 	 * Returns an AbilityUse struct
 	 ***************/
-	public AbilityUse Execute()
+	public ITurnAction Execute()
 	{
 		return m_turnInfo;
 	}
