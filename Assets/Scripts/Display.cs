@@ -26,9 +26,6 @@ public class Display : MonoBehaviour {
 	
 	public int tagOffset = 10;
 	
-	//bool m_waitingForInput = false;
-	//int m_pressedIndex = 0;
-	//IAbility m_selectedAbility;
 	ITurnAction m_selectedAction;
 	
 	private List<Ability> m_abilities;
@@ -38,8 +35,6 @@ public class Display : MonoBehaviour {
 
 	private Player m_userPlayer;
 	private Player m_enemyPlayer;
-	//private Character m_character;
-	//private List<Character> m_enemies;
 	private UserInputStrategy m_strategy;
 	
 	private BattleSystem m_system;
@@ -52,7 +47,6 @@ public class Display : MonoBehaviour {
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
 		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetTurnAction);
 		m_userPlayer = m_system.UserPlayer;
-		//m_character = m_system.ActivePokemon;
 		
 		GameObject playerDisplay = GameObject.FindGameObjectWithTag("PlayerDisplay");
 		GameObject enemyDisplay = GameObject.FindGameObjectWithTag("EnemyDisplay");
@@ -74,25 +68,19 @@ public class Display : MonoBehaviour {
 	void HandleAbilities(List<Ability> abilities)
 	{
 		m_enemyPlayer = m_system.EnemyPlayer;
-		//m_enemies = m_system.Enemies;
 		m_abilities = abilities;
-		//m_waitingForInput = true;
 		
 		m_currentState = State.DisplayAbilities;
 	}
 	
 	ITurnAction GetTurnAction()
 	{
-		//if (!m_waitingForInput)
 		if (m_currentState == State.SubmitAbilityChoice)
 		{
 			m_currentState = State.Default;
-			//return m_pressedIndex;
-			//return m_selectedAbility;
 			return m_selectedAction;
 		}
 		
-		//return -1;
 		return null;
 	}
 	
@@ -116,10 +104,7 @@ public class Display : MonoBehaviour {
 	
 	void processButtonClick(int index)
 	{
-		//m_pressedIndex = index;
 		m_selectedAction = new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, m_abilities[index]);
-		//m_selectedAbility = m_abilities[index];
-		//m_waitingForInput = false;
 		DoneWithText();
 		
 		m_currentState = State.SubmitAbilityChoice;
@@ -137,13 +122,11 @@ public class Display : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-//		if (Input.GetKeyDown("space") && !m_waitingForInput)
 		if (Input.GetKeyDown("space"))
 		{
 			DoneWithText();
 		}
 		
-		//if (m_waitingForInput)
 		if (m_currentState == State.DisplayAbilities)
 		{
 			if (Input.GetKeyDown("1"))
@@ -199,8 +182,6 @@ public class Display : MonoBehaviour {
 		
 		int buttonWidth = (Screen.width - padding) / 2;
 		
-		
-		//if (m_waitingForInput)
 		if (m_currentState == State.DisplayAbilities)
 		{
 			Rect buttonBounds = new Rect(0, 0, buttonWidth, buttonHeight);
@@ -253,8 +234,6 @@ public class Display : MonoBehaviour {
 				{
 					SubmitSwapAbility(pokemonIndex);
 				}
-				//GUI.DrawTexture(new Rect(0, i * (pokemonHeight + pokemonVPadding), pokemonWidth, pokemonHeight), pokemonTagTexture);
-				//GUI.DrawTexture(new Rect((Screen.width + pokemonHPadding) / 2, i * (pokemonHeight + pokemonVPadding), pokemonWidth, pokemonHeight), pokemonTagTexture);
 			}
 		}
 		
@@ -262,18 +241,14 @@ public class Display : MonoBehaviour {
 		{
 			Vector2 playerSizeInfo = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
 			Rect playerRect = new Rect(0, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);	
-			//PlayerStatusDisplay.Display(playerRect, "Goober", Character.Sex.Male, m_playerNameStyle);
 			PlayerStatusDisplay.Display(playerRect, m_userPlayer.ActivePokemon, m_userPlayer, m_playerNameStyle);
 			
 			Rect aiRect = new Rect(Screen.width - playerSizeInfo.x, Screen.height - statusHeight - playerSizeInfo.y, playerSizeInfo.x, playerSizeInfo.y);
-			//PlayerStatusDisplay.Display(aiRect, "AI Pokemon", Character.Sex.Female, m_playerNameStyle);
-			//PlayerStatusDisplay.Display(aiRect, m_enemies[0], m_enemyPlayer, m_playerNameStyle);
 			PlayerStatusDisplay.Display(aiRect, m_enemyPlayer.ActivePokemon, m_enemyPlayer, m_playerNameStyle);
 		}
 		
 		GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
 		GUI.Box(new Rect(0, Screen.height - statusHeight, Screen.width, statusHeight), m_statusText, statusStyle);
-		
 	}
 	
 }

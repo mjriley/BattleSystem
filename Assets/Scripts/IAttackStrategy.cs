@@ -2,7 +2,6 @@
 
 public interface IAttackStrategy
 {
-	//void UpdateConditions(Character actor, IEnumerable<Character> allies, IEnumerable<Character> enemies);
 	void UpdateConditions(Character actor, Player enemyPlayer);
 	ITurnAction Execute();
 }

@@ -27,16 +27,13 @@ public class SwapAbility : ITurnAction
 		if (m_currentState == State.Recall)
 		{
 			result.isComplete = false;
-			//result.messages.Add(actor.Name + "! Come back!\nSwap out!");
 			result.messages.Add(m_player.ActivePokemon.Name + "! Come back!\nSwap out!");
 			m_currentState = State.Deploy;
 		}
 		else if (m_currentState == State.Deploy)
 		{
 			result.isComplete = true;
-			//actor.Owner.setActivePokemon(m_newIndex);
 			m_player.setActivePokemon(m_newIndex);
-			//result.messages.Add("Go! " + actor.Owner.ActivePokemon.Name + "!");
 			result.messages.Add("Go! " + m_player.ActivePokemon.Name + "!");
 		}
 		

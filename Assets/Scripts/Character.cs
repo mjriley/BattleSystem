@@ -125,26 +125,4 @@ public class Character
 	{
 		return m_strategy.Execute();
 	}
-	
-//	public AbilityUse getTurnAbility(IEnumerable<Character> allies, IEnumerable<Character> enemies)
-//	{
-//		//uint usageCost = getUsageCost();
-//		
-//		AbilityUse turnInfo = m_strategy.Execute();
-//		
-//		return turnInfo;
-//		
-////		if (turnInfo.ability == null)
-////		{
-////			return;
-////		}
-////		
-////		foreach (Character target in turnInfo.targets)
-////		{
-////			target.TakeDamage(turnInfo.ability.DamageAmount);
-////		}
-////		
-////		turnInfo.ability.CurrentUses -= usageCost;
-//	}
-
 }

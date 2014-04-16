@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Ability : IAbility
+public class Ability
 {
 	private string m_name;
 	public string Name
@@ -50,7 +50,6 @@ public class Ability : IAbility
 		m_accuracy = accuracy;
 	}
 	
-	// TODO: Figure out a proper return value to show what happened
 	public virtual ActionStatus Execute(Character actor, Player targetPlayer)
 	{
 		if (m_currentUses <= 0)
@@ -88,14 +87,4 @@ public class Ability : IAbility
 		
 		return status;
 	}
-	
-//	public void Use()
-//	{
-//		if (m_currentUses <= 0)
-//		{
-//			throw new Exception("No ability charges left");
-//		}
-//		
-//		m_currentUses -= 1;
-//	}
 }

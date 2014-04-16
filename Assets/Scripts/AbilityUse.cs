@@ -3,9 +3,9 @@ public class AbilityUse : ITurnAction
 {
 	public Character m_actor;
 	public Player m_targetPlayer;
-	public IAbility m_ability;
+	public Ability m_ability;
 	
-	public AbilityUse(Character actor, Player targetPlayer, IAbility ability)
+	public AbilityUse(Character actor, Player targetPlayer, Ability ability)
 	{
 		m_actor = actor;
 		m_targetPlayer = targetPlayer;
