@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 
@@ -14,6 +15,7 @@ public class BattleSystem
 	
 	Queue<string> m_messages = new Queue<string>();
 	Queue<ITurnAction> m_pendingAbilities = new Queue<ITurnAction>();
+	Queue<ITurnAction> m_nextTurnActions = new Queue<ITurnAction>();
 	
 	Random m_generator = null;
 	
@@ -208,12 +210,15 @@ public class BattleSystem
 		}
 		else if (m_currentState == InternalState.GetAbilities)
 		{
+			// roll over the previous queue to the current queue
+			m_pendingAbilities = m_nextTurnActions;
+			m_nextTurnActions = new Queue<ITurnAction>();
+			
+			// only ask the player for an action if he doesn't already have one queued up
 			m_messages.Enqueue("What will " + m_player.ActivePokemon.Name + " do?");
 			// Call a callback that will tell us if we're still waiting for if the user has decided on input
 			m_player.ActivePokemon.UpdateBattleConditions(m_enemy);
 			
-			List<Character> currentPokemon = new List<Character>();
-			currentPokemon.Add(m_player.ActivePokemon);
 			m_enemy.ActivePokemon.UpdateBattleConditions(m_player);
 			
 			m_currentState = InternalState.Idle;
@@ -246,9 +251,13 @@ public class BattleSystem
 				ITurnAction turnAction = m_pendingAbilities.Peek();
 				ActionStatus status = turnAction.Execute(); 
 				
-				if (status.isComplete)
+				if (status.isComplete || status.turnComplete)
 				{
 					m_pendingAbilities.Dequeue();
+					
+					if (!status.isComplete)
+					{
+					}
 				}
 				
 				if (status.messages != null)

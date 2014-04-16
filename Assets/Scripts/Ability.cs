@@ -69,6 +69,7 @@ public class Ability
 		m_currentUses -= 1;
 		
 		ActionStatus status = new ActionStatus();
+		status.turnComplete = true;
 		status.isComplete = true;
 		
 		status.messages.Add(actor.Name + " used " + Name + "!");

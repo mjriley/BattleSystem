@@ -20,7 +20,8 @@ public class FlyAbility : Ability
 			++m_currentTurn;
 			
 			status = new ActionStatus();
-			status.isComplete = true;
+			status.turnComplete = true;
+			status.isComplete = false;
 			status.messages.Add("Flew up in the air!");
 		}
 		else

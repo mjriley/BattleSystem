@@ -12,6 +12,8 @@ public class AbilityUse : ITurnAction
 		m_ability = ability;
 	}
 	
+	public virtual Character Subject { get { return m_actor; } }
+	
 	public virtual ActionStatus Execute()
 	{
 		return m_ability.Execute(m_actor, m_targetPlayer);
