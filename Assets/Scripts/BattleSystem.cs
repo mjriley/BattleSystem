@@ -19,6 +19,8 @@ public class BattleSystem
 	
 	Random m_generator = null;
 	
+	bool m_needPlayerTurn = true;
+	bool m_needEnemyTurn = true;
 	
 	public delegate bool IsMessageProcessed();
 	public delegate int PlayerAbilityChoiceHandler(List<Ability> abilities);
@@ -40,7 +42,8 @@ public class BattleSystem
 	{
 		NewEncounter,
 		GetAbilities,
-		WaitingOnAbilities,
+		WaitingOnPlayerChoice,
+		WaitingOnEnemyChoice,
 		ExecutingAbilities,
 		NextText,
 		Idle
@@ -214,32 +217,59 @@ public class BattleSystem
 			m_pendingAbilities = m_nextTurnActions;
 			m_nextTurnActions = new Queue<ITurnAction>();
 			
-			// only ask the player for an action if he doesn't already have one queued up
-			m_messages.Enqueue("What will " + m_player.ActivePokemon.Name + " do?");
-			// Call a callback that will tell us if we're still waiting for if the user has decided on input
-			m_player.ActivePokemon.UpdateBattleConditions(m_enemy);
+			m_needPlayerTurn = !m_pendingAbilities.Any(p => p.Subject.Equals(m_player.ActivePokemon) );
+			m_needEnemyTurn = !m_pendingAbilities.Any(p => p.Subject.Equals(m_enemy.ActivePokemon) );
 			
-			m_enemy.ActivePokemon.UpdateBattleConditions(m_player);
+			// only ask the player for an action if he doesn't already have one queued up
+			if (m_needPlayerTurn)
+			{
+				m_messages.Enqueue("What will " + m_player.ActivePokemon.Name + " do?");
+				// Call a callback that will tell us if we're still waiting for if the user has decided on input
+				m_player.ActivePokemon.UpdateBattleConditions(m_enemy);
+			}
+			
+			if (m_needEnemyTurn)
+			{
+				m_enemy.ActivePokemon.UpdateBattleConditions(m_player);
+			}
 			
 			m_currentState = InternalState.Idle;
-			m_nextState = InternalState.WaitingOnAbilities;
+			m_nextState = InternalState.WaitingOnPlayerChoice;
 			
 			StateChange(State.InBattle);
 		}
-		else if (m_currentState == InternalState.WaitingOnAbilities)
+		else if (m_currentState == InternalState.WaitingOnPlayerChoice)
 		{
-			ITurnAction playerTurn = m_player.ActivePokemon.getTurn();
-			
-			// if turnInfo is null, we're still waiting
-			if (playerTurn != null)
+			if (m_needPlayerTurn)
 			{
-				// this would have to be moved elsewhere if the enemy was a real player;
-				// all abilities could/should be fetched at the same time/asynchronously
-				ITurnAction enemyTurn = m_enemy.ActivePokemon.getTurn();
+				ITurnAction playerTurn = m_player.ActivePokemon.getTurn();
 				
-				m_pendingAbilities.Enqueue(playerTurn);
+				if (playerTurn != null)
+				{
+					m_pendingAbilities.Enqueue(playerTurn);
+				}
+				
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.WaitingOnEnemyChoice;
+			}
+			else
+			{
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.WaitingOnEnemyChoice;
+			}
+		}
+		else if (m_currentState == InternalState.WaitingOnEnemyChoice)
+		{
+			if (m_needEnemyTurn)
+			{
+				ITurnAction enemyTurn = m_enemy.ActivePokemon.getTurn();
 				m_pendingAbilities.Enqueue(enemyTurn);
 				
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.ExecutingAbilities;
+			}
+			else
+			{
 				m_currentState = InternalState.Idle;
 				m_nextState = InternalState.ExecutingAbilities;
 			}
@@ -257,6 +287,7 @@ public class BattleSystem
 					
 					if (!status.isComplete)
 					{
+						m_nextTurnActions.Enqueue(turnAction);
 					}
 				}
 				
