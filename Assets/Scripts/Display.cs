@@ -8,7 +8,8 @@ public class Display : MonoBehaviour {
 		Default,
 		DisplayAbilities,
 		SubmitAbilityChoice,
-		DisplayPokemon
+		DisplayPokemon,
+		SubmitPokemonChoice
 	}
 	
 	private State m_currentState = State.Default;
@@ -31,6 +32,7 @@ public class Display : MonoBehaviour {
 	private List<Ability> m_abilities;
 	
 	bool m_handledCurrentText = true;
+	int m_selectedPokemon;
 
 
 	private Player m_userPlayer;
@@ -45,7 +47,7 @@ public class Display : MonoBehaviour {
 	void Start()
 	{
 		m_system = new BattleSystem(this.HandleText, this.CurrentMessageProcessed);
-		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetTurnAction);
+		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetTurnAction, this.GetNextPokemon);
 		m_userPlayer = m_system.UserPlayer;
 		
 		GameObject playerDisplay = GameObject.FindGameObjectWithTag("PlayerDisplay");
@@ -84,6 +86,23 @@ public class Display : MonoBehaviour {
 		return null;
 	}
 	
+	int GetNextPokemon()
+	{
+		if (m_currentState != State.DisplayPokemon)
+		{
+			m_currentState = State.DisplayPokemon;
+			m_selectedPokemon = -1;
+		}
+		
+		if (m_selectedPokemon != -1)
+		{
+			m_currentState = State.SubmitPokemonChoice;
+			return m_selectedPokemon;
+		}
+		
+		return -1;
+	}
+	
 	bool CurrentMessageProcessed()
 	{
 		return m_handledCurrentText;
@@ -110,13 +129,20 @@ public class Display : MonoBehaviour {
 		m_currentState = State.SubmitAbilityChoice;
 	}
 	
-	void SubmitSwapAbility(int index)
+	void processPokemonClick(int index)
 	{
-		m_selectedAction = new SwapAbility(m_userPlayer, index);
-		
-		DoneWithText();
-		
-		m_currentState = State.SubmitAbilityChoice;
+		if (m_system.IntState == BattleSystem.InternalState.WaitingOnPlayerChoice)
+		{
+			m_selectedAction = new SwapAbility(m_userPlayer, index);
+			DoneWithText();
+			m_currentState = State.SubmitAbilityChoice;
+		}
+		else if (m_system.IntState == BattleSystem.InternalState.WaitingOnNextPokemonSelection)
+		{
+			m_selectedPokemon = index;
+			DoneWithText();
+			m_currentState = State.SubmitPokemonChoice;
+		}
 	}
 	
 	// Update is called once per frame
@@ -221,7 +247,7 @@ public class Display : MonoBehaviour {
 				}
 				if (PokemonTagDisplay.Button(new Rect(0, i * (pokemonHeight + pokemonVPadding), pokemonWidth, pokemonHeight), leftPokemon, false))
 				{
-					SubmitSwapAbility(pokemonIndex);
+					processPokemonClick(pokemonIndex);
 				}
 				++pokemonIndex;
 				
@@ -232,7 +258,7 @@ public class Display : MonoBehaviour {
 				}
 				if (PokemonTagDisplay.Button(new Rect((Screen.width + pokemonHPadding) / 2, i * (pokemonHeight + pokemonVPadding) + pokemonVPadding, pokemonWidth, pokemonHeight), rightPokemon, true))
 				{
-					SubmitSwapAbility(pokemonIndex);
+					processPokemonClick(pokemonIndex);
 				}
 			}
 		}

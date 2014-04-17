@@ -22,6 +22,9 @@ public class BattleSystem
 	bool m_needPlayerTurn = true;
 	bool m_needEnemyTurn = true;
 	
+	bool m_needPlayerPokemon = false;
+	bool m_needEnemyPokemon = false;
+	
 	public delegate bool IsMessageProcessed();
 	public delegate int PlayerAbilityChoiceHandler(List<Ability> abilities);
 	public delegate void TextAlertHandler(string message);
@@ -38,13 +41,15 @@ public class BattleSystem
 		InBattle
 	};
 	
-	private enum InternalState
+	public enum InternalState
 	{
 		NewEncounter,
 		GetAbilities,
 		WaitingOnPlayerChoice,
 		WaitingOnEnemyChoice,
 		ExecutingAbilities,
+		ProcessTurnEnd,
+		WaitingOnNextPokemonSelection,
 		NextText,
 		Idle
 	};
@@ -61,6 +66,8 @@ public class BattleSystem
 	private MessageState m_currentMessageState = MessageState.Ready;
 	
 	private InternalState m_currentState = InternalState.NewEncounter;
+	public InternalState IntState { get { return m_currentState; } }
+	
 	private InternalState m_nextState = InternalState.NewEncounter;
 	private string m_status = "";
 	
@@ -114,9 +121,12 @@ public class BattleSystem
 		m_pendingAbilities.Clear();
 	}
 	
-	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, UserInputStrategy.GetUserInput abilityChoiceHandler)
+	public void CreatePlayerPokemon(UserInputStrategy.ReceiveConditions abilityDisplayHandler, 
+		UserInputStrategy.GetUserInput abilityChoiceHandler, 
+		InputPokemonStrategy.GetNextPokemon nextPokemonHandler)
 	{
-		m_player = new Player("Human");
+		InputPokemonStrategy nextPokemonStrategy = new InputPokemonStrategy(nextPokemonHandler);
+		m_player = new Player("Human", nextPokemonStrategy);
 		
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
 		
@@ -152,25 +162,28 @@ public class BattleSystem
 	
 	public Player generateEnemy()
 	{
-		Player player = new Player("Enemy");
+		Player player = new Player("Enemy", new SequentialPokemonStrategy());
 		
-		int index = m_generator.Next(0, Pokemon.Names.Length);
-		string name = Pokemon.Names[index];
-		
-		RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
-		
-		Character enemy = new Character(name, Character.Sex.Female, 70, BattleType.Water, enemy_strategy);
-		Ability ability0 = new Ability("Enemy Ability 0", BattleType.Normal, 20, 100, 20);
-		Ability ability1 = new Ability("Enemy Ability 1", BattleType.Normal, 20, 100, 20);
-		Ability ability2 = new Ability("Enemy Ability 2", BattleType.Normal, 20, 100, 20);
-		Ability ability3 = new Ability("Enemy Ability 3", BattleType.Normal, 20, 100, 20);
-		
-		enemy.addAbility(ability0);
-		enemy.addAbility(ability1);
-		enemy.addAbility(ability2);
-		enemy.addAbility(ability3);
-		
-		player.AddPokemon(enemy);
+		for (int i = 0; i < 3; ++i)
+		{
+			int index = m_generator.Next(0, Pokemon.Names.Length);
+			string name = Pokemon.Names[index];
+			
+			RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
+			
+			Character enemy = new Character(name, Character.Sex.Female, 70, BattleType.Water, enemy_strategy);
+			Ability ability0 = new Ability("Enemy Ability 0", BattleType.Normal, 20, 100, 20);
+			Ability ability1 = new Ability("Enemy Ability 1", BattleType.Normal, 20, 100, 20);
+			Ability ability2 = new Ability("Enemy Ability 2", BattleType.Normal, 20, 100, 20);
+			Ability ability3 = new Ability("Enemy Ability 3", BattleType.Normal, 20, 100, 20);
+			
+			enemy.addAbility(ability0);
+			enemy.addAbility(ability1);
+			enemy.addAbility(ability2);
+			enemy.addAbility(ability3);
+			
+			player.AddPokemon(enemy);
+		}
 		
 		return player;
 	}
@@ -247,10 +260,10 @@ public class BattleSystem
 				if (playerTurn != null)
 				{
 					m_pendingAbilities.Enqueue(playerTurn);
+					
+					m_currentState = InternalState.Idle;
+					m_nextState = InternalState.WaitingOnEnemyChoice;
 				}
-				
-				m_currentState = InternalState.Idle;
-				m_nextState = InternalState.WaitingOnEnemyChoice;
 			}
 			else
 			{
@@ -297,46 +310,99 @@ public class BattleSystem
 					{
 						m_messages.Enqueue(message);
 					}
+					
 				}
 				
-				bool victoryCheck = false;
-				
-				// figure out where to put this logic
-				if (m_player.ActivePokemon.isDead())
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.ExecutingAbilities;
+			}
+			else
+			{
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.ProcessTurnEnd;
+			}
+		}
+		else if (m_currentState == InternalState.WaitingOnNextPokemonSelection)
+		{
+			if (m_needPlayerPokemon)
+			{
+				UnityEngine.Debug.Log("Need Player Pokemon");
+				int nextPokemon = m_player.GetNextPokemon(m_enemy);
+				// Go for it! <X>!
+				if (nextPokemon != -1)
 				{
-					m_messages.Enqueue(m_player.ActivePokemon.Name + " fainted!");
-					victoryCheck = true;
+					m_player.setActivePokemon(nextPokemon);
+					m_messages.Enqueue("Go for it! " + m_player.ActivePokemon.Name + "!");
+					m_needPlayerPokemon = false;
 				}
-				
-				if (m_enemy.ActivePokemon.isDead())
+			}
+			
+			if (m_needEnemyPokemon)
+			{
+				UnityEngine.Debug.Log("Need Enemy Pokemon");
+				int nextPokemon = m_enemy.GetNextPokemon(m_player);
+				if (nextPokemon != -1)
 				{
-					m_messages.Enqueue(m_enemy.ActivePokemon.Name + " fainted!");
-					victoryCheck = true;
+					m_enemy.setActivePokemon(nextPokemon);
+					m_messages.Enqueue(m_enemy.Name + " is about to send in " + m_enemy.ActivePokemon.Name + ". Will you switch your Pokemon?");
+					m_needEnemyPokemon = false;
 				}
-
+			}
+			
+			if (!m_needPlayerPokemon && !m_needEnemyPokemon)
+			{
+				m_currentState = InternalState.Idle;
+				m_nextState = InternalState.GetAbilities;
+			}
+		}
+		else if (m_currentState == InternalState.ProcessTurnEnd)
+		{
+			bool checkPlayerVictory = false;
+			bool checkEnemyVictory = false;
+			
+			if (m_player.ActivePokemon.isDead())
+			{
+				m_messages.Enqueue(m_player.ActivePokemon.Name + " fainted!");
 				
-				if (victoryCheck)
+				checkEnemyVictory = true;
+				
+				m_messages.Enqueue("Battle using which Pokemon?");
+			}
+			
+			if (m_enemy.ActivePokemon.isDead())
+			{
+				m_messages.Enqueue(m_enemy.ActivePokemon.Name + " fainted!");
+				
+				checkPlayerVictory = true;
+			}
+			
+			if (checkEnemyVictory)
+			{
+				if (DidEnemyWin())
 				{
-					if (DidPlayerWin())
-					{
-						m_messages.Enqueue("Player Won!");
-						Restart();
-					}
-					else if (DidEnemyWin())
-					{
-						m_messages.Enqueue("Enemy Won!");
-						Restart();
-					}
-					else
-					{
-						m_currentState = InternalState.Idle;
-						m_nextState = InternalState.ExecutingAbilities;
-					}
+					m_messages.Enqueue("Enemy Won!");
+					Restart();
 				}
 				else
 				{
+					// get next enemy pokemon
+					m_needPlayerPokemon = true;
 					m_currentState = InternalState.Idle;
-					m_nextState = InternalState.ExecutingAbilities;
+					m_nextState = InternalState.WaitingOnNextPokemonSelection;
+				}
+			}
+			else if (checkPlayerVictory)
+			{
+				if (DidPlayerWin())
+				{
+					m_messages.Enqueue("Player Won!");
+					Restart();
+				}
+				else
+				{
+					m_needEnemyPokemon = true;
+					m_currentState = InternalState.Idle;
+					m_nextState = InternalState.WaitingOnNextPokemonSelection;
 				}
 			}
 			else

@@ -10,7 +10,9 @@ public class PlayerStatusDisplay : MonoBehaviour
 	private static Texture2D m_healthTexture;
 	private static Texture2D m_healthOutlineTexture;
 	
-	private static Texture2D m_ballTexture;
+	private static Texture2D m_normalBallTexture;
+	private static Texture2D m_statusBallTexture;
+	private static Texture2D m_deadBallTexture;
 	
 	private static void Init()
 	{
@@ -20,7 +22,9 @@ public class PlayerStatusDisplay : MonoBehaviour
 			m_femaleTexture = Resources.Load<Texture2D>("Textures/female");
 			m_healthTexture = Resources.Load<Texture2D>("Textures/white_tile");
 			m_healthOutlineTexture = Resources.Load<Texture2D>("Textures/HealthOutline");
-			m_ballTexture = Resources.Load<Texture2D>("Textures/pokeball");
+			m_normalBallTexture = Resources.Load<Texture2D>("Textures/normal_ball");
+			//m_statusBallTexture = Resources.Load<Texture2D>("Textures/status_ball");
+			m_deadBallTexture = Resources.Load<Texture2D>("Textures/dead_ball");
 			
 			m_isInit = true;
 		}
@@ -34,7 +38,7 @@ public class PlayerStatusDisplay : MonoBehaviour
 		Vector2 textSize = style.CalcSize(content);
 		
 		float width = m_healthOutlineTexture.width;
-		float height = textSize.y * 2 + m_healthOutlineTexture.height + m_ballTexture.height;
+		float height = textSize.y * 2 + m_healthOutlineTexture.height + m_normalBallTexture.height;
 		
 		return new Vector2(width, height);
 	}
@@ -77,7 +81,8 @@ public class PlayerStatusDisplay : MonoBehaviour
 			
 			for (int i = 0; i < player.Pokemon.Count; ++i)
 			{	
-				GUI.DrawTexture(new Rect(i * m_ballTexture.width, contentSize.y * 2 + m_healthOutlineTexture.height, m_ballTexture.width, m_ballTexture.height), m_ballTexture);
+				Texture2D texture = (player.Pokemon[i].isDead() ? m_deadBallTexture : m_normalBallTexture);
+				GUI.DrawTexture(new Rect(i * texture.width, contentSize.y * 2 + texture.height, texture.width, texture.height), texture);
 			}
 		GUI.EndGroup();
 	}

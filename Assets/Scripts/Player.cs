@@ -14,6 +14,8 @@ public class Player
 		get { return m_pokemon; }
 	}
 	
+	private INextPokemonStrategy m_nextPokemonStrategy;
+	
 	private int m_activePokemonIndex = 0;
 	public Character ActivePokemon { get { return m_pokemon[m_activePokemonIndex]; } }
 	public void setActivePokemon(int index)
@@ -21,14 +23,20 @@ public class Player
 		m_activePokemonIndex = index;
 	}
 	
-	public Player(string name)
+	public Player(string name, INextPokemonStrategy nextPokemonStrategy)
 	{
 		m_name = name;
+		m_nextPokemonStrategy = nextPokemonStrategy;
 	}
 	
 	public void AddPokemon(Character pokemon)
 	{
 		pokemon.Owner = this;
 		m_pokemon.Add(pokemon);
+	}
+	
+	public int GetNextPokemon(Player enemy)
+	{
+		return m_nextPokemonStrategy.getNextPokemon(this, enemy);
 	}
 }

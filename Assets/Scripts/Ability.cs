@@ -57,7 +57,19 @@ public class Ability
 			throw new Exception("No ability charges left");
 		}
 		
+		ActionStatus status = new ActionStatus();
+		
 		Character target = targetPlayer.ActivePokemon;
+		
+		if (actor.isDead())
+		{
+			// do not process abilities for dead pokemon
+			status.turnComplete = true;
+			status.isComplete = true;
+			
+			return status;
+		}
+		
 		float multiplier = DamageCalculations.getDamageMultiplier(m_type, target.Types);
 		
 		int amount = (int)(m_damageAmount * multiplier);
@@ -68,7 +80,6 @@ public class Ability
 		
 		m_currentUses -= 1;
 		
-		ActionStatus status = new ActionStatus();
 		status.turnComplete = true;
 		status.isComplete = true;
 		

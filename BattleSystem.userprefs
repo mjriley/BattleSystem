@@ -1,25 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AbilityUse.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BattleSystem.cs">
     <Files>
-      <File FileName="Assets/Scripts/Display.cs" Line="122" Column="30" />
-      <File FileName="Assets/Scripts/SwapAbility.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ActionStatus.cs" Line="6" Column="9" />
-      <File FileName="Assets/Scripts/Ability.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/BattleSystem.cs" Line="226" Column="34" />
-      <File FileName="Assets/Scripts/Character.cs" Line="151" Column="1" />
-      <File FileName="Assets/Scripts/UserInputStrategy.cs" Line="26" Column="2" />
-      <File FileName="Assets/Scripts/AbilityUse.cs" Line="8" Column="58" />
-      <File FileName="Assets/Scripts/FlyAbility.cs" Line="32" Column="44" />
-      <File FileName="Assets/Scripts/RandomAttackStrategy.cs" Line="74" Column="5" />
-      <File FileName="Assets/Scripts/IAttackStrategy.cs" Line="6" Column="60" />
+      <File FileName="Assets/Scripts/BattleSystem.cs" Line="186" Column="3" />
+      <File FileName="Assets/Scripts/Display.cs" Line="50" Column="37" />
+      <File FileName="Assets/Scripts/ITurnAction.cs" Line="6" Column="1" />
+      <File FileName="Assets/Scripts/Ability.cs" Line="102" Column="1" />
+      <File FileName="Assets/Scripts/Character.cs" Line="34" Column="1" />
+      <File FileName="Assets/Scripts/Player.cs" Line="38" Column="11" />
+      <File FileName="Assets/Scripts/INextPokemonStrategy.cs" Line="3" Column="4" />
+      <File FileName="Assets/Scripts/SequentialPokemonStrategy.cs" Line="29" Column="11" />
+      <File FileName="Assets/Editor/Tests/SequentialPokemonStrategyTests.cs" Line="23" Column="48" />
+      <File FileName="Assets/Scripts/InputPokemonStrategy.cs" Line="12" Column="11" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="AbilityUse.cs" selected="True" />
+              <Node name="BattleSystem.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Editor" expanded="True">
+              <Node name="Tests" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -31,7 +35,13 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Tests" expanded="True">
+              <Node name="SequentialPokemonStrategyTests" expanded="True" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
