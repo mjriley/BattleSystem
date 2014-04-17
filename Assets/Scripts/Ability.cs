@@ -40,7 +40,14 @@ public class Ability
 		get { return m_accuracy; }
 	}
 	
+	private AbilityEffect m_effect;
+	
 	public Ability(string name, BattleType type, int damageAmount, int accuracy, uint maxUses)
+	: this(name, type, damageAmount, accuracy, maxUses, new AbilityEffect(AbilityEffect.EffectType.None, 0))
+	{
+	}
+	
+	public Ability(string name, BattleType type, int damageAmount, int accuracy, uint maxUses, AbilityEffect effect)
 	{
 		m_name = name;
 		m_type = type;
@@ -48,6 +55,7 @@ public class Ability
 		m_maxUses = maxUses;
 		m_currentUses = m_maxUses;
 		m_accuracy = accuracy;
+		m_effect = effect;
 	}
 	
 	public virtual ActionStatus Execute(Character actor, Player targetPlayer)
@@ -95,6 +103,17 @@ public class Ability
 		else if (multiplier < 1)
 		{
 			status.messages.Add("It's not very effective...");
+		}
+		
+		if (m_effect.Type != AbilityEffect.EffectType.None)
+		{
+			System.Random r = new System.Random();
+			
+			if (r.NextDouble() < m_effect.Rate)
+			{
+				m_effect.Apply(target);
+				status.messages.Add(target.Name + " " + m_effect.GetActionMessage());
+			}
 		}
 		
 		return status;

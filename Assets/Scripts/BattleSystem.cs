@@ -133,7 +133,7 @@ public class BattleSystem
 		Character pikachu = new Character("Pikachu", Character.Sex.Male, 70, BattleType.Electric, userStrategy);
 		pikachu.addAbility(new FlyAbility("Fly", BattleType.Flying, 50, 95, 20));
 		pikachu.addAbility(new Ability("Bubble", BattleType.Water, 20, 100, 30));
-		pikachu.addAbility(new Ability("Ember", BattleType.Fire, 40, 100, 25));
+		pikachu.addAbility(new Ability("Ember", BattleType.Fire, 10, 100, 25, new AbilityEffect(AbilityEffect.EffectType.Burn, 0.10f)));
 		pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));
 		
 		Character chespin = new Character("Chespin", Character.Sex.Male, 70, BattleType.Grass, userStrategy);
@@ -297,6 +297,8 @@ public class BattleSystem
 				if (status.isComplete || status.turnComplete)
 				{
 					m_pendingAbilities.Dequeue();
+					List<string> endTurnMessages = turnAction.Subject.CompleteTurn();
+					status.messages.AddRange(endTurnMessages);
 					
 					if (!status.isComplete)
 					{

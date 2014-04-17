@@ -74,6 +74,8 @@ public class Character
 		{
 			m_types.Add(type2);
 		}
+		
+		ClearStatuses();
 	}
 	
 	public void Reset()
@@ -125,4 +127,73 @@ public class Character
 	{
 		return m_strategy.Execute();
 	}
+	
+	public bool Burned { get; set; }
+	public bool Frozen { get; set; }
+	public bool Paralyzed { get; set; }
+	public bool Poisoned { get; set; }
+	
+	private int m_numTurnsSleeping = 0;	
+	public bool IsSleeping()
+	{
+		return (m_numTurnsSleeping > 0);
+	}
+	
+	public void FallAsleep()
+	{
+		System.Random r = new System.Random();
+		
+		int turnsSleeping = r.Next(1, 4);
+		m_numTurnsSleeping = Math.Max(m_numTurnsSleeping, turnsSleeping);
+	}
+	
+	private void ClearStatuses()
+	{
+		Burned = false;
+		Frozen = false;
+		Paralyzed = false;
+		Poisoned = false;
+		m_numTurnsSleeping = 0;
+	}
+	
+	public List<string> CompleteTurn()
+	{
+		List<string> messages = new List<string>();
+		
+		if (Owner.ActivePokemon != this)
+		{
+			// only calculate effects if this pokemon is still on the field
+			return messages;
+		}
+		
+		if (Burned)
+		{
+			messages.Add(m_name + " was damaged by the burn!");
+			TakeDamage((int)(1.0f / 8.0f * m_maxHP));
+		}
+		
+		if (Poisoned)
+		{
+			messages.Add(m_name + " was damaged by the poison!");
+			TakeDamage((int)(1.0f / 8.0f * m_maxHP));
+		}
+		
+		if (IsSleeping())
+		{
+			m_numTurnsSleeping -= 1;
+			
+			if (!IsSleeping())
+			{
+				messages.Add(m_name + " woke up!");
+			}
+		}
+		
+		return messages;
+	}
+	
+	public bool IsStatusAfflicted()
+	{
+		return (Burned || Frozen || Paralyzed || Poisoned || IsSleeping());
+	}
 }
+
