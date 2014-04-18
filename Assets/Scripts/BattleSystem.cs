@@ -154,10 +154,24 @@ public class BattleSystem
 		charmander.addAbility(new Ability("Ability 2", BattleType.Fire, 20, 100, 20));
 		charmander.addAbility(new Ability("Ability 3", BattleType.Fire, 20, 100, 20));
 		
+		Character magikarp = new Character("Magikarp", Pokemon.Species.Magikarp, Character.Sex.Male, 70, 100, BattleType.Normal, userStrategy);
+		magikarp.addAbility(new Ability("Ability 0", BattleType.Normal, 20, 100, 20));
+		magikarp.addAbility(new Ability("Ability 1", BattleType.Normal, 20, 100, 20));
+		magikarp.addAbility(new Ability("Ability 2", BattleType.Normal, 20, 100, 20));
+		magikarp.addAbility(new Ability("Ability 3", BattleType.Normal, 20, 100, 20));
+		
+		Character bulbasaur = new Character("Bulbasaur", Pokemon.Species.Bulbasaur, Character.Sex.Female, 70, 10, BattleType.Poison, userStrategy);
+		bulbasaur.addAbility(new Ability("Ability 0", BattleType.Poison, 20, 100, 20));
+		bulbasaur.addAbility(new Ability("Ability 1", BattleType.Poison, 20, 100, 20));
+		bulbasaur.addAbility(new Ability("Ability 2", BattleType.Poison, 20, 100, 20));
+		bulbasaur.addAbility(new Ability("Ability 3", BattleType.Poison, 20, 100, 20));
+		
 		m_player.AddPokemon(pikachu);
 		m_player.AddPokemon(chespin);
 		m_player.AddPokemon(squirtle);
 		m_player.AddPokemon(charmander);
+		m_player.AddPokemon(magikarp);
+		m_player.AddPokemon(bulbasaur);
 	}
 	
 	public Player generateEnemy()
@@ -344,7 +358,6 @@ public class BattleSystem
 			
 			if (m_needEnemyPokemon)
 			{
-				UnityEngine.Debug.Log("Need Enemy Pokemon");
 				int nextPokemon = m_enemy.GetNextPokemon(m_player);
 				if (nextPokemon != -1)
 				{

@@ -1,0 +1,306 @@
+fileFormatVersion: 2
+guid: 2d8412c3396694587a66d879f4dc80a1
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 20
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: magikarp_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 1276
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 1392
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: magikarp_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 1624
+        y: 0
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

@@ -31,6 +31,8 @@ public class AbilityButton : MonoBehaviour
 		typeColors[BattleType.Water] = makeIntColor(104, 144, 240);
 		typeColors[BattleType.Grass] = makeIntColor(120, 200, 80);
 		typeColors[BattleType.Flying] = makeIntColor(168, 144, 240);
+		typeColors[BattleType.Normal] = makeIntColor(168, 168, 120);
+		typeColors[BattleType.Poison] = makeIntColor(160, 64, 160);
 	}
 	
 	public static bool Display(Rect rect, Ability ability, bool drawReversed, GUIStyle typeNameStyle, GUIStyle abilityNameStyle, GUIStyle abilityDetailsStyle, GUIStyle buttonStyle)

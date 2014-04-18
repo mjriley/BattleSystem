@@ -1,0 +1,441 @@
+fileFormatVersion: 2
+guid: 3e0c4c8e8483d48119aa865dc6d93053
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 20
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: chespin_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 2050
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: chespin_spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 2150
+        y: 0
+        width: 50
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

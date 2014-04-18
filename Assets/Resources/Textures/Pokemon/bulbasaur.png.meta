@@ -1,0 +1,414 @@
+fileFormatVersion: 2
+guid: 3d306c66cdf32471fb6853288d981b34
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 20
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: bulbasaur_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bulbasaur_spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 45
+        height: 49
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

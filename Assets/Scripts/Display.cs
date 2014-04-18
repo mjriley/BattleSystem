@@ -42,6 +42,12 @@ public class Display : MonoBehaviour {
 	private BattleSystem m_system;
 	
 	private string m_statusText = "";
+	
+	SpriteRenderer m_playerDisplay;
+	SpriteRenderer m_enemyDisplay;
+	
+	Animator m_playerAnimator;
+	Animator m_enemyAnimator;
 
 	// Use this for initialization
 	void Start()
@@ -50,11 +56,17 @@ public class Display : MonoBehaviour {
 		m_system.CreatePlayerPokemon(this.HandleAbilities, this.GetTurnAction, this.GetNextPokemon);
 		m_userPlayer = m_system.UserPlayer;
 		
-		GameObject playerDisplay = GameObject.FindGameObjectWithTag("PlayerDisplay");
-		GameObject enemyDisplay = GameObject.FindGameObjectWithTag("EnemyDisplay");
+		GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
+		m_playerDisplay = playerObject.GetComponent<SpriteRenderer>();
+		m_playerAnimator = m_playerDisplay.GetComponent<Animator>();
 		
-		playerDisplay.GetComponent<SpriteRenderer>().enabled = true;
-		enemyDisplay.GetComponent<SpriteRenderer>().enabled = true;
+		
+		GameObject enemyObject = GameObject.FindGameObjectWithTag("EnemyDisplay");
+		m_enemyDisplay = enemyObject.GetComponent<SpriteRenderer>();
+		m_enemyAnimator = m_enemyDisplay.GetComponent<Animator>();
+		
+		m_playerDisplay.GetComponent<SpriteRenderer>().enabled = true;
+		m_enemyDisplay.GetComponent<SpriteRenderer>().enabled = false;
 	}
 	
 	void HandleText(string message)
@@ -145,9 +157,35 @@ public class Display : MonoBehaviour {
 		}
 	}
 	
+	void UpdatePokemonAnimations()
+	{
+		string friendlyPokemon = m_userPlayer.ActivePokemon.Species.ToString();
+		if (m_playerAnimator.runtimeAnimatorController.ToString() != friendlyPokemon)
+		{
+			m_playerAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Controllers/" + friendlyPokemon);
+		}
+		
+		if (m_enemyPlayer != null)
+		{
+			string enemyPokemon = m_enemyPlayer.ActivePokemon.Species.ToString();
+			
+			if (m_enemyAnimator.runtimeAnimatorController.ToString() != enemyPokemon)
+			{
+				m_enemyAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Controllers/" + enemyPokemon);
+			}
+			
+			if (!m_enemyDisplay.enabled)
+			{
+				m_enemyDisplay.enabled = true;
+			}
+		}
+	}
+	
 	// Update is called once per frame
 	void Update ()
 	{
+		UpdatePokemonAnimations();
+		
 		if (Input.GetKeyDown("space"))
 		{
 			DoneWithText();
