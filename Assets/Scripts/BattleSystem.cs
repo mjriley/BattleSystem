@@ -130,25 +130,25 @@ public class BattleSystem
 		
 		UserInputStrategy userStrategy = new UserInputStrategy(abilityDisplayHandler, abilityChoiceHandler);
 		
-		Character pikachu = new Character("Pikachu", Character.Sex.Male, 70, BattleType.Electric, userStrategy);
+		Character pikachu = new Character("Pikachu", Pokemon.Species.Pikachu, Character.Sex.Male, 70, 35, BattleType.Electric, userStrategy);
 		pikachu.addAbility(new FlyAbility("Fly", BattleType.Flying, 50, 95, 20));
 		pikachu.addAbility(new Ability("Bubble", BattleType.Water, 20, 100, 30));
 		pikachu.addAbility(new Ability("Ember", BattleType.Fire, 10, 100, 25, new AbilityEffect(AbilityEffect.EffectType.Burn, 0.10f)));
 		pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));
 		
-		Character chespin = new Character("Chespin", Character.Sex.Male, 70, BattleType.Grass, userStrategy);
+		Character chespin = new Character("Chespin", Pokemon.Species.Chespin, Character.Sex.Female, 70, 1, BattleType.Grass, userStrategy);
 		chespin.addAbility(new Ability("Ability 0", BattleType.Grass, 20, 100, 20));
 		chespin.addAbility(new Ability("Ability 1", BattleType.Grass, 20, 100, 20));
 		chespin.addAbility(new Ability("Ability 2", BattleType.Grass, 20, 100, 20));
 		chespin.addAbility(new Ability("Ability 3", BattleType.Grass, 20, 100, 20));
 		
-		Character squirtle = new Character("Squirtle", Character.Sex.Male, 70, BattleType.Water, userStrategy);
+		Character squirtle = new Character("Squirtle", Pokemon.Species.Squirtle, Character.Sex.Female, 70, 20, BattleType.Water, userStrategy);
 		squirtle.addAbility(new Ability("Ability 0", BattleType.Water, 20, 100, 20));
 		squirtle.addAbility(new Ability("Ability 1", BattleType.Water, 20, 100, 20));
 		squirtle.addAbility(new Ability("Ability 2", BattleType.Water, 20, 100, 20));
 		squirtle.addAbility(new Ability("Ability 3", BattleType.Water, 20, 100, 20));
 		
-		Character charmander = new Character("Charmander", Character.Sex.Male, 70, BattleType.Fire, userStrategy);
+		Character charmander = new Character("Charmander", Pokemon.Species.Charmander, Character.Sex.Male, 70, 100, BattleType.Fire, userStrategy);
 		charmander.addAbility(new Ability("Ability 0", BattleType.Fire, 20, 100, 20));
 		charmander.addAbility(new Ability("Ability 1", BattleType.Fire, 20, 100, 20));
 		charmander.addAbility(new Ability("Ability 2", BattleType.Fire, 20, 100, 20));
@@ -164,14 +164,17 @@ public class BattleSystem
 	{
 		Player player = new Player("Enemy", new SequentialPokemonStrategy());
 		
+		string[] pokemonNames = Enum.GetNames(typeof(Pokemon.Species));
 		for (int i = 0; i < 3; ++i)
 		{
-			int index = m_generator.Next(0, Pokemon.Names.Length);
-			string name = Pokemon.Names[index];
+			int index = m_generator.Next(0, pokemonNames.Count());
+			string name = pokemonNames[index];
 			
 			RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
 			
-			Character enemy = new Character(name, Character.Sex.Female, 70, BattleType.Water, enemy_strategy);
+			Pokemon.Species species = (Pokemon.Species)Enum.Parse(typeof(Pokemon.Species), name);
+			
+			Character enemy = new Character(name, species, Character.Sex.Female, 70, 50, BattleType.Water, enemy_strategy);
 			Ability ability0 = new Ability("Enemy Ability 0", BattleType.Normal, 20, 100, 20);
 			Ability ability1 = new Ability("Enemy Ability 1", BattleType.Normal, 20, 100, 20);
 			Ability ability2 = new Ability("Enemy Ability 2", BattleType.Normal, 20, 100, 20);

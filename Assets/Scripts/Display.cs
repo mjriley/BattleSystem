@@ -245,7 +245,9 @@ public class Display : MonoBehaviour {
 				{
 					leftPokemon = m_userPlayer.Pokemon[pokemonIndex];
 				}
-				if (PokemonTagDisplay.Button(new Rect(0, i * (pokemonHeight + pokemonVPadding), pokemonWidth, pokemonHeight), leftPokemon, false))
+				//if (PokemonTagDisplay.Button(new Rect(0, i * (pokemonHeight + pokemonVPadding), pokemonWidth, pokemonHeight), leftPokemon, false))
+				if (PokemonTagDisplay.Button(new Rect(0, i * (pokemonHeight + pokemonVPadding), pokemonWidth, pokemonHeight), leftPokemon, false, 
+					tagNameStyle, tagOffsetX, tagOffsetY, statOffsetX, statOffsetY, statStyle))
 				{
 					processPokemonClick(pokemonIndex);
 				}
@@ -256,7 +258,9 @@ public class Display : MonoBehaviour {
 				{
 					rightPokemon = m_userPlayer.Pokemon[pokemonIndex];
 				}
-				if (PokemonTagDisplay.Button(new Rect((Screen.width + pokemonHPadding) / 2, i * (pokemonHeight + pokemonVPadding) + pokemonVPadding, pokemonWidth, pokemonHeight), rightPokemon, true))
+				//if (PokemonTagDisplay.Button(new Rect((Screen.width + pokemonHPadding) / 2, i * (pokemonHeight + pokemonVPadding) + pokemonVPadding, pokemonWidth, pokemonHeight), rightPokemon, true))
+				if (PokemonTagDisplay.Button(new Rect((Screen.width + pokemonHPadding) / 2, i * (pokemonHeight + pokemonVPadding) + pokemonVPadding, pokemonWidth, pokemonHeight), rightPokemon, true, 
+					tagNameStyle, tagOffsetX, tagOffsetY, statOffsetX, statOffsetY, statStyle))
 				{
 					processPokemonClick(pokemonIndex);
 				}
@@ -276,5 +280,12 @@ public class Display : MonoBehaviour {
 		GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
 		GUI.Box(new Rect(0, Screen.height - statusHeight, Screen.width, statusHeight), m_statusText, statusStyle);
 	}
+	
+	public int tagOffsetX = 65;
+	public int tagOffsetY = 13;
+	public int statOffsetX = 0;
+	public int statOffsetY = 0;
+	public GUIStyle tagNameStyle;
+	public GUIStyle statStyle;
 	
 }

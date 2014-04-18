@@ -55,17 +55,24 @@ public class Character
 		get { return m_gender; }
 	}
 	
-	public Character(string name, Sex gender, int maxHP, BattleType type, IAttackStrategy strategy) :
-		this(name, gender, maxHP, type, BattleType._None, strategy)
+	private Pokemon.Species m_species;
+	public Pokemon.Species Species { get { return m_species; } }
+	
+	public uint Level { get; set; }
+	
+	public Character(string name, Pokemon.Species species, Sex gender, int maxHP, uint level, BattleType type, IAttackStrategy strategy) :
+		this(name, species, gender, maxHP, level, type, BattleType._None, strategy)
 	{
 	}
 	
-	public Character(string name, Sex gender, int maxHP, BattleType type1, BattleType type2, IAttackStrategy strategy = null)
+	public Character(string name, Pokemon.Species species, Sex gender, int maxHP, uint level, BattleType type1, BattleType type2, IAttackStrategy strategy = null)
 	{
 		m_name = name;
+		m_species = species;
 		m_gender = gender;
 		m_maxHP = maxHP;
 		m_currentHP = m_maxHP;
+		Level = level;
 		
 		m_strategy = strategy;
 		
