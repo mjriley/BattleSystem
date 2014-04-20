@@ -17,7 +17,7 @@ public class UserInputStrategy : IAttackStrategy
 	
 	public void UpdateConditions(Character actor, Player enemyPlayer)
 	{
-		m_conditionsDelegate(actor.getAbilities());
+		//m_conditionsDelegate(actor.getAbilities());
 	}
 	
 	public ITurnAction Execute()

@@ -39,4 +39,14 @@ public class Player
 	{
 		return m_nextPokemonStrategy.getNextPokemon(this, enemy);
 	}
+	
+	public ITurnAction GetTurnAction()
+	{
+		return ActivePokemon.getTurn();
+	}
+	
+	public void UpdateConditions(Player enemy)
+	{
+		ActivePokemon.UpdateBattleConditions(enemy);
+	}
 }
