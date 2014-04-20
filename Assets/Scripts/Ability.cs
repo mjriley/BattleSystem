@@ -91,18 +91,20 @@ public class Ability
 		status.turnComplete = true;
 		status.isComplete = true;
 		
-		status.messages.Add(actor.Name + " used " + Name + "!");
+		status.events.Add(new StatusUpdateEventArgs(actor.Name + " used " + Name + "!"));
+		status.events.Add(new DamageEventArgs(targetPlayer, amount));
+		
 		if (multiplier > 1)
 		{
-			status.messages.Add("It's super effective!");
+			status.events.Add(new StatusUpdateEventArgs("It's super effective!"));
 		}
 		else if (multiplier == 0)
 		{
-			status.messages.Add("It doesn't affect the opposing " + target.Name + "...");
+			status.events.Add(new StatusUpdateEventArgs("It doesn't affect the opposing " + target.Name + "..."));
 		}
 		else if (multiplier < 1)
 		{
-			status.messages.Add("It's not very effective...");
+			status.events.Add(new StatusUpdateEventArgs("It's not very effective..."));
 		}
 		
 		if (m_effect.Type != AbilityEffect.EffectType.None)
@@ -112,7 +114,7 @@ public class Ability
 			if (r.NextDouble() < m_effect.Rate)
 			{
 				m_effect.Apply(target);
-				status.messages.Add(target.Name + " " + m_effect.GetActionMessage());
+				status.events.Add(new StatusUpdateEventArgs(target.Name + " " + m_effect.GetActionMessage()));
 			}
 		}
 		

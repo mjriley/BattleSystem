@@ -6,12 +6,12 @@ public class UserInputStrategy : IAttackStrategy
 	public delegate void ReceiveConditions(List<Ability> abilities);
 	public delegate ITurnAction GetUserInput();
 	
-	private ReceiveConditions m_conditionsDelegate;
+	//private ReceiveConditions m_conditionsDelegate;
 	private GetUserInput m_inputDelegate;
 	
 	public UserInputStrategy(ReceiveConditions conditionsDelegate, GetUserInput inputDelegate)
 	{
-		m_conditionsDelegate = conditionsDelegate;
+		//m_conditionsDelegate = conditionsDelegate;
 		m_inputDelegate = inputDelegate;
 	}
 	

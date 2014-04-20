@@ -28,11 +28,13 @@ public class SwapAbility : ITurnAction
 	public ActionStatus Execute()
 	{
 		ActionStatus result = new ActionStatus();
+		
 		if (m_currentState == State.Recall)
 		{
 			result.turnComplete = false;
 			result.isComplete = false;
-			result.messages.Add(m_player.ActivePokemon.Name + "! Come back!\nSwap out!");
+			result.events.Add(new StatusUpdateEventArgs(m_player.ActivePokemon.Name + "! Come back!\nSwap out!"));
+			result.events.Add(new WithdrawEventArgs(true));
 			m_currentState = State.Deploy;
 		}
 		else if (m_currentState == State.Deploy)
@@ -40,7 +42,8 @@ public class SwapAbility : ITurnAction
 			result.turnComplete = true;
 			result.isComplete = true;
 			m_player.setActivePokemon(m_newIndex);
-			result.messages.Add("Go! " + m_player.ActivePokemon.Name + "!");
+			result.events.Add(new StatusUpdateEventArgs("Go! " + m_player.ActivePokemon.Name + "!"));
+			result.events.Add(new DeployEventArgs(true));
 		}
 		
 		return result;

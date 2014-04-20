@@ -43,7 +43,7 @@ public class PlayerStatusDisplay : MonoBehaviour
 		return new Vector2(width, height);
 	}
 	
-	public static void Display(Rect screenRect, Character pokemon, Player player, GUIStyle style)
+	public static void Display(Rect screenRect, Character pokemon, Player player, int currentHP, GUIStyle style)
 	{
 		Init();
 		
@@ -73,11 +73,11 @@ public class PlayerStatusDisplay : MonoBehaviour
 			Color prevColor = GUI.color;
 			GUI.color = new Color(0, 1.0f, 0);
 			float healthWidth = 81.0f;
-			float healthRatio = (float)pokemon.CurrentHP / (float)pokemon.MaxHP;
+			float healthRatio = (float)currentHP / (float)pokemon.MaxHP;
 			GUI.DrawTexture(new Rect(53, contentSize.y + 5, healthWidth * healthRatio, 14), m_healthTexture);
 			GUI.color = prevColor;
 			
-			GUI.Label(new Rect(0, contentSize.y + m_healthOutlineTexture.height, maxWidth, contentSize.y), "100/100", style);
+			GUI.Label(new Rect(0, contentSize.y + m_healthOutlineTexture.height, maxWidth, contentSize.y), currentHP + "/" + pokemon.MaxHP, style);
 			
 			for (int i = 0; i < player.Pokemon.Count; ++i)
 			{	

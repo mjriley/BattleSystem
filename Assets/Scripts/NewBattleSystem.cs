@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public class NewBattleSystem
@@ -6,10 +7,12 @@ public class NewBattleSystem
 	public enum State
 	{
 		CombatIntro,
+		BeginTurn,
 		CombatPrompt,
 		FightPrompt,
 		ItemPrompt,
 		PokemonPrompt,
+		EnemyAction,
 		ProcessTurn,
 		EndTurn
 	};
@@ -41,6 +44,7 @@ public class NewBattleSystem
 	private int m_userChoice = -1;
 	
 	private Queue<ITurnAction> m_actionQueue = new Queue<ITurnAction>();
+	private Queue<ITurnAction> m_nextTurnQueue = new Queue<ITurnAction>();
 	
 	private Random m_generator = new Random();
 	private RandomAttackStrategy m_enemyStrategy;
@@ -55,6 +59,11 @@ public class NewBattleSystem
 	public void ProcessUserChoice(int choice)
 	{
 		m_userChoice = choice;
+	}
+	
+	bool NeedPlayerAction(Player player)
+	{
+		return !m_actionQueue.Any(p => (p.Subject == player.ActivePokemon));
 	}
 	
 	bool ValidateInput()
@@ -95,7 +104,23 @@ public class NewBattleSystem
 				
 				AddStatusMessage("Go! " + m_userPlayer.ActivePokemon.Name + "!");
 				m_pendingEvents.Enqueue(new DeployEventArgs(true));
-				m_nextState = State.CombatPrompt;
+				m_nextState = State.BeginTurn;
+				break;
+			}
+			case State.BeginTurn:
+			{
+				if (NeedPlayerAction(m_userPlayer))
+				{
+					m_nextState = State.CombatPrompt;
+				}
+				else if (NeedPlayerAction(m_enemyPlayer))
+				{
+					m_nextState = State.EnemyAction;
+				}
+				else
+				{
+					m_nextState = State.ProcessTurn;
+				}
 				break;
 			}
 			case State.CombatPrompt:
@@ -155,15 +180,9 @@ public class NewBattleSystem
 					}
 					else
 					{
-						//Ability userAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
-						ITurnAction userAction = m_userPlayer.GetTurnAction();
-						m_actionQueue.Enqueue(userAction);
+						m_actionQueue.Enqueue(m_userPlayer.GetTurnAction());
 						
-						ITurnAction enemyAction = m_enemyPlayer.GetTurnAction();
-						UnityEngine.Debug.Log("Enemy action is: " + enemyAction.Subject.Name);
-						m_actionQueue.Enqueue(enemyAction);
-						//AddStatusMessage("User submitted ability " + m_userPlayer.ActivePokemon.getAbilities()[m_userChoice].Name);
-						m_nextState = State.ProcessTurn;
+						m_nextState = State.EnemyAction;
 					}
 				}
 				break;
@@ -190,7 +209,7 @@ public class NewBattleSystem
 				if (!m_waitingForInput)
 				{
 					m_userChoice = -1;
-					AddStatusMessage("Chose to switch pokemon!");
+					AddStatusMessage("Choose a pokemon");
 					m_waitingForInput = true;
 				}
 				else if (ValidateInput())
@@ -199,42 +218,63 @@ public class NewBattleSystem
 					{
 						m_nextState = State.CombatPrompt;
 					}
+					else
+					{
+						// Assemble a recall action
+						//AddStatusMessage("Chose to switch to " + m_userPlayer.Pokemon[m_userChoice].Name);
+						SwapAbility swap = new SwapAbility(m_userPlayer, m_userChoice);
+						m_actionQueue.Enqueue(swap);
+						m_nextState = State.EnemyAction;
+					}
 				}
+				break;
+			}
+			case State.EnemyAction:
+			{
+				if (NeedPlayerAction(m_enemyPlayer))
+				{
+					ITurnAction enemyAction = m_enemyPlayer.GetTurnAction();
+					m_actionQueue.Enqueue(enemyAction);
+				}
+				
+				m_nextState = State.ProcessTurn;
 				break;
 			}
 			case State.ProcessTurn:
 			{
-				UnityEngine.Debug.Log("Processing Turn");
 				if (m_actionQueue.Count > 0)
 				{
 					ITurnAction action = m_actionQueue.Peek();
 					ActionStatus status = action.Execute();
-					UnityEngine.Debug.Log("Processing " + action.Subject.Name);
+					
+					foreach (EventArgs eventArgs in status.events)
+					{
+						m_pendingEvents.Enqueue(eventArgs);
+					}
 					
 					if (status.turnComplete)
 					{
-						foreach (string message in status.messages)
-						{
-							AddStatusMessage(message);
-						}
-					}
-					
-					if (status.isComplete)
-					{
 						m_actionQueue.Dequeue();
+						
+						if (!status.isComplete)
+						{
+							m_nextTurnQueue.Enqueue(action);
+						}
 					}
 				}
 				else
 				{
 					m_nextState = State.EndTurn;
 				}
-				
-				//AddStatusMessage("Processing Turn...");
-				//m_nextState = State.EndTurn;
 				break;
 			}
 			case State.EndTurn:
 			{
+				// swap queues -- make the next turn the current one
+				Queue<ITurnAction> temp = m_actionQueue;
+				m_actionQueue = m_nextTurnQueue;
+				m_nextTurnQueue = temp;
+				
 				AddStatusMessage("Ending turn");
 				m_nextState = State.CombatPrompt;
 				break;
@@ -362,5 +402,27 @@ public class DeployEventArgs : EventArgs
 	public DeployEventArgs(bool friendly)
 	{
 		Friendly = friendly;
+	}
+}
+
+public class WithdrawEventArgs : EventArgs
+{
+	public bool Friendly { get; set; }
+	
+	public WithdrawEventArgs(bool friendly)
+	{
+		Friendly = friendly;
+	}
+}
+
+public class DamageEventArgs : EventArgs
+{
+	public int Amount { get; set; }
+	public Player Player { get; set; }
+	
+	public DamageEventArgs(Player player, int amount)
+	{
+		Player = player;
+		Amount = amount;
 	}
 }

@@ -22,7 +22,7 @@ public class FlyAbility : Ability
 			status = new ActionStatus();
 			status.turnComplete = true;
 			status.isComplete = false;
-			status.messages.Add("Flew up in the air!");
+			status.events.Add(new StatusUpdateEventArgs("Flew up in the air!"));
 		}
 		else
 		{

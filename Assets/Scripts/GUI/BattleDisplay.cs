@@ -15,6 +15,9 @@ public class BattleDisplay : MonoBehaviour
 	bool m_ready = true;
 	string m_statusText = "";
 	
+	float m_currentUserHP = 0.0f;
+	float m_currentEnemyHP = 0.0f;
+	
 	Texture2D m_fightButtonTexture;
 	Texture2D m_fightButtonDownTexture;
 	GUIStyle m_fightButtonStyle;
@@ -35,6 +38,11 @@ public class BattleDisplay : MonoBehaviour
 	Texture2D m_backButtonDownTexture;
 	GUIStyle m_backButtonStyle;
 	
+	public int damageFrames = 60;
+	private int currentDamageFrame = 60;
+	float userDamagePerFrame = 0.0f;
+	float enemyDamagePerFrame = 0.0f;
+	
 	public GUIStyle typeNameStyle;
 	public GUIStyle abilityNameStyle;
 	public GUIStyle abilityDetailsStyle;
@@ -42,13 +50,12 @@ public class BattleDisplay : MonoBehaviour
 	
 	Rect m_screenArea;
 	
-	Ability m_ability;
-	
 	public delegate void AnimationCallback(MonoBehaviour script);
 	
 	void HandleAnimationComplete(MonoBehaviour script)
 	{
 		script.gameObject.GetComponent<Animator>().enabled = true;
+		Destroy(script);
 	}
 	
 	
@@ -60,8 +67,6 @@ public class BattleDisplay : MonoBehaviour
 	
 	public void Start()
 	{
-		m_ability = new Ability("Test", BattleType.Fire, 20, 100, 20);
-	
 		m_system.CreatePlayerPokemon();
 		GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
 		m_playerDisplay = playerObject.GetComponent<SpriteRenderer>();
@@ -115,6 +120,13 @@ public class BattleDisplay : MonoBehaviour
 	
 	void Update()
 	{
+		if (currentDamageFrame < damageFrames)
+		{
+			m_currentUserHP = Mathf.Max(0, m_currentUserHP - userDamagePerFrame);
+			m_currentEnemyHP = Mathf.Max(0, m_currentEnemyHP - enemyDamagePerFrame);
+			currentDamageFrame += 1;
+		}
+		
 		if (Input.GetKeyDown("space"))
 		{
 			DoneWithText();
@@ -151,16 +163,30 @@ public class BattleDisplay : MonoBehaviour
 	
 	public GUIStyle m_playerNameStyle;
 	
+	public int pokemonButtonHeight = 90;
+	public int pokemonButtonGapX = 50;
+	public int pokemonButtonGapY = 7;
+	
+	public int nameOffsetX = 0;
+	public int nameOffsetY = 0;
+	
+	public GUIStyle m_pokemonChoiceStyle;
+	
+	public int statOffsetX = 0;
+	public int statOffsetY = 0;
+	
+	public GUIStyle m_statStyle;
+	
 	void OnGUI()
 	{
 	
 		Vector2 playerDisplayCoords = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
 		Rect playerStatusRect = new Rect(0, 0, playerDisplayCoords.x, playerDisplayCoords.y);
-		PlayerStatusDisplay.Display(playerStatusRect, m_system.UserPlayer.ActivePokemon, m_system.UserPlayer, m_playerNameStyle);
+		PlayerStatusDisplay.Display(playerStatusRect, m_system.UserPlayer.ActivePokemon, m_system.UserPlayer, (int)m_currentUserHP, m_playerNameStyle);
 		
 		Vector2 enemyDisplayCoords = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
 		Rect enemyStatusRect = new Rect(Screen.width - enemyDisplayCoords.x, 0, enemyDisplayCoords.x, enemyDisplayCoords.y);
-		PlayerStatusDisplay.Display(enemyStatusRect, m_system.EnemyPlayer.ActivePokemon, m_system.EnemyPlayer, m_playerNameStyle);
+		PlayerStatusDisplay.Display(enemyStatusRect, m_system.EnemyPlayer.ActivePokemon, m_system.EnemyPlayer, (int)m_currentEnemyHP, m_playerNameStyle);
 		
 		if (m_system.CurrentState == NewBattleSystem.State.CombatPrompt)
 		{
@@ -225,6 +251,35 @@ public class BattleDisplay : MonoBehaviour
 						m_system.ProcessUserChoice(3);
 					}
 				}
+				else if (m_system.CurrentState == NewBattleSystem.State.PokemonPrompt)
+				{
+					for (int i = 0; i < 3; ++i)
+					{
+						int leftPokemonIndex = i * 2;
+						Character leftPokemon = m_system.UserPlayer.Pokemon[leftPokemonIndex];
+						if (leftPokemon != null)
+						{
+							Rect pokemonButtonLeft = new Rect(0, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
+							if (GUI.Button(pokemonButtonLeft, leftPokemon.Name))
+							{
+								DoneWithText();
+								m_system.ProcessUserChoice(leftPokemonIndex);
+							}
+						}
+						
+						int rightPokemonIndex = i * 2 + 1;
+						Character rightPokemon = m_system.UserPlayer.Pokemon[rightPokemonIndex];
+						if (rightPokemon != null)
+						{
+							Rect pokemonButtonRight = new Rect((m_screenArea.width + pokemonButtonGapX) / 2.0f, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
+							if (GUI.Button(pokemonButtonRight, rightPokemon.Name))
+							{
+								DoneWithText();
+								m_system.ProcessUserChoice(rightPokemonIndex);
+							}
+						}
+					}
+				}
 				
 				if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
 				{
@@ -252,23 +307,58 @@ public class BattleDisplay : MonoBehaviour
 			DeployEventArgs args = (DeployEventArgs)e;
 			if (args.Friendly)
 			{
+				m_playerAnimator.enabled = false;
 				BallZoneIn animation = m_playerDisplay.gameObject.AddComponent("BallZoneIn") as BallZoneIn;
 				animation.sprite = Resources.Load<Sprite>("Textures/circle");
 				animation.callback = this.HandleAnimationComplete;
 				m_playerDisplay.enabled = true;
 				
+				m_currentUserHP = m_system.UserPlayer.ActivePokemon.CurrentHP;
 			}
 			else
 			{
+				m_enemyAnimator.enabled = false;
 				BallZoneIn animation = m_enemyDisplay.gameObject.AddComponent("BallZoneIn") as BallZoneIn;
 				animation.sprite = Resources.Load<Sprite>("Textures/circle");
 				animation.callback = this.HandleAnimationComplete;
 				m_enemyDisplay.enabled = true;
+				
+				m_currentEnemyHP = m_system.EnemyPlayer.ActivePokemon.CurrentHP;
 			}
 			
 			m_ready = false;
 			// wait for the animation to complete
 			StartCoroutine("Wait");
+		}
+		else if (e is WithdrawEventArgs)
+		{
+			WithdrawEventArgs args = (WithdrawEventArgs)e;
+			if (args.Friendly)
+			{
+				m_playerDisplay.enabled = false;
+			}
+			else
+			{
+				m_enemyDisplay.enabled = false;
+			}
+		}
+		else if (e is DamageEventArgs)
+		{
+			Debug.Log("Received Damage event");
+			DamageEventArgs args = (DamageEventArgs)e;
+			
+			// recalculate user damage animation
+			float damagePerFrame = (float)args.Amount / (float)damageFrames;
+			currentDamageFrame = 0;
+			
+			if (args.Player == m_system.UserPlayer)
+			{
+				userDamagePerFrame = damagePerFrame;
+			}
+			else
+			{
+				enemyDamagePerFrame = damagePerFrame;
+			}
 		}
 	}
 	

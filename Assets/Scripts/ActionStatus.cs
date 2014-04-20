@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System;
 
 public class ActionStatus
 {
 	public bool turnComplete;
 	public bool isComplete;
-	public List<string> messages = new List<string>();
+	public List<EventArgs> events = new List<EventArgs>();
 }

@@ -24,7 +24,6 @@ public class BallZoneIn : MonoBehaviour {
 		
 		m_renderer = gameObject.GetComponent<SpriteRenderer>();
 		
-		Bounds initialBounds = m_renderer.sprite.bounds;
 		float extentX = m_renderer.sprite.bounds.extents.x;
 		float extentY = m_renderer.sprite.bounds.extents.y;
 		float maxExtent = Mathf.Max(extentX, extentY);
