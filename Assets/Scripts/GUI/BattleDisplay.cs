@@ -1,11 +1,16 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BattleDisplay : MonoBehaviour
 {
 	private NewBattleSystem m_system = new NewBattleSystem();
 	
+	private List<IAnimationEffect> m_animations = new List<IAnimationEffect>();
+	
+	GameObject m_playerObject;
+	GameObject m_enemyObject;
 	SpriteRenderer m_playerDisplay;
 	SpriteRenderer m_enemyDisplay;
 	
@@ -68,20 +73,18 @@ public class BattleDisplay : MonoBehaviour
 	public void Start()
 	{
 		m_system.CreatePlayerPokemon();
-		GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
-		m_playerDisplay = playerObject.GetComponent<SpriteRenderer>();
+		m_playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
+		m_playerDisplay = m_playerObject.GetComponent<SpriteRenderer>();
 		m_playerAnimator = m_playerDisplay.GetComponent<Animator>();
 		
 		
-		GameObject enemyObject = GameObject.FindGameObjectWithTag("EnemyDisplay");
-		m_enemyDisplay = enemyObject.GetComponent<SpriteRenderer>();
+		m_enemyObject = GameObject.FindGameObjectWithTag("EnemyDisplay");
+		m_enemyDisplay = m_enemyObject.GetComponent<SpriteRenderer>();
 		m_enemyAnimator = m_enemyDisplay.GetComponent<Animator>();
 		
 		m_playerDisplay.enabled = false;
-		m_playerAnimator.enabled = false;
 		
 		m_enemyDisplay.enabled = false;
-		m_enemyAnimator.enabled = false;
 		
 		m_system.BattleProgress += HandleBattleEvents;
 		
@@ -118,6 +121,28 @@ public class BattleDisplay : MonoBehaviour
 		m_screenArea = new Rect(0, areaY, Screen.width, Screen.height - areaY - statusHeight);
 	}
 	
+	private bool IsReady()
+	{
+		return (m_ready && m_animations.Count == 0);
+	}
+	
+	private void UpdateAnimations()
+	{
+		List<IAnimationEffect> nextAnimations = new List<IAnimationEffect>();
+		
+		foreach (IAnimationEffect anim in m_animations)
+		{
+			anim.Update();
+			
+			if (!anim.Done)
+			{
+				nextAnimations.Add(anim);
+			}
+		}
+		
+		m_animations = nextAnimations;
+	}
+	
 	void Update()
 	{
 		if (currentDamageFrame < damageFrames)
@@ -137,7 +162,9 @@ public class BattleDisplay : MonoBehaviour
 			m_playerAnimator.Play("FadeIn");
 		}
 		
-		if (m_ready)
+		UpdateAnimations();
+		
+		if (IsReady())
 		{
 			m_system.Update();
 		}
@@ -305,60 +332,72 @@ public class BattleDisplay : MonoBehaviour
 		else if (e is DeployEventArgs)
 		{
 			DeployEventArgs args = (DeployEventArgs)e;
+			BallZoneIn zoneScript;
+			
 			if (args.Friendly)
 			{
-				m_playerAnimator.enabled = false;
-				BallZoneIn animation = m_playerDisplay.gameObject.AddComponent("BallZoneIn") as BallZoneIn;
-				animation.sprite = Resources.Load<Sprite>("Textures/circle");
-				animation.callback = this.HandleAnimationComplete;
-				m_playerDisplay.enabled = true;
+				zoneScript = m_playerDisplay.GetComponentInChildren<BallZoneIn>();
+				zoneScript.Species = m_system.UserPlayer.ActivePokemon.Species;
 				
 				m_currentUserHP = m_system.UserPlayer.ActivePokemon.CurrentHP;
 			}
 			else
 			{
-				m_enemyAnimator.enabled = false;
-				BallZoneIn animation = m_enemyDisplay.gameObject.AddComponent("BallZoneIn") as BallZoneIn;
-				animation.sprite = Resources.Load<Sprite>("Textures/circle");
-				animation.callback = this.HandleAnimationComplete;
-				m_enemyDisplay.enabled = true;
+				zoneScript = m_enemyDisplay.GetComponentInChildren<BallZoneIn>();
+				zoneScript.Species = m_system.EnemyPlayer.ActivePokemon.Species;
 				
 				m_currentEnemyHP = m_system.EnemyPlayer.ActivePokemon.CurrentHP;
 			}
 			
-			m_ready = false;
-			// wait for the animation to complete
-			StartCoroutine("Wait");
+			ScriptAnimation anim = new ScriptAnimation(zoneScript);
+			m_animations.Add(anim);
+			anim.Start();
 		}
 		else if (e is WithdrawEventArgs)
 		{
 			WithdrawEventArgs args = (WithdrawEventArgs)e;
+			ScriptAnimation anim;
 			if (args.Friendly)
 			{
-				m_playerDisplay.enabled = false;
+				anim = new ScriptAnimation(m_playerDisplay.GetComponentInChildren<BallZoneOut>());
 			}
 			else
 			{
-				m_enemyDisplay.enabled = false;
+				anim = new ScriptAnimation(m_enemyDisplay.GetComponentInChildren<BallZoneOut>());
 			}
+			m_animations.Add(anim);
+			anim.Start();
 		}
 		else if (e is DamageEventArgs)
 		{
-			Debug.Log("Received Damage event");
 			DamageEventArgs args = (DamageEventArgs)e;
 			
 			// recalculate user damage animation
 			float damagePerFrame = (float)args.Amount / (float)damageFrames;
 			currentDamageFrame = 0;
 			
+			Animator animator;
+			
 			if (args.Player == m_system.UserPlayer)
 			{
+				animator = m_playerObject.transform.Find("explosionAnimation").GetComponent<Animator>();
+				//m_playerObject.transform.Find("explosionAnimation").gameObject.SetActive(true);
+				//Animator animator = m_playerObject.transform.Find("explosionAnimation").GetComponent<Animator>();
+				//animator.Play(0);
 				userDamagePerFrame = damagePerFrame;
 			}
 			else
 			{
+				animator = m_enemyObject.transform.Find("explosionAnimation").GetComponent<Animator>();
+				//m_enemyObject.transform.Find("explosionAnimation").gameObject.SetActive(true);
+				//Animator animator = m_enemyObject.transform.Find("explosionAnimation").GetComponent<Animator>();
+				//animator.Play(0);
 				enemyDamagePerFrame = damagePerFrame;
 			}
+			
+			AnimatorAnimation anim = new AnimatorAnimation(animator);
+			m_animations.Add(anim);
+			anim.Start();
 		}
 	}
 	

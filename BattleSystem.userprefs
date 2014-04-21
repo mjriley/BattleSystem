@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/BattleDisplay.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="213" Column="5" />
-      <File FileName="Assets/Scripts/GUI/PlayerStatusDisplay.cs" Line="15" Column="44" />
+      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="316" Column="6" />
+      <File FileName="Assets/Scripts/IAnimationEffect.cs" Line="2" Column="1" />
+      <File FileName="Assets/Scripts/ScriptAnimation.cs" Line="7" Column="25" />
+      <File FileName="Assets/Scripts/BallZoneIn.cs" Line="73" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
