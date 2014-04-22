@@ -14,6 +14,9 @@ public class BattleDisplay : MonoBehaviour
 	SpriteRenderer m_playerDisplay;
 	SpriteRenderer m_enemyDisplay;
 	
+	AudioSource m_audio;
+	AudioClip m_damageSound;
+	
 	private PlayerStatusDisplay m_playerStatusDisplay;
 	private PlayerStatusDisplay m_enemyStatusDisplay;
 	
@@ -64,6 +67,9 @@ public class BattleDisplay : MonoBehaviour
 	
 	public void Start()
 	{
+		m_audio = gameObject.GetComponent<AudioSource>();
+		m_damageSound = Resources.Load<AudioClip>("SoundEffects/attack_sound");
+		
 		m_system.CreatePlayerPokemon();
 		m_playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
 		m_playerDisplay = m_playerObject.GetComponent<SpriteRenderer>();
@@ -388,6 +394,10 @@ public class BattleDisplay : MonoBehaviour
 			AnimatorAnimation anim = new AnimatorAnimation(animator);
 			m_animations.Add(anim);
 			anim.Start();
+			
+			SoundEffect sound = new SoundEffect(m_audio, m_damageSound);
+			m_animations.Add(sound);
+			sound.Start();
 		}
 	}
 	
