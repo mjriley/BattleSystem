@@ -14,14 +14,11 @@ public class BattleDisplay : MonoBehaviour
 	SpriteRenderer m_playerDisplay;
 	SpriteRenderer m_enemyDisplay;
 	
-	Animator m_playerAnimator;
-	Animator m_enemyAnimator;
+	private PlayerStatusDisplay m_playerStatusDisplay;
+	private PlayerStatusDisplay m_enemyStatusDisplay;
 	
 	bool m_ready = true;
 	string m_statusText = "";
-	
-	float m_currentUserHP = 0.0f;
-	float m_currentEnemyHP = 0.0f;
 	
 	Texture2D m_fightButtonTexture;
 	Texture2D m_fightButtonDownTexture;
@@ -42,11 +39,6 @@ public class BattleDisplay : MonoBehaviour
 	Texture2D m_backButtonTexture;
 	Texture2D m_backButtonDownTexture;
 	GUIStyle m_backButtonStyle;
-	
-	public int damageFrames = 60;
-	private int currentDamageFrame = 60;
-	float userDamagePerFrame = 0.0f;
-	float enemyDamagePerFrame = 0.0f;
 	
 	public GUIStyle typeNameStyle;
 	public GUIStyle abilityNameStyle;
@@ -75,12 +67,9 @@ public class BattleDisplay : MonoBehaviour
 		m_system.CreatePlayerPokemon();
 		m_playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
 		m_playerDisplay = m_playerObject.GetComponent<SpriteRenderer>();
-		m_playerAnimator = m_playerDisplay.GetComponent<Animator>();
-		
 		
 		m_enemyObject = GameObject.FindGameObjectWithTag("EnemyDisplay");
 		m_enemyDisplay = m_enemyObject.GetComponent<SpriteRenderer>();
-		m_enemyAnimator = m_enemyDisplay.GetComponent<Animator>();
 		
 		m_playerDisplay.enabled = false;
 		
@@ -119,6 +108,16 @@ public class BattleDisplay : MonoBehaviour
 		m_backButtonStyle.active.background = m_backButtonDownTexture;
 		
 		m_screenArea = new Rect(0, areaY, Screen.width, Screen.height - areaY - statusHeight);
+		
+		Vector2 displayCoords = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
+		Rect playerStatusRect = new Rect(0, 0, displayCoords.x, displayCoords.y);
+		
+		Rect enemyStatusRect = new Rect(Screen.width - displayCoords.x, 0, displayCoords.x, displayCoords.y);
+		
+		m_playerStatusDisplay = new PlayerStatusDisplay(playerStatusRect);
+		m_playerStatusDisplay.ActivePlayer = m_system.UserPlayer;
+		
+		m_enemyStatusDisplay = new PlayerStatusDisplay(enemyStatusRect);
 	}
 	
 	private bool IsReady()
@@ -145,21 +144,9 @@ public class BattleDisplay : MonoBehaviour
 	
 	void Update()
 	{
-		if (currentDamageFrame < damageFrames)
-		{
-			m_currentUserHP = Mathf.Max(0, m_currentUserHP - userDamagePerFrame);
-			m_currentEnemyHP = Mathf.Max(0, m_currentEnemyHP - enemyDamagePerFrame);
-			currentDamageFrame += 1;
-		}
-		
 		if (Input.GetKeyDown("space"))
 		{
 			DoneWithText();
-		}
-		
-		if (Input.GetKeyDown("a"))
-		{
-			m_playerAnimator.Play("FadeIn");
 		}
 		
 		UpdateAnimations();
@@ -167,6 +154,17 @@ public class BattleDisplay : MonoBehaviour
 		if (IsReady())
 		{
 			m_system.Update();
+		}
+		
+		if (m_system.CurrentState == NewBattleSystem.State.ProcessTurn)
+		{
+			m_playerStatusDisplay.DisplayBalls = false;
+			m_enemyStatusDisplay.DisplayBalls = false;
+		}
+		else
+		{
+			m_playerStatusDisplay.DisplayBalls = true;
+			m_enemyStatusDisplay.DisplayBalls = true;
 		}
 	}
 	
@@ -206,14 +204,8 @@ public class BattleDisplay : MonoBehaviour
 	
 	void OnGUI()
 	{
-	
-		Vector2 playerDisplayCoords = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
-		Rect playerStatusRect = new Rect(0, 0, playerDisplayCoords.x, playerDisplayCoords.y);
-		PlayerStatusDisplay.Display(playerStatusRect, m_system.UserPlayer.ActivePokemon, m_system.UserPlayer, (int)m_currentUserHP, m_playerNameStyle);
-		
-		Vector2 enemyDisplayCoords = PlayerStatusDisplay.CalcMinSize(m_playerNameStyle);
-		Rect enemyStatusRect = new Rect(Screen.width - enemyDisplayCoords.x, 0, enemyDisplayCoords.x, enemyDisplayCoords.y);
-		PlayerStatusDisplay.Display(enemyStatusRect, m_system.EnemyPlayer.ActivePokemon, m_system.EnemyPlayer, (int)m_currentEnemyHP, m_playerNameStyle);
+		m_playerStatusDisplay.Display(m_playerNameStyle);
+		m_enemyStatusDisplay.Display(m_playerNameStyle);
 		
 		if (m_system.CurrentState == NewBattleSystem.State.CombatPrompt)
 		{
@@ -322,6 +314,10 @@ public class BattleDisplay : MonoBehaviour
 	
 	private void HandleBattleEvents(object sender, EventArgs e)
 	{
+		if (e is NewEncounterEventArgs)
+		{
+			m_enemyStatusDisplay.ActivePlayer = m_system.EnemyPlayer;
+		}
 		if (e is StatusUpdateEventArgs)
 		{
 			StatusUpdateEventArgs args = (StatusUpdateEventArgs)e;
@@ -339,14 +335,14 @@ public class BattleDisplay : MonoBehaviour
 				zoneScript = m_playerDisplay.GetComponentInChildren<BallZoneIn>();
 				zoneScript.Species = m_system.UserPlayer.ActivePokemon.Species;
 				
-				m_currentUserHP = m_system.UserPlayer.ActivePokemon.CurrentHP;
+				m_playerStatusDisplay.UpdatePokemon();
 			}
 			else
 			{
 				zoneScript = m_enemyDisplay.GetComponentInChildren<BallZoneIn>();
 				zoneScript.Species = m_system.EnemyPlayer.ActivePokemon.Species;
 				
-				m_currentEnemyHP = m_system.EnemyPlayer.ActivePokemon.CurrentHP;
+				m_enemyStatusDisplay.UpdatePokemon();
 			}
 			
 			ScriptAnimation anim = new ScriptAnimation(zoneScript);
@@ -371,29 +367,23 @@ public class BattleDisplay : MonoBehaviour
 		else if (e is DamageEventArgs)
 		{
 			DamageEventArgs args = (DamageEventArgs)e;
-			
-			// recalculate user damage animation
-			float damagePerFrame = (float)args.Amount / (float)damageFrames;
-			currentDamageFrame = 0;
-			
 			Animator animator;
 			
+			PlayerStatusDisplay targetDisplay;
 			if (args.Player == m_system.UserPlayer)
 			{
 				animator = m_playerObject.transform.Find("explosionAnimation").GetComponent<Animator>();
-				//m_playerObject.transform.Find("explosionAnimation").gameObject.SetActive(true);
-				//Animator animator = m_playerObject.transform.Find("explosionAnimation").GetComponent<Animator>();
-				//animator.Play(0);
-				userDamagePerFrame = damagePerFrame;
+				targetDisplay = m_playerStatusDisplay;
 			}
 			else
 			{
 				animator = m_enemyObject.transform.Find("explosionAnimation").GetComponent<Animator>();
-				//m_enemyObject.transform.Find("explosionAnimation").gameObject.SetActive(true);
-				//Animator animator = m_enemyObject.transform.Find("explosionAnimation").GetComponent<Animator>();
-				//animator.Play(0);
-				enemyDamagePerFrame = damagePerFrame;
+				targetDisplay = m_enemyStatusDisplay;
 			}
+			
+			GradualDamageAnimation healthAnim = new GradualDamageAnimation(targetDisplay, args.Amount, 60);
+			m_animations.Add(healthAnim);
+			healthAnim.Start();
 			
 			AnimatorAnimation anim = new AnimatorAnimation(animator);
 			m_animations.Add(anim);

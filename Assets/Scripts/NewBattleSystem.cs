@@ -99,6 +99,7 @@ public class NewBattleSystem
 			case State.CombatIntro:
 			{
 				m_enemyPlayer = generateEnemy();
+				m_pendingEvents.Enqueue(new NewEncounterEventArgs());
 				AddStatusMessage("A Wild " + m_enemyPlayer.ActivePokemon.Species.ToString() + " appeared!");
 				m_pendingEvents.Enqueue(new DeployEventArgs(false));
 				
@@ -383,6 +384,13 @@ public class NewBattleSystem
 		
 		return new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, selectedAbility);
 	}
+}
+
+public class NewEncounterEventArgs : EventArgs
+{
+	public NewEncounterEventArgs()
+	{
+	} 
 }
 
 public class StatusUpdateEventArgs : EventArgs

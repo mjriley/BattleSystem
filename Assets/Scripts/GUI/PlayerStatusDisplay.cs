@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerStatusDisplay : MonoBehaviour
+public class PlayerStatusDisplay
 {
 	private static bool m_isInit = false;
 	
@@ -13,6 +13,93 @@ public class PlayerStatusDisplay : MonoBehaviour
 	private static Texture2D m_normalBallTexture;
 	private static Texture2D m_statusBallTexture;
 	private static Texture2D m_deadBallTexture;
+	
+	public float CurrentHealth { get; set; }
+	
+	public bool DisplayBalls { get; set; }
+	
+	private Rect m_bounds;
+	
+	public Player ActivePlayer { get; set; }
+	
+	public PlayerStatusDisplay(Rect bounds)
+	{
+		Init();
+		
+		DisplayBalls = true;
+		
+		m_bounds = bounds;
+	}
+	
+	public void UpdatePokemon()
+	{
+		CurrentHealth = ActivePlayer.ActivePokemon.CurrentHP;
+	}
+	
+	public void Display(GUIStyle style)
+	{
+		if (ActivePlayer == null)
+		{
+			return;
+		}
+		
+		Character pokemon = ActivePlayer.ActivePokemon;
+		
+		GUIContent playerContent = new GUIContent(pokemon.Name);
+		Vector2 contentSize = style.CalcSize(playerContent);
+		
+		GUIContent lvlContent = new GUIContent("Lv. 35");
+		Vector2 lvlSize = style.CalcSize(lvlContent);
+		
+		float genderIconSize = contentSize.y;
+		
+		float maxWidth = m_healthOutlineTexture.width;
+		float nameBarWidth = contentSize.x + genderIconSize + lvlSize.x;
+		
+		Texture2D genderTexture = (pokemon.Gender == Character.Sex.Male) ? m_maleTexture : m_femaleTexture;
+		
+		GUI.BeginGroup(m_bounds);
+			GUI.BeginGroup(new Rect((maxWidth - nameBarWidth) / 2.0f, 0, maxWidth, contentSize.y));
+			
+				GUI.Label(new Rect(0, 0, contentSize.x, contentSize.y), playerContent, style);
+				GUI.DrawTexture(new Rect(contentSize.x, 0, genderIconSize, genderIconSize), genderTexture);
+				GUI.Label(new Rect(contentSize.x + genderIconSize, 0, lvlSize.x, lvlSize.y), lvlContent, style);
+			
+			GUI.EndGroup();
+			
+			GUI.DrawTexture(new Rect(0, contentSize.y, m_healthOutlineTexture.width, m_healthOutlineTexture.height), m_healthOutlineTexture);
+			Color prevColor = GUI.color;
+			GUI.color = new Color(0, 1.0f, 0);
+			float healthWidth = 81.0f;
+			float healthRatio = (float)CurrentHealth / (float)pokemon.MaxHP;
+			GUI.DrawTexture(new Rect(53, contentSize.y + 5, healthWidth * healthRatio, 14), m_healthTexture);
+			GUI.color = prevColor;
+			
+			GUI.Label(new Rect(0, contentSize.y + m_healthOutlineTexture.height, maxWidth, contentSize.y), (int)CurrentHealth + "/" + pokemon.MaxHP, style);
+			
+			if (DisplayBalls)
+			{
+				for (int i = 0; i < ActivePlayer.Pokemon.Count; ++i)
+				{	
+					Texture2D texture;
+					if (ActivePlayer.Pokemon[i].isDead())
+					{
+						texture = m_deadBallTexture;
+					}
+					else if (ActivePlayer.Pokemon[i].IsStatusAfflicted())
+					{
+						texture = m_statusBallTexture;
+					}
+					else
+					{
+						texture = m_normalBallTexture;
+					}
+					
+					GUI.DrawTexture(new Rect(i * texture.width, contentSize.y * 2 + texture.height, texture.width, texture.height), texture);
+				}
+			}
+		GUI.EndGroup();
+	}
 	
 	private static void Init()
 	{
