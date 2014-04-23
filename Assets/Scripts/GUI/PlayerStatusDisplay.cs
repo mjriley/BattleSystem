@@ -18,6 +18,8 @@ public class PlayerStatusDisplay
 	
 	public bool DisplayBalls { get; set; }
 	
+	public bool Enabled { get; set; }
+	
 	private Rect m_bounds;
 	
 	public Player ActivePlayer { get; set; }
@@ -27,6 +29,7 @@ public class PlayerStatusDisplay
 		Init();
 		
 		DisplayBalls = true;
+		Enabled = true;
 		
 		m_bounds = bounds;
 	}
@@ -38,7 +41,7 @@ public class PlayerStatusDisplay
 	
 	public void Display(GUIStyle style)
 	{
-		if (ActivePlayer == null)
+		if (ActivePlayer == null || Enabled == false)
 		{
 			return;
 		}

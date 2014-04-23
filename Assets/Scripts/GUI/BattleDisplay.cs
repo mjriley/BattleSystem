@@ -341,12 +341,6 @@ public class BattleDisplay : MonoBehaviour
 				{
 					DisplayPokemon();
 				}
-				
-//				if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
-//				{
-//					m_system.ProcessUserChoice(-2);
-//					DoneWithText();
-//				}
 
 				DisplayBackButton();
 			GUI.EndGroup();
@@ -361,6 +355,9 @@ public class BattleDisplay : MonoBehaviour
 		if (e is NewEncounterEventArgs)
 		{
 			m_enemyStatusDisplay.ActivePlayer = m_system.EnemyPlayer;
+			
+			m_playerStatusDisplay.Enabled = false;
+			m_enemyStatusDisplay.Enabled = false;
 		}
 		if (e is StatusUpdateEventArgs)
 		{
@@ -381,6 +378,7 @@ public class BattleDisplay : MonoBehaviour
 				zoneScript.Species = m_system.UserPlayer.ActivePokemon.Species;
 				
 				m_playerStatusDisplay.UpdatePokemon();
+				m_playerStatusDisplay.Enabled = true;
 			}
 			else
 			{
@@ -388,6 +386,7 @@ public class BattleDisplay : MonoBehaviour
 				zoneScript.Species = m_system.EnemyPlayer.ActivePokemon.Species;
 				
 				m_enemyStatusDisplay.UpdatePokemon();
+				m_enemyStatusDisplay.Enabled = true;
 			}
 			
 			ScriptAnimation anim = new ScriptAnimation(zoneScript);
@@ -401,10 +400,12 @@ public class BattleDisplay : MonoBehaviour
 			if (args.Pokemon == m_system.UserPlayer.ActivePokemon)
 			{
 				anim = new ScriptAnimation(m_playerDisplay.GetComponentInChildren<BallZoneOut>());
+				m_playerStatusDisplay.Enabled = false;
 			}
 			else
 			{
 				anim = new ScriptAnimation(m_enemyDisplay.GetComponentInChildren<BallZoneOut>());
+				m_enemyStatusDisplay.Enabled = false;
 			}
 			m_animations.Add(anim);
 			anim.Start();
