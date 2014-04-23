@@ -15,8 +15,6 @@ public class GradualDamageAnimation : IAnimationEffect
 		m_display = display;
 		m_amount = amount;
 		m_numFrames = numFrames;
-		
-		//m_perFrameAmount = (float)m_amount / (float)m_numFrames;
 	}
 	
 	public bool Done { get { return (m_currentFrame == m_numFrames); } }

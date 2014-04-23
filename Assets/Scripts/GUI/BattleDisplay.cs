@@ -208,6 +208,45 @@ public class BattleDisplay : MonoBehaviour
 	
 	public GUIStyle m_statStyle;
 	
+	private void DisplayBackButton()
+	{
+		if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
+		{
+			m_system.ProcessUserChoice(-2);
+			DoneWithText();
+		}
+	}
+	
+	private void DisplayPokemon()
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			int leftPokemonIndex = i * 2;
+			Character leftPokemon = m_system.UserPlayer.Pokemon[leftPokemonIndex];
+			if (leftPokemon != null)
+			{
+				Rect pokemonButtonLeft = new Rect(0, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
+				if (GUI.Button(pokemonButtonLeft, leftPokemon.Name))
+				{
+					DoneWithText();
+					m_system.ProcessUserChoice(leftPokemonIndex);
+				}
+			}
+			
+			int rightPokemonIndex = i * 2 + 1;
+			Character rightPokemon = m_system.UserPlayer.Pokemon[rightPokemonIndex];
+			if (rightPokemon != null)
+			{
+				Rect pokemonButtonRight = new Rect((m_screenArea.width + pokemonButtonGapX) / 2.0f, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
+				if (GUI.Button(pokemonButtonRight, rightPokemon.Name))
+				{
+					DoneWithText();
+					m_system.ProcessUserChoice(rightPokemonIndex);
+				}
+			}
+		}
+	}
+	
 	void OnGUI()
 	{
 		m_playerStatusDisplay.Display(m_playerNameStyle);
@@ -239,6 +278,28 @@ public class BattleDisplay : MonoBehaviour
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Pokemon);
 					DoneWithText();
 				}
+			GUI.EndGroup();
+		}
+		else if (m_system.CurrentState == NewBattleSystem.State.EnemyPokemonDefeated)
+		{
+			GUI.BeginGroup(m_screenArea);
+				if (GUI.Button(new Rect(m_screenArea.width / 4, 0, m_screenArea.width / 2, 90), "Switch Pokemon"))
+				{
+					m_system.ProcessUserChoice(1);
+					DoneWithText();
+				}
+				if (GUI.Button(new Rect(m_screenArea.width / 4, 100, m_screenArea.width / 2, 90), "Continue Battling"))
+				{
+					m_system.ProcessUserChoice(-2);
+					DoneWithText();
+				}
+			GUI.EndGroup();
+		}
+		else if (m_system.CurrentState == NewBattleSystem.State.ReplacePokemon)
+		{
+			GUI.BeginGroup(m_screenArea);
+				DisplayPokemon();
+				DisplayBackButton();
 			GUI.EndGroup();
 		}
 		else if (m_system.CurrentState == NewBattleSystem.State.FightPrompt ||
@@ -278,39 +339,16 @@ public class BattleDisplay : MonoBehaviour
 				}
 				else if (m_system.CurrentState == NewBattleSystem.State.PokemonPrompt)
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						int leftPokemonIndex = i * 2;
-						Character leftPokemon = m_system.UserPlayer.Pokemon[leftPokemonIndex];
-						if (leftPokemon != null)
-						{
-							Rect pokemonButtonLeft = new Rect(0, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
-							if (GUI.Button(pokemonButtonLeft, leftPokemon.Name))
-							{
-								DoneWithText();
-								m_system.ProcessUserChoice(leftPokemonIndex);
-							}
-						}
-						
-						int rightPokemonIndex = i * 2 + 1;
-						Character rightPokemon = m_system.UserPlayer.Pokemon[rightPokemonIndex];
-						if (rightPokemon != null)
-						{
-							Rect pokemonButtonRight = new Rect((m_screenArea.width + pokemonButtonGapX) / 2.0f, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
-							if (GUI.Button(pokemonButtonRight, rightPokemon.Name))
-							{
-								DoneWithText();
-								m_system.ProcessUserChoice(rightPokemonIndex);
-							}
-						}
-					}
+					DisplayPokemon();
 				}
 				
-				if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
-				{
-					m_system.ProcessUserChoice(-2);
-					DoneWithText();
-				}
+//				if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
+//				{
+//					m_system.ProcessUserChoice(-2);
+//					DoneWithText();
+//				}
+
+				DisplayBackButton();
 			GUI.EndGroup();
 		}
 	
@@ -336,7 +374,8 @@ public class BattleDisplay : MonoBehaviour
 			DeployEventArgs args = (DeployEventArgs)e;
 			BallZoneIn zoneScript;
 			
-			if (args.Friendly)
+			//if (args.Friendly)
+			if (args.Pokemon == m_system.UserPlayer.ActivePokemon)
 			{
 				zoneScript = m_playerDisplay.GetComponentInChildren<BallZoneIn>();
 				zoneScript.Species = m_system.UserPlayer.ActivePokemon.Species;
@@ -359,7 +398,7 @@ public class BattleDisplay : MonoBehaviour
 		{
 			WithdrawEventArgs args = (WithdrawEventArgs)e;
 			ScriptAnimation anim;
-			if (args.Friendly)
+			if (args.Pokemon == m_system.UserPlayer.ActivePokemon)
 			{
 				anim = new ScriptAnimation(m_playerDisplay.GetComponentInChildren<BallZoneOut>());
 			}

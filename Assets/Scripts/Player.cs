@@ -49,4 +49,10 @@ public class Player
 	{
 		ActivePokemon.UpdateBattleConditions(enemy);
 	}
+	
+	public bool IsDefeated()
+	{
+		Character alivePokemon = m_pokemon.Find(p => !p.isDead()); 
+		return (alivePokemon == null);
+	}
 }

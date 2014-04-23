@@ -118,6 +118,13 @@ public class Ability
 			}
 		}
 		
+		if (target.isDead())
+		{
+			status.events.Add(new StatusUpdateEventArgs("The opposing " + target.Name + " fainted!"));
+			status.events.Add(new WithdrawEventArgs(target));
+		}
+		
+		
 		return status;
 	}
 }

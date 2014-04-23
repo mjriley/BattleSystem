@@ -14,7 +14,11 @@ public class NewBattleSystem
 		PokemonPrompt,
 		EnemyAction,
 		ProcessTurn,
-		EndTurn
+		EndTurn,
+		FriendlyPokemonDefeated,
+		EnemyPokemonDefeated,
+		ReplacePokemon,
+		ReplaceEnemyPokemon
 	};
 	
 	public enum CombatSelection : int
@@ -101,10 +105,10 @@ public class NewBattleSystem
 				m_enemyPlayer = generateEnemy();
 				m_pendingEvents.Enqueue(new NewEncounterEventArgs());
 				AddStatusMessage("A Wild " + m_enemyPlayer.ActivePokemon.Species.ToString() + " appeared!");
-				m_pendingEvents.Enqueue(new DeployEventArgs(false));
+				m_pendingEvents.Enqueue(new DeployEventArgs(m_enemyPlayer.ActivePokemon));
 				
 				AddStatusMessage("Go! " + m_userPlayer.ActivePokemon.Name + "!");
-				m_pendingEvents.Enqueue(new DeployEventArgs(true));
+				m_pendingEvents.Enqueue(new DeployEventArgs(m_userPlayer.ActivePokemon));
 				m_nextState = State.BeginTurn;
 				break;
 			}
@@ -222,7 +226,6 @@ public class NewBattleSystem
 					else
 					{
 						// Assemble a recall action
-						//AddStatusMessage("Chose to switch to " + m_userPlayer.Pokemon[m_userChoice].Name);
 						SwapAbility swap = new SwapAbility(m_userPlayer, m_userChoice);
 						m_actionQueue.Enqueue(swap);
 						m_nextState = State.EnemyAction;
@@ -271,13 +274,118 @@ public class NewBattleSystem
 			}
 			case State.EndTurn:
 			{
-				// swap queues -- make the next turn the current one
-				Queue<ITurnAction> temp = m_actionQueue;
-				m_actionQueue = m_nextTurnQueue;
-				m_nextTurnQueue = temp;
 				
-				AddStatusMessage("Ending turn");
-				m_nextState = State.CombatPrompt;
+				if (m_userPlayer.ActivePokemon.isDead())
+				{
+					if (m_userPlayer.IsDefeated())
+					{
+						AddStatusMessage("You've lost!");
+						m_nextState = State.CombatIntro;
+					}
+					else
+					{
+						m_nextState = State.FriendlyPokemonDefeated;
+					}
+				}
+				else if (m_enemyPlayer.ActivePokemon.isDead())
+				{
+					if (m_enemyPlayer.IsDefeated())
+					{
+						AddStatusMessage("You've won!");
+						m_nextState = State.CombatIntro;
+					}
+					else
+					{
+						m_nextState = State.EnemyPokemonDefeated;
+					}
+				}
+				else
+				{
+					// swap queues -- make the next turn the current one
+					Queue<ITurnAction> temp = m_actionQueue;
+					m_actionQueue = m_nextTurnQueue;
+					m_nextTurnQueue = temp;
+					
+					m_nextState = State.BeginTurn;
+				}
+				break;
+			}
+			case State.FriendlyPokemonDefeated:
+			{
+				if (!m_waitingForInput)
+				{
+					m_userChoice = -1;
+					AddStatusMessage("Battle using which Pokemon?");
+					m_waitingForInput = true;
+				}
+				else
+				{
+					if (m_userChoice != -1)
+					{
+						m_waitingForInput = false;
+						m_actionQueue.Enqueue(new DeployAbility(m_userPlayer, m_userChoice, true));
+						m_nextState = State.ProcessTurn;
+					}
+				}
+				break;
+			}
+			case State.EnemyPokemonDefeated:
+			{
+				if (!m_waitingForInput)
+				{
+					m_userChoice = -1;
+					int pokemonIndex = m_enemyPlayer.GetNextPokemon(m_userPlayer);
+					
+					AddStatusMessage(m_enemyPlayer.Name + " is about to send in " + m_enemyPlayer.Pokemon[pokemonIndex].Name + ".\n Will you switch your Pokemon?");
+					
+					m_waitingForInput = true;
+				}
+				else
+				{
+					if (m_userChoice != -1)
+					{
+						m_waitingForInput = false;
+						if (m_userChoice == 1)
+						{	
+							m_nextState = State.ReplacePokemon;
+						}
+						else
+						{
+							m_nextState = State.ReplaceEnemyPokemon;
+						}
+					}
+				}
+				break;
+			}
+			case State.ReplacePokemon:
+			{
+				if (!m_waitingForInput)
+				{
+					m_userChoice = -1;
+					AddStatusMessage("Choose a Pokemon");
+					m_waitingForInput = true;
+				}
+				else
+				{
+					if (m_userChoice != -1)
+					{
+						m_waitingForInput = false;
+						if (m_userChoice != -2)
+						{
+							SwapAbility ability = new SwapAbility(m_userPlayer, m_userChoice);
+							m_actionQueue.Enqueue(ability);
+						}
+						m_nextState = State.ReplaceEnemyPokemon;
+					}
+				}
+				break;
+			}
+			case State.ReplaceEnemyPokemon:
+			{
+				int pokemonIndex = m_enemyPlayer.GetNextPokemon(m_userPlayer);
+				m_actionQueue.Enqueue(new DeployAbility(m_enemyPlayer, pokemonIndex, false));
+				
+				m_nextState = State.ProcessTurn;
 				break;
 			}
 		}
@@ -352,8 +460,6 @@ public class NewBattleSystem
 			int index = m_generator.Next(0, pokemonNames.Length);
 			string name = pokemonNames[index];
 			
-			//RandomAttackStrategy enemy_strategy = new RandomAttackStrategy();
-			
 			Pokemon.Species species = (Pokemon.Species)Enum.Parse(typeof(Pokemon.Species), name);
 			
 			Character enemy = new Character(name, species, Character.Sex.Female, 70, 50, BattleType.Water, m_enemyStrategy);
@@ -405,21 +511,21 @@ public class StatusUpdateEventArgs : EventArgs
 
 public class DeployEventArgs : EventArgs
 {
-	public bool Friendly { get; set; }	
+	public Character Pokemon { get; set; }
 	
-	public DeployEventArgs(bool friendly)
+	public DeployEventArgs(Character pokemon)
 	{
-		Friendly = friendly;
+		Pokemon = pokemon;
 	}
 }
 
 public class WithdrawEventArgs : EventArgs
 {
-	public bool Friendly { get; set; }
+	public Character Pokemon { get; set; }
 	
-	public WithdrawEventArgs(bool friendly)
+	public WithdrawEventArgs(Character pokemon)
 	{
-		Friendly = friendly;
+		Pokemon = pokemon;
 	}
 }
 
