@@ -441,7 +441,8 @@ public class NewBattleSystem
 		UserInputStrategy input = new UserInputStrategy(null, this.GetUserAbility);
 		
 		Character pikachu = new Character("Pikachu", Pokemon.Species.Pikachu, Character.Sex.Male, 70, 35, BattleType.Electric, input);
-		pikachu.addAbility(new FlyAbility("Fly", BattleType.Flying, 50, 95, 20));
+		//pikachu.addAbility(new FlyAbility("Fly", BattleType.Flying, 50, 95, 20));
+		pikachu.addAbility(new MultiAttackAbility("Fury Swipes", BattleType.Bug, 18, 80, 15, 2, 5));
 		pikachu.addAbility(new Ability("Bubble", BattleType.Water, 20, 100, 30));
 		pikachu.addAbility(new Ability("Ember", BattleType.Fire, 10, 100, 25, new AbilityEffect(AbilityEffect.EffectType.Burn, 0.10f)));
 		pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));

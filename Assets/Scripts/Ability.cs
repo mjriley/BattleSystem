@@ -40,7 +40,7 @@ public class Ability
 		get { return m_accuracy; }
 	}
 	
-	private AbilityEffect m_effect;
+	protected AbilityEffect m_effect;
 	
 	public Ability(string name, BattleType type, int damageAmount, int accuracy, uint maxUses)
 	: this(name, type, damageAmount, accuracy, maxUses, new AbilityEffect(AbilityEffect.EffectType.None, 0))
@@ -57,6 +57,27 @@ public class Ability
 		m_accuracy = accuracy;
 		m_effect = effect;
 	}
+	
+	public EventArgs GetEffectivenessMessage(Character target, float multiplier)
+	{
+		if (multiplier > 1)
+		{
+			return new StatusUpdateEventArgs("It's super effective!");
+		}
+		else if (multiplier == 0)
+		{
+			return new StatusUpdateEventArgs("It doesn't affect the opposing " + target.Name + "...");
+		}
+		else // if (multiplier < 1)
+		{
+			return new StatusUpdateEventArgs("It's not very effective...");
+		}
+	}
+	
+	// Ability Flow:
+	// Check if the ability can even hit -- otherwise <X> is not affected by <Y>
+	// Effectiveness Message
+	// Hit <#> Times!
 	
 	public virtual ActionStatus Execute(Character actor, Player targetPlayer)
 	{
