@@ -6,6 +6,8 @@ public class NewBattleSystem
 {
 	public enum State
 	{
+		Start,
+		Splash,
 		CombatIntro,
 		BeginTurn,
 		CombatPrompt,
@@ -32,11 +34,14 @@ public class NewBattleSystem
 	private Queue<EventArgs> m_pendingEvents = new Queue<EventArgs>();
 	
 	public delegate void BattleEventHandler(object sender, EventArgs e);
+	public delegate void StateChangeHandler(object sender, StateChangeArgs e);
 	
 	public event BattleEventHandler BattleProgress;
+	public event StateChangeHandler LeaveState;
+	public event StateChangeHandler EnterState;
 	
-	private State m_currentState = State.CombatIntro;
-	private State m_nextState = State.CombatIntro;
+	private State m_currentState = State.Start;
+	private State m_nextState = State.Splash;
 	public State CurrentState { get { return m_currentState; } }
 	
 	private Player m_userPlayer;
@@ -96,14 +101,26 @@ public class NewBattleSystem
 		}
 		
 		// all status events must be processed before we can handle state logic
-		m_currentState = m_nextState;
+		ChangeState(m_nextState);
+		//m_currentState = m_nextState;
 		
 		switch (m_currentState)
 		{
-			case State.CombatIntro:
+			// You are challenged by Duchess Ione!
+			// -> Shift out trainer portrait
+			// Duchess Ione sent out <X>!
+			// Go! <Y>!
+			case State.Splash:
 			{
 				m_enemyPlayer = generateEnemy();
 				m_pendingEvents.Enqueue(new NewEncounterEventArgs());
+				//AddStatusMessage("You have been challenged by Duchess Ione!");
+				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by Duchess Ione!", false));
+				m_nextState = State.CombatIntro;
+				break;
+			}
+			case State.CombatIntro:
+			{
 				AddStatusMessage("A Wild " + m_enemyPlayer.ActivePokemon.Species.ToString() + " appeared!");
 				m_pendingEvents.Enqueue(new DeployEventArgs(m_enemyPlayer.ActivePokemon));
 				
@@ -399,6 +416,23 @@ public class NewBattleSystem
 		}
 	}
 	
+	private void ChangeState(State newState)
+	{
+		if (LeaveState != null)
+		{
+			StateChangeArgs e = new StateChangeArgs(m_currentState);
+			LeaveState(this, e);
+		}
+		
+		m_currentState = newState;
+		
+		if (EnterState != null)
+		{
+			StateChangeArgs e = new StateChangeArgs(m_currentState);
+			EnterState(this, e);
+		}
+	}
+	
 	
 	public void CreatePlayerPokemon()
 	{
@@ -492,6 +526,16 @@ public class NewBattleSystem
 	}
 }
 
+public class StateChangeArgs : EventArgs
+{
+	public NewBattleSystem.State State { get; set; }
+	
+	public StateChangeArgs(NewBattleSystem.State state)
+	{
+		this.State = state;
+	}
+}
+
 public class NewEncounterEventArgs : EventArgs
 {
 	public NewEncounterEventArgs()
@@ -502,10 +546,12 @@ public class NewEncounterEventArgs : EventArgs
 public class StatusUpdateEventArgs : EventArgs
 {
 	public string Status { get; set; }
+	public bool Expires { get; set; }
 	
-	public StatusUpdateEventArgs(string status)
+	public StatusUpdateEventArgs(string status, bool expires=true)
 	{
 		Status = status;
+		Expires = expires;
 	}
 }
 

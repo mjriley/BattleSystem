@@ -1,24 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/BattleDisplay.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BallZoneIn.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="324" Column="18" />
-      <File FileName="Assets/Scripts/GUI/PlayerStatusDisplay.cs" Line="100" Column="4" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="206" Column="23" />
-      <File FileName="Assets/Scripts/GradualDamageAnimation.cs" Line="49" Column="1" />
-      <File FileName="Assets/Scripts/IAnimationEffect.cs" Line="8" Column="1" />
-      <File FileName="Assets/Scripts/SoundEffect.cs" Line="12" Column="2" />
-      <File FileName="Assets/Scripts/Player.cs" Line="57" Column="2" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/PlayerStatusDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets/BallRotation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BallZoneIn.cs" Line="37" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="GUI" expanded="True">
-                <Node name="BattleDisplay.cs" selected="True" />
-              </Node>
-            </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="References" expanded="True" selected="True" />
           </Node>
         </State>
       </Pad>

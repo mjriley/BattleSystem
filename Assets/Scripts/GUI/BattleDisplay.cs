@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class BattleDisplay : MonoBehaviour
 {
+	public GameObject splashScreen;
+	
 	private NewBattleSystem m_system = new NewBattleSystem();
 	
 	private List<IAnimationEffect> m_animations = new List<IAnimationEffect>();
@@ -82,6 +84,8 @@ public class BattleDisplay : MonoBehaviour
 		m_enemyDisplay.enabled = false;
 		
 		m_system.BattleProgress += HandleBattleEvents;
+		m_system.EnterState += HandleEnterState;
+		m_system.LeaveState += HandleLeaveState;
 		
 		m_fightButtonTexture = Resources.Load<Texture2D>("Textures/FightButton");
 		m_fightButtonDownTexture = Resources.Load<Texture2D>("Textures/FightButtonDown");
@@ -124,6 +128,22 @@ public class BattleDisplay : MonoBehaviour
 		m_playerStatusDisplay.ActivePlayer = m_system.UserPlayer;
 		
 		m_enemyStatusDisplay = new PlayerStatusDisplay(enemyStatusRect);
+	}
+
+	void HandleLeaveState (object sender, StateChangeArgs e)
+	{
+		if (e.State == NewBattleSystem.State.Splash)
+		{
+			splashScreen.SetActive(false);
+		}
+	}
+
+	void HandleEnterState (object sender, StateChangeArgs e)
+	{
+		if (e.State == NewBattleSystem.State.Splash)
+		{
+			splashScreen.SetActive(true);
+		}
 	}
 	
 	private bool IsReady()
@@ -364,7 +384,10 @@ public class BattleDisplay : MonoBehaviour
 			StatusUpdateEventArgs args = (StatusUpdateEventArgs)e;
 			m_statusText = args.Status; 
 			m_ready = false;
-			StartCoroutine("Wait");
+			if (args.Expires)
+			{
+				StartCoroutine("Wait");
+			}
 		}
 		else if (e is DeployEventArgs)
 		{
