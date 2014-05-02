@@ -115,13 +115,13 @@ public class NewBattleSystem
 				m_enemyPlayer = generateEnemy();
 				m_pendingEvents.Enqueue(new NewEncounterEventArgs());
 				//AddStatusMessage("You have been challenged by Duchess Ione!");
-				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by Duchess Ione!", false));
+				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + m_enemyPlayer.Name + "!", false));
 				m_nextState = State.CombatIntro;
 				break;
 			}
 			case State.CombatIntro:
 			{
-				AddStatusMessage("A Wild " + m_enemyPlayer.ActivePokemon.Species.ToString() + " appeared!");
+				AddStatusMessage(m_enemyPlayer.Name + " sent out " + m_enemyPlayer.ActivePokemon.Species.ToString() + "!");
 				m_pendingEvents.Enqueue(new DeployEventArgs(m_enemyPlayer.ActivePokemon));
 				
 				AddStatusMessage("Go! " + m_userPlayer.ActivePokemon.Name + "!");
@@ -486,7 +486,7 @@ public class NewBattleSystem
 	
 	public Player generateEnemy()
 	{
-		Player player = new Player("Enemy", new SequentialPokemonStrategy());
+		Player player = new Player("Duchess Ione", new SequentialPokemonStrategy());
 		
 		string[] pokemonNames = Enum.GetNames(typeof(Pokemon.Species));
 		for (int i = 0; i < 3; ++i)
