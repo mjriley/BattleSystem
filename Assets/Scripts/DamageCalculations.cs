@@ -1,13 +1,118 @@
 using System;
 using System.Collections.Generic;
 
+public struct DamageResult
+{
+	public int amount;
+	public bool crit;
+	public Effectiveness effectiveness;
+};
+
 public class DamageCalculations
 {
-	public static float getDamageMultiplier(BattleType attackType, List<BattleType> pokemonTypes)
+	const double SAME_TYPE_MULTIPLIER = 1.5;
+	
+	const double BASE_CRIT_MULTIPLIER = 1.5;
+	
+	// always a 1 in X chance of crit.
+	// Storing the denominators rather than the fraction to avoid 1/3
+	static int[] CRIT_TABLE = new int[] { 16, 8, 4, 3, 2 };
+		
+	public static int CalculateBaseDamage(int attack, int defense, uint level, 
+		uint power, double same_type_multiplier, double effectiveness_multiplier, 
+		double crit_multiplier, double variance_multiplier)
+	{
+		double level_factor = (2.0 * level + 10) / 250.0;
+		double attack_ratio = (double)attack / (double)defense;
+		double raw_damage = level_factor * attack_ratio * power + 2;
+		
+		// TODO: Account for items, abilities, etc
+		double modifier = same_type_multiplier * effectiveness_multiplier * crit_multiplier * variance_multiplier;
+		
+		return (int)(raw_damage * modifier);
+	}
+	
+	private static Effectiveness GetEffectiveness(double multiplier)
+	{
+		if (multiplier > 1.0)
+		{
+			return Effectiveness.SuperEffective;
+		}
+		else if (multiplier == 0)
+		{
+			return Effectiveness.Immune;
+		}
+		else if (multiplier < 1.0)
+		{
+			return Effectiveness.Weak;
+		}
+		
+		return Effectiveness.Normal;
+	}
+	
+	private static bool WillCrit(Character attacker, Random generator)
+	{
+		int crit_liklihood = CRIT_TABLE[CalculateCritStage(attacker)];
+		int rand = generator.Next(crit_liklihood);
+		
+		if (rand == 0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static DamageResult CalculateDamage(DamageAbility ability, Character attacker, Character defender, Random generator)
+	{
+		DamageResult result = new DamageResult();
+		
+		double same_type_multiplier = attacker.Types.Contains(ability.BattleType) ? SAME_TYPE_MULTIPLIER : 1.0;
+		
+		result.crit = WillCrit(attacker, generator);
+		double crit_multiplier = result.crit ? BASE_CRIT_MULTIPLIER : 1.0;
+		
+		double effectiveness_multiplier = getDamageMultiplier(ability.BattleType, defender.Types);
+		result.effectiveness = GetEffectiveness(effectiveness_multiplier);
+		
+		double variance_multiplier = GetDamageVariance(generator);
+		
+		int attack, defense;
+		if (ability.AbilityType == AbilityType.Physical)
+		{
+			attack = attacker.Atk;
+			defense = defender.Def;
+		}
+		else
+		{
+			attack = attacker.SpAtk;
+			defense = defender.SpDef;
+		}
+		
+		result.amount = CalculateBaseDamage(attack, defense, attacker.Level, ability.Power, same_type_multiplier, effectiveness_multiplier, crit_multiplier, variance_multiplier);
+		
+		return result;
+	}
+		
+	private static int CalculateCritStage(Character pokemon)
+	{
+		return 0;
+	}
+	// Returns a value between 0.85 and 1.0 to be the damage 'noise'
+	private static double GetDamageVariance(Random generator)
+	{
+		double rand = generator.NextDouble();
+		double baseMultiplier = 1.0;
+		double varianceRange = 0.15;
+		
+		return baseMultiplier - varianceRange * rand;
+	}
+
+	public static double getDamageMultiplier(BattleType attackType, List<BattleType> pokemonTypes)
 	{
 		Init();
 		
-		float multiplier = 1.0f;
+		double multiplier = 1.0;
 		
 		foreach (BattleType pokemonType in pokemonTypes)
 		{

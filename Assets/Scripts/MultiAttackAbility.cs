@@ -24,14 +24,12 @@ public class MultiAttackAbility : Ability
 		m_attackCount = rand.Next(m_minAttackCount, m_maxAttackCount + 1);
 	}
 	
-	public override ActionStatus Execute(Character actor, Player targetPlayer)
+	protected override ActionStatus ExecuteImpl(Character actor, Player targetPlayer, ActionStatus status)
 	{
 		if (base.CurrentUses <= 0)
 		{
 			throw new Exception("No ability charges left");
 		}
-		
-		ActionStatus status = new ActionStatus();
 		
 		if (actor.isDead())
 		{
@@ -51,7 +49,7 @@ public class MultiAttackAbility : Ability
 		
 		if ((m_currentAttack < m_attackCount) && (!target.isDead()))
 		{
-			float multiplier = DamageCalculations.getDamageMultiplier(base.Type, target.Types);
+			double multiplier = DamageCalculations.getDamageMultiplier(base.Type, target.Types);
 			
 			int amount = (int)(base.DamageAmount * multiplier);
 			if (amount != 0)
@@ -71,7 +69,7 @@ public class MultiAttackAbility : Ability
 		}
 		else
 		{
-			float multiplier = DamageCalculations.getDamageMultiplier(base.Type, target.Types);
+			double multiplier = DamageCalculations.getDamageMultiplier(base.Type, target.Types);
 			status.events.Add(GetEffectivenessMessage(target, multiplier));
 			status.events.Add(new StatusUpdateEventArgs("Hit " + m_currentAttack + " times!"));
 			

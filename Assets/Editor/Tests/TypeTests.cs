@@ -12,7 +12,7 @@ namespace Tests
 			List<BattleType> pokemonTypes = new List<BattleType>();
 			pokemonTypes.Add(BattleType.Fire);
 			
-			float multiplier = DamageCalculations.getDamageMultiplier(BattleType.Water, pokemonTypes);
+			double multiplier = DamageCalculations.getDamageMultiplier(BattleType.Water, pokemonTypes);
 			
 			Assert.AreEqual(2.0f, multiplier);
 		}
@@ -24,7 +24,7 @@ namespace Tests
 			pokemonTypes.Add(BattleType.Ghost);
 			pokemonTypes.Add(BattleType.Psychic);
 			
-			float multiplier = DamageCalculations.getDamageMultiplier(BattleType.Ghost, pokemonTypes);
+			double multiplier = DamageCalculations.getDamageMultiplier(BattleType.Ghost, pokemonTypes);
 			
 			Assert.AreEqual(4.0f, multiplier);
 		}

@@ -28,20 +28,20 @@ public class RandomAttackStrategy : IAttackStrategy
 	 * Attempts to find an ability (at random)
 	 * Returns the desired ability or null if no ability with sufficient uses could be found
 	 **********/
-	private Ability DetermineAbility(Character actor)
+	private AbstractAbility DetermineAbility(Character actor)
 	{
 		uint cost = actor.getUsageCost();
 		
-		List<Ability> abilities = actor.getAbilities();
+		List<AbstractAbility> abilities = actor.getAbilities();
 		
-		Ability ability = null;
+		AbstractAbility ability = null;
 		
 		while (abilities.Count() > 0)
 		{
 			int abilityIndex = m_generator.Next(0, abilities.Count());
 			ability = abilities.ElementAt(abilityIndex);
 			
-			if (ability.CurrentUses < cost)
+			if (ability.CurrentPP < cost)
 			{
 				abilities.Remove(ability);
 			}
@@ -56,7 +56,7 @@ public class RandomAttackStrategy : IAttackStrategy
 	
 	public void UpdateConditions(Character actor, Player enemyPlayer)
 	{
-		Ability ability = DetermineAbility(actor);
+		AbstractAbility ability = DetermineAbility(actor);
 		
 		m_turnInfo = new AbilityUse(actor, enemyPlayer, ability);
 	}

@@ -442,40 +442,45 @@ public class NewBattleSystem
 		
 		Character pikachu = new Character("Pikachu", Pokemon.Species.Pikachu, Character.Sex.Male, 70, 35, BattleType.Electric, input);
 		//pikachu.addAbility(new FlyAbility("Fly", BattleType.Flying, 50, 95, 20));
-		pikachu.addAbility(new MultiAttackAbility("Fury Swipes", BattleType.Bug, 18, 80, 15, 2, 5));
-		pikachu.addAbility(new Ability("Bubble", BattleType.Water, 20, 100, 30));
-		pikachu.addAbility(new Ability("Ember", BattleType.Fire, 10, 100, 25, new AbilityEffect(AbilityEffect.EffectType.Burn, 0.10f)));
-		pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));
+		//pikachu.addAbility(new MultiAttackAbility("Fury Swipes", BattleType.Bug, 18, 80, 15, 2, 5));
+		//pikachu.addAbility(new Ability("Bubble", BattleType.Water, 20, 100, 30));
+		//pikachu.addAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 20, 30, 100))
+		//pikachu.addAbility(new Ability("Ember", BattleType.Fire, 10, 100, 25, new AbilityEffect(AbilityEffect.EffectType.Burn, 0.10f)));
+		//pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));
+		//pikachu.addAbility(AbilityFactory)
+		pikachu.addAbility(AbilityFactory.GetAbility("Fury Swipes"));
+		pikachu.addAbility(AbilityFactory.GetAbility("Bubble"));
+		pikachu.addAbility(AbilityFactory.GetAbility("Ember"));
+		pikachu.addAbility(AbilityFactory.GetAbility("Vine Whip"));
 		
 		Character chespin = new Character("Chespin", Pokemon.Species.Chespin, Character.Sex.Female, 70, 1, BattleType.Grass, input);
-		chespin.addAbility(new Ability("Ability 0", BattleType.Grass, 20, 100, 20));
-		chespin.addAbility(new Ability("Ability 1", BattleType.Grass, 20, 100, 20));
-		chespin.addAbility(new Ability("Ability 2", BattleType.Grass, 20, 100, 20));
-		chespin.addAbility(new Ability("Ability 3", BattleType.Grass, 20, 100, 20));
+		chespin.addAbility(AbilityFactory.GetAbility("Tackle"));
+		chespin.addAbility(AbilityFactory.GetAbility("Vine Whip"));
+		chespin.addAbility(AbilityFactory.GetAbility("Rollout"));
+		chespin.addAbility(AbilityFactory.GetAbility("Bite"));
 		
 		Character squirtle = new Character("Squirtle", Pokemon.Species.Squirtle, Character.Sex.Female, 70, 20, BattleType.Water, input);
-		squirtle.addAbility(new Ability("Ability 0", BattleType.Water, 20, 100, 20));
-		squirtle.addAbility(new Ability("Ability 1", BattleType.Water, 20, 100, 20));
-		squirtle.addAbility(new Ability("Ability 2", BattleType.Water, 20, 100, 20));
-		squirtle.addAbility(new Ability("Ability 3", BattleType.Water, 20, 100, 20));
+		squirtle.addAbility(AbilityFactory.GetAbility("Tackle"));
+		squirtle.addAbility(AbilityFactory.GetAbility("Water Gun"));
+		squirtle.addAbility(AbilityFactory.GetAbility("Bubble"));
+		squirtle.addAbility(AbilityFactory.GetAbility("Bite"));
 		
 		Character charmander = new Character("Charmander", Pokemon.Species.Charmander, Character.Sex.Male, 70, 100, BattleType.Fire, input);
-		charmander.addAbility(new Ability("Ability 0", BattleType.Fire, 20, 100, 20));
-		charmander.addAbility(new Ability("Ability 1", BattleType.Fire, 20, 100, 20));
-		charmander.addAbility(new Ability("Ability 2", BattleType.Fire, 20, 100, 20));
-		charmander.addAbility(new Ability("Ability 3", BattleType.Fire, 20, 100, 20));
+		charmander.addAbility(AbilityFactory.GetAbility("Scratch"));
+		charmander.addAbility(AbilityFactory.GetAbility("Ember"));
+		charmander.addAbility(AbilityFactory.GetAbility("Dragon Rage"));
+		charmander.addAbility(AbilityFactory.GetAbility("Fire Fang"));
 		
 		Character magikarp = new Character("Magikarp", Pokemon.Species.Magikarp, Character.Sex.Male, 70, 100, BattleType.Normal, input);
-		magikarp.addAbility(new Ability("Ability 0", BattleType.Normal, 20, 100, 20));
-		magikarp.addAbility(new Ability("Ability 1", BattleType.Normal, 20, 100, 20));
-		magikarp.addAbility(new Ability("Ability 2", BattleType.Normal, 20, 100, 20));
-		magikarp.addAbility(new Ability("Ability 3", BattleType.Normal, 20, 100, 20));
+		magikarp.addAbility(AbilityFactory.GetAbility("Splash"));
+		magikarp.addAbility(AbilityFactory.GetAbility("Tackle"));
+		magikarp.addAbility(AbilityFactory.GetAbility("Flail"));
 		
 		Character bulbasaur = new Character("Bulbasaur", Pokemon.Species.Bulbasaur, Character.Sex.Female, 70, 10, BattleType.Poison, input);
-		bulbasaur.addAbility(new Ability("Ability 0", BattleType.Poison, 20, 100, 20));
-		bulbasaur.addAbility(new Ability("Ability 1", BattleType.Poison, 20, 100, 20));
-		bulbasaur.addAbility(new Ability("Ability 2", BattleType.Poison, 20, 100, 20));
-		bulbasaur.addAbility(new Ability("Ability 3", BattleType.Poison, 20, 100, 20));
+		bulbasaur.addAbility(AbilityFactory.GetAbility("Tackle"));
+		bulbasaur.addAbility(AbilityFactory.GetAbility("Vine Whip"));
+		bulbasaur.addAbility(AbilityFactory.GetAbility("Take Down"));
+		bulbasaur.addAbility(AbilityFactory.GetAbility("Razor Leaf"));
 		
 		m_userPlayer.AddPokemon(pikachu);
 		m_userPlayer.AddPokemon(chespin);
@@ -498,10 +503,10 @@ public class NewBattleSystem
 			Pokemon.Species species = (Pokemon.Species)Enum.Parse(typeof(Pokemon.Species), name);
 			
 			Character enemy = new Character(name, species, Character.Sex.Female, 70, 50, BattleType.Water, m_enemyStrategy);
-			Ability ability0 = new Ability("Enemy Ability 0", BattleType.Normal, 20, 100, 20);
-			Ability ability1 = new Ability("Enemy Ability 1", BattleType.Normal, 20, 100, 20);
-			Ability ability2 = new Ability("Enemy Ability 2", BattleType.Normal, 20, 100, 20);
-			Ability ability3 = new Ability("Enemy Ability 3", BattleType.Normal, 20, 100, 20);
+			AbstractAbility ability0 = new DamageAbility("Enemy Ability 0", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
+			AbstractAbility ability1 = new DamageAbility("Enemy Ability 1", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
+			AbstractAbility ability2 = new DamageAbility("Enemy Ability 2", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
+			AbstractAbility ability3 = new DamageAbility("Enemy Ability 3", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
 			
 			enemy.addAbility(ability0);
 			enemy.addAbility(ability1);
@@ -521,7 +526,7 @@ public class NewBattleSystem
 			return null;
 		}
 		
-		Ability selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
+		AbstractAbility selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
 		
 		return new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, selectedAbility);
 	}

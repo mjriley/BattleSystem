@@ -12,9 +12,17 @@ public class Character
 		Female
 	}
 	
+	// stats
+	public int Atk { get; set; }
+	public int Def { get; set; }
+	public int SpAtk { get; set; }
+	public int SpDef { get; set; }
+	public int Spd { get; set; }
+	public uint Level { get; set; }
+	
 	private int m_maxHP;
 	private int m_currentHP;
-	private List<Ability> m_abilities = new List<Ability>();
+	private List<AbstractAbility> m_abilities = new List<AbstractAbility>();
 	private string m_name;
 	
 	private WeakReference m_refOwner;
@@ -58,7 +66,6 @@ public class Character
 	private Pokemon.Species m_species;
 	public Pokemon.Species Species { get { return m_species; } }
 	
-	public uint Level { get; set; }
 	
 	public Character(string name, Pokemon.Species species, Sex gender, int maxHP, uint level, BattleType type, IAttackStrategy strategy) :
 		this(name, species, gender, maxHP, level, type, BattleType._None, strategy)
@@ -83,6 +90,16 @@ public class Character
 		}
 		
 		ClearStatuses();
+		InitStats();
+	}
+	
+	private void InitStats()
+	{
+		Atk = 50;
+		Def = 50;
+		SpAtk = 50;
+		SpDef = 50;
+		Spd = 50;
 	}
 	
 	public void Reset()
@@ -103,17 +120,17 @@ public class Character
 		return (m_currentHP == 0);
 	}
 	
-	public List<Ability> getAbilities()
+	public List<AbstractAbility> getAbilities()
 	{
-		return new List<Ability>(m_abilities);
+		return new List<AbstractAbility>(m_abilities);
 	}
 	
-	public void addAbility(Ability ability)
+	public void addAbility(AbstractAbility ability)
 	{
 		m_abilities.Add(ability);
 	}
 	
-	public void replaceAbility(int index, Ability ability)
+	public void replaceAbility(int index, AbstractAbility ability)
 	{
 		m_abilities[index] = ability;
 	}
