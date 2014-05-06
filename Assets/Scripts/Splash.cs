@@ -21,7 +21,6 @@ public class Splash : MonoBehaviour
 
 	void Start()
 	{
-		Debug.Log("Bounds: " + Screen.width + ", " + Screen.height);
 		trainer = Resources.Load<Texture2D>("Textures/Trainers/VSFurisode_Girl_2");
 	}
 	

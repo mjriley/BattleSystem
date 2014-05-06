@@ -2,12 +2,15 @@ using System;
 
 public class DamageAbility : AbstractAbility
 {
+	public delegate void OnHitEffect(DamageAbility ability, int damage, Character attacker, Character defender, ref ActionStatus status);
+
 	public uint Power { get; protected set; }
 	public int Accuracy { get; protected set; }
 	
 	private Random m_generator;
+	private OnHitEffect onHitHandler;
 	
-	public DamageAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, uint power, int accuracy, string description="", Random generator=null)
+	public DamageAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, uint power, int accuracy, OnHitEffect onHitHandler=null, string description="", Random generator=null)
 	: base(name, abilityType, battleType, maxPP, description)
 	{
 		Power = power;
@@ -19,6 +22,8 @@ public class DamageAbility : AbstractAbility
 		}
 		
 		m_generator = generator;
+		
+		this.onHitHandler = onHitHandler;
 	}
 	
 	protected override ActionStatus ExecuteImpl(Character attacker, Player targetPlayer, ref ActionStatus status)
@@ -34,9 +39,14 @@ public class DamageAbility : AbstractAbility
 			return status;
 		}
 		
-		ApplyDamage(attacker, defender, ref status);
+		DamageResult result = ApplyDamage(attacker, defender, ref status);
 		
 		HandleTargetDeath(defender, ref status);
+		
+		if (onHitHandler != null)
+		{
+			onHitHandler(this, result.amount, attacker, defender, ref status);
+		}
 		
 		status.turnComplete = true;
 		status.isComplete = true;
@@ -51,7 +61,7 @@ public class DamageAbility : AbstractAbility
 		return (rand < Accuracy);
 	}
 	
-	protected void ApplyDamage(Character attacker, Character defender, ref ActionStatus status)
+	protected DamageResult ApplyDamage(Character attacker, Character defender, ref ActionStatus status)
 	{
 		DamageResult result = DamageCalculations.CalculateDamage(this, attacker, defender, m_generator);
 		
@@ -74,6 +84,8 @@ public class DamageAbility : AbstractAbility
 		}
 		
 		status.events.Add(new DamageEventArgs(defender.Owner, result.amount));
+		
+		return result;
 	}
 	
 	protected void HandleTargetDeath(Character target, ref ActionStatus status)

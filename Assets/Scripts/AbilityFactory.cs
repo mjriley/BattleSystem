@@ -32,7 +32,7 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 30, 40, 100));
 		AddAbility(new DamageAbility("Water Gun", AbilityType.Special, BattleType.Water, 25, 40, 100));
 		
-		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100));
+		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100, OnHitEffects.BurnEffect(10)));
 		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95));
 		
 		AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 45, 100));
@@ -43,7 +43,7 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Scratch", AbilityType.Physical, BattleType.Normal, 35, 40, 100));
 		AddAbility(new DamageAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, 10, 100));
 		AddAbility(new DamageAbility("Flail", AbilityType.Physical, BattleType.Normal, 15, 10, 100));
-		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85));
+		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85, OnHitEffects.RecoilEffect(25)));
 		
 		AddAbility(new DamageAbility("Rollout", AbilityType.Physical, BattleType.Rock, 20, 30, 90));
 		

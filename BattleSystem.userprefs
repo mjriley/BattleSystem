@@ -1,25 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NewBattleSystem.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/DamageAbility.cs">
     <Files>
-      <File FileName="Assets/Scripts/AbilityFactory.cs" Line="45" Column="95" />
-      <File FileName="Assets/Scripts/AbilityUse.cs" Line="6" Column="16" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="477" Column="58" />
-      <File FileName="Assets/Scripts/Character.cs" Line="125" Column="26" />
-      <File FileName="Assets/Scripts/AbilityDescriptionsEnglish.cs" Line="18" Column="122" />
+      <File FileName="Assets/Scripts/OnHitEffects.cs" Line="37" Column="1" />
+      <File FileName="Assets/Scripts/DamageAbility.cs" Line="48" Column="61" />
+      <File FileName="Assets/Scripts/AbilityFactory.cs" Line="27" Column="26" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="NewBattleSystem.cs" selected="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="Editor" expanded="True">
-              <Node name="Tests" expanded="True" />
+              <Node name="DamageAbility.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -31,13 +23,7 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Tests" expanded="True">
-              <Node name="DamageCalculationsTests" expanded="True" selected="True" />
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
