@@ -35,13 +35,13 @@ public class AbilityButton : MonoBehaviour
 		typeColors[BattleType.Poison] = makeIntColor(160, 64, 160);
 	}
 	
-	public static bool Display(Rect rect, Ability ability, bool drawReversed, GUIStyle typeNameStyle, GUIStyle abilityNameStyle, GUIStyle abilityDetailsStyle, GUIStyle buttonStyle)
+	public static bool Display(Rect rect, AbstractAbility ability, bool drawReversed, GUIStyle typeNameStyle, GUIStyle abilityNameStyle, GUIStyle abilityDetailsStyle, GUIStyle buttonStyle)
 	{
 		Init();
 		
 		bool result = false;
 		
-		Color typeColor = typeColors[ability.Type];
+		Color typeColor = typeColors[ability.BattleType];
 		
 		Rect fullBounds;
 		if (drawReversed)
@@ -61,9 +61,9 @@ public class AbilityButton : MonoBehaviour
 			GUI.DrawTexture(fullBounds, m_baseTexture);
 			GUI.DrawTexture(tagBounds, m_tagTexture);
 			GUI.color = previousColor;
-			GUI.Label(tagBounds, Enum.GetName(typeof(BattleType), ability.Type), typeNameStyle);
+			GUI.Label(tagBounds, Enum.GetName(typeof(BattleType), ability.BattleType), typeNameStyle);
 			GUI.Label(new Rect(0, 0, rect.width, rect.height / 2), ability.Name, abilityNameStyle);
-			GUI.Label(new Rect(0, rect.height / 2, rect.width, rect.height / 2), "PP " + ability.CurrentUses + "/" + ability.MaxUses, abilityDetailsStyle);
+			GUI.Label(new Rect(0, rect.height / 2, rect.width, rect.height / 2), "PP " + ability.CurrentPP + "/" + ability.MaxPP, abilityDetailsStyle);
 			result = GUI.Button(new Rect(0, 0, rect.width, rect.height), "", buttonStyle);
 		GUI.EndGroup();
 		

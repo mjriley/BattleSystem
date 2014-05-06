@@ -3,7 +3,7 @@ using System.Linq;
 
 public class UserInputStrategy : IAttackStrategy
 {
-	public delegate void ReceiveConditions(List<Ability> abilities);
+	public delegate void ReceiveConditions(List<AbstractAbility> abilities);
 	public delegate ITurnAction GetUserInput();
 	
 	//private ReceiveConditions m_conditionsDelegate;
