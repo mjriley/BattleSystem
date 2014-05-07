@@ -50,9 +50,12 @@ public class DamageCalculations
 		return Effectiveness.Normal;
 	}
 	
-	private static bool WillCrit(Character attacker, Random generator)
+	private static bool WillCrit(DamageAbility ability, Character attacker, Random generator)
 	{
-		int crit_liklihood = CRIT_TABLE[CalculateCritStage(attacker)];
+		int crit_stage = 0;
+		crit_stage += ability.CritStage;
+		crit_stage += CalculateCritStage(attacker);
+		int crit_liklihood = CRIT_TABLE[crit_stage];
 		int rand = generator.Next(crit_liklihood);
 		
 		if (rand == 0)
@@ -69,7 +72,7 @@ public class DamageCalculations
 		
 		double same_type_multiplier = attacker.Types.Contains(ability.BattleType) ? SAME_TYPE_MULTIPLIER : 1.0;
 		
-		result.crit = WillCrit(attacker, generator);
+		result.crit = WillCrit(ability, attacker, generator);
 		double crit_multiplier = result.crit ? BASE_CRIT_MULTIPLIER : 1.0;
 		
 		double effectiveness_multiplier = getDamageMultiplier(ability.BattleType, defender.Types);

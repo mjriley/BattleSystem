@@ -29,21 +29,21 @@ public class AbilityFactory
 		m_descriptions = new AbilityDescriptionsEnglish();
 		m_abilities = new Dictionary<string, AbstractAbility>();
 		
-		AddAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 30, 40, 100, OnHitEffects.BasicEffectWrapper(BasicEffects.TargetStatModificationEffect(Stat.Speed, -1, 10))));
+		AddAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 30, 40, 100, false, OnHitEffects.BasicEffectWrapper(BasicEffects.TargetStatModificationEffect(Stat.Speed, -1, 10))));
 		AddAbility(new DamageAbility("Water Gun", AbilityType.Special, BattleType.Water, 25, 40, 100));
 		
-		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100, OnHitEffects.BurnEffect(10)));
-		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95, OnHitEffects.CompositeEffect(OnHitEffects.BurnEffect(10), OnHitEffects.FlinchEffect(10))));
+		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100, false, OnHitEffects.BurnEffect(10)));
+		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95, false, OnHitEffects.CompositeEffect(OnHitEffects.BurnEffect(10), OnHitEffects.FlinchEffect(10))));
 		
 		AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 45, 100));
-		AddAbility(new DamageAbility("Razor Leaf", AbilityType.Physical, BattleType.Grass, 25, 55, 95));
+		AddAbility(new DamageAbility("Razor Leaf", AbilityType.Physical, BattleType.Grass, 25, 55, 95, true));
 		
 		AddAbility(new DamageAbility("Tackle", AbilityType.Physical, BattleType.Normal, 35, 50, 100));
 		AddAbility(new DamageAbility("Fury Swipes", AbilityType.Physical, BattleType.Normal, 15, 18, 80));
 		AddAbility(new DamageAbility("Scratch", AbilityType.Physical, BattleType.Normal, 35, 40, 100));
 		AddAbility(new DamageAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, 10, 100));
 		AddAbility(new DamageAbility("Flail", AbilityType.Physical, BattleType.Normal, 15, 10, 100));
-		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85, OnHitEffects.RecoilEffect(25)));
+		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85, false, OnHitEffects.RecoilEffect(25)));
 		AddAbility(new EffectAbility("Growl", AbilityType.Status, BattleType.Normal, 40, BasicEffects.TargetStatModificationEffect(Stat.Attack, -1)));
 		
 		AddAbility(new DamageAbility("Rollout", AbilityType.Physical, BattleType.Rock, 20, 30, 90));

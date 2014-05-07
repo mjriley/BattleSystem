@@ -10,7 +10,10 @@ public class DamageAbility : AbstractAbility
 	private Random m_generator;
 	private OnHitEffect onHitHandler;
 	
-	public DamageAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, uint power, int accuracy, OnHitEffect onHitHandler=null, string description="", Random generator=null)
+	bool m_highCritRate;
+	public int CritStage { get { return (m_highCritRate ? 1 : 0); } }
+	
+	public DamageAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, uint power, int accuracy, bool highCritRate=false, OnHitEffect onHitHandler=null, string description="", Random generator=null)
 	: base(name, abilityType, battleType, maxPP, description)
 	{
 		Power = power;
@@ -23,6 +26,7 @@ public class DamageAbility : AbstractAbility
 		
 		m_generator = generator;
 		
+		m_highCritRate = highCritRate;
 		this.onHitHandler = onHitHandler;
 	}
 	
