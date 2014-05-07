@@ -166,6 +166,7 @@
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\LaserScope.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\SuperSimpleSelfIllumination.shader" />
      <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-01.xml" />
+     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-07.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleBlend.shader" />
      <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-05.xml" />
   </ItemGroup>

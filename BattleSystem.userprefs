@@ -1,19 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NewBattleSystem.cs">
     <Files>
-      <File FileName="Assets/Scripts/Item.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/OnHitEffects.cs" Line="24" Column="4" />
-      <File FileName="Assets/Scripts/DamageAbility.cs" Line="5" Column="27" />
-      <File FileName="Assets/Scripts/AbilityFactory.cs" Line="47" Column="144" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="454" Column="57" />
-      <File FileName="Assets/Scripts/EffectAbility.cs" Line="8" Column="2" />
-      <File FileName="Assets/Scripts/AbstractAbility.cs" Line="56" Column="1" />
-      <File FileName="Assets/Scripts/AbilityEffect.cs" Line="8" Column="9" />
-      <File FileName="Assets/Scripts/BasicEffects.cs" Line="41" Column="3" />
-      <File FileName="Assets/Scripts/Character.cs" Line="116" Column="1" />
-      <File FileName="Assets/Scripts/Stat.cs" Line="8" Column="6" />
-      <File FileName="Assets/Scripts/AbilityDescriptionsEnglish.cs" Line="25" Column="3" />
+      <File FileName="Assets/Scripts/Character.cs" Line="160" Column="2" />
+      <File FileName="Assets/Scripts/model/StatsModule.cs" Line="15" Column="44" />
+      <File FileName="Assets/Editor/Tests/CharacterTests.cs" Line="107" Column="37" />
+      <File FileName="Assets/Scripts/Stat.cs" Line="10" Column="8" />
+      <File FileName="Assets/Scripts/AbilityFactory.cs" Line="39" Column="98" />
+      <File FileName="Assets/Scripts/OnHitEffects.cs" Line="9" Column="56" />
+      <File FileName="Assets/Scripts/BasicEffects.cs" Line="19" Column="49" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="443" Column="54" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,6 +17,11 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
               <Node name="NewBattleSystem.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Editor" expanded="True">
+              <Node name="Tests" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -32,7 +33,13 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Tests" expanded="True">
+              <Node name="CharacterTests" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

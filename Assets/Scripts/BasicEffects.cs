@@ -1,9 +1,21 @@
+using System;
+
 public class BasicEffects
 {
-	public static EffectAbility.BasicEffect TargetStatModificationEffect(Stat stat, int stage_change)
+	public static EffectAbility.BasicEffect TargetStatModificationEffect(Stat stat, int stage_change, int percent=100, Random generator=null)
 	{
+		if (generator == null)
+		{
+			generator = new Random();
+		}
+		
 		return delegate(AbstractAbility ability, Character actor, Player targetPlayer, ref ActionStatus status)
 		{
+			if (generator.Next(0, 100) >= percent)
+			{
+				return;
+			}
+			
 			Character target = targetPlayer.ActivePokemon;
 			int actual_change = target.ModifyStage(Stat.Attack, stage_change);
 			

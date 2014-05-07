@@ -29,11 +29,11 @@ public class AbilityFactory
 		m_descriptions = new AbilityDescriptionsEnglish();
 		m_abilities = new Dictionary<string, AbstractAbility>();
 		
-		AddAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 30, 40, 100));
+		AddAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 30, 40, 100, OnHitEffects.BasicEffectWrapper(BasicEffects.TargetStatModificationEffect(Stat.Speed, -1, 10))));
 		AddAbility(new DamageAbility("Water Gun", AbilityType.Special, BattleType.Water, 25, 40, 100));
 		
 		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100, OnHitEffects.BurnEffect(10)));
-		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95));
+		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95, OnHitEffects.CompositeEffect(OnHitEffects.BurnEffect(10), OnHitEffects.FlinchEffect(10))));
 		
 		AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 45, 100));
 		AddAbility(new DamageAbility("Razor Leaf", AbilityType.Physical, BattleType.Grass, 25, 55, 95));

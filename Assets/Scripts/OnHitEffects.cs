@@ -1,7 +1,46 @@
 using System;
+using System.Collections.Generic;
 
 public class OnHitEffects
 {
+	public static DamageAbility.OnHitEffect CompositeEffect(params DamageAbility.OnHitEffect[] effects)
+	{
+		return delegate(DamageAbility ability, int damage, Character attacker, Character defender, ref ActionStatus status)
+		{
+			foreach (DamageAbility.OnHitEffect effect in effects)
+			{
+				effect(ability, damage, attacker, defender, ref status);
+			}
+		};
+	}
+	
+
+	public static DamageAbility.OnHitEffect BasicEffectWrapper(EffectAbility.BasicEffect effect)
+	{
+		return delegate(DamageAbility ability, int damage, Character attacker, Character defender, ref ActionStatus status)
+		{
+			return effect(ability, attacker, defender.Owner, ref status);
+		};
+	}
+	
+	public static DamageAbility.OnHitEffect FlinchEffect(int percent, Random generator=null)
+	{
+		if (generator == null)
+		{
+			generator = new Random();
+		}	
+		
+		return delegate(DamageAbility ability, int damage, Character attacker, Character defender, ref ActionStatus status)
+		{
+			if (generator.Next(100) >= percent)
+			{
+				return;
+			}
+			
+			defender.Flinching = true;
+		};
+	}
+	
 	public static DamageAbility.OnHitEffect BurnEffect(int percent, Random generator=null)
 	{
 		if (generator == null)

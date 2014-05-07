@@ -233,6 +233,9 @@ public class Character
 	public bool Paralyzed { get; set; }
 	public bool Poisoned { get; set; }
 	
+	// temporary statuses
+	public bool Flinching { get; set; }
+	
 	private int m_numTurnsSleeping = 0;	
 	public bool IsSleeping()
 	{
@@ -254,6 +257,8 @@ public class Character
 		Paralyzed = false;
 		Poisoned = false;
 		m_numTurnsSleeping = 0;
+		
+		Flinching = false;
 	}
 	
 	public List<string> CompleteTurn()

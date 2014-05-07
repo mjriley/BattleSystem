@@ -36,6 +36,16 @@ public abstract class AbstractAbility
 			return status;
 		}
 		
+		if (actor.Flinching)
+		{
+			status.turnComplete = true;
+			status.isComplete = true;
+			
+			status.events.Add(new StatusUpdateEventArgs(actor.Name + " flinched and couldn't move!"));
+			
+			return status;
+		}
+		
 		status.events.Add(new StatusUpdateEventArgs(actor.Name + " used " + Name + "!"));
 		
 		DeductPP();

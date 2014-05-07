@@ -449,9 +449,9 @@ public class NewBattleSystem
 		//pikachu.addAbility(new Ability("Vine Whip", BattleType.Grass, 35, 100, 10));
 		//pikachu.addAbility(AbilityFactory)
 		//pikachu.addAbility(AbilityFactory.GetAbility("Fury Swipes"));
-		pikachu.addAbility(AbilityFactory.GetAbility("Take Down"));
+		pikachu.addAbility(AbilityFactory.GetAbility("Bubble"));
 		//pikachu.addAbility(AbilityFactory.GetAbility("Bubble"));
-		pikachu.addAbility(AbilityFactory.GetAbility("Growl"));
+		pikachu.addAbility(AbilityFactory.GetAbility("Fire Fang"));
 		pikachu.addAbility(AbilityFactory.GetAbility("Ember"));
 		pikachu.addAbility(AbilityFactory.GetAbility("Vine Whip"));
 		
