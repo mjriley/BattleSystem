@@ -44,6 +44,7 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, 10, 100));
 		AddAbility(new DamageAbility("Flail", AbilityType.Physical, BattleType.Normal, 15, 10, 100));
 		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85, OnHitEffects.RecoilEffect(25)));
+		AddAbility(new EffectAbility("Growl", AbilityType.Status, BattleType.Normal, 40, BasicEffects.TargetStatModificationEffect(Stat.Attack, -1)));
 		
 		AddAbility(new DamageAbility("Rollout", AbilityType.Physical, BattleType.Rock, 20, 30, 90));
 		

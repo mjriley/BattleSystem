@@ -12,6 +12,8 @@ public class Character
 		Female
 	}
 	
+	public Dictionary<Stat, int> m_stages = new Dictionary<Stat, int>();
+	
 	// stats
 	public int Atk { get; set; }
 	public int Def { get; set; }
@@ -19,6 +21,9 @@ public class Character
 	public int SpDef { get; set; }
 	public int Spd { get; set; }
 	public uint Level { get; set; }
+	
+	public const int MAX_STAGE = 6;
+	public const int MIN_STAGE = -6;
 	
 	private int m_maxHP;
 	private int m_currentHP;
@@ -91,6 +96,8 @@ public class Character
 		
 		ClearStatuses();
 		InitStats();
+		
+		ResetStages();
 	}
 	
 	private void InitStats()
@@ -105,6 +112,39 @@ public class Character
 	public void Reset()
 	{
 		m_currentHP = m_maxHP;
+	}
+	
+	public void ResetStages()
+	{
+		m_stages.Clear();
+		
+		m_stages[Stat.Attack] = 0;
+		m_stages[Stat.Defense] = 0;
+		m_stages[Stat.SpecialAttack] = 0;
+		m_stages[Stat.SpecialDefense] = 0;
+		m_stages[Stat.Speed] = 0;
+	}
+	
+	// attempts to modify the indicated stat's stage by the specified amount, returns the actual change
+	// (change may be less than requested)
+	public int ModifyStage(Stat stat, int amount)
+	{
+		int new_value = m_stages[stat] + amount;
+		
+		if (new_value > MAX_STAGE)
+		{
+			new_value = MAX_STAGE;
+		}
+		else if (new_value < MIN_STAGE)
+		{
+			new_value = MIN_STAGE;
+		}
+		
+		int difference = new_value - m_stages[stat];
+		
+		m_stages[stat] = new_value;
+		
+		return difference;
 	}
 	
 	public void TakeDamage(int damage)

@@ -20,8 +20,8 @@ public class AbilityDescriptionsEnglish : IAbilityDescriptions
 		descriptions["Splash"] = "The user just flops and splashes around to no effect at all...";
 		descriptions["Flail"] = "The user flails about aimlessly to attack. It becomes more powerful the less HP the user has.";
 		descriptions["Take Down"] = "A reckless, full-body charge attack for slamming into the target. It also damages the user a little.";
+		descriptions["Growl"] = "The user growls in an endearing way, making opposing Pokemon less wary. This lowers their Attack stats.";
 		
-		descriptions["Growl" ] = "The user growls in an endearing way, making the opposing team less wary. The foes' Attack stats are lowered.";
 		descriptions["Rollout"] = "The user continually rolls into the target over five turns. It becomes stronger each time it hits.";
 		descriptions["Bite"] = "The target is bitten with viciously sharp fangs. It may make the target flinch.";
 		descriptions["Water Gun"] = "The target is blasted with a forceful shot of water.";
