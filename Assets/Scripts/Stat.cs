@@ -5,5 +5,7 @@ public enum Stat
 	Defense,
 	SpecialAttack,
 	SpecialDefense,
-	Speed
+	Speed,
+	Accuracy,
+	Evasion
 }

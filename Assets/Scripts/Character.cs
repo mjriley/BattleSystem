@@ -12,14 +12,18 @@ public class Character
 		Female
 	}
 	
+	public Dictionary<Stat, int> m_baseStats = new Dictionary<Stat, int>();
 	public Dictionary<Stat, int> m_stages = new Dictionary<Stat, int>();
 	
 	// stats
-	public int Atk { get; set; }
-	public int Def { get; set; }
-	public int SpAtk { get; set; }
-	public int SpDef { get; set; }
-	public int Spd { get; set; }
+	
+	public int Atk { get { return GetCurrentStatValue(Stat.Attack); } }
+	public int Def { get { return GetCurrentStatValue(Stat.Defense); } }
+	public int SpAtk { get { return GetCurrentStatValue(Stat.SpecialAttack); } }
+	public int SpDef { get { return GetCurrentStatValue(Stat.SpecialDefense); } }
+	public int Spd { get { return GetCurrentStatValue(Stat.Speed); } }
+	public int Accuracy { get { return GetCurrentStatValue(Stat.Accuracy); } }
+	public int Evasion { get { return GetCurrentStatValue(Stat.Evasion); } }
 	public uint Level { get; set; }
 	
 	public const int MAX_STAGE = 6;
@@ -102,11 +106,11 @@ public class Character
 	
 	private void InitStats()
 	{
-		Atk = 50;
-		Def = 50;
-		SpAtk = 50;
-		SpDef = 50;
-		Spd = 50;
+		m_baseStats[Stat.Attack] = 50;
+		m_baseStats[Stat.Defense] = 50;
+		m_baseStats[Stat.SpecialAttack] = 50;
+		m_baseStats[Stat.SpecialDefense] = 50;
+		m_baseStats[Stat.Speed] = 50;
 	}
 	
 	public void Reset()
@@ -123,6 +127,38 @@ public class Character
 		m_stages[Stat.SpecialAttack] = 0;
 		m_stages[Stat.SpecialDefense] = 0;
 		m_stages[Stat.Speed] = 0;
+		
+		m_stages[Stat.Accuracy] = 0;
+		m_stages[Stat.Evasion] = 0;
+	}
+	
+	// accuracy stat is whether the stat pertains to accuracy (i.e. accuracy/evasion)
+	private double CalculateStageMultiplier(int level, bool accuracyStat)
+	{
+		int numerator = (accuracyStat) ? 3 : 2;
+		int denominator = (accuracyStat) ? 3 : 2;
+		
+		if (level < 0)
+		{
+			denominator -= level;
+		}
+		else if (level > 0)
+		{
+			numerator += level;
+		}
+		
+		return (double)numerator / (double)denominator;
+	}
+	
+	static Stat[] AccuracyStats = new Stat[] { Stat.Accuracy, Stat.Evasion };
+	public int GetCurrentStatValue(Stat stat)
+	{
+		bool accuracyStat = AccuracyStats.Contains(stat);
+		int baseStat = (accuracyStat) ? 100 : m_baseStats[stat];
+		
+		double computedStat = baseStat * CalculateStageMultiplier(m_stages[stat], accuracyStat);
+		
+		return (int)computedStat;
 	}
 	
 	// attempts to modify the indicated stat's stage by the specified amount, returns the actual change
