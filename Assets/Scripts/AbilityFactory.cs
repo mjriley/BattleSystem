@@ -40,7 +40,7 @@ public class AbilityFactory
 		
 		AddAbility(new DamageAbility("Tackle", AbilityType.Physical, BattleType.Normal, 35, 50, 100));
 		// TODO: Make fury swipes multi-hit
-		AddAbility(new DamageAbility("Fury Swipes", AbilityType.Physical, BattleType.Normal, 15, 18, 80));
+		AddAbility(new MultiHitAbility("Fury Swipes", AbilityType.Physical, BattleType.Normal, 15, 18, 80, 2, 5));
 		AddAbility(new DamageAbility("Scratch", AbilityType.Physical, BattleType.Normal, 35, 40, 100));
 		AddAbility(new NoOpAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, "But nothing happened!"));
 		// TODO: Add a variable power ability for flail

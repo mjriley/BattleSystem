@@ -7,7 +7,7 @@ public class DamageAbility : AbstractAbility
 	public uint Power { get; protected set; }
 	public int Accuracy { get; protected set; }
 	
-	private Random m_generator;
+	protected Random m_generator;
 	private OnHitEffect onHitHandler;
 	
 	bool m_highCritRate;
@@ -46,11 +46,7 @@ public class DamageAbility : AbstractAbility
 		DamageResult result = ApplyDamage(attacker, defender, ref status);
 		
 		HandleTargetDeath(defender, ref status);
-		
-		if (onHitHandler != null)
-		{
-			onHitHandler(this, result.amount, attacker, defender, ref status);
-		}
+		HandleOnHit(attacker, defender, result, ref status);
 		
 		status.turnComplete = true;
 		status.isComplete = true;
@@ -90,6 +86,14 @@ public class DamageAbility : AbstractAbility
 		status.events.Add(new DamageEventArgs(defender.Owner, result.amount));
 		
 		return result;
+	}
+	
+	protected void HandleOnHit(Character attacker, Character defender, DamageResult result, ref ActionStatus status)
+	{
+		if (onHitHandler != null)
+		{
+			onHitHandler(this, result.amount, attacker, defender, ref status);
+		}
 	}
 	
 	protected void HandleTargetDeath(Character target, ref ActionStatus status)
