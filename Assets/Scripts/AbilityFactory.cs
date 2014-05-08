@@ -35,7 +35,8 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100, false, OnHitEffects.BurnEffect(10)));
 		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95, false, OnHitEffects.CompositeEffect(OnHitEffects.BurnEffect(10), OnHitEffects.FlinchEffect(10))));
 		
-		AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 45, 100));
+		AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 120, 100));
+		//AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 45, 100));
 		AddAbility(new DamageAbility("Razor Leaf", AbilityType.Physical, BattleType.Grass, 25, 55, 95, true));
 		
 		AddAbility(new DamageAbility("Tackle", AbilityType.Physical, BattleType.Normal, 35, 50, 100));

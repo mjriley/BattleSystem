@@ -297,7 +297,7 @@ public class NewBattleSystem
 					if (m_userPlayer.IsDefeated())
 					{
 						AddStatusMessage("You've lost!");
-						m_nextState = State.CombatIntro;
+						m_nextState = State.Splash;
 					}
 					else
 					{
@@ -309,7 +309,7 @@ public class NewBattleSystem
 					if (m_enemyPlayer.IsDefeated())
 					{
 						AddStatusMessage("You've won!");
-						m_nextState = State.CombatIntro;
+						m_nextState = State.Splash;
 					}
 					else
 					{

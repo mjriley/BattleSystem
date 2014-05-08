@@ -84,6 +84,7 @@ public class DamageAbility : AbstractAbility
 		}
 		
 		status.events.Add(new DamageEventArgs(defender.Owner, result.amount));
+		defender.TakeDamage(result.amount);
 		
 		return result;
 	}

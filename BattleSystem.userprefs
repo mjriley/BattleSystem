@@ -2,14 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NewBattleSystem.cs">
     <Files>
-      <File FileName="Assets/Scripts/Character.cs" Line="160" Column="2" />
-      <File FileName="Assets/Scripts/model/StatsModule.cs" Line="15" Column="44" />
-      <File FileName="Assets/Editor/Tests/CharacterTests.cs" Line="107" Column="37" />
-      <File FileName="Assets/Scripts/Stat.cs" Line="10" Column="8" />
-      <File FileName="Assets/Scripts/AbilityFactory.cs" Line="39" Column="98" />
-      <File FileName="Assets/Scripts/OnHitEffects.cs" Line="9" Column="56" />
-      <File FileName="Assets/Scripts/BasicEffects.cs" Line="19" Column="49" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="443" Column="54" />
+      <File FileName="Assets/Scripts/AbstractAbility.cs" Line="49" Column="83" />
+      <File FileName="Assets/Scripts/AbilityFactory.cs" Line="38" Column="91" />
+      <File FileName="Assets/Scripts/DamageAbility.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="313" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -33,13 +29,7 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Tests" expanded="True">
-              <Node name="CharacterTests" selected="True" />
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
