@@ -39,19 +39,22 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Razor Leaf", AbilityType.Physical, BattleType.Grass, 25, 55, 95, true));
 		
 		AddAbility(new DamageAbility("Tackle", AbilityType.Physical, BattleType.Normal, 35, 50, 100));
+		// TODO: Make fury swipes multi-hit
 		AddAbility(new DamageAbility("Fury Swipes", AbilityType.Physical, BattleType.Normal, 15, 18, 80));
 		AddAbility(new DamageAbility("Scratch", AbilityType.Physical, BattleType.Normal, 35, 40, 100));
-		AddAbility(new DamageAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, 10, 100));
+		AddAbility(new NoOpAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, "But nothing happened!"));
+		// TODO: Add a variable power ability for flail
 		AddAbility(new DamageAbility("Flail", AbilityType.Physical, BattleType.Normal, 15, 10, 100));
 		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85, false, OnHitEffects.RecoilEffect(25)));
 		AddAbility(new EffectAbility("Growl", AbilityType.Status, BattleType.Normal, 40, BasicEffects.TargetStatModificationEffect(Stat.Attack, -1)));
 		
+		// TODO: Add a sequence move
 		AddAbility(new DamageAbility("Rollout", AbilityType.Physical, BattleType.Rock, 20, 30, 90));
 		
+		// TODO: Add a fixed amage move
 		AddAbility(new DamageAbility("Dragon Rage", AbilityType.Special, BattleType.Dragon, 10, 40, 100));
 		
-		
-		AddAbility(new DamageAbility("Bite", AbilityType.Physical, BattleType.Dark, 25, 60, 100));
+		AddAbility(new DamageAbility("Bite", AbilityType.Physical, BattleType.Dark, 25, 60, 100, false, OnHitEffects.FlinchEffect(30)));
 		
 		
 //		// Fire
