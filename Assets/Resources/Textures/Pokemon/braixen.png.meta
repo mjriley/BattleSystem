@@ -1,0 +1,414 @@
+fileFormatVersion: 2
+guid: cdb4f557c536749a18cc4f620e54a40f
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: braixen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_5
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_6
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_8
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_9
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_10
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_11
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_12
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_13
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_14
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_15
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_16
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_17
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_18
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_19
+      rect:
+        serializedVersion: 2
+        x: 1406
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_20
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_21
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_22
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_23
+      rect:
+        serializedVersion: 2
+        x: 1702
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_24
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_25
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_26
+      rect:
+        serializedVersion: 2
+        x: 1924
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_27
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_28
+      rect:
+        serializedVersion: 2
+        x: 2072
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_29
+      rect:
+        serializedVersion: 2
+        x: 2146
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_30
+      rect:
+        serializedVersion: 2
+        x: 2220
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_31
+      rect:
+        serializedVersion: 2
+        x: 2294
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_32
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_33
+      rect:
+        serializedVersion: 2
+        x: 2442
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_34
+      rect:
+        serializedVersion: 2
+        x: 2516
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_35
+      rect:
+        serializedVersion: 2
+        x: 2590
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_36
+      rect:
+        serializedVersion: 2
+        x: 2664
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_37
+      rect:
+        serializedVersion: 2
+        x: 2738
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_38
+      rect:
+        serializedVersion: 2
+        x: 2812
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_39
+      rect:
+        serializedVersion: 2
+        x: 2886
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: braixen_40
+      rect:
+        serializedVersion: 2
+        x: 2960
+        y: 0
+        width: 74
+        height: 86
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

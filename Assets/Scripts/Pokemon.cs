@@ -5,12 +5,24 @@ using UnityEngine;
 	{
 		public enum Species
 		{
+			Chespin,
+			Quilladin,
+			Chesnaught,
+			Fennekin,
+			Braixen,
+			Delphox,
+			Froakie,
+			Frogadier,
+			Greninja,
+			Bunnelby,
+			Diggersby,
+			Zigzagoon,
 			Bulbasaur,
 			Charmander,
-			Chespin,
 			Magikarp,
 			Pikachu,
-			Squirtle
+			Squirtle,
+			None
 		};
 		
 		public static Texture2D GetThumbnail(Species species)

@@ -1,0 +1,486 @@
+fileFormatVersion: 2
+guid: e806cef7294954fe8af1d017347dbd4e
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: diggersby_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_1
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_2
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_3
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_4
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_5
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_6
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_7
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_8
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_9
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_10
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_11
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_12
+      rect:
+        serializedVersion: 2
+        x: 1452
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_13
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_14
+      rect:
+        serializedVersion: 2
+        x: 1694
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_15
+      rect:
+        serializedVersion: 2
+        x: 1815
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_16
+      rect:
+        serializedVersion: 2
+        x: 1936
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_17
+      rect:
+        serializedVersion: 2
+        x: 2057
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_18
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_19
+      rect:
+        serializedVersion: 2
+        x: 2299
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_20
+      rect:
+        serializedVersion: 2
+        x: 2420
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_21
+      rect:
+        serializedVersion: 2
+        x: 2541
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_22
+      rect:
+        serializedVersion: 2
+        x: 2662
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_23
+      rect:
+        serializedVersion: 2
+        x: 2783
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_24
+      rect:
+        serializedVersion: 2
+        x: 2904
+        y: 105
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_26
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_27
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_28
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_29
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_30
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_31
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_32
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_33
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_34
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_35
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_36
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_37
+      rect:
+        serializedVersion: 2
+        x: 1452
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_38
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_39
+      rect:
+        serializedVersion: 2
+        x: 1694
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_40
+      rect:
+        serializedVersion: 2
+        x: 1815
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_41
+      rect:
+        serializedVersion: 2
+        x: 1936
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_42
+      rect:
+        serializedVersion: 2
+        x: 2057
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_43
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_44
+      rect:
+        serializedVersion: 2
+        x: 2299
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_45
+      rect:
+        serializedVersion: 2
+        x: 2420
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_46
+      rect:
+        serializedVersion: 2
+        x: 2541
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_47
+      rect:
+        serializedVersion: 2
+        x: 2662
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: diggersby_48
+      rect:
+        serializedVersion: 2
+        x: 2783
+        y: 0
+        width: 121
+        height: 105
+      alignment: 7
+      pivot: {x: .5, y: 0}
+  spritePackingTag: 
+  userData: 

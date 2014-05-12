@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 48969e519e9ee4ccda41111c9196ecff
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: delphox_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_1
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_2
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_3
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_4
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_5
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_6
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_7
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_8
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_9
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_10
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_11
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_12
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_13
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_14
+      rect:
+        serializedVersion: 2
+        x: 1330
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_15
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_16
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_17
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_18
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_19
+      rect:
+        serializedVersion: 2
+        x: 1805
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_20
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_21
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_22
+      rect:
+        serializedVersion: 2
+        x: 2090
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_23
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_24
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_25
+      rect:
+        serializedVersion: 2
+        x: 2375
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_26
+      rect:
+        serializedVersion: 2
+        x: 2470
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_27
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_28
+      rect:
+        serializedVersion: 2
+        x: 2660
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_29
+      rect:
+        serializedVersion: 2
+        x: 2755
+        y: 110
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_31
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_32
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_33
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_34
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_35
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_36
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_37
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_38
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_39
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_40
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_41
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_42
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_43
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_44
+      rect:
+        serializedVersion: 2
+        x: 1330
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_45
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_46
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_47
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_48
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_49
+      rect:
+        serializedVersion: 2
+        x: 1805
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_50
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_51
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_52
+      rect:
+        serializedVersion: 2
+        x: 2090
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_53
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_54
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_55
+      rect:
+        serializedVersion: 2
+        x: 2375
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_56
+      rect:
+        serializedVersion: 2
+        x: 2470
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_57
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_58
+      rect:
+        serializedVersion: 2
+        x: 2660
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: delphox_59
+      rect:
+        serializedVersion: 2
+        x: 2755
+        y: 0
+        width: 95
+        height: 110
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

@@ -1,0 +1,270 @@
+fileFormatVersion: 2
+guid: 5ba9a64e4cda84f96aa97c05b5e766bd
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: fennekin_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_2
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_3
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_4
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_5
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_6
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_7
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_8
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_9
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_10
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_11
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_12
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_13
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_14
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_15
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_16
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_17
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_18
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_19
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_20
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_21
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_22
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_23
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: fennekin_24
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 0
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

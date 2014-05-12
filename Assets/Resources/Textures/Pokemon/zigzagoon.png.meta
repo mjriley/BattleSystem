@@ -1,0 +1,477 @@
+fileFormatVersion: 2
+guid: 9e492550ae2ed4e5d8f28faf602318ec
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: zigzagoon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_8
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_9
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_10
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_11
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_12
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_13
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_14
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_15
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_16
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_17
+      rect:
+        serializedVersion: 2
+        x: 1105
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_18
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_19
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_20
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_21
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_22
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_23
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_24
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_25
+      rect:
+        serializedVersion: 2
+        x: 1625
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_26
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_27
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_28
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_29
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_30
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_31
+      rect:
+        serializedVersion: 2
+        x: 2015
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_32
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_33
+      rect:
+        serializedVersion: 2
+        x: 2145
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_34
+      rect:
+        serializedVersion: 2
+        x: 2210
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_35
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_36
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_37
+      rect:
+        serializedVersion: 2
+        x: 2405
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_38
+      rect:
+        serializedVersion: 2
+        x: 2470
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_39
+      rect:
+        serializedVersion: 2
+        x: 2535
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_40
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_41
+      rect:
+        serializedVersion: 2
+        x: 2665
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_42
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_43
+      rect:
+        serializedVersion: 2
+        x: 2795
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_44
+      rect:
+        serializedVersion: 2
+        x: 2860
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_45
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_46
+      rect:
+        serializedVersion: 2
+        x: 2990
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: zigzagoon_47
+      rect:
+        serializedVersion: 2
+        x: 3055
+        y: 0
+        width: 65
+        height: 47
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

@@ -1,0 +1,306 @@
+fileFormatVersion: 2
+guid: d45410028c53b42d48a6a07ccab4fecb
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: froakie_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_2
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_3
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_4
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_5
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_6
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_7
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_8
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_9
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_10
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_11
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_12
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_13
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_14
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_15
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_16
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_17
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_18
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_19
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_20
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_21
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_22
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_23
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_24
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_25
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_26
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_27
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: froakie_28
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 0
+        width: 45
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

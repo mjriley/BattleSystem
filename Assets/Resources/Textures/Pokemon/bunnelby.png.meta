@@ -1,0 +1,468 @@
+fileFormatVersion: 2
+guid: e58c42605449e41318e44173d67a6f45
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: bunnelby_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_13
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_14
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_17
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_19
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_20
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_21
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_22
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_23
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_24
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_25
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_26
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_27
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_28
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_29
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_30
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_31
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_32
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_33
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_34
+      rect:
+        serializedVersion: 2
+        x: 2176
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_35
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_36
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_37
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_38
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_39
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_40
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_41
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_42
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_43
+      rect:
+        serializedVersion: 2
+        x: 2752
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_44
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_45
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: bunnelby_46
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 0
+        width: 64
+        height: 92
+      alignment: 7
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

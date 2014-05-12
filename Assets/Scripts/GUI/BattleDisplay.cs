@@ -45,12 +45,17 @@ public class BattleDisplay : MonoBehaviour
 	Texture2D m_backButtonDownTexture;
 	GUIStyle m_backButtonStyle;
 	
+	Texture2D m_basicTexture;
+	
 	public GUIStyle typeNameStyle;
 	public GUIStyle abilityNameStyle;
 	public GUIStyle abilityDetailsStyle;
 	public GUIStyle buttonStyle;
 	
 	Rect m_screenArea;
+	
+	Rect m_topScreen = new Rect(0, 0, 400, 240);
+	Rect m_bottomScreen = new Rect(0, 240, 400, 240);
 	
 	public delegate void AnimationCallback(MonoBehaviour script);
 	
@@ -69,6 +74,7 @@ public class BattleDisplay : MonoBehaviour
 	
 	public void Start()
 	{
+		m_basicTexture = Resources.Load<Texture2D>("Textures/metal");
 		m_audio = gameObject.GetComponent<AudioSource>();
 		m_damageSound = Resources.Load<AudioClip>("SoundEffects/attack_sound");
 		
@@ -274,7 +280,9 @@ public class BattleDisplay : MonoBehaviour
 		
 		if (m_system.CurrentState == NewBattleSystem.State.CombatPrompt)
 		{
-			GUI.BeginGroup(m_screenArea);
+			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
+				GUI.DrawTexture(new Rect(0.0f, 0.0f, m_screenArea.width, m_screenArea.height), m_basicTexture);
+				//GUI.color = prevColor;
 				if (GUI.Button(new Rect((m_screenArea.width - fightButtonWidth) / 2.0f, 0.0f, fightButtonWidth, fightButtonHeight), "", m_fightButtonStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Fight);
@@ -298,11 +306,11 @@ public class BattleDisplay : MonoBehaviour
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Pokemon);
 					DoneWithText();
 				}
-			GUI.EndGroup();
+			});
 		}
 		else if (m_system.CurrentState == NewBattleSystem.State.EnemyPokemonDefeated)
 		{
-			GUI.BeginGroup(m_screenArea);
+			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
 				if (GUI.Button(new Rect(m_screenArea.width / 4, 0, m_screenArea.width / 2, 90), "Switch Pokemon"))
 				{
 					m_system.ProcessUserChoice(1);
@@ -313,7 +321,7 @@ public class BattleDisplay : MonoBehaviour
 					m_system.ProcessUserChoice(-2);
 					DoneWithText();
 				}
-			GUI.EndGroup();
+			});
 		}
 		else if (m_system.CurrentState == NewBattleSystem.State.ReplacePokemon)
 		{
@@ -326,7 +334,7 @@ public class BattleDisplay : MonoBehaviour
 			m_system.CurrentState == NewBattleSystem.State.ItemPrompt ||
 			m_system.CurrentState == NewBattleSystem.State.PokemonPrompt)
 		{
-			GUI.BeginGroup(m_screenArea);
+			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
 				if (m_system.CurrentState == NewBattleSystem.State.FightPrompt)
 				{
 					Character pokemon = m_system.UserPlayer.ActivePokemon;
@@ -363,11 +371,14 @@ public class BattleDisplay : MonoBehaviour
 				}
 
 				DisplayBackButton();
-			GUI.EndGroup();
+			});
 		}
 	
-		GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
-		GUI.Box(new Rect(0, Screen.height - statusHeight, Screen.width, statusHeight), m_statusText, statusStyle);
+		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds) {
+			GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
+			GUI.Box(new Rect(0, bounds.height - statusHeight, bounds.width, statusHeight), m_statusText, statusStyle);
+		});
+		
 	}
 	
 	private void HandleBattleEvents(object sender, EventArgs e)
