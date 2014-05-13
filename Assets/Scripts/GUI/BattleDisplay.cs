@@ -25,19 +25,15 @@ public class BattleDisplay : MonoBehaviour
 	bool m_ready = true;
 	string m_statusText = "";
 	
-	Texture2D m_fightButtonTexture;
 	Texture2D m_fightButtonDownTexture;
 	GUIStyle m_fightButtonStyle;
 	
-	Texture2D m_bagButtonTexture;
 	Texture2D m_bagButtonDownTexture;
 	GUIStyle m_bagButtonStyle;
 	
-	Texture2D m_pokemonButtonTexture;
 	Texture2D m_pokemonButtonDownTexture;
 	GUIStyle m_pokemonButtonStyle;
 	
-	Texture2D m_runButtonTexture;
 	Texture2D m_runButtonDownTexture;
 	GUIStyle m_runButtonStyle;
 	
@@ -46,6 +42,18 @@ public class BattleDisplay : MonoBehaviour
 	GUIStyle m_backButtonStyle;
 	
 	Texture2D m_basicTexture;
+	Texture2D m_topBarTexture;
+	Texture2D m_bottomBarTexture;
+	
+	Texture2D m_fightButtonTexture;
+	Texture2D m_bagButtonShadowTexture;
+	Texture2D m_bagButtonTexture;
+	Texture2D m_runButtonShadowTexture;
+	Texture2D m_runButtonTexture;
+	Texture2D m_pokemonButtonShadowTexture;
+	Texture2D m_pokemonButtonTexture;
+	
+	Texture2D m_buttonLayoutTexture;
 	
 	public GUIStyle typeNameStyle;
 	public GUIStyle abilityNameStyle;
@@ -74,7 +82,23 @@ public class BattleDisplay : MonoBehaviour
 	
 	public void Start()
 	{
-		m_basicTexture = Resources.Load<Texture2D>("Textures/metal");
+		m_basicTexture = Resources.Load<Texture2D>("Textures/OptionBackground");
+		m_topBarTexture = Resources.Load<Texture2D>("Textures/bottomScreenTopEdge");
+		m_bottomBarTexture = Resources.Load<Texture2D>("Textures/bottomScreenEdge");
+		
+		m_fightButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/Fight");
+		
+		m_bagButtonShadowTexture = Resources.Load<Texture2D>("Textures/Buttons/BagShadow");
+		m_bagButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/Bag");
+		
+		m_runButtonShadowTexture = Resources.Load<Texture2D>("Textures/Buttons/RunShadow");
+		m_runButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/Run");
+		
+		m_pokemonButtonShadowTexture = Resources.Load<Texture2D>("Textures/Buttons/PokemonShadow");
+		m_pokemonButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/Pokemon");
+		
+		m_buttonLayoutTexture = Resources.Load<Texture2D>("Textures/ButtonLayout");
+		
 		m_audio = gameObject.GetComponent<AudioSource>();
 		m_damageSound = Resources.Load<AudioClip>("SoundEffects/attack_sound");
 		
@@ -92,30 +116,6 @@ public class BattleDisplay : MonoBehaviour
 		m_system.BattleProgress += HandleBattleEvents;
 		m_system.EnterState += HandleEnterState;
 		m_system.LeaveState += HandleLeaveState;
-		
-		m_fightButtonTexture = Resources.Load<Texture2D>("Textures/FightButton");
-		m_fightButtonDownTexture = Resources.Load<Texture2D>("Textures/FightButtonDown");
-		m_fightButtonStyle = new GUIStyle();
-		m_fightButtonStyle.normal.background = m_fightButtonTexture;
-		m_fightButtonStyle.active.background = m_fightButtonDownTexture;
-		
-		m_bagButtonTexture = Resources.Load<Texture2D>("Textures/BagButton");
-		m_bagButtonDownTexture = Resources.Load<Texture2D>("Textures/BagButtonDown");
-		m_bagButtonStyle = new GUIStyle();
-		m_bagButtonStyle.normal.background = m_bagButtonTexture;
-		m_bagButtonStyle.active.background = m_bagButtonDownTexture;
-		
-		m_pokemonButtonTexture = Resources.Load<Texture2D>("Textures/PokemonButton");
-		m_pokemonButtonDownTexture = Resources.Load<Texture2D>("Textures/PokemonButtonDown");
-		m_pokemonButtonStyle = new GUIStyle();
-		m_pokemonButtonStyle.normal.background = m_pokemonButtonTexture;
-		m_pokemonButtonStyle.active.background = m_pokemonButtonDownTexture;
-		
-		m_runButtonTexture = Resources.Load<Texture2D>("Textures/RunButton");
-		m_runButtonDownTexture = Resources.Load<Texture2D>("Textures/RunButtonDown");
-		m_runButtonStyle = new GUIStyle();
-		m_runButtonStyle.normal.background = m_runButtonTexture;
-		m_runButtonStyle.active.background = m_runButtonDownTexture;
 		
 		m_backButtonTexture = Resources.Load<Texture2D>("Textures/BackButton");
 		m_backButtonDownTexture = Resources.Load<Texture2D>("Textures/BackButtonDown");
@@ -200,23 +200,11 @@ public class BattleDisplay : MonoBehaviour
 		}
 	}
 	
-	public int fightButtonWidth = 100;
-	public int fightButtonHeight = 100;
-	
-	public int sideButtonWidth = 100;
-	public int sideButtonHeight = 100;
-	
-	public int midButtonWidth = 100;
-	public int midButtonHeight = 100;
-	
-	public int backButtonWidth = 100;
-	public int backButtonHeight = 100;
-	
 	public int areaY = 100;
 	
 	public int abilityButtonGapX = 10;
 	public int abilityButtonGapY = 10;
-	public int abilityButtonHeight = 90;
+	public int abilityButtonHeight = 60;
 	
 	public GUIStyle m_playerNameStyle;
 	
@@ -273,35 +261,66 @@ public class BattleDisplay : MonoBehaviour
 		}
 	}
 	
+	
+	public Texture2D m_solidTexture;
+	public int m_topBarHeight = 40;
+	public int m_abilityVGap = 20;
+	
+	public int m_fightButtonGap = 2;
+	
+	GUIStyle m_emptyStyle = new GUIStyle();
+	
 	void OnGUI()
 	{
+		Color prevColor;
 		m_playerStatusDisplay.Display(m_playerNameStyle);
 		m_enemyStatusDisplay.Display(m_playerNameStyle);
+		
 		
 		if (m_system.CurrentState == NewBattleSystem.State.CombatPrompt)
 		{
 			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
+				Rect bagRect = new Rect(0.0f, bounds.height - m_bagButtonTexture.height, m_bagButtonTexture.width, m_bagButtonTexture.height);
+				Rect runRect = new Rect((bounds.width - m_runButtonTexture.width) / 2.0f, bounds.height - m_runButtonTexture.height, m_runButtonTexture.width, m_runButtonTexture.height);
+				Rect pokemonRect = new Rect(bounds.width - m_pokemonButtonTexture.width, bounds.height - m_pokemonButtonTexture.height, m_pokemonButtonTexture.width, m_pokemonButtonTexture.height);
+			
 				GUI.DrawTexture(new Rect(0.0f, 0.0f, m_screenArea.width, m_screenArea.height), m_basicTexture);
+				
+				// top bar
+				GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, m_topBarTexture.height), m_topBarTexture);
+				
+				// button shadows
+				GUI.DrawTexture(bagRect, m_bagButtonShadowTexture);
+				GUI.DrawTexture(runRect, m_runButtonShadowTexture);
+				GUI.DrawTexture(pokemonRect, m_pokemonButtonShadowTexture);
+				
+				// bottom bar
+				GUI.DrawTexture(new Rect(0.0f, bounds.height - m_bottomBarTexture.height, bounds.width, m_bottomBarTexture.height), m_bottomBarTexture);
+				
 				//GUI.color = prevColor;
-				if (GUI.Button(new Rect((m_screenArea.width - fightButtonWidth) / 2.0f, 0.0f, fightButtonWidth, fightButtonHeight), "", m_fightButtonStyle))
+				//if (GUI.Button(new Rect((m_screenArea.width - fightButtonWidth) / 2.0f, 0.0f, fightButtonWidth, fightButtonHeight), "", m_fightButtonStyle))
+				if (GUI.Button(new Rect((bounds.width - m_fightButtonTexture.width) / 2.0f, m_topBarHeight + m_fightButtonGap, m_fightButtonTexture.width, m_fightButtonTexture.height), m_fightButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Fight);
 					DoneWithText();
 				}
 				
-				if (GUI.Button(new Rect(0, m_screenArea.height - sideButtonHeight, sideButtonWidth, sideButtonHeight), "", m_bagButtonStyle))
+				//if (GUI.Button(new Rect(0, m_screenArea.height - sideButtonHeight, sideButtonWidth, sideButtonHeight), "", m_bagButtonStyle))
+				if (GUI.Button(bagRect, m_bagButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Item);
 					DoneWithText();
 				}
 				
-				if (GUI.Button(new Rect((m_screenArea.width - midButtonWidth) / 2.0f, m_screenArea.height - midButtonHeight, midButtonWidth, midButtonHeight), "", m_runButtonStyle))
+				//if (GUI.Button(new Rect((m_screenArea.width - midButtonWidth) / 2.0f, m_screenArea.height - midButtonHeight, midButtonWidth, midButtonHeight), "", m_runButtonStyle))
+				if (GUI.Button(runRect, m_runButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Run);
 					DoneWithText();
 				}
 				
-				if (GUI.Button(new Rect(m_screenArea.width - sideButtonWidth, m_screenArea.height - sideButtonHeight, sideButtonWidth, sideButtonHeight), "", m_pokemonButtonStyle))
+				//if (GUI.Button(new Rect(m_screenArea.width - sideButtonWidth, m_screenArea.height - sideButtonHeight, sideButtonWidth, sideButtonHeight), "", m_pokemonButtonStyle))
+				if (GUI.Button(pokemonRect, m_pokemonButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Pokemon);
 					DoneWithText();
@@ -335,31 +354,44 @@ public class BattleDisplay : MonoBehaviour
 			m_system.CurrentState == NewBattleSystem.State.PokemonPrompt)
 		{
 			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
+				GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, bounds.height), m_buttonLayoutTexture);
+				
 				if (m_system.CurrentState == NewBattleSystem.State.FightPrompt)
 				{
+					// top bar
+					GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, m_topBarTexture.height), m_topBarTexture);
+					
+					int initialY = m_topBarTexture.height + m_abilityVGap;
+					
 					Character pokemon = m_system.UserPlayer.ActivePokemon;
 					
-					Rect buttonBounds = new Rect(0, 0, (m_screenArea.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
-					if (GUI.Button(buttonBounds, pokemon.getAbilities()[0].Name))
+					Rect buttonBounds = new Rect(0, initialY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
+					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[0], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
+					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[0]))
 					{
 						DoneWithText();
 						m_system.ProcessUserChoice(0);
 					}
 					
-					if (GUI.Button(new Rect((m_screenArea.width + abilityButtonGapX) / 2.0f, 0, (m_screenArea.width - abilityButtonGapX) / 2.0f, abilityButtonHeight), pokemon.getAbilities()[1].Name))
+					buttonBounds = new Rect((bounds.width + abilityButtonGapX) / 2.0f, initialY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
+					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[1], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
+					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[1], true))
 					{
 						DoneWithText();
 						m_system.ProcessUserChoice(1);
 					}
 					
-					if (GUI.Button(new Rect(0, abilityButtonHeight + abilityButtonGapY, (m_screenArea.width - abilityButtonGapX) / 2.0f, abilityButtonHeight), pokemon.getAbilities()[2].Name))
+					buttonBounds = new Rect(0, initialY + abilityButtonHeight + abilityButtonGapY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
+					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[2], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
+					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[2]))
 					{
 						DoneWithText();
 						m_system.ProcessUserChoice(2);
 					}
 					
-					if (GUI.Button(new Rect((m_screenArea.width + abilityButtonGapX) / 2.0f, abilityButtonHeight + abilityButtonGapY, (m_screenArea.width - abilityButtonGapX) / 2.0f, abilityButtonHeight),
-						pokemon.getAbilities()[3].Name))
+					buttonBounds = new Rect((bounds.width + abilityButtonGapX) / 2.0f, initialY + abilityButtonHeight + abilityButtonGapY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
+					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[3], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
+					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[3], true))
 					{
 						DoneWithText();
 						m_system.ProcessUserChoice(3);
