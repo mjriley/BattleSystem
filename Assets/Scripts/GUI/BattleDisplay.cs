@@ -330,16 +330,40 @@ public class BattleDisplay : MonoBehaviour
 		else if (m_system.CurrentState == NewBattleSystem.State.EnemyPokemonDefeated)
 		{
 			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
-				if (GUI.Button(new Rect(m_screenArea.width / 4, 0, m_screenArea.width / 2, 90), "Switch Pokemon"))
+				GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, bounds.height), m_buttonLayoutTexture);
+				
+				GUIUtils.DrawGroup(new Rect(0.0f, bounds.height / 4.0f, bounds.width, bounds.height * 3.0f / 5.0f), delegate(Rect innerBounds)
 				{
-					m_system.ProcessUserChoice(1);
-					DoneWithText();
-				}
-				if (GUI.Button(new Rect(m_screenArea.width / 4, 100, m_screenArea.width / 2, 90), "Continue Battling"))
-				{
-					m_system.ProcessUserChoice(-2);
-					DoneWithText();
-				}
+					prevColor = GUI.color;
+					GUI.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+					GUI.DrawTexture(new Rect(0.0f, 0.0f, innerBounds.width, innerBounds.height), m_basicTexture);
+					GUI.color = prevColor;
+					
+					int buttonWidth = 340;
+					int buttonHeight = 40;
+					int buttonVPadding = 20;
+					
+					//if (GUI.Button(new Rect((innerBounds.width - buttonWidth) / 2.0f, buttonVPadding, buttonWidth, buttonHeight), "Switch Pokemon"))
+					prevColor = GUI.backgroundColor;
+					GUI.backgroundColor = Color.green;
+					if (SwitchPokemonButton.Display(new Rect((innerBounds.width - buttonWidth) / 2.0f, buttonVPadding, buttonWidth, buttonHeight), "SWITCH POKÉMON"))
+					{
+						m_system.ProcessUserChoice(1);
+						DoneWithText();
+					}
+					
+					//if (GUI.Button(new Rect((innerBounds.width - buttonWidth) / 2.0f, innerBounds.height - buttonHeight - buttonVPadding, buttonWidth, buttonHeight), "Continue Battling"))
+					GUI.backgroundColor = Color.cyan;
+					if (SwitchPokemonButton.Display(new Rect((innerBounds.width - buttonWidth) / 2.0f, innerBounds.height - buttonHeight - buttonVPadding, buttonWidth, buttonHeight), "CONTINUE BATTLING"))
+					{
+						m_system.ProcessUserChoice(-2);
+						DoneWithText();
+					}
+					
+					GUI.backgroundColor = prevColor;
+					
+					});
+				
 			});
 		}
 		else if (m_system.CurrentState == NewBattleSystem.State.ReplacePokemon)
@@ -404,6 +428,16 @@ public class BattleDisplay : MonoBehaviour
 
 				DisplayBackButton();
 			});
+		}
+		else
+		{
+//			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds)
+//			{
+//				
+//			});
+
+			GUIUtils.DrawBottomScreenBackground(m_bottomScreen);
+			
 		}
 	
 		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds) {

@@ -139,6 +139,8 @@ public class PokemonListState : IDisplayState
 			GUI.EndScrollView();
 		GUI.EndGroup();
 		
+		GUIUtils.DrawBottomScreenBackground(bottomScreen);
+		
 		GUI.BeginGroup(bottomScreen);
 			int width = 100;
 			int height = 40;

@@ -11,6 +11,8 @@ public class GUIMenu : MonoBehaviour
 	
 	int optionSelectedIndex = 0;
 	
+	Rect m_bottomScreen = new Rect(0.0f, 240.0f, 400.0f, 240.0f);
+	
 	enum Options : int
 	{
 		Battle = 0,
@@ -19,10 +21,18 @@ public class GUIMenu : MonoBehaviour
 	
 	Options[] m_options = (Options[])Enum.GetValues(typeof(Options));
 	
+	void Start()
+	{
+	}
+	
 	public void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
+			if (m_options[optionSelectedIndex] == Options.Battle)
+			{
+				Application.LoadLevel("battle");
+			}
 			if (m_options[optionSelectedIndex] == Options.Roster)
 			{
 				Application.LoadLevel("roster");
@@ -41,18 +51,31 @@ public class GUIMenu : MonoBehaviour
 			}
 		}
 	}
+	
 	public void OnGUI()
 	{
-		Rect parentRect = new Rect(0.0f, Screen.height - height, Screen.width, height);
+		DrawBottomScreen();
+	}
+	
+	void DrawBottomScreen()
+	{
+		GUIUtils.DrawBottomScreenBackground(m_bottomScreen);
 		
-		GUI.BeginGroup(parentRect);
+		GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds)
+		{
+			GUIContent cursor = new GUIContent("➤");
+			Vector2 textBounds = optionsStyle.CalcSize(cursor);
+			
+			float textVerticalSize = textBounds.y * m_options.Length;
+			float textVerticalStart = (bounds.height - textVerticalSize) / 2.0f;
+			
 			for (int i=0; i < m_options.Length; ++i)
 			{
-				GUI.Label(new Rect((Screen.width - fontWidth) / 2.0f, i * fontHeight, fontWidth, fontHeight), m_options[i].ToString(), optionsStyle);
+				GUI.Label(new Rect((bounds.width - fontWidth) / 2.0f, textVerticalStart + i * textBounds.y, fontWidth, textBounds.y), m_options[i].ToString(), optionsStyle);
 			}
 			
-			GUI.Label(new Rect((Screen.width - fontWidth) / 2.0f - 20.0f, optionSelectedIndex * 20.0f, 20.0f, fontHeight), "➤", optionsStyle);
-		GUI.EndGroup();
+			GUI.Label(new Rect((Screen.width - fontWidth) / 2.0f - textBounds.x, textVerticalStart + optionSelectedIndex * textBounds.y, textBounds.x, textBounds.y), cursor, optionsStyle);
+		});
 	}
 
 }

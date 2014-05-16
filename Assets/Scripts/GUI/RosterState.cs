@@ -28,6 +28,7 @@ public class RosterState : IDisplayState
 	{
 	}
 	
+	public GUIStyle speciesStyle = new GUIStyle();
 	public void Display()
 	{
 		GUI.BeginGroup(topScreen);
@@ -44,21 +45,30 @@ public class RosterState : IDisplayState
 			}
 		GUI.EndGroup();
 		
-		GUI.BeginGroup(bottomScreen);
+		DrawBottomScreen();
+		
+	}
+	
+	void DrawBottomScreen()
+	{
+		GUIUtils.DrawBottomScreenBackground(bottomScreen);
+		
+		GUIUtils.DrawGroup(bottomScreen, delegate(Rect bounds) {
 			int width = 100;
 			int height = 40;
-			if (GUI.Button(new Rect((bottomScreen.width - width) / 2.0f, (bottomScreen.height - height) / 2.0f, width, height), "Accept"))
+			if (GUI.Button(new Rect((bounds.width - width) / 2.0f, (bounds.height - height) / 2.0f, width, height), "Accept"))
 			{
 				m_controller.ExitScene();
-				//Application.LoadLevel("start_menu");
 			}
 			
 			
-			if (GUI.Button(new Rect((bottomScreen.width - width) / 2.0f, (bottomScreen.height - height), width, height), "Exit"))
+			if (GUI.Button(new Rect((bounds.width - width) / 2.0f, (bounds.height - height), width, height), "Exit"))
 			{
 				m_controller.ExitScene(cancel: true);
-				//Application.LoadLevel("start_menu");
 			}
+		});
+		
+		GUI.BeginGroup(bottomScreen);
 		GUI.EndGroup();
 	}
 	
