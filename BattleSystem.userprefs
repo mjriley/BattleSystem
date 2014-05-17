@@ -1,21 +1,30 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/BattleDisplay.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PokemonFactory.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/StartGUI.cs" Line="22" Column="1" />
-      <File FileName="Assets/Scripts/GUI/StartState.cs" Line="5" Column="7" />
-      <File FileName="Assets/GUIMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="365" Column="3" />
-      <File FileName="Assets/Scripts/GUI/SwitchPokemonButton.cs" Line="26" Column="9" />
+      <File FileName="Assets/Scripts/PokemonFactory.cs" Line="89" Column="12" />
+      <File FileName="Assets/Scripts/Pokemon.cs" Line="33" Column="4" />
+      <File FileName="Assets/Scripts/PokemonPrototype.cs" Line="58" Column="1" />
+      <File FileName="Assets/Scripts/BattleType.cs" Line="23" Column="1" />
+      <File FileName="Assets/Scripts/Character.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/PlayerStatusDisplay.cs" Line="151" Column="62" />
+      <File FileName="Assets/Scripts/GUI/PokemonTagDisplay.cs" Line="96" Column="68" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="549" Column="1" />
+      <File FileName="Assets/Editor/Tests/CharacterTests.cs" Line="16" Column="82" />
+      <File FileName="Assets/Editor/Tests/SequentialPokemonStrategyTests.cs" Line="11" Column="79" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="GUI" expanded="True">
-                <Node name="BattleDisplay.cs" selected="True" />
-              </Node>
+              <Node name="GUI" expanded="True" />
+              <Node name="PokemonFactory.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Editor" expanded="True">
+              <Node name="Tests" expanded="True" />
             </Node>
           </Node>
         </State>

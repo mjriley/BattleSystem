@@ -13,7 +13,8 @@ namespace Tests
 		[SetUp]
 		public void Init()
 		{
-			m_actor = new Character("Test Pokemon", Pokemon.Species.Pikachu, Character.Sex.Male, 70, 1, BattleType.Normal, null);
+			//m_actor = new Character("Test Pokemon", Pokemon.Species.Pikachu, Pokemon.Gender.Male, 70, 1, BattleType.Normal, null);
+			m_actor = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50, "");
 		}
 			
 		[Test]

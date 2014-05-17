@@ -14,7 +14,7 @@ public class RosterState : IDisplayState
 	RosterController m_controller;
 	
 	Rect topScreen = new Rect(0, 0, 400, 240);
-	Rect bottomScreen = new Rect(0, 240, 400, 240);
+	Rect bottomScreen = new Rect(0, 260, 400, 240);
 	
 	public RosterState(RosterController controller)
 	{

@@ -29,8 +29,12 @@ public class AbilityFactory
 		m_descriptions = new AbilityDescriptionsEnglish();
 		m_abilities = new Dictionary<string, AbstractAbility>();
 		
+		AddAbility(new DamageAbility("Thunder Shock", AbilityType.Special, BattleType.Electric, 30, 40, 100, false, OnHitEffects.ParalyzeEffect(10)));
+		
 		AddAbility(new DamageAbility("Bubble", AbilityType.Special, BattleType.Water, 30, 40, 100, false, OnHitEffects.BasicEffectWrapper(BasicEffects.TargetStatModificationEffect(Stat.Speed, -1, 10))));
 		AddAbility(new DamageAbility("Water Gun", AbilityType.Special, BattleType.Water, 25, 40, 100));
+		// TODO: Change target to user
+		AddAbility(new EffectAbility("Withdraw", AbilityType.Status, BattleType.Water, 40, BasicEffects.TargetStatModificationEffect(Stat.Defense, 1)));
 		
 		AddAbility(new DamageAbility("Ember", AbilityType.Special, BattleType.Fire, 25, 40, 100, false, OnHitEffects.BurnEffect(10)));
 		AddAbility(new DamageAbility("Fire Fang", AbilityType.Physical, BattleType.Fire, 15, 65, 95, false, OnHitEffects.CompositeEffect(OnHitEffects.BurnEffect(10), OnHitEffects.FlinchEffect(10))));
@@ -38,9 +42,14 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 120, 100));
 		//AddAbility(new DamageAbility("Vine Whip", AbilityType.Physical, BattleType.Grass, 25, 45, 100));
 		AddAbility(new DamageAbility("Razor Leaf", AbilityType.Physical, BattleType.Grass, 25, 55, 95, true));
+		// TODO: Actually implement leech seed
+		AddAbility(new DamageAbility("Leech Seed", AbilityType.Special, BattleType.Grass, 25, 40, 100));
 		
+		// TODO: Add Priority for Quick Attack
+		AddAbility(new DamageAbility("Quick Attack", AbilityType.Physical, BattleType.Normal, 30, 40, 100));
 		AddAbility(new DamageAbility("Tackle", AbilityType.Physical, BattleType.Normal, 35, 50, 100));
 		// TODO: Make fury swipes multi-hit
+		AddAbility(new DamageAbility("Pound", AbilityType.Physical, BattleType.Normal, 35, 40, 100));
 		AddAbility(new MultiHitAbility("Fury Swipes", AbilityType.Physical, BattleType.Normal, 15, 18, 80, 2, 5));
 		AddAbility(new DamageAbility("Scratch", AbilityType.Physical, BattleType.Normal, 35, 40, 100));
 		AddAbility(new NoOpAbility("Splash", AbilityType.Physical, BattleType.Normal, 40, "But nothing happened!"));
@@ -48,6 +57,16 @@ public class AbilityFactory
 		AddAbility(new DamageAbility("Flail", AbilityType.Physical, BattleType.Normal, 15, 10, 100));
 		AddAbility(new DamageAbility("Take Down", AbilityType.Physical, BattleType.Normal, 20, 90, 85, false, OnHitEffects.RecoilEffect(25)));
 		AddAbility(new EffectAbility("Growl", AbilityType.Status, BattleType.Normal, 40, BasicEffects.TargetStatModificationEffect(Stat.Attack, -1)));
+		AddAbility(new EffectAbility("Tail Whip", AbilityType.Status, BattleType.Normal, 30, BasicEffects.TargetStatModificationEffect(Stat.Defense, -1)));
+		// TODO: Change from TargetStatMod to UserStatMod
+		AddAbility(new EffectAbility("Howl", AbilityType.Status, BattleType.Normal, 40, BasicEffects.TargetStatModificationEffect(Stat.Attack, 1)));
+		// TODO: Change from TargetStatMod to UserStatMod
+		AddAbility(new EffectAbility("Agility", AbilityType.Status, BattleType.Psychic, 30, BasicEffects.TargetStatModificationEffect(Stat.Speed, 2)));
+		AddAbility(new EffectAbility("Leer", AbilityType.Status, BattleType.Normal, 30, BasicEffects.TargetStatModificationEffect(Stat.Defense, -1)));
+		AddAbility(new DamageAbility("Headbutt", AbilityType.Physical, BattleType.Normal, 15, 70, 100, false, OnHitEffects.FlinchEffect(30)));
+		AddAbility(new EffectAbility("Smokescreen", AbilityType.Status, BattleType.Normal, 20, BasicEffects.TargetStatModificationEffect(Stat.Accuracy, -1)));
+		// TODO: Look into how it always hits
+		AddAbility(new EffectAbility("Play Nice", AbilityType.Status, BattleType.Normal, 20, BasicEffects.TargetStatModificationEffect(Stat.Attack, -1)));
 		
 		// TODO: Add a sequence move
 		AddAbility(new DamageAbility("Rollout", AbilityType.Physical, BattleType.Rock, 20, 30, 90));

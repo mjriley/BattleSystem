@@ -8,7 +8,8 @@ namespace Tests
 	
 		private Character createTestPokemon()
 		{
-			return new Character("Test Pokemon", Pokemon.Species.Pikachu, Character.Sex.Male, 70, 1, BattleType.Normal, null);
+			//return new Character("Test Pokemon", Pokemon.Species.Pikachu, Pokemon.Gender.Male, 70, 1, BattleType.Normal, null);
+			return PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50);
 		}
 		
 		private Player m_player;

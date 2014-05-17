@@ -23,6 +23,25 @@ public class OnHitEffects
 		};
 	}
 	
+	public static DamageAbility.OnHitEffect ParalyzeEffect(int percent, Random generator=null)
+	{
+		if (generator == null)
+		{
+			generator = new Random();
+		}	
+		
+		return delegate(DamageAbility ability, int damage, Character attacker, Character defender, ref ActionStatus status)
+		{
+			if (generator.Next(100) >= percent)
+			{
+				return;
+			}
+			
+			defender.Paralyzed = true;
+		};
+		
+	}
+	
 	public static DamageAbility.OnHitEffect FlinchEffect(int percent, Random generator=null)
 	{
 		if (generator == null)

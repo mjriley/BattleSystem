@@ -6,16 +6,22 @@ using System.Linq;
 
 public class Character
 {
-	public enum Sex
-	{
-		Male,
-		Female
-	}
+//	public enum Sex
+//	{
+//		Male,
+//		Female
+//	}
 	
 	public Dictionary<Stat, int> m_baseStats = new Dictionary<Stat, int>();
 	public Dictionary<Stat, int> m_stages = new Dictionary<Stat, int>();
 	
 	// stats
+	public int MaxHP {
+		get
+		{
+			return (m_prototype.HP * 2 + 100) * (int)Level / 100 + 10;
+		}
+	}
 	
 	public int Atk { get { return GetCurrentStatValue(Stat.Attack); } }
 	public int Def { get { return GetCurrentStatValue(Stat.Defense); } }
@@ -29,7 +35,6 @@ public class Character
 	public const int MAX_STAGE = 6;
 	public const int MIN_STAGE = -6;
 	
-	private int m_maxHP;
 	private int m_currentHP;
 	private List<AbstractAbility> m_abilities = new List<AbstractAbility>();
 	private string m_name;
@@ -62,41 +67,28 @@ public class Character
 		get { return m_currentHP; }
 	}
 	
-	public int MaxHP { get { return m_maxHP; } }
-	
 	public List<BattleType> Types { get { return m_types; } }
 	
-	private Sex m_gender;
-	public Sex Gender
+	private Pokemon.Gender m_gender;
+	public Pokemon.Gender Gender
 	{
 		get { return m_gender; }
 	}
 	
-	private Pokemon.Species m_species;
-	public Pokemon.Species Species { get { return m_species; } }
+	public Pokemon.Species Species { get { return m_prototype.Species; } }
 	
+	PokemonPrototype m_prototype;
 	
-	public Character(string name, Pokemon.Species species, Sex gender, int maxHP, uint level, BattleType type, IAttackStrategy strategy) :
-		this(name, species, gender, maxHP, level, type, BattleType._None, strategy)
-	{
-	}
-	
-	public Character(string name, Pokemon.Species species, Sex gender, int maxHP, uint level, BattleType type1, BattleType type2, IAttackStrategy strategy = null)
+	public Character(string name, PokemonPrototype prototype, Pokemon.Gender gender, uint level, IAttackStrategy strategy)
 	{
 		m_name = name;
-		m_species = species;
+		m_prototype = prototype;
 		m_gender = gender;
-		m_maxHP = maxHP;
-		m_currentHP = m_maxHP;
 		Level = level;
 		
 		m_strategy = strategy;
 		
-		m_types.Add(type1);
-		if (type2 != BattleType._None)
-		{
-			m_types.Add(type2);
-		}
+		Reset();
 		
 		ClearStatuses();
 		InitStats();
@@ -115,7 +107,7 @@ public class Character
 	
 	public void Reset()
 	{
-		m_currentHP = m_maxHP;
+		m_currentHP = MaxHP;
 	}
 	
 	public void ResetStages()
@@ -187,7 +179,7 @@ public class Character
 	{
 		m_currentHP -= damage;
 		
-		m_currentHP = Mathf.Min(m_currentHP, m_maxHP);
+		m_currentHP = Mathf.Min(m_currentHP, MaxHP);
 		m_currentHP = Mathf.Max(m_currentHP, 0);
 	}
 	
@@ -274,13 +266,13 @@ public class Character
 		if (Burned)
 		{
 			messages.Add(m_name + " was damaged by the burn!");
-			TakeDamage((int)(1.0f / 8.0f * m_maxHP));
+			TakeDamage((int)(1.0f / 8.0f * MaxHP));
 		}
 		
 		if (Poisoned)
 		{
 			messages.Add(m_name + " was damaged by the poison!");
-			TakeDamage((int)(1.0f / 8.0f * m_maxHP));
+			TakeDamage((int)(1.0f / 8.0f * MaxHP));
 		}
 		
 		if (IsSleeping())

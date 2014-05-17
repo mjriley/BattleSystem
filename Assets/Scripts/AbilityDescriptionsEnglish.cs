@@ -21,12 +21,25 @@ public class AbilityDescriptionsEnglish : IAbilityDescriptions
 		descriptions["Flail"] = "The user flails about aimlessly to attack. It becomes more powerful the less HP the user has.";
 		descriptions["Take Down"] = "A reckless, full-body charge attack for slamming into the target. It also damages the user a little.";
 		descriptions["Growl"] = "The user growls in an endearing way, making opposing Pokemon less wary. This lowers their Attack stats.";
+		descriptions["Quick Attack"] = "The user lunges at the target at a speed that makes it almost invisible. This move always goes first.";
+		descriptions["Pound"] = "The target is physically pounded with a long tail, a foreleg, or the like.";
+		descriptions["Tail Whip"] = "The user wags its tail cutely, making opposing Pokemon less wary and lowering their Defense stat.";
+		descriptions["Howl"] = "The user howls loudly to raise its spirit, which raises its Attack stat.";
+		descriptions["Agility"] = "The user relaxes and lightens its body to move faster. This sharply raises the Speed stat.";
+		descriptions["Leer"] = "The user gives opposing Pokemon an intimidating leer that lowers the Defense stat.";
+		descriptions["Headbutt"] = "The user sticks out its head and attacks by charging straight into the target. This may also make the target flinch.";
+		descriptions["Smokescreen"] = "The user releases an obscuring cloud of smoke or ink. This lowers the target's accuracy.";
+		descriptions["Play Nice"] = "The user and the target become friends, and the target loses its will to fight. This lowers the target's Attack stat.";
 		
 		descriptions["Rollout"] = "The user continually rolls into the target over five turns. It becomes stronger each time it hits.";
 		descriptions["Bite"] = "The target is bitten with viciously sharp fangs. It may make the target flinch.";
 		descriptions["Water Gun"] = "The target is blasted with a forceful shot of water.";
 		descriptions["Bubble"] = "A spray of countless bubbles is jetted at the opposing team. It may also lower the targets' Speed stats.";
+		descriptions["Withdraw"] = "The user withdraws its body into its hard shell, raising its Defense stat.";
 		descriptions["Dragon Rage"] = "This attack hits the target with a shock wave of pure rage. This attack always inflicts 40 HP damage.";
+		
+		descriptions["Thunder Shock"] = "A jolt of electricity crashes down on the target to inflict damage. This may also leave the target with paralysis.";
+		descriptions["Leech Seed"] = "A seed is planted on the target. It steals some HP from the target every turn.";
 	}
 	
 	

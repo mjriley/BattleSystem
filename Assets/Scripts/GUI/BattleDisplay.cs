@@ -54,6 +54,7 @@ public class BattleDisplay : MonoBehaviour
 	Texture2D m_pokemonButtonTexture;
 	
 	Texture2D m_buttonLayoutTexture;
+	Texture2D m_statusTexture;
 	
 	public GUIStyle typeNameStyle;
 	public GUIStyle abilityNameStyle;
@@ -63,7 +64,7 @@ public class BattleDisplay : MonoBehaviour
 	Rect m_screenArea;
 	
 	Rect m_topScreen = new Rect(0, 0, 400, 240);
-	Rect m_bottomScreen = new Rect(0, 240, 400, 240);
+	Rect m_bottomScreen = new Rect(0, 260, 400, 240);
 	
 	public delegate void AnimationCallback(MonoBehaviour script);
 	
@@ -75,7 +76,7 @@ public class BattleDisplay : MonoBehaviour
 	
 	
 	/** GUI variables ******/
-	public int statusHeight = 10;
+	public int statusHeight = 50;
 	public GUIStyle statusStyle;
 	
 	/***************/
@@ -98,6 +99,7 @@ public class BattleDisplay : MonoBehaviour
 		m_pokemonButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/Pokemon");
 		
 		m_buttonLayoutTexture = Resources.Load<Texture2D>("Textures/ButtonLayout");
+		m_statusTexture = Resources.Load<Texture2D>("Textures/TextDisplayBackground");
 		
 		m_audio = gameObject.GetComponent<AudioSource>();
 		m_damageSound = Resources.Load<AudioClip>("SoundEffects/attack_sound");
@@ -344,23 +346,20 @@ public class BattleDisplay : MonoBehaviour
 					int buttonVPadding = 20;
 					
 					//if (GUI.Button(new Rect((innerBounds.width - buttonWidth) / 2.0f, buttonVPadding, buttonWidth, buttonHeight), "Switch Pokemon"))
-					prevColor = GUI.backgroundColor;
-					GUI.backgroundColor = Color.green;
-					if (SwitchPokemonButton.Display(new Rect((innerBounds.width - buttonWidth) / 2.0f, buttonVPadding, buttonWidth, buttonHeight), "SWITCH POKÉMON"))
+					if (SwitchPokemonButton.Display(new Rect((innerBounds.width - buttonWidth) / 2.0f, buttonVPadding, buttonWidth, buttonHeight), 
+						"SWITCH POKEMON", Color.green))
 					{
 						m_system.ProcessUserChoice(1);
 						DoneWithText();
 					}
 					
 					//if (GUI.Button(new Rect((innerBounds.width - buttonWidth) / 2.0f, innerBounds.height - buttonHeight - buttonVPadding, buttonWidth, buttonHeight), "Continue Battling"))
-					GUI.backgroundColor = Color.cyan;
-					if (SwitchPokemonButton.Display(new Rect((innerBounds.width - buttonWidth) / 2.0f, innerBounds.height - buttonHeight - buttonVPadding, buttonWidth, buttonHeight), "CONTINUE BATTLING"))
+					if (SwitchPokemonButton.Display(new Rect((innerBounds.width - buttonWidth) / 2.0f, innerBounds.height - buttonHeight - buttonVPadding, buttonWidth, buttonHeight), 
+						"CONTINUE BATTLING", Color.cyan))
 					{
 						m_system.ProcessUserChoice(-2);
 						DoneWithText();
 					}
-					
-					GUI.backgroundColor = prevColor;
 					
 					});
 				
@@ -441,8 +440,10 @@ public class BattleDisplay : MonoBehaviour
 		}
 	
 		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds) {
-			GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
-			GUI.Box(new Rect(0, bounds.height - statusHeight, bounds.width, statusHeight), m_statusText, statusStyle);
+			//GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
+			//GUI.Box(new Rect(0, bounds.height - statusHeight, bounds.width, statusHeight), m_statusText, statusStyle);
+			GUI.Label(new Rect(0, bounds.height - statusStyle.normal.background.height, bounds.width, statusStyle.normal.background.height), m_statusText, statusStyle);
+			//GUI.DrawTexture(new Rect(0, bounds.height - statusHeight, bounds.width, m_statusTexture.height), m_statusTexture);
 		});
 		
 	}

@@ -11,7 +11,7 @@ public class GUIMenu : MonoBehaviour
 	
 	int optionSelectedIndex = 0;
 	
-	Rect m_bottomScreen = new Rect(0.0f, 240.0f, 400.0f, 240.0f);
+	Rect m_bottomScreen = new Rect(0.0f, 260.0f, 400.0f, 240.0f);
 	
 	enum Options : int
 	{

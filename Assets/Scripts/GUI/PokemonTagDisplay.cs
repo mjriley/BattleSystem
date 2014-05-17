@@ -93,7 +93,7 @@ public class PokemonTagDisplay
 				CustomGUI.BorderedLabel(new Rect(statOffsetX, screenRect.height - statBounds.y - statOffsetY, 100, statBounds.y), levelContent, 1, Color.black, statStyle);
 				CustomGUI.BorderedLabel(new Rect(93 + m_healthBorderTexture.width - hpBounds.x, screenRect.height - hpBounds.y - statOffsetY, hpBounds.x, hpBounds.y), hpContent, 1, Color.black, statStyle);
 				
-				Texture2D genderTexture = (pokemon.Gender == Character.Sex.Male) ? m_maleTexture : m_femaleTexture;
+				Texture2D genderTexture = (pokemon.Gender == Pokemon.Gender.Male) ? m_maleTexture : m_femaleTexture;
 				GUI.DrawTexture(new Rect(93 + m_healthBorderTexture.width, nameOffsetY, 18, 18), genderTexture);
 			}
 			

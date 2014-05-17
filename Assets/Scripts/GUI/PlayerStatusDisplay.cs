@@ -59,7 +59,7 @@ public class PlayerStatusDisplay
 		float maxWidth = m_healthOutlineTexture.width;
 		float nameBarWidth = contentSize.x + genderIconSize + lvlSize.x;
 		
-		Texture2D genderTexture = (pokemon.Gender == Character.Sex.Male) ? m_maleTexture : m_femaleTexture;
+		Texture2D genderTexture = (pokemon.Gender == Pokemon.Gender.Male) ? m_maleTexture : m_femaleTexture;
 		
 		GUI.BeginGroup(m_bounds);
 			GUI.BeginGroup(new Rect((maxWidth - nameBarWidth) / 2.0f, 0, maxWidth, contentSize.y));
@@ -148,7 +148,7 @@ public class PlayerStatusDisplay
 		float maxWidth = m_healthOutlineTexture.width;
 		float nameBarWidth = contentSize.x + genderIconSize + lvlSize.x;
 		
-		Texture2D genderTexture = (pokemon.Gender == Character.Sex.Male) ? m_maleTexture : m_femaleTexture;
+		Texture2D genderTexture = (pokemon.Gender == Pokemon.Gender.Male) ? m_maleTexture : m_femaleTexture;
 		
 		GUI.BeginGroup(screenRect);
 			GUI.BeginGroup(new Rect((maxWidth - nameBarWidth) / 2, 0, maxWidth, contentSize.y));
