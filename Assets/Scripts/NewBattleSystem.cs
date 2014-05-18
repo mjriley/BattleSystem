@@ -65,6 +65,19 @@ public class NewBattleSystem
 		m_enemyStrategy = new RandomAttackStrategy(m_generator);
 	}
 	
+	public void InitializePlayer(Pokemon.Species[] playerSpecies)
+	{
+		m_userPlayer = new Player("Human", null);
+		
+		UserInputStrategy input = new UserInputStrategy(null, this.GetUserAbility);
+		
+		foreach (Pokemon.Species species in playerSpecies)
+		{
+			Character pokemon = PokemonFactory.CreatePokemon(species, 50, "", Pokemon.Gender.Random, input);
+			m_userPlayer.AddPokemon(pokemon);
+		}
+	}
+	
 	public void ProcessUserChoice(int choice)
 	{
 		m_userChoice = choice;
@@ -433,84 +446,18 @@ public class NewBattleSystem
 		}
 	}
 	
-	
-	public void CreatePlayerPokemon()
-	{
-		m_userPlayer = new Player("Human", null);
-		
-		UserInputStrategy input = new UserInputStrategy(null, this.GetUserAbility);
-		
-//		Character pikachu = new Character("Quilladin", Pokemon.Species.Greninja, Pokemon.Gender.Male, 70, 35, BattleType.Electric, input);
-//		pikachu.addAbility(AbilityFactory.GetAbility("Fury Swipes"));
-//		pikachu.addAbility(AbilityFactory.GetAbility("Fire Fang"));
-//		pikachu.addAbility(AbilityFactory.GetAbility("Ember"));
-//		pikachu.addAbility(AbilityFactory.GetAbility("Vine Whip"));
-		Character pikachu = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50, "", Pokemon.Gender.Male, input);
-		
-//		Character chespin = new Character("Chespin", Pokemon.Species.Chespin, Pokemon.Gender.Female, 70, 1, BattleType.Grass, input);
-//		chespin.addAbility(AbilityFactory.GetAbility("Tackle"));
-//		chespin.addAbility(AbilityFactory.GetAbility("Vine Whip"));
-//		chespin.addAbility(AbilityFactory.GetAbility("Rollout"));
-//		chespin.addAbility(AbilityFactory.GetAbility("Bite"));
-		Character chespin = PokemonFactory.CreatePokemon(Pokemon.Species.Chespin, 50, "", Pokemon.Gender.Male, input);
-		
-//		Character squirtle = new Character("Squirtle", Pokemon.Species.Squirtle, Pokemon.Gender.Female, 70, 20, BattleType.Water, input);
-//		squirtle.addAbility(AbilityFactory.GetAbility("Tackle"));
-//		squirtle.addAbility(AbilityFactory.GetAbility("Water Gun"));
-//		squirtle.addAbility(AbilityFactory.GetAbility("Bubble"));
-//		squirtle.addAbility(AbilityFactory.GetAbility("Bite"));
-		Character squirtle = PokemonFactory.CreatePokemon(Pokemon.Species.Squirtle, 50, "", Pokemon.Gender.Male, input);
-		
-//		Character charmander = new Character("Charmander", Pokemon.Species.Charmander, Pokemon.Gender.Male, 70, 100, BattleType.Fire, input);
-//		charmander.addAbility(AbilityFactory.GetAbility("Scratch"));
-//		charmander.addAbility(AbilityFactory.GetAbility("Ember"));
-//		charmander.addAbility(AbilityFactory.GetAbility("Dragon Rage"));
-//		charmander.addAbility(AbilityFactory.GetAbility("Fire Fang"));
-		Character charmander = PokemonFactory.CreatePokemon(Pokemon.Species.Charmander, 50, "", Pokemon.Gender.Male, input);
-		
-//		Character magikarp = new Character("Magikarp", Pokemon.Species.Magikarp, Pokemon.Gender.Male, 70, 100, BattleType.Normal, input);
-//		magikarp.addAbility(AbilityFactory.GetAbility("Splash"));
-//		magikarp.addAbility(AbilityFactory.GetAbility("Tackle"));
-//		magikarp.addAbility(AbilityFactory.GetAbility("Flail"));
-		Character magikarp = PokemonFactory.CreatePokemon(Pokemon.Species.Magikarp, 50, "", Pokemon.Gender.Female, input);
-		
-//		Character bulbasaur = new Character("Bulbasaur", Pokemon.Species.Bulbasaur, Pokemon.Gender.Female, 70, 10, BattleType.Poison, input);
-//		bulbasaur.addAbility(AbilityFactory.GetAbility("Tackle"));
-//		bulbasaur.addAbility(AbilityFactory.GetAbility("Vine Whip"));
-//		bulbasaur.addAbility(AbilityFactory.GetAbility("Take Down"));
-//		bulbasaur.addAbility(AbilityFactory.GetAbility("Razor Leaf"));
-		Character bulbasaur = PokemonFactory.CreatePokemon(Pokemon.Species.Bulbasaur, 50, "", Pokemon.Gender.Male, input);
-		
-		m_userPlayer.AddPokemon(pikachu);
-		m_userPlayer.AddPokemon(chespin);
-		m_userPlayer.AddPokemon(squirtle);
-		m_userPlayer.AddPokemon(charmander);
-		m_userPlayer.AddPokemon(magikarp);
-		m_userPlayer.AddPokemon(bulbasaur);
-	}
-	
 	public Player generateEnemy()
 	{
 		Player player = new Player("Duchess Ione", new SequentialPokemonStrategy());
 		
-		string[] pokemonNames = Enum.GetNames(typeof(Pokemon.Species));
+		Pokemon.Species[] speciesOptions = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
+		speciesOptions = speciesOptions.Where(x => x != Pokemon.Species.None).ToArray();
 		for (int i = 0; i < 3; ++i)
 		{
-			int index = m_generator.Next(0, pokemonNames.Length);
-			string name = pokemonNames[index];
+			int index = m_generator.Next(0, speciesOptions.Length);
 			
-			Pokemon.Species species = (Pokemon.Species)Enum.Parse(typeof(Pokemon.Species), name);
+			Pokemon.Species species = speciesOptions[index];
 			
-//			Character enemy = new Character(name, species, Pokemon.Gender.Female, 70, 50, BattleType.Water, m_enemyStrategy);
-//			AbstractAbility ability0 = new DamageAbility("Enemy Ability 0", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
-//			AbstractAbility ability1 = new DamageAbility("Enemy Ability 1", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
-//			AbstractAbility ability2 = new DamageAbility("Enemy Ability 2", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
-//			AbstractAbility ability3 = new DamageAbility("Enemy Ability 3", AbilityType.Physical, BattleType.Normal, 20, 20, 100);
-//			
-//			enemy.addAbility(ability0);
-//			enemy.addAbility(ability1);
-//			enemy.addAbility(ability2);
-//			enemy.addAbility(ability3);
 			Character enemy = PokemonFactory.CreatePokemon(species, 50, "", Pokemon.Gender.Random, m_enemyStrategy);
 			
 			player.AddPokemon(enemy);

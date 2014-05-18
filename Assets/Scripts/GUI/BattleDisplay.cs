@@ -104,7 +104,11 @@ public class BattleDisplay : MonoBehaviour
 		m_audio = gameObject.GetComponent<AudioSource>();
 		m_damageSound = Resources.Load<AudioClip>("SoundEffects/attack_sound");
 		
-		m_system.CreatePlayerPokemon();
+		PlayerRoster roster = GameObject.Find("PlayerRoster").GetComponent<PlayerRoster>();
+		m_system.InitializePlayer(roster.roster);
+		
+		//m_system.CreatePlayerPokemon();
+		
 		m_playerObject = GameObject.FindGameObjectWithTag("PlayerDisplay");
 		m_playerDisplay = m_playerObject.GetComponent<SpriteRenderer>();
 		

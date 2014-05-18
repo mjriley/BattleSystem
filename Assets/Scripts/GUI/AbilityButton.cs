@@ -52,12 +52,24 @@ public class AbilityButton : MonoBehaviour
 			m_isInit = true;
 		}
 		
-		typeColors[BattleType.Fire] = makeIntColor(240, 128, 48);
-		typeColors[BattleType.Water] = makeIntColor(104, 144, 240);
-		typeColors[BattleType.Grass] = makeIntColor(120, 200, 80);
-		typeColors[BattleType.Flying] = makeIntColor(168, 144, 240);
-		typeColors[BattleType.Normal] = makeIntColor(168, 168, 120);
-		typeColors[BattleType.Poison] = makeIntColor(160, 64, 160);
+		typeColors[BattleType.Bug] = makeIntColor(176, 188, 0);
+		typeColors[BattleType.Dark] = makeIntColor(115, 90, 73);
+		typeColors[BattleType.Dragon] = makeIntColor(117, 101, 235);
+		typeColors[BattleType.Electric] = makeIntColor(255, 198, 5);
+		typeColors[BattleType.Fairy] = makeIntColor(245, 183, 249);
+		typeColors[BattleType.Fight] = makeIntColor(165, 84, 54);
+		typeColors[BattleType.Fire] = makeIntColor(246, 87, 40);
+		typeColors[BattleType.Flying] = makeIntColor(153, 174, 250);
+		typeColors[BattleType.Ghost] = makeIntColor(95, 100, 184);
+		typeColors[BattleType.Grass] = makeIntColor(128, 205, 71);
+		typeColors[BattleType.Ground] = makeIntColor(215, 181, 81);
+		typeColors[BattleType.Ice] = makeIntColor(90, 205, 233);
+		typeColors[BattleType.Normal] = makeIntColor(173, 165, 147);
+		typeColors[BattleType.Poison] = makeIntColor(179, 93, 167);
+		typeColors[BattleType.Psychic] = makeIntColor(254, 119, 166);
+		typeColors[BattleType.Rock] = makeIntColor(190, 165, 84);
+		typeColors[BattleType.Steel] = makeIntColor(172, 173, 199);
+		typeColors[BattleType.Water] = makeIntColor(44, 156, 255);
 	}
 	
 	public static bool Display(Rect rect, AbstractAbility ability, bool drawReversed=false, 
