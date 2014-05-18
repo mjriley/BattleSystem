@@ -1,25 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PokemonFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/PokemonListState.cs">
     <Files>
-      <File FileName="Assets/Scripts/PokemonFactory.cs" Line="89" Column="12" />
-      <File FileName="Assets/Scripts/Pokemon.cs" Line="33" Column="4" />
-      <File FileName="Assets/Scripts/PokemonPrototype.cs" Line="58" Column="1" />
-      <File FileName="Assets/Scripts/BattleType.cs" Line="23" Column="1" />
-      <File FileName="Assets/Scripts/Character.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/PlayerStatusDisplay.cs" Line="151" Column="62" />
-      <File FileName="Assets/Scripts/GUI/PokemonTagDisplay.cs" Line="96" Column="68" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="549" Column="1" />
-      <File FileName="Assets/Editor/Tests/CharacterTests.cs" Line="16" Column="82" />
-      <File FileName="Assets/Editor/Tests/SequentialPokemonStrategyTests.cs" Line="11" Column="79" />
+      <File FileName="Assets/Scripts/GUI/RosterState.cs" Line="98" Column="1" />
+      <File FileName="Assets/Scripts/GUI/GUIUtils.cs" Line="26" Column="18" />
+      <File FileName="Assets/Scripts/GUI/RosterController.cs" Line="50" Column="15" />
+      <File FileName="Assets/Scripts/PlayerRoster.cs" Line="20" Column="31" />
+      <File FileName="Assets/Scripts/GUI/PokemonRosterButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/PokemonListState.cs" Line="73" Column="52" />
+      <File FileName="Assets/Scripts/PokemonDefinition.cs" Line="176" Column="2" />
+      <File FileName="Assets/Scripts/PokemonPrototype.cs" Line="16" Column="18" />
+      <File FileName="Assets/Scripts/Pokemon.cs" Line="16" Column="10" />
+      <File FileName="Assets/Scripts/PokemonFactory.cs" Line="10" Column="2" />
+      <File FileName="Assets/Scripts/Character.cs" Line="103" Column="26" />
+      <File FileName="Assets/RosterGUI.cs" Line="15" Column="4" />
+      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="104" Column="51" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="76" Column="108" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="GUI" expanded="True" />
-              <Node name="PokemonFactory.cs" selected="True" />
+              <Node name="GUI" expanded="True">
+                <Node name="PokemonListState.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True">

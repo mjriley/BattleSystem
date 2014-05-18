@@ -19,7 +19,7 @@ public class Character
 	public int MaxHP {
 		get
 		{
-			return (m_prototype.HP * 2 + 100) * (int)Level / 100 + 10;
+			return (m_definition.HP * 2 + 100) * (int)Level / 100 + 10;
 		}
 	}
 	
@@ -75,14 +75,14 @@ public class Character
 		get { return m_gender; }
 	}
 	
-	public Pokemon.Species Species { get { return m_prototype.Species; } }
+	public Pokemon.Species Species { get { return m_definition.Species; } }
 	
-	PokemonPrototype m_prototype;
+	PokemonDefinition m_definition;
 	
-	public Character(string name, PokemonPrototype prototype, Pokemon.Gender gender, uint level, IAttackStrategy strategy)
+	public Character(string name, PokemonDefinition definition, Pokemon.Gender gender, uint level, IAttackStrategy strategy)
 	{
 		m_name = name;
-		m_prototype = prototype;
+		m_definition = definition;
 		m_gender = gender;
 		Level = level;
 		

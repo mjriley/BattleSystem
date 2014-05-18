@@ -30,7 +30,7 @@ public class PokemonListState : IDisplayState
 
 	public PokemonListState(RosterController controller)
 	{
-		m_options = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
+		m_controller = controller;
 		elapsed = KEY_PRESS_DELAY; // make sure key input is detected immediately
 		
 		InitScrollBarStyle();
@@ -41,7 +41,6 @@ public class PokemonListState : IDisplayState
 		
 		m_activeSlot = 0;
 		
-		m_controller = controller;
 	}
 	
 	void InitScrollBarStyle()
@@ -53,7 +52,10 @@ public class PokemonListState : IDisplayState
 	public void SetActiveSlot(int slot)
 	{
 		m_activeSlot = slot;
-		selectedIndex = Array.BinarySearch(m_options, m_controller.GetRosterSlot(slot));
+		m_options = m_controller.GetSlotOptions(slot);
+		PokemonPrototype prototype = m_controller.GetRosterSlot(slot);
+		Pokemon.Species species = (prototype == null) ? Pokemon.Species.None : prototype.Species;
+		selectedIndex = Array.BinarySearch(m_options, species);
 		
 		FocusSelected();
 	}
@@ -69,7 +71,8 @@ public class PokemonListState : IDisplayState
 	{
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
-			m_controller.SetSlotValue(m_activeSlot, m_options[selectedIndex]);
+			PokemonPrototype prototype = new PokemonPrototype(m_options[selectedIndex], 50, Pokemon.Gender.Male);
+			m_controller.SetSlotValue(m_activeSlot, prototype);
 			return;
 		}
 		

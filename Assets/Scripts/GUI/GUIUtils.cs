@@ -3,6 +3,7 @@ using UnityEngine;
 public class GUIUtils
 {
 	public delegate void DrawFunc(Rect bounds);
+	public delegate void BlockFunc();
 	
 	private static Texture2D m_solidTexture;
 	private static bool m_isInit = false;
@@ -14,6 +15,20 @@ public class GUIUtils
 		GUI.BeginGroup(bounds);
 		func(bounds);
 		GUI.EndGroup();
+	}
+	
+	static public void DrawEnabled(bool enabled, BlockFunc func)
+	{
+		bool prevEnabled = GUI.enabled;
+		
+		if (!enabled)
+		{
+			GUI.enabled = false;
+		}
+		
+		func();
+		
+		GUI.enabled = prevEnabled;
 	}
 	
 	static void Init()

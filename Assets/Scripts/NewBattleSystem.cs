@@ -65,15 +65,15 @@ public class NewBattleSystem
 		m_enemyStrategy = new RandomAttackStrategy(m_generator);
 	}
 	
-	public void InitializePlayer(Pokemon.Species[] playerSpecies)
+	public void InitializePlayer(PokemonPrototype[] prototypes)
 	{
 		m_userPlayer = new Player("Human", null);
 		
 		UserInputStrategy input = new UserInputStrategy(null, this.GetUserAbility);
 		
-		foreach (Pokemon.Species species in playerSpecies)
+		foreach (PokemonPrototype prototype in prototypes)
 		{
-			Character pokemon = PokemonFactory.CreatePokemon(species, 50, "", Pokemon.Gender.Random, input);
+			Character pokemon = PokemonFactory.CreatePokemon(prototype.Species, prototype.Level, "", prototype.Gender, input);
 			m_userPlayer.AddPokemon(pokemon);
 		}
 	}

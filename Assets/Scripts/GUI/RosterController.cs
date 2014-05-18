@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RosterController
@@ -12,7 +13,9 @@ public class RosterController
 	
 	PlayerRoster m_rosterModel;
 	
-	Pokemon.Species[] m_roster;
+	//List<Pokemon.Species> m_roster;
+	List<PokemonPrototype> m_roster;
+	
 	
 	public RosterController()
 	{
@@ -27,19 +30,17 @@ public class RosterController
 	
 	void InitRoster()
 	{
-		m_roster = new Pokemon.Species[6];
+		//m_roster = new List<Pokemon.Species>();
+		m_roster = new List<PokemonPrototype>();
 		for (int i=0; i<6; ++i)
 		{
-			m_roster[i] = m_rosterModel.GetRosterSlot(i);
+			m_roster.Add(m_rosterModel.GetRosterSlot(i));
 		}
 	}
 	
 	void CommitChoices()
 	{
-		for (int i=0; i<6; ++i)
-		{
-			m_rosterModel.SetRosterSlot(i, m_roster[i]);
-		}
+		m_rosterModel.roster = m_roster.ToArray();
 	}
 	
 	void ChangeState(IDisplayState newState)
@@ -51,46 +52,87 @@ public class RosterController
 		m_currentState.OnEnter();
 	}
 	
-	public Pokemon.Species GetRosterSlot(int slot)
+	//public Pokemon.Species GetRosterSlot(int slot)
+	public PokemonPrototype GetRosterSlot(int slot)
 	{
-		//return m_roster.GetRosterSlot(slot);
+		if (slot >= m_roster.Count)
+		{
+			//return Pokemon.Species.None;
+			return null;
+		}
+		
 		return m_roster[slot];
+	}
+	
+	public Pokemon.Species[] GetSlotOptions(int slot)
+	{
+		Pokemon.Species[] species = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
+		
+		//if (GetRosterSlot(slot) != Pokemon.Species.None)
+		if (GetRosterSlot(slot) != null)
+		{
+			return species.Where(x => x != Pokemon.Species.None).ToArray();
+		}
+		
+		return species;
+	}
+	
+	public void RemovePokemonAtSlot(int slot)
+	{
+		m_roster.RemoveAt(slot);
+	}
+	
+	public int GetRosterSize()
+	{
+		return m_roster.Count;
 	}
 	
 	public void DisplaySlotOptions(int slot)
 	{
 		m_optionState.SetActiveSlot(slot);
-		//m_currentState = State.Options;
 		ChangeState(m_optionState);
 	}
 	
-	public void SetSlotValue(int slot, Pokemon.Species species)
+	//public void SetSlotValue(int slot, Pokemon.Species species)
+	public void SetSlotValue(int slot, PokemonPrototype prototype)
 	{
-		//m_roster[slot] = species;
-		//m_roster.SetRosterSlot(slot, species);
-		m_roster[slot] = species;
+		// None is never added to the roster
+		//if (species != Pokemon.Species.None)
+		if (prototype != null)
+		{
+			if (slot >= m_roster.Count)
+			{
+				//m_roster.Add(species);
+				m_roster.Add(prototype);
+			}
+			else
+			{
+				//m_roster[slot] = species;
+				m_roster[slot] = prototype;
+			}
+		}
 		
 		ChangeState(m_rosterState);
-		//m_currentState = State.Roster;
+	}
+	
+	public void ModifyLevel(int slot, int increase)
+	{
+		PokemonPrototype prototype = GetRosterSlot(slot);
+		
+		if (prototype != null)
+		{
+			int newLevel = (int)prototype.Level + increase;
+			
+			newLevel = Mathf.Min(newLevel, 100);
+			newLevel = Mathf.Max(newLevel, 1);
+			
+			prototype.Level = (uint)newLevel;
+		}
 	}
 	
 	public IDisplayState GetActiveDisplay()
 	{
 		return m_currentState;
-//		if (m_currentState == State.Start)
-//		{
-//			return m_startState;
-//		}
-//		else if (m_currentState == State.Roster)
-//		{
-//			return m_rosterState;
-//		}
-//		else if (m_currentState == State.Options)
-//		{
-//			return m_optionState;
-//		}
-		
-		//return null;
 	}
 	
 	public void ExitScene(bool cancel=false)
