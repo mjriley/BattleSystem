@@ -1,16 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/PokemonDetailsState.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/Tests/RandomAttackStrategyTests.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/PokemonRosterButton.cs" Line="83" Column="81" />
-      <File FileName="Assets/Scripts/GUI/RosterController.cs" Line="16" Column="1" />
-      <File FileName="Assets/Scripts/GUI/AccelerationButton.cs" Line="26" Column="12" />
-      <File FileName="Assets/Scripts/GUI/PokemonDetailsState.cs" Line="7" Column="1" />
-      <File FileName="Assets/Scripts/GUI/IDisplayState.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/PlayerRoster.cs" Line="50" Column="4" />
+      <File FileName="Assets/Editor/Tests/RosterSerializeTests.cs" Line="14" Column="39" />
+      <File FileName="Assets/Editor/Tests/RandomAttackStrategyTests.cs" Line="15" Column="4" />
+      <File FileName="Assets/Scripts/PokemonPrototype.cs" Line="4" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Editor" expanded="True">
+              <Node name="Tests" expanded="True">
+                <Node name="RandomAttackStrategyTests.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />

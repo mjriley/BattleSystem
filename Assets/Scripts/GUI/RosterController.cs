@@ -33,13 +33,18 @@ public class RosterController
 		m_roster = new List<PokemonPrototype>();
 		for (int i=0; i<6; ++i)
 		{
-			m_roster.Add(m_rosterModel.GetRosterSlot(i));
+			PokemonPrototype prototype = m_rosterModel.GetRosterSlot(i);
+			if (prototype != null)
+			{
+				m_roster.Add(prototype);
+			}
 		}
 	}
 	
 	void CommitChoices()
 	{
 		m_rosterModel.roster = m_roster.ToArray();
+		m_rosterModel.Save();
 	}
 	
 	void ChangeState(IDisplayState newState)
