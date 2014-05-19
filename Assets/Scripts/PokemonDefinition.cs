@@ -24,6 +24,7 @@ public class PokemonDefinition
 		m_baseStats[Stat.Attack] = atk;
 		m_baseStats[Stat.Defense] = def;
 		m_baseStats[Stat.SpecialAttack] = spAtk;
+		m_baseStats[Stat.SpecialDefense] = spDef;
 		m_baseStats[Stat.Speed] = spd;
 		
 		m_abilities = abilities;

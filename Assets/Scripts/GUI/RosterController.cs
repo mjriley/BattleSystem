@@ -7,13 +7,12 @@ public class RosterController
 {
 	IDisplayState m_currentState;
 	
-	StartState m_startState;
 	RosterState m_rosterState;
 	PokemonListState m_optionState;
+	PokemonDetailsState m_detailsState;
 	
 	PlayerRoster m_rosterModel;
 	
-	//List<Pokemon.Species> m_roster;
 	List<PokemonPrototype> m_roster;
 	
 	
@@ -21,6 +20,7 @@ public class RosterController
 	{
 		m_rosterState = new RosterState(this);
 		m_optionState = new PokemonListState(this);
+		m_detailsState = new PokemonDetailsState(this);
 		
 		m_currentState = m_rosterState;
 		
@@ -30,7 +30,6 @@ public class RosterController
 	
 	void InitRoster()
 	{
-		//m_roster = new List<Pokemon.Species>();
 		m_roster = new List<PokemonPrototype>();
 		for (int i=0; i<6; ++i)
 		{
@@ -52,12 +51,10 @@ public class RosterController
 		m_currentState.OnEnter();
 	}
 	
-	//public Pokemon.Species GetRosterSlot(int slot)
 	public PokemonPrototype GetRosterSlot(int slot)
 	{
 		if (slot >= m_roster.Count)
 		{
-			//return Pokemon.Species.None;
 			return null;
 		}
 		
@@ -68,7 +65,6 @@ public class RosterController
 	{
 		Pokemon.Species[] species = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
 		
-		//if (GetRosterSlot(slot) != Pokemon.Species.None)
 		if (GetRosterSlot(slot) != null)
 		{
 			return species.Where(x => x != Pokemon.Species.None).ToArray();
@@ -93,21 +89,17 @@ public class RosterController
 		ChangeState(m_optionState);
 	}
 	
-	//public void SetSlotValue(int slot, Pokemon.Species species)
 	public void SetSlotValue(int slot, PokemonPrototype prototype)
 	{
 		// None is never added to the roster
-		//if (species != Pokemon.Species.None)
 		if (prototype != null)
 		{
 			if (slot >= m_roster.Count)
 			{
-				//m_roster.Add(species);
 				m_roster.Add(prototype);
 			}
 			else
 			{
-				//m_roster[slot] = species;
 				m_roster[slot] = prototype;
 			}
 		}
@@ -133,6 +125,17 @@ public class RosterController
 	public IDisplayState GetActiveDisplay()
 	{
 		return m_currentState;
+	}
+	
+	public void DisplayDetails(int slot)
+	{
+		m_detailsState.SetActiveSlot(slot);
+		ChangeState(m_detailsState);
+	}
+	
+	public void DisplayRoster()
+	{
+		ChangeState(m_rosterState);
 	}
 	
 	public void ExitScene(bool cancel=false)

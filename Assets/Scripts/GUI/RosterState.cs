@@ -124,7 +124,10 @@ public class RosterState : IDisplayState
 			GUIUtils.DrawEnabled(isExistingPokemon, delegate()
 			{	
 				Rect detailsRect = new Rect(bounds.width - m_offsetX - m_buttonWidth, m_offsetY, m_buttonWidth, m_buttonHeight);
-				GUI.Button(detailsRect, "Details");
+				if (GUI.Button(detailsRect, "Details"))
+				{
+					m_controller.DisplayDetails(activeIndex);
+				}
 				
 				Rect abilitiesRect = new Rect(m_offsetX, 2 * m_offsetY + m_buttonHeight, m_buttonWidth, m_buttonHeight);
 				GUI.Button(abilitiesRect, "Abilities");

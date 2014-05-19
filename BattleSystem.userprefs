@@ -1,38 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/PokemonListState.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/PokemonDetailsState.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/RosterState.cs" Line="98" Column="1" />
-      <File FileName="Assets/Scripts/GUI/GUIUtils.cs" Line="26" Column="18" />
-      <File FileName="Assets/Scripts/GUI/RosterController.cs" Line="50" Column="15" />
-      <File FileName="Assets/Scripts/PlayerRoster.cs" Line="20" Column="31" />
-      <File FileName="Assets/Scripts/GUI/PokemonRosterButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/PokemonListState.cs" Line="73" Column="52" />
-      <File FileName="Assets/Scripts/PokemonDefinition.cs" Line="176" Column="2" />
-      <File FileName="Assets/Scripts/PokemonPrototype.cs" Line="16" Column="18" />
-      <File FileName="Assets/Scripts/Pokemon.cs" Line="16" Column="10" />
-      <File FileName="Assets/Scripts/PokemonFactory.cs" Line="10" Column="2" />
-      <File FileName="Assets/Scripts/Character.cs" Line="103" Column="26" />
-      <File FileName="Assets/RosterGUI.cs" Line="15" Column="4" />
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="104" Column="51" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="76" Column="108" />
+      <File FileName="Assets/Scripts/GUI/PokemonRosterButton.cs" Line="83" Column="81" />
+      <File FileName="Assets/Scripts/GUI/RosterController.cs" Line="16" Column="1" />
+      <File FileName="Assets/Scripts/GUI/AccelerationButton.cs" Line="26" Column="12" />
+      <File FileName="Assets/Scripts/GUI/PokemonDetailsState.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/GUI/IDisplayState.cs" Line="9" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="GUI" expanded="True">
-                <Node name="PokemonListState.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Editor" expanded="True">
-              <Node name="Tests" expanded="True" />
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
