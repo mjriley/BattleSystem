@@ -48,6 +48,7 @@ public class NewBattleSystem
 	public Player UserPlayer { get { return m_userPlayer; } }
 	
 	private Player m_enemyPlayer; 
+	Trainer m_enemyTrainer;
 	public Player EnemyPlayer { get { return m_enemyPlayer; } }
 	
 	private int m_userChoice = -1;
@@ -104,6 +105,18 @@ public class NewBattleSystem
 		m_pendingEvents.Enqueue(new StatusUpdateEventArgs(status));
 	}
 	
+	public void Reset()
+	{
+		m_pendingEvents = new Queue<EventArgs>();
+		m_currentState = State.Start;
+		m_nextState = State.Splash;
+		
+		m_userChoice = -1;
+		m_waitingForInput = false;
+		
+		m_enemyTrainer = null;
+	}
+	
 	public void Update()
 	{
 		if (m_pendingEvents.Count != 0)
@@ -125,10 +138,17 @@ public class NewBattleSystem
 			// Go! <Y>!
 			case State.Splash:
 			{
+//				if (m_enemyTrainer == null)
+//				{
+//					m_enemyTrainer = new Trainer(TrainerDefinition.TrainerType.RandomClass, Pokemon.Gender.Random);
+//				}
+			
 				m_enemyPlayer = generateEnemy();
-				m_pendingEvents.Enqueue(new NewEncounterEventArgs());
+				m_pendingEvents.Enqueue(new NewEncounterEventArgs(m_enemyTrainer));
 				//AddStatusMessage("You have been challenged by Duchess Ione!");
-				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + m_enemyPlayer.Name + "!", false));
+				//m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + m_enemyPlayer.Name + "!", false));
+				string fullName = m_enemyTrainer.Title + " " + m_enemyTrainer.Name;
+				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + fullName + "!", false));
 				m_nextState = State.CombatIntro;
 				break;
 			}
@@ -448,7 +468,11 @@ public class NewBattleSystem
 	
 	public Player generateEnemy()
 	{
+		//string prefix = Trainer.GetMaleString(Trainer.Class.Nobility3);
+		m_enemyTrainer = new Trainer(TrainerDefinition.TrainerType.RandomClass, Pokemon.Gender.Random, -1);
+		
 		Player player = new Player("Duchess Ione", new SequentialPokemonStrategy());
+		//Player player = new Player(prefix + " Ione", new SequentialPokemonStrategy());
 		
 		Pokemon.Species[] speciesOptions = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
 		speciesOptions = speciesOptions.Where(x => x != Pokemon.Species.None).ToArray();
@@ -491,8 +515,11 @@ public class StateChangeArgs : EventArgs
 
 public class NewEncounterEventArgs : EventArgs
 {
-	public NewEncounterEventArgs()
+	public Trainer Trainer { get; set; }
+		
+	public NewEncounterEventArgs(Trainer trainer)
 	{
+		Trainer = trainer;
 	} 
 }
 

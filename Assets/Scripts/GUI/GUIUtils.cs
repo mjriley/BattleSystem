@@ -40,6 +40,16 @@ public class GUIUtils
 		}
 	}
 	
+	static public void DrawSeparatorBar()
+	{
+		Init();
+		Rect separatorBar = new Rect(0.0f, 240, 400, 20);
+		Color prevColor = GUI.color;
+		GUI.color = Color.black;
+		GUI.DrawTexture(separatorBar, m_solidTexture);
+		GUI.color = prevColor;
+	}
+	
 	static public void DrawBottomScreenBackground(Rect bounds, int borderWidth=5)
 	{
 		Init();

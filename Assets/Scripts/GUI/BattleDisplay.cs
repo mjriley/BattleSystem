@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class BattleDisplay : MonoBehaviour
 {
 	public GameObject splashScreen;
+	TrainerDisplay m_trainerDisplay;
 	
 	private NewBattleSystem m_system = new NewBattleSystem();
 	
@@ -74,6 +75,16 @@ public class BattleDisplay : MonoBehaviour
 		Destroy(script);
 	}
 	
+	void Reset()
+	{
+		DoneWithText();
+		m_animations.Clear();
+		m_system.Reset();
+		
+		m_playerDisplay.enabled = false;
+		m_enemyDisplay.enabled = false;
+	}
+	
 	
 	/** GUI variables ******/
 	public int statusHeight = 50;
@@ -83,6 +94,8 @@ public class BattleDisplay : MonoBehaviour
 	
 	public void Start()
 	{
+		m_trainerDisplay = splashScreen.GetComponent<TrainerDisplay>();
+		
 		m_basicTexture = Resources.Load<Texture2D>("Textures/OptionBackground");
 		m_topBarTexture = Resources.Load<Texture2D>("Textures/bottomScreenTopEdge");
 		m_bottomBarTexture = Resources.Load<Texture2D>("Textures/bottomScreenEdge");
@@ -142,7 +155,7 @@ public class BattleDisplay : MonoBehaviour
 		m_enemyStatusDisplay = new PlayerStatusDisplay(enemyStatusRect);
 	}
 
-	void HandleLeaveState (object sender, StateChangeArgs e)
+	void HandleLeaveState(object sender, StateChangeArgs e)
 	{
 		if (e.State == NewBattleSystem.State.Splash)
 		{
@@ -150,7 +163,7 @@ public class BattleDisplay : MonoBehaviour
 		}
 	}
 
-	void HandleEnterState (object sender, StateChangeArgs e)
+	void HandleEnterState(object sender, StateChangeArgs e)
 	{
 		if (e.State == NewBattleSystem.State.Splash)
 		{
@@ -182,6 +195,11 @@ public class BattleDisplay : MonoBehaviour
 	
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.F5))
+		{
+			Reset();
+		}
+		
 		if (Input.GetKeyDown("space"))
 		{
 			DoneWithText();
@@ -278,6 +296,8 @@ public class BattleDisplay : MonoBehaviour
 	
 	void OnGUI()
 	{
+		GUIUtils.DrawSeparatorBar();
+		
 		Color prevColor;
 		m_playerStatusDisplay.Display(m_playerNameStyle);
 		m_enemyStatusDisplay.Display(m_playerNameStyle);
@@ -446,6 +466,7 @@ public class BattleDisplay : MonoBehaviour
 		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds) {
 			//GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
 			//GUI.Box(new Rect(0, bounds.height - statusHeight, bounds.width, statusHeight), m_statusText, statusStyle);
+			statusStyle.wordWrap = true;
 			GUI.Label(new Rect(0, bounds.height - statusStyle.normal.background.height, bounds.width, statusStyle.normal.background.height), m_statusText, statusStyle);
 			//GUI.DrawTexture(new Rect(0, bounds.height - statusHeight, bounds.width, m_statusTexture.height), m_statusTexture);
 		});
@@ -456,7 +477,9 @@ public class BattleDisplay : MonoBehaviour
 	{
 		if (e is NewEncounterEventArgs)
 		{
+			NewEncounterEventArgs args = (NewEncounterEventArgs)e;
 			m_enemyStatusDisplay.ActivePlayer = m_system.EnemyPlayer;
+			m_trainerDisplay.UpdateTrainer(args.Trainer); 
 			
 			m_playerStatusDisplay.Enabled = false;
 			m_enemyStatusDisplay.Enabled = false;

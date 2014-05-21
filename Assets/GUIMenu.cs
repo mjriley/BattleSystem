@@ -54,6 +54,7 @@ public class GUIMenu : MonoBehaviour
 	
 	public void OnGUI()
 	{
+		GUIUtils.DrawSeparatorBar();
 		DrawBottomScreen();
 	}
 	

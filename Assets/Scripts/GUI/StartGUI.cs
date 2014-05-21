@@ -17,6 +17,7 @@ public class StartGUI : MonoBehaviour
 	
 	public void OnGUI()
 	{
+		GUIUtils.DrawSeparatorBar();
 		m_controller.GetActiveDisplay().Display();
 	}
 }

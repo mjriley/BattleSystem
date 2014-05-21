@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TrainerDisplay : MonoBehaviour
 {
-	public Texture2D trainer;
+	public Texture2D trainerTexture;
 	
 	public float m_x;
 	
@@ -22,9 +22,10 @@ public class TrainerDisplay : MonoBehaviour
 	float m_updateDistancePerSecondLeft;
 	float m_updateDistancePerSecondRight;
 	
-	public void Start()
+	public void UpdateTrainer(Trainer trainer)
 	{
-		
+		Debug.Log("Texture path is: " + trainer.TexturePath);
+		trainerTexture = Resources.Load<Texture2D>(trainer.TexturePath);
 	}
 	
 	public void Update()
@@ -123,7 +124,7 @@ public class TrainerDisplay : MonoBehaviour
 	{
 		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds)
 		{
-			GUI.DrawTexture(new Rect(m_x, 0.0f, bounds.width, bounds.height), trainer);
+			GUI.DrawTexture(new Rect(m_x, 0.0f, bounds.width, bounds.height), trainerTexture);
 		});
 	}
 }

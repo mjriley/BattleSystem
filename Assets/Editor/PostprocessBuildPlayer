@@ -1,0 +1,21 @@
+#!/usr/bin/env perl
+
+#my $installPath = $ARGV[0];
+
+#my $target = $ARGV[1];
+
+#my $optimization = $ARGV[2];
+
+#my $companyName = $ARGV[3];
+
+#my $productName = $ARGV[4];
+
+#my $width = $ARGV[5];
+
+#my $height = $ARGV[6];
+
+#print ("\n*** Building at '$installPath' with target: $target \n");
+#`mkdir '$installPath'/../Library/ScriptAssemblies/es-MX`
+
+#`osascript -e \'tell application \"Finder\" to display dialog \"Test $installPath\" buttons \"OK\"\'`;
+
