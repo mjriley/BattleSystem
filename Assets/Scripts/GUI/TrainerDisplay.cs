@@ -24,7 +24,6 @@ public class TrainerDisplay : MonoBehaviour
 	
 	public void UpdateTrainer(Trainer trainer)
 	{
-		Debug.Log("Texture path is: " + trainer.TexturePath);
 		trainerTexture = Resources.Load<Texture2D>(trainer.TexturePath);
 	}
 	

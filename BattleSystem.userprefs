@@ -1,14 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/BattleDisplay.cs">
     <Files>
-      <File FileName="Assets/Assembly-CSharp.txt" Line="60" Column="17" />
-      <File FileName="Assets/Scripts/TrainerDefinition.cs" Line="127" Column="14" />
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="133" Column="50" />
-      <File FileName="Assets/Scripts/Splash.cs" Line="78" Column="3" />
-      <File FileName="Assets/Scripts/GUI/TrainerDisplay.cs" Line="55" Column="66" />
-      <File FileName="Assets/Scripts/Trainer.cs" Line="10" Column="60" />
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="467" Column="3" />
+      <File FileName="Assets/Assembly-CSharp.txt" Line="16" Column="7" />
+      <File FileName="Assets/Scripts/TrainerDefinition.cs" Line="100" Column="116" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="472" Column="16" />
+      <File FileName="Assets/Scripts/Splash.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/TrainerDisplay.cs" Line="27" Column="55" />
+      <File FileName="Assets/Scripts/Trainer.cs" Line="23" Column="1" />
+      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="85" Column="33" />
+      <File FileName="Assets/Scripts/TrainerNames.cs" Line="1572" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

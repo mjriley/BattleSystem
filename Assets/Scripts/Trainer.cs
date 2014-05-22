@@ -20,9 +20,6 @@ public class Trainer
 		ResourceManager rm = new ResourceManager("Assembly-CSharp", Assembly.GetExecutingAssembly());
 		string localizationKey = m_class.ToString() + "_" + gender.ToString();
 		
-		UnityEngine.Debug.Log("Gender is: " + gender.ToString());
-		UnityEngine.Debug.Log("Localization key is: " + localizationKey);
-		
 		return rm.GetString(localizationKey);
 	}
 	
