@@ -1,5 +1,6 @@
 public interface ITurnAction
 {
-	Character Subject { get; }
+	ICharacter Subject { get; }
+	int Priority { get; } 
 	ActionStatus Execute();
 }

@@ -11,8 +11,9 @@ public class MultiHitAbility : DamageAbility
 	// Moves like Fury Swipes don't have an even distribution for the chance of the # of strikes
 	// to mimic this, pass in a custom random generator that reflects that distribution
 	public MultiHitAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, 
-		uint power, int accuracy, uint minHits, uint maxHits, bool highCritRate=false, DamageAbility.OnHitEffect onHitHandler=null, string description="", Random generator=null)
-	: base(name, abilityType, battleType, maxPP, power, accuracy, highCritRate, onHitHandler, description, generator)
+		uint power, int accuracy, uint minHits, uint maxHits, int priority=0,
+		bool highCritRate=false, DamageAbility.OnHitEffect onHitHandler=null, string description="", Random generator=null)
+	: base(name, abilityType, battleType, maxPP, power, accuracy, priority, highCritRate, onHitHandler, description, generator)
 	{
 		m_minHits = minHits;
 		m_maxHits = maxHits;

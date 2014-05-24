@@ -2,8 +2,8 @@ public class NoOpAbility : AbstractAbility
 {
 	string m_moveMessage;
 	
-	public NoOpAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, string moveMessage = "", string description="")
-	: base(name, abilityType, battleType, maxPP, description)
+	public NoOpAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, string moveMessage = "", int priority=0, string description="")
+	: base(name, abilityType, battleType, maxPP, priority, description)
 	{
 		m_moveMessage = moveMessage;
 	}

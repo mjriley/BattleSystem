@@ -21,9 +21,11 @@ public class SwapAbility : ITurnAction
 		m_subject = m_player.ActivePokemon;
 	}
 	
-	public Character Subject { get { return m_subject; } }
+	public ICharacter Subject { get { return m_subject; } }
 	
 	public string Name { get { return "Swap"; } }
+	
+	public int Priority { get { return 6; } }
 	
 	public ActionStatus Execute()
 	{

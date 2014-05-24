@@ -55,12 +55,15 @@ public class NewBattleSystem
 	private int m_userChoice = -1;
 	
 	private Queue<ITurnAction> m_actionQueue = new Queue<ITurnAction>();
-	private Queue<ITurnAction> m_nextTurnQueue = new Queue<ITurnAction>();
+	private List<ITurnAction> m_turnActions = new List<ITurnAction>();
+	//private Queue<ITurnAction> m_nextTurnQueue = new Queue<ITurnAction>();
 	
 	private Random m_generator = new Random();
 	private RandomAttackStrategy m_enemyStrategy;
 	
 	private bool m_waitingForInput = false;
+	
+	bool isQueueSorted = false;
 	
 	int m_consecutiveVictories;
 	public int Victories { get { return m_consecutiveVictories; } }
@@ -92,7 +95,8 @@ public class NewBattleSystem
 	
 	bool NeedPlayerAction(Player player)
 	{
-		return !m_actionQueue.Any(p => (p.Subject == player.ActivePokemon));
+		//return !m_actionQueue.Any(p => (p.Subject == player.ActivePokemon));
+		return !m_turnActions.Any(p => (p.Subject == player.ActivePokemon));
 	}
 	
 	bool ValidateInput()
@@ -171,6 +175,8 @@ public class NewBattleSystem
 			}
 			case State.BeginTurn:
 			{
+				isQueueSorted = false;
+				
 				if (NeedPlayerAction(m_userPlayer))
 				{
 					m_nextState = State.CombatPrompt;
@@ -242,7 +248,8 @@ public class NewBattleSystem
 					}
 					else
 					{
-						m_actionQueue.Enqueue(m_userPlayer.GetTurnAction());
+						//m_actionQueue.Enqueue(m_userPlayer.GetTurnAction());
+						m_turnActions.Add(m_userPlayer.GetTurnAction());
 						
 						m_nextState = State.EnemyAction;
 					}
@@ -295,7 +302,8 @@ public class NewBattleSystem
 				if (NeedPlayerAction(m_enemyPlayer))
 				{
 					ITurnAction enemyAction = m_enemyPlayer.GetTurnAction();
-					m_actionQueue.Enqueue(enemyAction);
+					//m_actionQueue.Enqueue(enemyAction);
+					m_turnActions.Add(enemyAction);
 				}
 				
 				m_nextState = State.ProcessTurn;
@@ -303,8 +311,22 @@ public class NewBattleSystem
 			}
 			case State.ProcessTurn:
 			{
+				if (!isQueueSorted)
+				{
+					m_turnActions.Sort(delegate(ITurnAction x, ITurnAction y) { return ActionSort.ByPriority(y, x); });
+					
+					foreach (ITurnAction action in m_turnActions)
+					{
+						m_actionQueue.Enqueue(action);
+					}
+					
+					m_turnActions = new List<ITurnAction>();
+					isQueueSorted = true;
+				}
+				
 				if (m_actionQueue.Count > 0)
 				{
+					// Sort the action queue
 					ITurnAction action = m_actionQueue.Peek();
 					ActionStatus status = action.Execute();
 					
@@ -319,7 +341,8 @@ public class NewBattleSystem
 						
 						if (!status.isComplete)
 						{
-							m_nextTurnQueue.Enqueue(action);
+							//m_nextTurnQueue.Enqueue(action);
+							m_turnActions.Add(action);
 						}
 					}
 				}
@@ -331,7 +354,6 @@ public class NewBattleSystem
 			}
 			case State.EndTurn:
 			{
-				
 				if (m_userPlayer.ActivePokemon.isDead())
 				{
 					if (m_userPlayer.IsDefeated())
@@ -358,9 +380,9 @@ public class NewBattleSystem
 				else
 				{
 					// swap queues -- make the next turn the current one
-					Queue<ITurnAction> temp = m_actionQueue;
-					m_actionQueue = m_nextTurnQueue;
-					m_nextTurnQueue = temp;
+//					Queue<ITurnAction> temp = m_actionQueue;
+//					m_actionQueue = m_nextTurnQueue;
+//					m_nextTurnQueue = temp;
 					
 					m_nextState = State.BeginTurn;
 				}

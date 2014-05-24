@@ -279,6 +279,10 @@ public class BattleDisplay : MonoBehaviour
 		for (int i = 0; i < 3; ++i)
 		{
 			int leftPokemonIndex = i * 2;
+			if (leftPokemonIndex >= m_system.UserPlayer.Pokemon.Count)
+			{
+				break;
+			}
 			Character leftPokemon = m_system.UserPlayer.Pokemon[leftPokemonIndex];
 			if (leftPokemon != null)
 			{
@@ -291,6 +295,10 @@ public class BattleDisplay : MonoBehaviour
 			}
 			
 			int rightPokemonIndex = i * 2 + 1;
+			if (rightPokemonIndex >= m_system.UserPlayer.Pokemon.Count)
+			{
+				break;
+			}
 			Character rightPokemon = m_system.UserPlayer.Pokemon[rightPokemonIndex];
 			if (rightPokemon != null)
 			{

@@ -14,7 +14,9 @@ public class DeployAbility : ITurnAction
 		m_subject = player.Pokemon[newIndex];
 	}
 	
-	public Character Subject { get { return m_subject; } }
+	public ICharacter Subject { get { return m_subject; } }
+	
+	public int Priority { get { return 6; } }
 	
 	public ActionStatus Execute()
 	{

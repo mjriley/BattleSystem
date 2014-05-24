@@ -4,8 +4,8 @@ public class EffectAbility : AbstractAbility
 	
 	BasicEffect EffectImpl;
 	
-	public EffectAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, BasicEffect effectImpl, string description="")
-	: base(name, abilityType, battleType, maxPP, description)
+	public EffectAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, BasicEffect effectImpl, int priority=0, string description="")
+	: base(name, abilityType, battleType, maxPP, priority, description)
 	{
 		EffectImpl = effectImpl;
 	}

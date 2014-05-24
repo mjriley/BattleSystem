@@ -9,13 +9,16 @@ public abstract class AbstractAbility
 	public AbilityType AbilityType { get; protected set; }
 	public BattleType BattleType { get; protected set; }
 	
-	public AbstractAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, string description="")
+	public int Priority { get; protected set;  }
+	
+	public AbstractAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, int priority=0, string description="")
 	{
 		this.Name = name;
 		this.AbilityType = abilityType;
 		this.BattleType = battleType;
 		this.MaxPP = maxPP;
 		this.CurrentPP = maxPP;
+		this.Priority = priority;
 		this.Description = description;
 	}
 	

@@ -13,8 +13,8 @@ public class DamageAbility : AbstractAbility
 	bool m_highCritRate;
 	public int CritStage { get { return (m_highCritRate ? 1 : 0); } }
 	
-	public DamageAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, uint power, int accuracy, bool highCritRate=false, OnHitEffect onHitHandler=null, string description="", Random generator=null)
-	: base(name, abilityType, battleType, maxPP, description)
+	public DamageAbility(string name, AbilityType abilityType, BattleType battleType, int maxPP, uint power, int accuracy, int priority=0, bool highCritRate=false, OnHitEffect onHitHandler=null, string description="", Random generator=null)
+	: base(name, abilityType, battleType, maxPP, priority, description)
 	{
 		Power = power;
 		Accuracy = accuracy;

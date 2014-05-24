@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Character
+public class Character : ICharacter
 {
 //	public enum Sex
 //	{
@@ -180,9 +180,6 @@ public class Character
 		
 		m_currentHP = Mathf.Min(m_currentHP, MaxHP);
 		m_currentHP = Mathf.Max(m_currentHP, 0);
-		
-		// TODO: REMOVE -- just speeds up testing
-		m_currentHP = 0;
 	}
 	
 	public bool isDead()
