@@ -88,12 +88,9 @@ public class Character
 		
 		m_strategy = strategy;
 		
-		Reset();
-		
-		ClearStatuses();
 		InitStats();
 		
-		ResetStages();
+		Reset();
 	}
 	
 	private void InitStats()
@@ -108,6 +105,8 @@ public class Character
 	public void Reset()
 	{
 		m_currentHP = MaxHP;
+		ResetStages();
+		ClearStatuses();
 	}
 	
 	public void ResetStages()
@@ -181,6 +180,9 @@ public class Character
 		
 		m_currentHP = Mathf.Min(m_currentHP, MaxHP);
 		m_currentHP = Mathf.Max(m_currentHP, 0);
+		
+		// TODO: REMOVE -- just speeds up testing
+		m_currentHP = 0;
 	}
 	
 	public bool isDead()

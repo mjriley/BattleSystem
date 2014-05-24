@@ -121,6 +121,11 @@ public class TrainerDisplay : MonoBehaviour
 	
 	void DrawTopScreen()
 	{
+		if (trainerTexture == null)
+		{
+			return;
+		}
+		
 		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds)
 		{
 			GUI.DrawTexture(new Rect(m_x, 0.0f, bounds.width, bounds.height), trainerTexture);

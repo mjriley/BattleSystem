@@ -59,8 +59,6 @@ public class BasicEffects
 				}
 			}
 			
-			UnityEngine.Debug.Log("actual change was: " + actual_change);
-			
 			status.events.Add(new StatusUpdateEventArgs(target.Name + "'s " + stat + " " + suffix));
 		};
 	}

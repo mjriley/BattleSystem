@@ -19,6 +19,7 @@ public class NewBattleSystem
 		EndTurn,
 		FriendlyPokemonDefeated,
 		EnemyPokemonDefeated,
+		Victory,
 		ReplacePokemon,
 		ReplaceEnemyPokemon
 	};
@@ -61,9 +62,14 @@ public class NewBattleSystem
 	
 	private bool m_waitingForInput = false;
 	
+	int m_consecutiveVictories;
+	public int Victories { get { return m_consecutiveVictories; } }
+	
 	public NewBattleSystem()
 	{
 		m_enemyStrategy = new RandomAttackStrategy(m_generator);
+		
+		Reset();
 	}
 	
 	public void InitializePlayer(PokemonPrototype[] prototypes)
@@ -115,6 +121,13 @@ public class NewBattleSystem
 		m_waitingForInput = false;
 		
 		m_enemyTrainer = null;
+		
+		m_consecutiveVictories = 0;
+	}
+	
+	void ProcessVictory()
+	{
+		m_consecutiveVictories += 1;
 	}
 	
 	public void Update()
@@ -138,15 +151,9 @@ public class NewBattleSystem
 			// Go! <Y>!
 			case State.Splash:
 			{
-//				if (m_enemyTrainer == null)
-//				{
-//					m_enemyTrainer = new Trainer(TrainerDefinition.TrainerType.RandomClass, Pokemon.Gender.Random);
-//				}
-			
+				m_userPlayer.RestorePokemon();
 				m_enemyPlayer = generateEnemy();
 				m_pendingEvents.Enqueue(new NewEncounterEventArgs(m_enemyTrainer));
-				//AddStatusMessage("You have been challenged by Duchess Ione!");
-				//m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + m_enemyPlayer.Name + "!", false));
 				string fullName = m_enemyTrainer.Title + " " + m_enemyTrainer.Name;
 				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + fullName + "!", false));
 				m_nextState = State.CombatIntro;
@@ -341,8 +348,7 @@ public class NewBattleSystem
 				{
 					if (m_enemyPlayer.IsDefeated())
 					{
-						AddStatusMessage("You've won!");
-						m_nextState = State.Splash;
+						m_nextState = State.Victory;
 					}
 					else
 					{
@@ -357,6 +363,42 @@ public class NewBattleSystem
 					m_nextTurnQueue = temp;
 					
 					m_nextState = State.BeginTurn;
+				}
+				break;
+			}
+			case State.Victory:
+			{
+				if (!m_waitingForInput)
+				{
+					ProcessVictory();
+					m_userChoice = -1;
+					m_waitingForInput = true;
+				}
+				else
+				{
+					if (m_userChoice != -1)
+					{
+						VictoryDisplay.Options selectedOption = (VictoryDisplay.Options)m_userChoice;
+						if (selectedOption == VictoryDisplay.Options.Continue)
+						{
+							m_waitingForInput = false;
+							m_nextState = State.Splash;
+						}
+						else if (selectedOption == VictoryDisplay.Options.Quit)
+						{
+							HighScores highScores = new HighScores();
+							highScores.Load();
+							
+							if (highScores.IsHighScore(m_consecutiveVictories))
+							{
+								highScores.InsertScore(HighScore.CreateFromPlayer(m_userPlayer, m_consecutiveVictories));
+								highScores.Save();
+							}
+							
+							// TODO: Figure out some way to not include this in this file
+							UnityEngine.Application.LoadLevel("HighScores");
+						}
+					}
 				}
 				break;
 			}
@@ -468,15 +510,15 @@ public class NewBattleSystem
 	
 	public Player generateEnemy()
 	{
-		//string prefix = Trainer.GetMaleString(Trainer.Class.Nobility3);
 		m_enemyTrainer = new Trainer(TrainerDefinition.TrainerType.RandomClass, Pokemon.Gender.Random, -1);
+		string trainerName = m_enemyTrainer.Title + " " + m_enemyTrainer.Name;
 		
-		Player player = new Player("Duchess Ione", new SequentialPokemonStrategy());
-		//Player player = new Player(prefix + " Ione", new SequentialPokemonStrategy());
+		Player player = new Player(trainerName, new SequentialPokemonStrategy());
 		
 		Pokemon.Species[] speciesOptions = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
 		speciesOptions = speciesOptions.Where(x => x != Pokemon.Species.None).ToArray();
-		for (int i = 0; i < 3; ++i)
+		//for (int i = 0; i < 3; ++i)
+		for (int i = 0; i < 1; ++i)
 		{
 			int index = m_generator.Next(0, speciesOptions.Length);
 			

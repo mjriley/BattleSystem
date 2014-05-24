@@ -17,6 +17,8 @@ public class BattleDisplay : MonoBehaviour
 	SpriteRenderer m_playerDisplay;
 	SpriteRenderer m_enemyDisplay;
 	
+	VictoryDisplay m_victoryDisplay;
+	
 	AudioSource m_audio;
 	AudioClip m_damageSound;
 	
@@ -67,7 +69,15 @@ public class BattleDisplay : MonoBehaviour
 	Rect m_topScreen = new Rect(0, 0, 400, 240);
 	Rect m_bottomScreen = new Rect(0, 260, 400, 240);
 	
+	
 	public delegate void AnimationCallback(MonoBehaviour script);
+	
+	public int m_victoryHeight = 20;
+	
+	void Awake()
+	{
+		m_victoryDisplay = new VictoryDisplay(m_system, this);
+	}
 	
 	void HandleAnimationComplete(MonoBehaviour script)
 	{
@@ -75,14 +85,18 @@ public class BattleDisplay : MonoBehaviour
 		Destroy(script);
 	}
 	
-	void Reset()
+	void ClearDisplay()
 	{
 		DoneWithText();
 		m_animations.Clear();
-		m_system.Reset();
-		
 		m_playerDisplay.enabled = false;
 		m_enemyDisplay.enabled = false;
+	}
+	
+	void Reset()
+	{
+		ClearDisplay();
+		m_system.Reset();
 	}
 	
 	
@@ -212,6 +226,11 @@ public class BattleDisplay : MonoBehaviour
 			m_system.Update();
 		}
 		
+		if (m_system.CurrentState == NewBattleSystem.State.Victory)
+		{
+			m_victoryDisplay.Update();
+		}
+		
 		if (m_system.CurrentState == NewBattleSystem.State.ProcessTurn)
 		{
 			m_playerStatusDisplay.DisplayBalls = false;
@@ -323,35 +342,47 @@ public class BattleDisplay : MonoBehaviour
 				// bottom bar
 				GUI.DrawTexture(new Rect(0.0f, bounds.height - m_bottomBarTexture.height, bounds.width, m_bottomBarTexture.height), m_bottomBarTexture);
 				
-				//GUI.color = prevColor;
-				//if (GUI.Button(new Rect((m_screenArea.width - fightButtonWidth) / 2.0f, 0.0f, fightButtonWidth, fightButtonHeight), "", m_fightButtonStyle))
 				if (GUI.Button(new Rect((bounds.width - m_fightButtonTexture.width) / 2.0f, m_topBarHeight + m_fightButtonGap, m_fightButtonTexture.width, m_fightButtonTexture.height), m_fightButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Fight);
 					DoneWithText();
 				}
 				
-				//if (GUI.Button(new Rect(0, m_screenArea.height - sideButtonHeight, sideButtonWidth, sideButtonHeight), "", m_bagButtonStyle))
 				if (GUI.Button(bagRect, m_bagButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Item);
 					DoneWithText();
 				}
 				
-				//if (GUI.Button(new Rect((m_screenArea.width - midButtonWidth) / 2.0f, m_screenArea.height - midButtonHeight, midButtonWidth, midButtonHeight), "", m_runButtonStyle))
 				if (GUI.Button(runRect, m_runButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Run);
 					DoneWithText();
 				}
 				
-				//if (GUI.Button(new Rect(m_screenArea.width - sideButtonWidth, m_screenArea.height - sideButtonHeight, sideButtonWidth, sideButtonHeight), "", m_pokemonButtonStyle))
 				if (GUI.Button(pokemonRect, m_pokemonButtonTexture, m_emptyStyle))
 				{
 					m_system.ProcessUserChoice((int)NewBattleSystem.CombatSelection.Pokemon);
 					DoneWithText();
 				}
 			});
+		}
+		else if (m_system.CurrentState == NewBattleSystem.State.Victory)
+		{
+//			GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds)
+//			{
+//				prevColor = GUI.color;
+//				GUI.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+//				GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, bounds.height), m_solidTexture);
+//				GUI.color = prevColor;
+//				
+//				int buttonWidth = 100;
+//				int buttonHeight = 30;
+//				GUI.Label(new Rect((bounds.width - buttonWidth) / 2.0f, 20, 200, buttonHeight), "Consecutive Victories: 5");
+//				GUI.Button(new Rect((bounds.width - buttonWidth) / 2.0f, 50, buttonWidth, buttonHeight), "Continue");
+//				GUI.Button(new Rect((bounds.width - buttonWidth) / 2.0f, 100, buttonWidth, buttonHeight), "Quit");
+//			});
+			m_victoryDisplay.Display();
 		}
 		else if (m_system.CurrentState == NewBattleSystem.State.EnemyPokemonDefeated)
 		{
@@ -400,7 +431,8 @@ public class BattleDisplay : MonoBehaviour
 			m_system.CurrentState == NewBattleSystem.State.ItemPrompt ||
 			m_system.CurrentState == NewBattleSystem.State.PokemonPrompt)
 		{
-			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds) {
+			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds)
+			{
 				GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, bounds.height), m_buttonLayoutTexture);
 				
 				if (m_system.CurrentState == NewBattleSystem.State.FightPrompt)
@@ -413,7 +445,6 @@ public class BattleDisplay : MonoBehaviour
 					Character pokemon = m_system.UserPlayer.ActivePokemon;
 					
 					Rect buttonBounds = new Rect(0, initialY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
-					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[0], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
 					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[0]))
 					{
 						DoneWithText();
@@ -421,7 +452,6 @@ public class BattleDisplay : MonoBehaviour
 					}
 					
 					buttonBounds = new Rect((bounds.width + abilityButtonGapX) / 2.0f, initialY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
-					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[1], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
 					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[1], true))
 					{
 						DoneWithText();
@@ -429,7 +459,6 @@ public class BattleDisplay : MonoBehaviour
 					}
 					
 					buttonBounds = new Rect(0, initialY + abilityButtonHeight + abilityButtonGapY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
-					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[2], false, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
 					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[2]))
 					{
 						DoneWithText();
@@ -437,7 +466,6 @@ public class BattleDisplay : MonoBehaviour
 					}
 					
 					buttonBounds = new Rect((bounds.width + abilityButtonGapX) / 2.0f, initialY + abilityButtonHeight + abilityButtonGapY, (bounds.width - abilityButtonGapX) / 2.0f, abilityButtonHeight);
-					//if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[3], true, typeNameStyle, abilityNameStyle, abilityDetailsStyle, m_emptyStyle))
 					if (AbilityButton.Display(buttonBounds, pokemon.getAbilities()[3], true))
 					{
 						DoneWithText();
@@ -454,29 +482,22 @@ public class BattleDisplay : MonoBehaviour
 		}
 		else
 		{
-//			GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds)
-//			{
-//				
-//			});
-
 			GUIUtils.DrawBottomScreenBackground(m_bottomScreen);
-			
 		}
 	
-		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds) {
-			//GUI.backgroundColor = new Color(0.2f, 0.2f, 0.4f);
-			//GUI.Box(new Rect(0, bounds.height - statusHeight, bounds.width, statusHeight), m_statusText, statusStyle);
+		GUIUtils.DrawGroup(m_topScreen, delegate(Rect bounds)
+		{
 			statusStyle.wordWrap = true;
 			GUI.Label(new Rect(0, bounds.height - statusStyle.normal.background.height, bounds.width, statusStyle.normal.background.height), m_statusText, statusStyle);
-			//GUI.DrawTexture(new Rect(0, bounds.height - statusHeight, bounds.width, m_statusTexture.height), m_statusTexture);
 		});
-		
 	}
 	
 	private void HandleBattleEvents(object sender, EventArgs e)
 	{
 		if (e is NewEncounterEventArgs)
 		{
+			ClearDisplay();
+		
 			NewEncounterEventArgs args = (NewEncounterEventArgs)e;
 			m_enemyStatusDisplay.ActivePlayer = m_system.EnemyPlayer;
 			m_trainerDisplay.UpdateTrainer(args.Trainer); 

@@ -35,6 +35,14 @@ public class Player
 		m_pokemon.Add(pokemon);
 	}
 	
+	public void RestorePokemon()
+	{
+		foreach (Character pokemon in m_pokemon)
+		{
+			pokemon.Reset();
+		}
+	}
+	
 	public int GetNextPokemon(Player enemy)
 	{
 		return m_nextPokemonStrategy.getNextPokemon(this, enemy);

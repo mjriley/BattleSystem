@@ -16,7 +16,8 @@ public class GUIMenu : MonoBehaviour
 	enum Options : int
 	{
 		Battle = 0,
-		Roster
+		Roster,
+		Leaderboard
 	}
 	
 	Options[] m_options = (Options[])Enum.GetValues(typeof(Options));
@@ -36,6 +37,10 @@ public class GUIMenu : MonoBehaviour
 			if (m_options[optionSelectedIndex] == Options.Roster)
 			{
 				Application.LoadLevel("roster");
+			}
+			else if (m_options[optionSelectedIndex] == Options.Leaderboard)
+			{
+				Application.LoadLevel("HighScores");
 			}
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -58,6 +63,8 @@ public class GUIMenu : MonoBehaviour
 		DrawBottomScreen();
 	}
 	
+	public int optionOffsetX = 10;
+	public int optionPaddingY = 10;
 	void DrawBottomScreen()
 	{
 		GUIUtils.DrawBottomScreenBackground(m_bottomScreen);
@@ -67,15 +74,20 @@ public class GUIMenu : MonoBehaviour
 			GUIContent cursor = new GUIContent("➤");
 			Vector2 textBounds = optionsStyle.CalcSize(cursor);
 			
-			float textVerticalSize = textBounds.y * m_options.Length;
+			float textVerticalSize = (textBounds.y + optionPaddingY) * m_options.Length - optionPaddingY;
 			float textVerticalStart = (bounds.height - textVerticalSize) / 2.0f;
 			
 			for (int i=0; i < m_options.Length; ++i)
 			{
-				GUI.Label(new Rect((bounds.width - fontWidth) / 2.0f, textVerticalStart + i * textBounds.y, fontWidth, textBounds.y), m_options[i].ToString(), optionsStyle);
+				float y = textVerticalStart + i * (textBounds.y + optionPaddingY);
+				GUI.Label(new Rect((bounds.width - fontWidth) / 2.0f + optionOffsetX, y, fontWidth, textBounds.y), m_options[i].ToString(), optionsStyle);
+				if (i == optionSelectedIndex)
+				{
+					GUI.Label(new Rect((bounds.width - fontWidth) / 2.0f - textBounds.x, y, textBounds.x, textBounds.y), cursor, optionsStyle);
+				}
 			}
 			
-			GUI.Label(new Rect((Screen.width - fontWidth) / 2.0f - textBounds.x, textVerticalStart + optionSelectedIndex * textBounds.y, textBounds.x, textBounds.y), cursor, optionsStyle);
+			//GUI.Label(new Rect((Screen.width - fontWidth) / 2.0f - textBounds.x, textVerticalStart + optionSelectedIndex * textBounds.y, textBounds.x, textBounds.y), cursor, optionsStyle);
 		});
 	}
 
