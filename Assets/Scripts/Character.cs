@@ -6,22 +6,32 @@ using System.Linq;
 
 public class Character : ICharacter
 {
-//	public enum Sex
-//	{
-//		Male,
-//		Female
-//	}
+	static Dictionary<Stat, int> PerfectIVs = new Dictionary<Stat, int>() {
+		{Stat.HP, 31},
+		{Stat.Attack, 31},
+		{Stat.Defense, 31},
+		{Stat.SpecialAttack, 31},
+		{Stat.SpecialDefense, 31},
+		{Stat.Speed, 31}
+	};
+	
+	static Dictionary<Stat, int> ZeroedEVs = new Dictionary<Stat, int>() {
+		{Stat.HP, 0},
+		{Stat.Attack, 0},
+		{Stat.Defense, 0},
+		{Stat.SpecialAttack, 0},
+		{Stat.SpecialDefense, 0},
+		{Stat.Speed, 0}
+	};
 	
 	public Dictionary<Stat, int> m_baseStats = new Dictionary<Stat, int>();
 	public Dictionary<Stat, int> m_stages = new Dictionary<Stat, int>();
+	Dictionary<Stat, int> m_IVs = new Dictionary<Stat, int>();
+	Dictionary<Stat, int> m_EVs = new Dictionary<Stat, int>();
+	Nature m_nature;
 	
 	// stats
-	public int MaxHP {
-		get
-		{
-			return (m_definition.HP * 2 + 100) * (int)Level / 100 + 10;
-		}
-	}
+	public int MaxHP { get { return m_baseStats[Stat.HP]; } }
 	
 	public int Atk { get { return GetCurrentStatValue(Stat.Attack); } }
 	public int Def { get { return GetCurrentStatValue(Stat.Defense); } }
@@ -79,7 +89,8 @@ public class Character : ICharacter
 	
 	PokemonDefinition m_definition;
 	
-	public Character(string name, PokemonDefinition definition, Pokemon.Gender gender, uint level, IAttackStrategy strategy)
+	public Character(string name, PokemonDefinition definition, Pokemon.Gender gender, uint level, 
+		IAttackStrategy strategy, Dictionary<Stat, int> ivs=null, Dictionary<Stat, int> evs=null, Nature nature=null)
 	{
 		m_name = name;
 		m_definition = definition;
@@ -88,18 +99,56 @@ public class Character : ICharacter
 		
 		m_strategy = strategy;
 		
+		if (ivs == null)
+		{
+			ivs = PerfectIVs;
+		}
+		m_IVs = ivs;
+		
+		if (evs == null)
+		{
+			evs = ZeroedEVs;
+		}
+		m_EVs = evs;
+		
+		if (nature == null)
+		{
+			// This nature has no effect on any attributes
+			nature = NatureFactory.GetNature(Nature.Type.Hardy);
+		}
+		m_nature = nature;
+		
 		InitStats();
 		
 		Reset();
 	}
 	
+	private void CalculateBaseStat(Stat stat)
+	{
+		int constantBase = (stat == Stat.HP) ? 10 : 5;
+		int multiplierBase = (stat == Stat.HP) ? 100 : 0;
+		double natureMultiplier = (stat == Stat.HP) ? 1.0 : m_nature.GetMultiplier(stat);
+		
+		int iv = 0;
+		m_IVs.TryGetValue(stat, out iv);
+		
+		int ev = 0;
+		m_EVs.TryGetValue(stat, out ev);
+		
+		double perLevel = iv + 2 * m_definition.GetStat(stat) + ev / 4.0 + multiplierBase;
+		m_baseStats[stat] = (int)((perLevel * (int)Level / 100 + constantBase) * natureMultiplier);
+	}
+	
 	private void InitStats()
 	{
-		m_baseStats[Stat.Attack] = 50;
-		m_baseStats[Stat.Defense] = 50;
-		m_baseStats[Stat.SpecialAttack] = 50;
-		m_baseStats[Stat.SpecialDefense] = 50;
-		m_baseStats[Stat.Speed] = 50;
+		CalculateBaseStat(Stat.HP);
+		CalculateBaseStat(Stat.Attack);
+		CalculateBaseStat(Stat.Defense);
+		CalculateBaseStat(Stat.SpecialAttack);
+		CalculateBaseStat(Stat.SpecialDefense);
+		CalculateBaseStat(Stat.Speed);
+		
+		m_currentHP = MaxHP;
 	}
 	
 	public void Reset()

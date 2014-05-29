@@ -18,9 +18,10 @@ namespace Tests
 		}
 			
 		[Test]
-		public void BasicConstructor()
+		public void BaseHealth()
 		{
-			Assert.AreEqual(70, m_actor.CurrentHP);
+			// Pikachu's Base HP at Level 50, Perfect IV is 110
+			Assert.AreEqual(110, m_actor.CurrentHP);
 		}
 		
 		[Test]
@@ -28,7 +29,7 @@ namespace Tests
 		{
 			m_actor.TakeDamage(50);
 			
-			Assert.AreEqual(20, m_actor.CurrentHP);
+			Assert.AreEqual(60, m_actor.CurrentHP);
 		}
 		
 		[Test]
@@ -37,7 +38,7 @@ namespace Tests
 			m_actor.TakeDamage(50);
 			m_actor.TakeDamage(-10);
 			
-			Assert.AreEqual(30, m_actor.CurrentHP);
+			Assert.AreEqual(70, m_actor.CurrentHP);
 		}
 		
 		[Test]
@@ -45,21 +46,21 @@ namespace Tests
 		{
 			m_actor.TakeDamage(-10);
 			
-			Assert.AreEqual(70, m_actor.CurrentHP);
+			Assert.AreEqual(110, m_actor.CurrentHP);
 		}
 		
 		[Test]
 		public void ZeroHP()
 		{
-			m_actor.TakeDamage(80);
+			m_actor.TakeDamage(110);
 			
-			Assert.AreEqual (0, m_actor.CurrentHP);
+			Assert.AreEqual(0, m_actor.CurrentHP);
 		}
 		
 		[Test]
 		public void IsDead()
 		{
-			m_actor.TakeDamage(70);
+			m_actor.TakeDamage(110);
 			
 			Assert.IsTrue(m_actor.isDead());
 		}
@@ -67,21 +68,23 @@ namespace Tests
 		[Test]
 		public void BaseAttack()
 		{
-			Assert.AreEqual(50, m_actor.Atk);
+			// Base Attack for Pikachu is 55
+			// At Level 50, this should be 75 with max IV and no EV
+			Assert.AreEqual(75, m_actor.Atk);
 		}
 		
 		[Test]
 		public void PositiveStageIncreasesAttack()
 		{
 			m_actor.ModifyStage(Stat.Attack, 1);
-			Assert.AreEqual(75, m_actor.Atk);
+			Assert.AreEqual(112, m_actor.Atk);
 		}
 		
 		[Test]
 		public void NegativeStageDecreasesAttack()
 		{
 			m_actor.ModifyStage(Stat.Attack, -1);
-			Assert.AreEqual(33, m_actor.Atk);
+			Assert.AreEqual(50, m_actor.Atk);
 		}
 		
 		[Test]
@@ -89,7 +92,7 @@ namespace Tests
 		{
 			int max_stage = 6;
 			m_actor.ModifyStage(Stat.Attack, max_stage);
-			Assert.AreEqual(200, m_actor.Atk);
+			Assert.AreEqual(300, m_actor.Atk);
 		}
 		
 		[Test]
@@ -97,7 +100,7 @@ namespace Tests
 		{
 			int max_stage = -6;
 			m_actor.ModifyStage(Stat.Attack, max_stage);
-			Assert.AreEqual(12, m_actor.Atk);
+			Assert.AreEqual(18, m_actor.Atk);
 		}
 		
 		[Test]
@@ -105,7 +108,7 @@ namespace Tests
 		{
 			int levels = m_actor.ModifyStage(Stat.Attack, 7);
 			Assert.AreEqual(6, levels);
-			Assert.AreEqual(200, m_actor.Atk);
+			Assert.AreEqual(300, m_actor.Atk);
 		}
 		
 		[Test]
@@ -113,7 +116,7 @@ namespace Tests
 		{
 			int levels = m_actor.ModifyStage(Stat.Attack, -7);
 			Assert.AreEqual(-6, levels);
-			Assert.AreEqual(12, m_actor.Atk);
+			Assert.AreEqual(18, m_actor.Atk);
 		}
 		
 		[Test]
@@ -142,8 +145,49 @@ namespace Tests
 			Assert.AreEqual(133, m_actor.Evasion);
 		}
 		
+		[Test]
+		public void BeneficialNature()
+		{
+			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			// Lonely increases attack and decreases Defense
+			Nature nature = NatureFactory.GetNature(Nature.Type.Lonely);
+			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, nature: nature);
+			
+			Assert.AreEqual(83, pokemon.Atk);
+		}
 		
+		[Test]
+		public void DetrimentalNature()
+		{
+			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			// Bold increases defense and decreases Attack
+			Nature nature = NatureFactory.GetNature(Nature.Type.Bold);
+			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, nature: nature);
+			
+			Assert.AreEqual(67, pokemon.Atk);
+		}
 		
+		[Test]
+		public void HandleIVs()
+		{
+			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			Dictionary<Stat, int> iv = new Dictionary<Stat, int> { {Stat.Attack, 10} };
+			
+			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, ivs: iv);
+			
+			Assert.AreEqual(65, pokemon.Atk);
+		}
+		
+		[Test]
+		public void HandleEVs()
+		{
+			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			Dictionary<Stat, int> ev = new Dictionary<Stat, int> { {Stat.Attack, 200} };
+			
+			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, evs: ev);
+			
+			Assert.AreEqual(100, pokemon.Atk);
+		}
 	}
 }
 

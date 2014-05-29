@@ -1,28 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SwapAbility.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NewBattleSystem.cs">
     <Files>
-      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="96" Column="7" />
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="301" Column="4" />
-      <File FileName="Assets/Scripts/PokemonFactory.cs" Line="17" Column="3" />
-      <File FileName="Assets/Scripts/PokemonDefinition.cs" Line="121" Column="46" />
-      <File FileName="Assets/Scripts/ITurnAction.cs" Line="3" Column="2" />
-      <File FileName="Assets/Scripts/DamageAbility.cs" Line="76" Column="56" />
-      <File FileName="Assets/Scripts/AbstractAbility.cs" Line="27" Column="21" />
-      <File FileName="Assets/Scripts/AbilityUse.cs" Line="15" Column="17" />
-      <File FileName="Assets/Scripts/ActionSort.cs" Line="5" Column="8" />
-      <File FileName="Assets/Editor/Tests/ActionSortTests.cs" Line="12" Column="3" />
-      <File FileName="Assets/Scripts/ICharacter.cs" Line="4" Column="2" />
-      <File FileName="Assets/Scripts/Character.cs" Line="7" Column="35" />
-      <File FileName="Assets/Scripts/DeployAbility.cs" Line="17" Column="9" />
-      <File FileName="Assets/Scripts/SwapAbility.cs" Line="24" Column="9" />
+      <File FileName="Assets/Editor/Tests/ActionSortTests.cs" Line="40" Column="8" />
+      <File FileName="Assets/Scripts/ITurnAction.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/ActionSort.cs" Line="24" Column="21" />
+      <File FileName="Assets/Scripts/NewBattleSystem.cs" Line="316" Column="72" />
+      <File FileName="Assets/Scripts/IRandom.cs" Line="5" Column="36" />
+      <File FileName="Assets/CRandom.cs" Line="30" Column="46" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="SwapAbility.cs" selected="True" />
+              <Node name="NewBattleSystem.cs" selected="True" />
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True">
@@ -39,7 +31,13 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Tests" expanded="True">
+              <Node name="ActionSortTests" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
