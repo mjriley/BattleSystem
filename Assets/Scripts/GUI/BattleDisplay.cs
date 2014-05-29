@@ -57,7 +57,6 @@ public class BattleDisplay : MonoBehaviour
 	Texture2D m_pokemonButtonTexture;
 	
 	Texture2D m_buttonLayoutTexture;
-	Texture2D m_statusTexture;
 	
 	public GUIStyle typeNameStyle;
 	public GUIStyle abilityNameStyle;
@@ -126,7 +125,6 @@ public class BattleDisplay : MonoBehaviour
 		m_pokemonButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/Pokemon");
 		
 		m_buttonLayoutTexture = Resources.Load<Texture2D>("Textures/ButtonLayout");
-		m_statusTexture = Resources.Load<Texture2D>("Textures/TextDisplayBackground");
 		
 		m_audio = gameObject.GetComponent<AudioSource>();
 		m_damageSound = Resources.Load<AudioClip>("SoundEffects/attack_sound");

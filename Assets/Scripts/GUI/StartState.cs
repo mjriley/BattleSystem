@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class StartState : IDisplayState
 {
-	RosterController m_controller;
-	
 	Rect topScreen = new Rect(0, 0, 400, 240);
 	
 	string[] m_options = new string[] { "Battle!", "Roster" };
@@ -18,8 +16,6 @@ public class StartState : IDisplayState
 	
 	public StartState(RosterController controller)
 	{
-		m_controller = controller;
-		
 		optionsStyle = new GUIStyle();
 	}
 	
