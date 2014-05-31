@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+using Abilities;
+using Abilities.Status;
+
 public class Character : ICharacter
 {
 	static Dictionary<Stat, int> PerfectIVs = new Dictionary<Stat, int>() {
@@ -46,7 +49,8 @@ public class Character : ICharacter
 	public const int MIN_STAGE = -6;
 	
 	private int m_currentHP;
-	private List<AbstractAbility> m_abilities = new List<AbstractAbility>();
+	//private List<AbstractAbility> m_abilities = new List<AbstractAbility>();
+	private List<Ability> m_abilities = new List<Ability>();
 	private string m_name;
 	
 	private WeakReference m_refOwner;
@@ -56,7 +60,7 @@ public class Character : ICharacter
 		set { m_refOwner = new WeakReference(value); }
 	}
 	
-	private List<BattleType> m_types = new List<BattleType>();
+	//private List<BattleType> m_types = new List<BattleType>();
 	
 	private bool m_isInvisible = false;
 	public bool IsInvisible
@@ -77,7 +81,7 @@ public class Character : ICharacter
 		get { return m_currentHP; }
 	}
 	
-	public List<BattleType> Types { get { return m_types; } }
+	public List<BattleType> Types { get { return m_definition.Types; } }
 	
 	private Pokemon.Gender m_gender;
 	public Pokemon.Gender Gender
@@ -236,17 +240,20 @@ public class Character : ICharacter
 		return (m_currentHP == 0);
 	}
 	
-	public List<AbstractAbility> getAbilities()
+	//public List<AbstractAbility> getAbilities()
+	public List<Ability> getAbilities()
 	{
-		return new List<AbstractAbility>(m_abilities);
+		return new List<Ability>(m_abilities);
 	}
 	
-	public void addAbility(AbstractAbility ability)
+	//public void addAbility(AbstractAbility ability)
+	public void addAbility(Ability ability)
 	{
 		m_abilities.Add(ability);
 	}
 	
-	public void replaceAbility(int index, AbstractAbility ability)
+	//public void replaceAbility(int index, AbstractAbility ability)
+	public void replaceAbility(int index, Ability ability)
 	{
 		m_abilities[index] = ability;
 	}
@@ -276,6 +283,9 @@ public class Character : ICharacter
 	// temporary statuses
 	public bool Flinching { get; set; }
 	
+	// statuses that clear on switch
+	public bool Seeded { get; set; }
+	
 	private int m_numTurnsSleeping = 0;	
 	public bool IsSleeping()
 	{
@@ -299,28 +309,37 @@ public class Character : ICharacter
 		m_numTurnsSleeping = 0;
 		
 		Flinching = false;
+		
+		Seeded = false;
 	}
 	
-	public List<string> CompleteTurn()
+	public void CompleteTurn(Character enemy, ref ActionStatus status)
 	{
-		List<string> messages = new List<string>();
+		//List<string> messages = new List<string>();
 		
 		if (Owner.ActivePokemon != this)
 		{
 			// only calculate effects if this pokemon is still on the field
-			return messages;
+			//return messages;
+			return;
 		}
 		
 		if (Burned)
 		{
-			messages.Add(m_name + " was damaged by the burn!");
-			TakeDamage((int)(1.0f / 8.0f * MaxHP));
+			//messages.Add(m_name + " was damaged by the burn!");
+			status.events.Add(new StatusUpdateEventArgs(m_name + " was damaged by the burn!"));
+			int amount = (int)(1.0f / 8.0f * MaxHP);
+			TakeDamage(amount);
+			status.events.Add(new DamageEventArgs(this.Owner, amount));
 		}
 		
 		if (Poisoned)
 		{
-			messages.Add(m_name + " was damaged by the poison!");
-			TakeDamage((int)(1.0f / 8.0f * MaxHP));
+			//messages.Add(m_name + " was damaged by the poison!");
+			status.events.Add(new StatusUpdateEventArgs(m_name + " was damaged by the poison!"));
+			int amount = (int)(1.0f / 8.0f * MaxHP);
+			TakeDamage(amount);
+			status.events.Add(new DamageEventArgs(this.Owner, amount));
 		}
 		
 		if (IsSleeping())
@@ -329,11 +348,17 @@ public class Character : ICharacter
 			
 			if (!IsSleeping())
 			{
-				messages.Add(m_name + " woke up!");
+				//messages.Add(m_name + " woke up!");
+				status.events.Add(new StatusUpdateEventArgs(m_name + " woke up!"));
 			}
 		}
 		
-		return messages;
+		if (Seeded)
+		{
+			SeededStatus.ProcessStatus(this, enemy, ref status);
+		}
+		
+		//return messages;
 	}
 	
 	public bool IsStatusAfflicted()

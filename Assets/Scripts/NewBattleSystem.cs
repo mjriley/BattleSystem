@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using Abilities;
+
 public class NewBattleSystem
 {
 	public enum State
@@ -354,6 +356,17 @@ public class NewBattleSystem
 			}
 			case State.EndTurn:
 			{
+				// TODO: Likely need to move this to its own state, and make damage events delayed
+				ActionStatus status = new ActionStatus();
+				m_userPlayer.ActivePokemon.CompleteTurn(m_enemyPlayer.ActivePokemon, ref status);
+					
+				m_enemyPlayer.ActivePokemon.CompleteTurn(m_userPlayer.ActivePokemon, ref status);
+				
+				foreach (EventArgs eventArgs in status.events)
+				{
+					m_pendingEvents.Enqueue(eventArgs);
+				}
+				
 				if (m_userPlayer.ActivePokemon.isDead())
 				{
 					if (m_userPlayer.IsDefeated())
@@ -561,7 +574,8 @@ public class NewBattleSystem
 			return null;
 		}
 		
-		AbstractAbility selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
+		//AbstractAbility selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
+		Ability selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
 		
 		return new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, selectedAbility);
 	}

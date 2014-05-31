@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Collections.Generic;
 
+using Abilities;
+
 public class RandomAttackStrategy : IAttackStrategy
 {
 	private System.Random m_generator;
@@ -28,13 +30,16 @@ public class RandomAttackStrategy : IAttackStrategy
 	 * Attempts to find an ability (at random)
 	 * Returns the desired ability or null if no ability with sufficient uses could be found
 	 **********/
-	private AbstractAbility DetermineAbility(Character actor)
+	//private AbstractAbility DetermineAbility(Character actor)
+	private Ability DetermineAbility(Character actor)
 	{
 		uint cost = actor.getUsageCost();
 		
-		List<AbstractAbility> abilities = actor.getAbilities();
+		//List<AbstractAbility> abilities = actor.getAbilities();
+		List<Ability> abilities = actor.getAbilities();
 		
-		AbstractAbility ability = null;
+		//AbstractAbility ability = null;
+		Ability ability = null;
 		
 		while (abilities.Count() > 0)
 		{
@@ -56,7 +61,8 @@ public class RandomAttackStrategy : IAttackStrategy
 	
 	public void UpdateConditions(Character actor, Player enemyPlayer)
 	{
-		AbstractAbility ability = DetermineAbility(actor);
+		//AbstractAbility ability = DetermineAbility(actor);
+		Ability ability = DetermineAbility(actor);
 		
 		m_turnInfo = new AbilityUse(actor, enemyPlayer, ability);
 	}

@@ -165,9 +165,11 @@
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Resources\MobileBloom.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleAdditive.shader" />
      <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-28.xml" />
+     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-31.xml" />
      <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-04.xml" />
      <None Include="Assets\UnityTestTools\changelog.txt" />
      <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-16.xml" />
+     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-29.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\LaserScope.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\SuperSimpleSelfIllumination.shader" />
      <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-01.xml" />

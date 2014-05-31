@@ -1,26 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/Tests/CharacterTests.cs">
-    <Files>
-      <File FileName="Assets/Scripts/DamageAbility.cs" Line="27" Column="26" />
-      <File FileName="Assets/Scripts/Character.cs" Line="136" Column="30" />
-      <File FileName="Assets/Scripts/DamageCalculations.cs" Line="28" Column="2" />
-      <File FileName="Assets/Scripts/PokemonDefinition.cs" Line="60" Column="18" />
-      <File FileName="Assets/Scripts/Nature.cs" Line="39" Column="22" />
-      <File FileName="Assets/Scripts/NatureFactory.cs" Line="3" Column="26" />
-      <File FileName="Assets/Editor/Tests/CharacterTests.cs" Line="167" Column="37" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True" />
+            <Node name="Scripts" expanded="True">
+              <Node name="Abilities" expanded="True">
+                <Node name="Power" expanded="True">
+                  <Node name="PowerPerTurn.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True">
             <Node name="Editor" expanded="True">
-              <Node name="Tests" expanded="True">
-                <Node name="CharacterTests.cs" selected="True" />
-              </Node>
+              <Node name="Tests" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -32,13 +27,7 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Tests" expanded="True">
-              <Node name="CharacterTests" selected="True" />
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

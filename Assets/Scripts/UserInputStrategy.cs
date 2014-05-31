@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Abilities;
+
 public class UserInputStrategy : IAttackStrategy
 {
 	public delegate void ReceiveConditions(List<AbstractAbility> abilities);

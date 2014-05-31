@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Abilities;
 
 public class AbilityButton : MonoBehaviour
 {
@@ -72,7 +73,8 @@ public class AbilityButton : MonoBehaviour
 		typeColors[BattleType.Water] = makeIntColor(44, 156, 255);
 	}
 	
-	public static bool Display(Rect rect, AbstractAbility ability, bool drawReversed=false, 
+	//public static bool Display(Rect rect, AbstractAbility ability, bool drawReversed=false, 
+	public static bool Display(Rect rect, Ability ability, bool drawReversed=false, 
 		GUIStyle typeNameStyle=null, 
 		GUIStyle abilityNameStyle=null, 
 		GUIStyle abilityDetailsStyle=null,

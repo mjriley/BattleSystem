@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using Abilities;
+
 public class PokemonFactory
 {
 	public static Character CreatePokemon(Pokemon.Species species, uint level, string name="", Pokemon.Gender gender=Pokemon.Gender.Random, IAttackStrategy strategy=null)
@@ -32,7 +34,8 @@ public class PokemonFactory
 				break;
 			}
 			
-			AbstractAbility ability = AbilityFactory.GetAbility(abilityName);
+			//AbstractAbility ability = AbilityFactory.GetAbility(abilityName);
+			Ability ability = AbilityFactory.GetAbility(abilityName);
 			pokemon.addAbility(ability);
 		}
 		
