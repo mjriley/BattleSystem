@@ -3,7 +3,9 @@ using UnityEngine;
 public class PokemonSelectionButton
 {
 	static bool isInit = false;
-	static GUIStyle style;
+	static GUIStyle speciesStyle;
+	static Texture2D m_texture;
+	static Texture2D m_glow;
 	
 	static void Init()
 	{
@@ -12,9 +14,12 @@ public class PokemonSelectionButton
 			// load textures
 			isInit = true;
 			
-			style = new GUIStyle();
-			style.border.top = style.border.bottom = style.border.left = style.border.right = 2;
-			style.normal.background = Resources.Load<Texture2D>("Textures/glow");
+			speciesStyle = new GUIStyle();
+			speciesStyle.alignment = TextAnchor.MiddleLeft;
+			speciesStyle.fontSize = 16;
+			
+			m_texture = Resources.Load<Texture2D>("Textures/PokemonSelectionButton");
+			m_glow = Resources.Load<Texture2D>("Textures/PokemonSelectionButtonGlow");
 		}
 	}
 	
@@ -22,14 +27,19 @@ public class PokemonSelectionButton
 	{
 		Init();
 		
-		Rect innerBounds = new Rect(2.0f, 2.0f, parent.width - 4.0f, parent.height - 4.0f);
+		Texture2D thumbnail = Pokemon.Pokemon.GetThumbnail(species);
+		float thumbnailX = 25.0f;
+		float thumbnailY = (m_texture.height - thumbnail.height) / 2.0f;
+		float nameX = thumbnailX + thumbnail.width + 10.0f;
+		
 		GUI.BeginGroup(parent);
+			GUI.DrawTexture(new Rect(0.0f, 0.0f, m_texture.width, m_texture.height), m_texture);
+			GUI.DrawTexture(new Rect(thumbnailX, thumbnailY, thumbnail.width, thumbnail.height), thumbnail);
+			GUI.Label(new Rect(nameX, 0.0f, 100, m_texture.height), species.ToString(), speciesStyle);
 			if (selected)
 			{
-				GUI.Box(new Rect(0.0f, 0.0f, parent.width, parent.height), "", style);
+				GUI.DrawTexture(new Rect(0.0f, 0.0f, m_texture.width, m_texture.height), m_glow);
 			}
-			GUI.Box(innerBounds, species.ToString());
 		GUI.EndGroup();
 	}
 }
-

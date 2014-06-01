@@ -28,6 +28,8 @@ public class PokemonListState : IDisplayState
 	
 	Rect topScreen = new Rect(0, 0, 400, 240);
 	Rect bottomScreen = new Rect(0, 260, 400, 240);
+	
+	Texture2D m_backgroundTexture;
 
 	public PokemonListState(RosterController controller)
 	{
@@ -42,6 +44,7 @@ public class PokemonListState : IDisplayState
 		
 		m_activeSlot = 0;
 		
+		m_backgroundTexture = Resources.Load<Texture2D>("Textures/RosterSelectionBackground");
 	}
 	
 	void InitScrollBarStyle()
@@ -68,12 +71,18 @@ public class PokemonListState : IDisplayState
 		scrollPosition.y = scrollIndex * m_rowHeight;
 	}
 	
+	void SubmitPokemon()
+	{
+		PokemonPrototype prototype = new PokemonPrototype(m_options[selectedIndex], 50, Pokemon.Gender.Male);
+		m_controller.SetSlotValue(m_activeSlot, prototype);
+		
+	}
+	
 	public void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
-			PokemonPrototype prototype = new PokemonPrototype(m_options[selectedIndex], 50, Pokemon.Gender.Male);
-			m_controller.SetSlotValue(m_activeSlot, prototype);
+			SubmitPokemon();
 			return;
 		}
 		
@@ -133,6 +142,7 @@ public class PokemonListState : IDisplayState
 	public void Display()
 	{
 		GUI.BeginGroup(topScreen);
+			GUI.DrawTexture(new Rect(0.0f, 0.0f, topScreen.width, topScreen.height), m_backgroundTexture);
 			scrollPosition = GUI.BeginScrollView(new Rect(0.0f, 0.0f, topScreen.width, topScreen.height), scrollPosition, new Rect(0.0f, 0.0f, m_rowWidth, m_options.Length * m_rowHeight));
 			
 			for (int i = 0; i < m_options.Length; ++i)
@@ -148,7 +158,10 @@ public class PokemonListState : IDisplayState
 		GUI.BeginGroup(bottomScreen);
 			int width = 100;
 			int height = 40;
-			GUI.Button(new Rect((bottomScreen.width - width) / 2.0f, (bottomScreen.height - height) / 2.0f, width, height), "Accept");
+			if (GUI.Button(new Rect((bottomScreen.width - width) / 2.0f, (bottomScreen.height - height) / 2.0f, width, height), "Accept"))
+			{
+				SubmitPokemon();
+			}
 		GUI.EndGroup();
 	}
 	
