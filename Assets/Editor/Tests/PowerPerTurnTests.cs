@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Abilities;
 using Abilities.Power;
+using PokeCore;
 
 namespace Tests
 {

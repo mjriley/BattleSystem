@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Pokemon;
 
 public class PlayerRoster : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class PlayerRoster : MonoBehaviour
 	
 	void Load()
 	{
+		//PlayerPrefs.DeleteAll();
 		string serializedRoster = PlayerPrefs.GetString(ROSTER_KEY);
 		byte[] bytes = Convert.FromBase64String(serializedRoster);
 		MemoryStream stream = new MemoryStream();

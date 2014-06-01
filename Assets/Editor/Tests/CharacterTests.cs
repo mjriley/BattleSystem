@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
+using Pokemon;
+using PokeCore;
+
 namespace Tests
 {
 	[TestFixture]
@@ -14,7 +17,7 @@ namespace Tests
 		public void Init()
 		{
 			//m_actor = new Character("Test Pokemon", Pokemon.Species.Pikachu, Pokemon.Gender.Male, 70, 1, BattleType.Normal, null);
-			m_actor = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50, "");
+			m_actor = PokemonFactory.CreatePokemon(Species.Pikachu, 50, "");
 		}
 			
 		[Test]

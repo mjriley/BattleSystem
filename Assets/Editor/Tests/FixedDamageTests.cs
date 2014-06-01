@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using Abilities;
+using Pokemon;
+using PokeCore;
 
 namespace Tests
 {
@@ -12,15 +14,15 @@ namespace Tests
 		
 		Character CreateTypedPokemon(BattleType battleType)
 		{
-			PokemonDefinition def = new PokemonDefinition(Pokemon.Species.Pikachu, battleType, 50, 50, 50, 50, 50, 50, null, 1.0f);
-			return new Character("Defender", def, Pokemon.Gender.Male, 50, null);
+			PokemonDefinition def = new PokemonDefinition(Species.Pikachu, battleType, 50, 50, 50, 50, 50, 50, null, 1.0f);
+			return new Character("Defender", def, Gender.Male, 50, null);
 		}
 		
 		[SetUp]
 		public void Init()
 		{
 			m_ability = new DamageAbility("Test Ability", AbilityType.Special, BattleType.Dragon, 20, POWER, 100);
-			m_attacker = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50, "Attacker");
+			m_attacker = PokemonFactory.CreatePokemon(Species.Pikachu, 50, "Attacker");
 		}
 		
 		[Test]

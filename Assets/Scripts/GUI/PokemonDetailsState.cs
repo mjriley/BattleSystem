@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+using Pokemon;
+
 public class PokemonDetailsState : IDisplayState
 {
 	Rect m_topScreen = new Rect(0, 0, 400, 240);
@@ -115,10 +117,10 @@ public class PokemonDetailsState : IDisplayState
 	{
 		m_activePokemon = m_controller.GetRosterSlot(slot);
 		
-		m_statValues[Stat.HP] = Pokemon.GetStat(m_activePokemon.Species, Stat.HP, m_activePokemon.Level);
+		m_statValues[Stat.HP] = Pokemon.Pokemon.GetStat(m_activePokemon.Species, Stat.HP, m_activePokemon.Level);
 		foreach (Stat stat in m_statOrder)
 		{
-			m_statValues[stat] = Pokemon.GetStat(m_activePokemon.Species, stat, m_activePokemon.Level);
+			m_statValues[stat] = Pokemon.Pokemon.GetStat(m_activePokemon.Species, stat, m_activePokemon.Level);
 		}
 	}
 	

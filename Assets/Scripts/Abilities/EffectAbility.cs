@@ -1,3 +1,4 @@
+using PokeCore;
 using System;
 
 namespace Abilities {

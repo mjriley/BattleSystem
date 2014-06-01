@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Abilities.Power;
 using Abilities.Effects;
+using Pokemon;
 
 namespace Abilities {
 

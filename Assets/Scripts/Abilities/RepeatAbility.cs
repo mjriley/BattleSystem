@@ -1,3 +1,5 @@
+using PokeCore;
+
 namespace Abilities {
 
 	// An ability that performs the same action until it misses or the max number of turns expire

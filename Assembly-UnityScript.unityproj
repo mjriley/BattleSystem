@@ -142,20 +142,13 @@
      <Compile Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Scripts\Weapons\SlowBulletFireWithNoise.js" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\Cursor.shader" />
      <None Include="Assets\UnityTestTools\LICENSE.txt" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-04.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleAdditiveBlend.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-24.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\Additive.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-02.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Resources\HeightDepthOfField.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Resources\BlurPassesForDof.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-20.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\Fallback.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\Multiply.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-03.xml" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-19.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\CharacterSelfIlluminationReflective.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-14.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Resources\ColoredNoise.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\PlanarRealtimeReflection.shader" />
      <None Include="Assets\Assembly-CSharp.txt" />
@@ -164,18 +157,10 @@
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\AngryInclude.cginc" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Resources\MobileBloom.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleAdditive.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-28.xml" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-31.xml" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-04.xml" />
      <None Include="Assets\UnityTestTools\changelog.txt" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-16.xml" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-29.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\LaserScope.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\SuperSimpleSelfIllumination.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-04-01.xml" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-07.xml" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleBlend.shader" />
-     <None Include="Assets\test-results\Assembly-CSharp-Editor.csproj-Debug-2014-05-05.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

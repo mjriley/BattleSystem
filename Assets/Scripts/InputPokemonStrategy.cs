@@ -1,3 +1,5 @@
+using PokeCore;
+
 public class InputPokemonStrategy : INextPokemonStrategy
 {
 	public delegate int GetNextPokemon();

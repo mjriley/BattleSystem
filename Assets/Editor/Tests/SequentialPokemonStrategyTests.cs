@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using Pokemon;
+using PokeCore;
 
 namespace Tests
 {
@@ -9,7 +11,7 @@ namespace Tests
 		private Character createTestPokemon()
 		{
 			//return new Character("Test Pokemon", Pokemon.Species.Pikachu, Pokemon.Gender.Male, 70, 1, BattleType.Normal, null);
-			return PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50);
+			return PokemonFactory.CreatePokemon(Species.Pikachu, 50);
 		}
 		
 		private Player m_player;

@@ -1,6 +1,9 @@
 using Abilities.Power;
 using NUnit.Framework;
 
+using Pokemon;
+using PokeCore;
+
 namespace Tests
 {
 
@@ -15,8 +18,8 @@ namespace Tests
 		public void Init()
 		{
 			// A Level 50 Pikachu's Max HP is 110
-			m_attacker = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50, "Attacker");
-			m_defender = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50, "Defender");
+			m_attacker = PokemonFactory.CreatePokemon(Species.Pikachu, 50, "Attacker");
+			m_defender = PokemonFactory.CreatePokemon(Species.Pikachu, 50, "Defender");
 			
 			m_powerFormula = new GatedPercentHP();
 		}

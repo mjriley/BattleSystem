@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using Abilities;
 using Abilities.Effects;
+using Pokemon;
+using PokeCore;
 
 namespace Tests
 {

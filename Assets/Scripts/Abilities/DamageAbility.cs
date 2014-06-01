@@ -1,4 +1,5 @@
 using System;
+using PokeCore;
 using Abilities.Power;
 
 namespace Abilities {

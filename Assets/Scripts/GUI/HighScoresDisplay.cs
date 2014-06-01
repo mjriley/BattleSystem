@@ -58,7 +58,7 @@ public class HighScoresDisplay : MonoBehaviour
 			{
 				if (!m_thumbnails.ContainsKey(pokemon))
 				{
-					m_thumbnails[pokemon] = Pokemon.GetThumbnail(pokemon);
+					m_thumbnails[pokemon] = Pokemon.Pokemon.GetThumbnail(pokemon);
 				}
 			}
 		}

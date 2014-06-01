@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pokemon;
 
 public class BallZoneIn : MonoBehaviour {
 

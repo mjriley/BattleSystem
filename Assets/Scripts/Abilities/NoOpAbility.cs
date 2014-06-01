@@ -1,3 +1,5 @@
+using PokeCore;
+
 namespace Abilities {
 
 public class NoOpAbility : AbstractAbility

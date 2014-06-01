@@ -1,3 +1,4 @@
+using PokeCore;
 using UnityEngine;
 
 public class PokemonTagDisplay
@@ -79,7 +80,7 @@ public class PokemonTagDisplay
 				GUI.DrawTexture(new Rect(93 + 25, 29, fullHealthWidth, m_healthBackgroundTexture.height), m_healthBackgroundTexture);
 				GUI.DrawTexture(new Rect(93 + 25, 29, currentHealthWidth, m_healthTexture.height), m_healthTexture);
 				GUI.DrawTexture(new Rect(93, 28, m_healthBorderTexture.width, m_healthBorderTexture.height), m_healthBorderTexture);
-				Texture2D thumbnail = Pokemon.GetThumbnail(pokemon.Species);
+				Texture2D thumbnail = Pokemon.Pokemon.GetThumbnail(pokemon.Species);
 				GUI.DrawTexture(new Rect(17, 13, thumbnail.width, thumbnail.height), thumbnail);
 				Vector2 nameBounds = style.CalcSize(new GUIContent(pokemon.Name));
 				GUI.Label(new Rect(nameOffsetX, nameOffsetY, nameBounds.x, nameBounds.y), pokemon.Name, style);

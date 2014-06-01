@@ -1,3 +1,4 @@
+using PokeCore;
 using Abilities;
 using System;
 using System.Collections.Generic;

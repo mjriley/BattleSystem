@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using PokeCore;
 
 public class PlayerStatusDisplay
 {

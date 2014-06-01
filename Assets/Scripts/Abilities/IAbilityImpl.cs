@@ -1,5 +1,6 @@
-namespace Abilities
-{
+using PokeCore;
+
+namespace Abilities {
 
 public interface IAbilityImpl
 {

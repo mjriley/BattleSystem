@@ -1,4 +1,6 @@
 using System;
+using Pokemon;
+using PokeCore;
 
 namespace Abilities {
 namespace Effects {

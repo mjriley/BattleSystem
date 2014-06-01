@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Reflection;
+using PokeCore;
 
 // The view for player victory.
 // Allows the user to choose to continue or quit
