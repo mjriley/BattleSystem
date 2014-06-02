@@ -1,15 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/PokemonSwitchButton.cs">
+    <Files>
+      <File FileName="Assets/Scripts/PokeCore/Player.cs" Line="22" Column="1" />
+      <File FileName="Assets/Scripts/GUI/PokemonListState.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/RosterState.cs" Line="75" Column="1" />
+      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="318" Column="76" />
+      <File FileName="Assets/Scripts/GUI/PokemonSwitchButton.cs" Line="66" Column="61" />
+      <File FileName="Assets/Scripts/GUI/PokemonTagDisplay.cs" Line="14" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
               <Node name="GUI" expanded="True">
-                <Node name="VictoryDisplay.cs" selected="True" />
+                <Node name="PokemonSwitchButton.cs" selected="True" />
               </Node>
-              <Node name="PokeCore" expanded="True" />
             </Node>
           </Node>
         </State>

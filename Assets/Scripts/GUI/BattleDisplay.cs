@@ -70,6 +70,7 @@ public class BattleDisplay : MonoBehaviour
 	Rect m_bottomScreen = new Rect(0, 260, 400, 240);
 	
 	
+	
 	public delegate void AnimationCallback(MonoBehaviour script);
 	
 	public int m_victoryHeight = 20;
@@ -149,11 +150,11 @@ public class BattleDisplay : MonoBehaviour
 		m_system.EnterState += HandleEnterState;
 		m_system.LeaveState += HandleLeaveState;
 		
-		m_backButtonTexture = Resources.Load<Texture2D>("Textures/BackButton");
-		m_backButtonDownTexture = Resources.Load<Texture2D>("Textures/BackButtonDown");
+		m_backButtonTexture = Resources.Load<Texture2D>("Textures/Buttons/BackButton");
+		//m_backButtonDownTexture = Resources.Load<Texture2D>("Textures/BackButtonDown");
 		m_backButtonStyle = new GUIStyle();
 		m_backButtonStyle.normal.background = m_backButtonTexture;
-		m_backButtonStyle.active.background = m_backButtonDownTexture;
+		//m_backButtonStyle.active.background = m_backButtonDownTexture;
 		
 		m_screenArea = new Rect(0, areaY, Screen.width, Screen.height - areaY - statusHeight);
 		
@@ -264,9 +265,11 @@ public class BattleDisplay : MonoBehaviour
 	
 	public GUIStyle m_statStyle;
 	
-	private void DisplayBackButton()
+	private void DisplayBackButton(Rect bounds)
 	{
-		if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
+		//if (GUI.Button(new Rect(m_screenArea.width - m_backButtonTexture.width, m_screenArea.height - m_backButtonTexture.height, m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
+		if (GUI.Button(new Rect(bounds.width - m_backButtonTexture.width, bounds.height - m_backButtonTexture.height, 
+			m_backButtonTexture.width, m_backButtonTexture.height), "", m_backButtonStyle))
 		{
 			m_system.ProcessUserChoice(-2);
 			DoneWithText();
@@ -282,11 +285,18 @@ public class BattleDisplay : MonoBehaviour
 			{
 				break;
 			}
+			
+			Vector2 buttonSize = PokemonSwitchButton.CalcMinSize(m_emptyStyle);
+			
 			Character leftPokemon = m_system.UserPlayer.Pokemon[leftPokemonIndex];
 			if (leftPokemon != null)
 			{
-				Rect pokemonButtonLeft = new Rect(0, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
-				if (GUI.Button(pokemonButtonLeft, leftPokemon.Name))
+				//Rect pokemonButtonLeft = new Rect(0, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
+				//Rect pokemonButtonLeft = new Rect(0, i * (m_pokemonSwitchButtonTexture.height + pokemonButtonGapY), m_pokemonSwitchButtonTexture.width, m_pokemonSwitchButtonTexture.height);
+				Rect pokemonButtonLeft = new Rect(0, i * (buttonSize.y + pokemonButtonGapY), buttonSize.x, buttonSize.y);
+				//GUI.DrawTexture(pokemonButtonLeft, m_pokemonSwitchButtonTexture);
+				//if (GUI.Button(pokemonButtonLeft, leftPokemon.Name, m_emptyStyle))
+				if (PokemonSwitchButton.Display(pokemonButtonLeft, leftPokemon))
 				{
 					DoneWithText();
 					m_system.ProcessUserChoice(leftPokemonIndex);
@@ -301,8 +311,13 @@ public class BattleDisplay : MonoBehaviour
 			Character rightPokemon = m_system.UserPlayer.Pokemon[rightPokemonIndex];
 			if (rightPokemon != null)
 			{
-				Rect pokemonButtonRight = new Rect((m_screenArea.width + pokemonButtonGapX) / 2.0f, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
-				if (GUI.Button(pokemonButtonRight, rightPokemon.Name))
+				//Rect pokemonButtonRight = new Rect((m_screenArea.width + pokemonButtonGapX) / 2.0f, i * (pokemonButtonHeight + pokemonButtonGapY), (m_screenArea.width - pokemonButtonGapX) / 2.0f, pokemonButtonHeight);
+//				Rect pokemonButtonRight = new Rect(m_screenArea.width - m_pokemonSwitchButtonTexture.width, i * (m_pokemonSwitchButtonTexture.height + pokemonButtonGapY), 
+//					m_pokemonSwitchButtonTexture.width, m_pokemonSwitchButtonTexture.height);
+				Rect pokemonButtonRight = new Rect(m_screenArea.width - buttonSize.x, i * (buttonSize.y + pokemonButtonGapY), 
+					buttonSize.x, buttonSize.y);
+				//if (GUI.Button(pokemonButtonRight, rightPokemon.Name))
+				if (PokemonSwitchButton.Display(pokemonButtonRight, rightPokemon, true))
 				{
 					DoneWithText();
 					m_system.ProcessUserChoice(rightPokemonIndex);
@@ -431,7 +446,7 @@ public class BattleDisplay : MonoBehaviour
 		{
 			GUI.BeginGroup(m_screenArea);
 				DisplayPokemon();
-				DisplayBackButton();
+				DisplayBackButton(m_screenArea);
 			GUI.EndGroup();
 		}
 		else if (m_system.CurrentState == NewBattleSystem.State.FightPrompt ||
@@ -484,7 +499,7 @@ public class BattleDisplay : MonoBehaviour
 					DisplayPokemon();
 				}
 
-				DisplayBackButton();
+				DisplayBackButton(bounds);
 			});
 		}
 		else
