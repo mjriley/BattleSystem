@@ -11,8 +11,6 @@ public class GUIMenu : MonoBehaviour
 	
 	int optionSelectedIndex = 0;
 	
-	Rect m_bottomScreen = new Rect(0.0f, 260.0f, 400.0f, 240.0f);
-	
 	enum Options : int
 	{
 		Battle = 0,
@@ -22,17 +20,35 @@ public class GUIMenu : MonoBehaviour
 	
 	Options[] m_options = (Options[])Enum.GetValues(typeof(Options));
 	
+	StarTransition m_transition;
+	bool m_isExiting;
+	Texture2D m_solidTexture;
+	
+	void Awake()
+	{
+		m_solidTexture = Resources.Load<Texture2D>("Textures/white_tile");
+	}
+	
 	void Start()
 	{
+		m_transition = GetComponent<StarTransition>();
+		m_isExiting = false;
 	}
 	
 	public void Update()
 	{
+		if (m_isExiting && !m_transition.IsAnimating)
+		{
+			Application.LoadLevel("battle");
+		}
+		
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
 			if (m_options[optionSelectedIndex] == Options.Battle)
 			{
-				Application.LoadLevel("battle");
+				//Application.LoadLevel("battle");
+				m_isExiting = true;
+				m_transition.enabled = true;
 			}
 			if (m_options[optionSelectedIndex] == Options.Roster)
 			{
@@ -60,16 +76,24 @@ public class GUIMenu : MonoBehaviour
 	public void OnGUI()
 	{
 		GUIUtils.DrawSeparatorBar();
-		DrawBottomScreen();
+		
+		if (m_isExiting)
+		{
+			DrawBlankBottomScreen();
+		}
+		else
+		{
+			DrawBottomScreen();
+		}
 	}
 	
 	public int optionOffsetX = 10;
 	public int optionPaddingY = 10;
 	void DrawBottomScreen()
 	{
-		GUIUtils.DrawBottomScreenBackground(m_bottomScreen);
+		GUIUtils.DrawBottomScreenBackground(ScreenCoords.BottomScreen);
 		
-		GUIUtils.DrawGroup(m_bottomScreen, delegate(Rect bounds)
+		GUIUtils.DrawGroup(ScreenCoords.BottomScreen, delegate(Rect bounds)
 		{
 			GUIContent cursor = new GUIContent("➤");
 			Vector2 textBounds = optionsStyle.CalcSize(cursor);
@@ -87,6 +111,14 @@ public class GUIMenu : MonoBehaviour
 				}
 			}
 		});
+	}
+	
+	void DrawBlankBottomScreen()
+	{
+		Color prevColor = GUI.color;
+		GUI.color = Color.black;
+		GUI.DrawTexture(ScreenCoords.BottomScreen, m_solidTexture);
+		GUI.color = prevColor;
 	}
 
 }

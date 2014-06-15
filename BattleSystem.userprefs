@@ -1,27 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Abilities/Status/SeededStatus.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StarTransition.cs">
     <Files>
-      <File FileName="Assets/Scripts/Items/StatusItem.cs" Line="21" Column="2" />
-      <File FileName="Assets/Scripts/Abilities/Effects/BasicEffects.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assembly-CSharp.txt" Line="138" Column="23" />
-      <File FileName="Assets/Scripts/Abilities/Effects/OnHitEffects.cs" Line="73" Column="2" />
-      <File FileName="Assets/Scripts/Abilities/Power/FixedPower.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Abilities/Power/GatedPercentHP.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Abilities/Power/IPowerCalculation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Abilities/Power/PowerPerTurn.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Abilities/Status/SeededStatus.cs" Line="10" Column="3" />
+      <File FileName="Assets/WhiteOut.cs" Line="24" Column="1" />
+      <File FileName="Assets/Scripts/StarTransition.cs" Line="19" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Abilities" expanded="True">
-                <Node name="Status" expanded="True">
-                  <Node name="SeededStatus.cs" selected="True" />
-                </Node>
-              </Node>
+              <Node name="StarTransition.cs" selected="True" />
             </Node>
           </Node>
         </State>

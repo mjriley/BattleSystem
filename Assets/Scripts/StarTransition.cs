@@ -13,13 +13,19 @@ public class StarTransition : MonoBehaviour
 	const int frameWidth = 48;
 	int m_currentFrame = 0;
 	
-	bool m_isAnimating = false;
-
-	void Start()
+	public bool IsAnimating { get; protected set; }
+	
+	void Awake()
 	{
 		m_starTexture = Resources.Load<Texture2D>("Textures/stars");
 		m_solidTexture = Resources.Load<Texture2D>("Textures/white_tile");
 		m_gradientTexture = Resources.Load<Texture2D>("Textures/GradientBlend");
+	}
+	
+	void Start()
+	{
+		Reset();
+		IsAnimating = true;
 	}
 	
 	void Update()
@@ -27,10 +33,10 @@ public class StarTransition : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			Reset();
-			m_isAnimating = true;
+			IsAnimating = true;
 		}
 		
-		if (m_isAnimating)
+		if (IsAnimating)
 		{
 			if (m_currentFrame < m_totalFrames)
 			{
@@ -46,7 +52,7 @@ public class StarTransition : MonoBehaviour
 			}
 			else
 			{
-				m_isAnimating = false;
+				IsAnimating = false;
 			}
 		}
 	}

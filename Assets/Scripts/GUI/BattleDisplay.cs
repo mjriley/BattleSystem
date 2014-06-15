@@ -19,6 +19,8 @@ public class BattleDisplay : MonoBehaviour
 	SpriteRenderer m_playerDisplay;
 	SpriteRenderer m_enemyDisplay;
 	
+	Texture2D m_backgroundTexture;
+	
 	VictoryDisplay m_victoryDisplay;
 	
 	AudioSource m_audio;
@@ -55,6 +57,11 @@ public class BattleDisplay : MonoBehaviour
 	{
 		ClearDisplay();
 		m_system.Reset();
+	}
+	
+	void Awake()
+	{
+		m_backgroundTexture = Resources.Load<Texture2D>("Textures/ButtonLayout");
 	}
 	
 	void Start()
@@ -168,6 +175,7 @@ public class BattleDisplay : MonoBehaviour
 	
 	void OnGUI()
 	{
+		GUI.depth = 5;
 		GUIUtils.DrawSeparatorBar();
 		
 		m_playerStatusDisplay.Display(m_playerNameStyle);
@@ -183,6 +191,11 @@ public class BattleDisplay : MonoBehaviour
 			statusStyle.wordWrap = true;
 			GUI.Label(new Rect(0, bounds.height - statusStyle.normal.background.height, bounds.width, statusStyle.normal.background.height), m_statusText, statusStyle);
 		});
+		
+		Color prevColor = GUI.color;
+		GUI.color = new Color(0.4f, 0.4f, 0.4f);
+		GUI.DrawTexture(ScreenCoords.BottomScreen, m_backgroundTexture);
+		GUI.color = prevColor;
 	}
 	
 	private void HandleBattleEvents(object sender, EventArgs e)

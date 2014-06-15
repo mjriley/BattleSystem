@@ -116,6 +116,7 @@ public class TrainerDisplay : MonoBehaviour
 	
 	public void OnGUI()
 	{
+		GUI.depth = 10;
 		DrawTopScreen();
 	}
 	
