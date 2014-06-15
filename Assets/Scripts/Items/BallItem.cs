@@ -18,9 +18,16 @@ public class BallItem : BaseItem
 	{
 		ActionStatus status = new ActionStatus();
 		
-		status.events.Add(new StatusUpdateEventArgs(context.Player.Name + " used a " + Name + "!"));
-		status.events.Add(new StatusUpdateEventArgs(context.Target.Owner.Name + " blocked your " + Name + "!"));
-		status.events.Add(new StatusUpdateEventArgs("Don't be a thief!"));
+		string useFormat = L18N.Get("MSG_ITEM_USE"); // <X> used a <Y>!
+		string useMessage = string.Format(useFormat, context.Player.Name, Name);
+		status.events.Add(new StatusUpdateEventArgs(useMessage));
+		
+		string blockFormat = L18N.Get("MSG_ITEM_BALL_BLOCK"); // <X> blocked your <Y>!
+		string blockMessage = string.Format(blockFormat, context.Target.Owner.Name, Name);
+		status.events.Add(new StatusUpdateEventArgs(blockMessage));
+		
+		string thiefMessage = L18N.Get("MSG_ITEM_BALL_SCOLD"); // Don't be a thief!
+		status.events.Add(new StatusUpdateEventArgs(thiefMessage));
 		
 		status.turnComplete = true;
 		status.isComplete = true;

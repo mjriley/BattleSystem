@@ -18,7 +18,8 @@ public class RestoreItem : BaseItem
 		Character target = context.Target;
 		int actualAmount = target.TakeDamage(-Amount);
 		
-		string message = context.Player.Name + " used a " + Name + "!";
+		string format = L18N.Get("MSG_ITEM_USE"); // <X> used a <Y>!
+		string message = string.Format(format, context.Player.Name, Name);
 		DamageEventArgs healEvent = new DamageEventArgs(context.Player, actualAmount);
 		status.events.Add(new StatusUpdateEventArgs(message));
 		status.events.Add(healEvent);

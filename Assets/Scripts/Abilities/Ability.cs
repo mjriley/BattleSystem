@@ -60,7 +60,10 @@ public class Ability
 			status.turnComplete = true;
 			status.isComplete = true;
 			
-			status.events.Add(new StatusUpdateEventArgs(actor.Name + " flinched and couldn't move!"));
+			string format = L18N.Get("STATUS_FLINCHED");
+			string message = string.Format(format, actor.Name);
+			
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 	}
 	
@@ -88,7 +91,9 @@ public class Ability
 		
 		if (!m_turnStarted)
 		{
-			status.events.Add(new StatusUpdateEventArgs(actor.Name + " used " + Name + "!"));
+			string format = L18N.Get("MOVE_USE"); // <X> used <Y>!
+			string message = string.Format(format, actor.Name, Name);
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 		
 		ActionStatus exectionStatus = m_abilityImpl.Execute(actor, targetPlayer);
@@ -111,4 +116,3 @@ public class Ability
 }
 
 }
-

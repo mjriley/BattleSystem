@@ -49,7 +49,10 @@ public class MultiHitAbility : DamageAbility
 		{
 			if (!CheckHit())
 			{
-				status.events.Add(new StatusUpdateEventArgs(attacker.Name + " missed!"));
+				string format = L18N.Get("MOVE_MISSED"); // <X> missed!
+				string message = string.Format(format, attacker.Name);
+				
+				status.events.Add(new StatusUpdateEventArgs(message));
 				status.turnComplete = true;
 				status.isComplete = true;
 				
@@ -67,7 +70,9 @@ public class MultiHitAbility : DamageAbility
 		{
 			status.turnComplete = true;
 			status.isComplete = true;
-			status.events.Add(new StatusUpdateEventArgs("Hit " + m_finalAttackCount + " times!"));
+			string format = L18N.Get("MOVE_MULTI_HIT"); // Hit <X> times!
+			string message = string.Format(format, m_finalAttackCount.ToString());
+			status.events.Add(new StatusUpdateEventArgs(message));
 			Reset(); // TODO: Should probably be called explitly by the battle system.
 		}
 		else

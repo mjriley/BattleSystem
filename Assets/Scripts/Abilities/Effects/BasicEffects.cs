@@ -17,7 +17,7 @@ public class BasicEffects
 		}
 		else
 		{
-			status.events.Add(new StatusUpdateEventArgs("But it failed!"));
+			status.events.Add(new StatusUpdateEventArgs(L18N.Get("MSG_FAIL"))); // But it failed!
 		}
 	}
 	

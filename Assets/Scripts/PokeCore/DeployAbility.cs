@@ -35,11 +35,15 @@ public class DeployAbility : ITurnAction
 		m_player.setActivePokemon(m_newIndex);
 		if (m_friendly)
 		{
-			result.events.Add(new StatusUpdateEventArgs("Go! " + m_player.ActivePokemon.Name + "!"));
+			string format = L18N.Get("MSG_GO"); // Go! <X>!
+			string message = string.Format(format, m_player.ActivePokemon.Name);
+			result.events.Add(new StatusUpdateEventArgs(message));
 		}
 		else
 		{
-			result.events.Add(new StatusUpdateEventArgs(m_player.Name + " sent out " + m_player.ActivePokemon.Name + "!"));
+			string format = L18N.Get("MSG_DEPLOY"); // <X> sent out <Y>!
+			string message = string.Format(format, m_player.Name, m_player.ActivePokemon.Name);
+			result.events.Add(new StatusUpdateEventArgs(message));
 		}
 		result.events.Add(new DeployEventArgs(m_player.ActivePokemon));
 		

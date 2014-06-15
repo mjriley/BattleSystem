@@ -21,7 +21,9 @@ public class EtherItem : BaseItem
 	{
 		ActionStatus status = new ActionStatus();
 		
-		status.events.Add(new StatusUpdateEventArgs(context.Player.Name + " used a " + Name + "!"));
+		string useFormat = L18N.Get("ITEM_USE"); // <X> used a <Y>!
+		string useMessage = string.Format(useFormat, context.Player.Name, Name);
+		status.events.Add(new StatusUpdateEventArgs(useMessage));
 		
 		string moveName;
 		
@@ -36,7 +38,7 @@ public class EtherItem : BaseItem
 		else
 		{
 			abilities = pokemon.getAbilities();
-			moveName = "all its moves";
+			moveName = L18N.Get("MSG_ITEM_PP_ALL"); // all its moves
 		}
 		
 		int totalReplenished = 0;
@@ -47,11 +49,13 @@ public class EtherItem : BaseItem
 		
 		if (totalReplenished > 0)
 		{
-			status.events.Add(new StatusUpdateEventArgs(context.Player.Name + " restored " + moveName + "'s PP"));
+			string format = L18N.Get("MSG_ITEM_PP_RESTORE"); // <X> restored <Y>'s PP
+			string message = string.Format(format, context.Player.Name, moveName);
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 		else
 		{
-			status.events.Add(new StatusUpdateEventArgs("But it had no effect!"));
+			status.events.Add(new StatusUpdateEventArgs(L18N.Get("MSG_INERT"))); // But it had no effect!
 		}
 		
 		status.turnComplete = true;

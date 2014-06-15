@@ -38,7 +38,9 @@ public class SwapAbility : ITurnAction
 		{
 			result.turnComplete = false;
 			result.isComplete = false;
-			result.events.Add(new StatusUpdateEventArgs(m_player.ActivePokemon.Name + "! Come back!\nSwap out!"));
+			string format = L18N.Get("MSG_SWAP"); // <X>! Come back! Swap out!
+			string message = string.Format(format, m_player.ActivePokemon.Name);
+			result.events.Add(new StatusUpdateEventArgs(message));
 			result.events.Add(new WithdrawEventArgs(m_player.ActivePokemon));
 			m_currentState = State.Deploy;
 		}
@@ -47,7 +49,9 @@ public class SwapAbility : ITurnAction
 			result.turnComplete = true;
 			result.isComplete = true;
 			m_player.setActivePokemon(m_newIndex);
-			result.events.Add(new StatusUpdateEventArgs("Go! " + m_player.ActivePokemon.Name + "!"));
+			string format = L18N.Get("MSG_GO"); // Go! <X>!
+			string message = string.Format(format, m_player.ActivePokemon.Name);
+			result.events.Add(new StatusUpdateEventArgs(message));
 			result.events.Add(new DeployEventArgs(m_player.ActivePokemon));
 		}
 		

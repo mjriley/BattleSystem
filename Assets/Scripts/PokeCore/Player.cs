@@ -20,8 +20,6 @@ public class Player
 		get { return m_pokemon; }
 	}
 	
-	//INextPokemonStrategy m_nextPokemonStrategy;
-	
 	int m_activePokemonIndex = 0;
 	public Character ActivePokemon { get { return m_pokemon[m_activePokemonIndex]; } }
 	public void setActivePokemon(int index)
@@ -36,7 +34,6 @@ public class Player
 	public Player(string name, IActionRequest turnRequest, IActionRequest replaceRequest, IActionRequest counterReplaceRequest)
 	{
 		m_name = name;
-		//m_nextPokemonStrategy = nextPokemonStrategy;
 		m_turnRequest = turnRequest;
 		m_replaceRequest = replaceRequest;
 		m_counterReplaceRequest = counterReplaceRequest;
@@ -57,21 +54,6 @@ public class Player
 			pokemon.Reset();
 		}
 	}
-	
-//	public int GetNextPokemon(Player enemy)
-//	{
-//		return m_nextPokemonStrategy.getNextPokemon(this, enemy);
-//	}
-	
-//	public int GetReplacementPokemon()
-//	{
-//		return 0;
-//	}
-//	
-//	public int GetCounterPokemon()
-//	{
-//		return 0;
-//	}
 	
 	public void GetTurnAction(Player enemyPlayer, NewBattleSystem.ProcessAction actionCallback)
 	{

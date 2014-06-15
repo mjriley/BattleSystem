@@ -58,7 +58,9 @@ public class DamageAbility : AbstractAbility
 		
 		if (!CheckHit())
 		{
-			status.events.Add(new StatusUpdateEventArgs(attacker.Name + " missed!"));
+			string format = L18N.Get("MOVE_MISSED");
+			string message = string.Format(format, attacker.Name);
+			status.events.Add(new StatusUpdateEventArgs(message));
 			status.turnComplete = true;
 			status.isComplete = true;
 			
@@ -89,26 +91,29 @@ public class DamageAbility : AbstractAbility
 		
 		if (result.effectiveness == Effectiveness.SuperEffective)
 		{
-			status.events.Add(new StatusUpdateEventArgs("It's super effective!"));
+			string message = L18N.Get("EFFECTIVENESS_GOOD"); // It's super effective!
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 		else if (result.effectiveness == Effectiveness.Weak)
 		{
-			status.events.Add(new StatusUpdateEventArgs("It's not very effective..."));
+			string message = L18N.Get("EFFECTIVENESS_BAD"); // It's not very effective...
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 		else if (result.effectiveness == Effectiveness.Immune)
 		{
-			status.events.Add(new StatusUpdateEventArgs("It doesn't affect the opposing " + defender.Name + "..."));
+			string format = L18N.Get("EFFECTIVENESS_IMMUNE"); // It's doesn't affect the opposing <X>...
+			string message = string.Format(format, defender.Name);
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 		
 		if (result.crit)
 		{
-			status.events.Add(new StatusUpdateEventArgs("A critical hit!"));
+			string message = L18N.Get("MOVE_CRIT"); // A critical hit!
+			status.events.Add(new StatusUpdateEventArgs(message));
 		}
 		
 		status.events.Add(new DamageEventArgs(defender.Owner, result.amount));
 		defender.TakeDamage(result.amount);
-		
-		UnityEngine.Debug.Log("Dealing " + result.amount + " damage");
 		
 		return result;
 	}
@@ -125,7 +130,9 @@ public class DamageAbility : AbstractAbility
 	{
 		if (target.isDead())
 		{
-			status.events.Add(new StatusUpdateEventArgs(target.Name + " fainted!"));
+			string format = L18N.Get("MSG_DEATH"); // <X> fainted!
+			string message = string.Format(format, target.Name);
+			status.events.Add(new StatusUpdateEventArgs(message));
 			status.events.Add(new WithdrawEventArgs(target));
 		}
 	}

@@ -19,6 +19,10 @@ public class StatusItem : BaseItem
 		Character pokemon = context.Target;
 		pokemon.ClearStatus(Status);
 		
+		string useFormat = L18N.Get("MSG_ITEM_USE"); // <X> used a <Y>!
+		string useMessage = string.Format(useFormat, context.Player.Name, Name);
+		status.events.Add(new StatusUpdateEventArgs(useMessage));
+		
 		status.turnComplete = true;
 		status.isComplete = true;
 		

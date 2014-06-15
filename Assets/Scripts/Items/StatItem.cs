@@ -22,10 +22,12 @@ public class StatItem : BaseItem
 		Character pokemon = context.Target;
 		int actualChange = pokemon.ModifyStage(Stat, Stages);
 		
-		string message = Character.GetStageModificationMessage(context.Target.Name, Stat, actualChange, (Stages > 0));
+		string changeMessage = Character.GetStageModificationMessage(context.Target.Name, Stat, actualChange, (Stages > 0));
 		
-		status.events.Add(new StatusUpdateEventArgs(context.Player.Name + " used a " + Name + "!"));
-		status.events.Add(new StatusUpdateEventArgs(message));
+		string useFormat = L18N.Get("MSG_ITEM_USE"); // <X> used a <Y>!
+		string useMessage = string.Format(useFormat, context.Player.Name, Name);
+		status.events.Add(new StatusUpdateEventArgs(useMessage));
+		status.events.Add(new StatusUpdateEventArgs(changeMessage));
 		
 		status.isComplete = true;
 		status.turnComplete = true;

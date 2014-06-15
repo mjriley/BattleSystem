@@ -38,7 +38,9 @@ public class EffectAbility : AbstractAbility
 	{
 		if (!CheckHit())
 		{
-			status.events.Add(new StatusUpdateEventArgs(actor.Name + " missed!"));
+			string format = L18N.Get("MOVE_MISSED"); // <X> missed!
+			string message = string.Format(format, actor.Name);
+			status.events.Add(new StatusUpdateEventArgs(message));
 			status.turnComplete = true;
 			status.isComplete = true;
 			

@@ -136,7 +136,7 @@ public class NewBattleSystem
 			
 			if (m_hasCounterReplace && !m_needPlayerPokemon)
 			{
-				string format = L18N.Get("COUNTER_REPLACE_PROMPT");
+				string format = L18N.Get("PROMPT_COUNTER_REPLACE"); // <X> is about to send in <Y>. Will you switch your Pokémon?
 				string message = String.Format(format, m_enemyPlayer.Name, action.Subject.Name);
 				m_pendingEvents.Enqueue(new StatusUpdateEventArgs(message));
 				m_needPlayerPokemon = true;
@@ -229,16 +229,22 @@ public class NewBattleSystem
 				m_enemyPlayer = generateEnemy();
 				m_pendingEvents.Enqueue(new NewEncounterEventArgs(m_enemyTrainer));
 				string fullName = m_enemyTrainer.Title + " " + m_enemyTrainer.Name;
-				m_pendingEvents.Enqueue(new StatusUpdateEventArgs("You have been challenged by " + fullName + "!", false));
+				string format = L18N.Get("MSG_CHALLENGE"); // You have been challenged by <X>!
+				string message = String.Format(format, fullName);
+				m_pendingEvents.Enqueue(new StatusUpdateEventArgs(message, false));
 				m_nextState = State.CombatIntro;
 				break;
 			}
 			case State.CombatIntro:
 			{
-				AddStatusMessage(m_enemyPlayer.Name + " sent out " + m_enemyPlayer.ActivePokemon.Species.ToString() + "!");
+				string deployFormat = L18N.Get("MSG_DEPLOY"); // <X> sent out <Y>!
+				string deployMessage = String.Format(deployFormat, m_enemyPlayer.Name, m_enemyPlayer.ActivePokemon.Species.ToString());
+				AddStatusMessage(deployMessage);
 				m_pendingEvents.Enqueue(new DeployEventArgs(m_enemyPlayer.ActivePokemon));
 				
-				AddStatusMessage("Go! " + m_userPlayer.ActivePokemon.Name + "!");
+				string goFormat = L18N.Get("MSG_GO"); // Go! <X>!
+				string goMessage = String.Format(goFormat, m_userPlayer.ActivePokemon.Name);
+				AddStatusMessage(goMessage);
 				m_pendingEvents.Enqueue(new DeployEventArgs(m_userPlayer.ActivePokemon));
 				m_nextState = State.BeginTurn;
 				break;
@@ -263,11 +269,12 @@ public class NewBattleSystem
 				{
 					m_userChoice = -1;
 					
-					
 					if (NeedPlayerAction(m_userPlayer))
 					{
 						m_userPlayer.GetTurnAction(m_enemyPlayer, this.ActionHandler);
-						AddStatusMessage("What will " + m_userPlayer.ActivePokemon.Name + " do?");
+						string format = L18N.Get("PROMPT_TURN"); // What will <X> do?
+						string message = String.Format(format, m_userPlayer.ActivePokemon.Name);
+						AddStatusMessage(message);
 					}
 					
 					if (NeedPlayerAction(m_enemyPlayer))
@@ -396,7 +403,7 @@ public class NewBattleSystem
 					{
 						if (m_userPlayer.IsDefeated())
 						{
-							AddStatusMessage("You've lost!");
+							AddStatusMessage(L18N.Get("MSG_LOSE"));
 							m_nextState = State.Splash;
 						}
 						else

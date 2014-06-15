@@ -134,7 +134,94 @@ STAGE_DECREASE_1=fell
 STAGE_DECREASE_2=harshly fell
 STAGE_DECREASE_3=severely fell
 
+# Effectiveness Messages
+EFFECTIVENESS_GOOD=It's super effective!
+EFFECTIVENESS_BAD=It's not very effective...
+EFFECTIVENESS_IMMUNE=It doesn't affect the opposing {0}...
+
+# Move Messages
+MOVE_USE={0} used {1}!
+MOVE_MISSED={0} missed!
+MOVE_CRIT=A critical hit!
+MOVE_SEEDED_DRAIN={0}'s health was sapped by Leech Seed!
+MOVE_MULTI_HIT=Hit {0} times!
+
+# Moves
+MOVE_EMBER=Ember
+MOVE_DESC_EMBER=The target is attacked with small flames. It may also leave the target with a burn.
+MOVE_FIRE_FANG=Fire Fang
+MOVE_DESC_FIRE_FANG=The user bites with flame-cloaked fangs. It may also make the target flinch or leave it burned.
+MOVE_VINE_WHIP=Vine Whip
+MOVE_DESC_VINE_WHIP=The target is struck with slender, whiplike vines to inflict damage.
+MOVE_RAZOR_LEAF=Razor Leaf
+MOVE_DESC_RAZOR_LEAF=Sharp-edged leaves are launched to slash at the opposing team. Critical hits land more easily.
+MOVE_FURY_SWIPES=Fury Swipes
+MOVE_DESC_FURY_SWIPES=The target is raked with sharp claws or scythes for two to fives times in quick succession.
+MOVE_TACKLE=Tackle
+MOVE_DESC_TACKLE=A physical attack in which the user charges and slams into the target with its whole body.
+MOVE_SCRATCH=Scratch
+MOVE_DESC_SCRATCH=Hard, pointed, and sharp claws rake the target to inflict damage.
+MOVE_SPLASH=Splash
+MOVE_DESC_SPLASH=The user just flops and splashes around to no effect at all...
+MOVE_FLAIL=Flail
+MOVE_DESC_FLAIL=The user flails about aimlessly to attack. It becomes more powerful the less HP the user has.
+MOVE_TAKE_DOWN=Take Down
+MOVE_DESC_TAKE_DOWN=A reckless, full-body charge attack for slamming into the target. It also damages the user a little.
+MOVE_GROWL=Growl
+MOVE_DESC_GROWL=The user growls in an endearing way, making opposing Pokemon less wary. This lowers their Attack stats.
+MOVE_QUICK_ATTACK=Quick Attack
+MOVE_DESC_QUICK_ATTACK=The user lunges at the target at a speed that makes it almost invisible. This move always goes first.
+MOVE_POUND=Pound
+MOVE_DESC_POUND=The target is physically pounded with a long tail, a foreleg, or the like.
+MOVE_TAIL_WHIP=Tail Whip
+MOVE_DESC_TAIL_WHIP=The user wags its tail cutely, making opposing Pokemon less wary and lowering their Defense stat.
+MOVE_HOWL=Howl
+MOVE_DESC_HOWL=The user howls loudly to raise its spirit, which raises its Attack stat.
+MOVE_AGILITY=Agility
+MOVE_DESC_AGILITY=The user relaxes and lightens its body to move faster. This sharply raises the Speed stat.
+MOVE_LEER=Leer
+MOVE_DESC_LEER=The user gives opposing Pokemon an intimidating leer that lowers the Defense stat.
+MOVE_HEADBUTT=Headbutt
+MOVE_DESC_HEADBUTT=The user sticks out its head and attacks by charging straight into the target. This may also make the target flinch.
+MOVE_SMOKESCREEN=Smokescreen
+MOVE_DESC_SMOKESCREEN=The user releases an obscuring cloud of smoke or ink. This lowers the target's accuracy.
+MOVE_PLAY_NICE=Play Nice
+MOVE_DESC_PLAY_NICE=The user and the target become friends, and the target loses its will to fight. This lowers the target's Attack stat.
+MOVE_ROLLOUT=Rollout
+MOVE_DESC_ROLLOUT=The user continually rolls into the target over five turns. It becomes stronger each time it hits.
+MOVE_BITE=Bite
+MOVE_DESC_BITE=The target is bitten with viciously sharp fangs. It may make the target flinch.
+MOVE_WATER_GUN=Water Gun
+MOVE_DESC_WATER_GUN=The target is blasted with a forceful shot of water.
+MOVE_BUBBLE=Bubble
+MOVE_DESC_BUBBLE=A spray of countless bubbles is jetted at the opposing team. It may also lower the targets' Speed stats.
+MOVE_WITHDRAW=Withdraw
+MOVE_DESC_WITHDRAW=The user withdraws its body into its hard shell, raising its Defense stat.
+MOVE_DRAGON_RAGE=Dragon Rage
+MOVE_DESC_DRAGON_RAGE=This attack hits the target with a shock wave of pure rage. This attack always inflicts 40 HP damage.
+MOVE_THUNDER_SHOCK=Thunder Shock
+MOVE_DESC_THUNDER_SHOCK=A jolt of electricity crashes down on the target to inflict damage. This may also leave the target with paralysis.
+MOVE_LEECH_SEED=Leech Seed
+MOVE_DESC_LEECH_SEED=A seed is planted on the target. It steals some HP from the target every turn.
+
+# Status Effect Messages
+STATUS_FLINCHED={0} flinched and couldn't move!
+
 # Status Messages
-COUNTER_REPLACE_PROMPT={0} is about to send in {1}. Will you switch your Pokémon?
+MSG_DEATH={0} fainted!
+MSG_FAIL=But it failed!
+MSG_ITEM_USE={0} used a {1}!
+MSG_ITEM_BALL_BLOCK={0} blocked your {1}!
+MSG_ITEM_BALL_SCOLD=Don't be a thief!
+MSG_ITEM_PP_ALL=all its moves
+MSG_ITEM_PP_RESTORE={0} restored {1}'s PP
+MSG_INERT=But it had no effect!
+MSG_SWAP={0}! Come back!\nSwap out!
+MSG_LOSE=You've lost!
+MSG_CHALLENGE=You have been challenged by {0}!
+MSG_DEPLOY={0} sent out {1}!
+MSG_GO=Go! {0}!
+PROMPT_TURN=What will {0} do?
+PROMPT_COUNTER_REPLACE={0} is about to send in {1}. Will you switch your Pokémon?
 FLEE_PROHIBITED=No! There's no running from a Trainer battle!
 STAT_CHANGE={0}'s {1} {2}!

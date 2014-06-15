@@ -37,11 +37,6 @@ namespace Items
 			AddItem(new StatItem("X Sp. Def", Stat.SpecialDefense, 1));
 			AddItem(new StatItem("X Speed", Stat.Speed, 1));
 			AddItem(new StatItem("X Accuracy", Stat.Accuracy, 1));
-			
-//			foreach (KeyValuePair<string, IItem> item in m_items)
-//			{
-//				UnityEngine.Debug.Log("Item name is: " + item.Key);
-//			}
 		}
 		
 		public static IItem GetItem(string name)

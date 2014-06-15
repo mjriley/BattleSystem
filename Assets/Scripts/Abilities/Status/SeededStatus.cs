@@ -19,7 +19,9 @@ namespace Status {
 			enemy.TakeDamage(-amount);
 			
 			status.events.Add(new DamageEventArgs(actor.Owner, amount));
-			status.events.Add(new StatusUpdateEventArgs(actor.Name + "'s health is sapped by Leech Seed!"));
+			string format = L18N.Get("MOVE_SEEDED_DRAIN"); // <X>'s health was sapped by Leech Seed!
+			string message = string.Format(format, actor.Name);
+			status.events.Add(new StatusUpdateEventArgs(message));
 			status.events.Add(new DamageEventArgs(enemy.Owner, -amount));
 		}
 	}
