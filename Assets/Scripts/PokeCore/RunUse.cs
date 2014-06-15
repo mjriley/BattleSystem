@@ -13,6 +13,8 @@ public class RunUse : ITurnAction
 		m_pokemon = pokemon;
 	}
 	
+	public string Name { get { return "RunUse"; } }
+	
 	public ICharacter Subject { get { return m_pokemon; } }
 	
 	public int Priority { get { return 6; } }

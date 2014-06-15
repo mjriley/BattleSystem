@@ -1,16 +1,23 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StarTransition.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PokeCore/ActionSort.cs">
     <Files>
-      <File FileName="Assets/WhiteOut.cs" Line="24" Column="1" />
-      <File FileName="Assets/Scripts/StarTransition.cs" Line="19" Column="2" />
+      <File FileName="Assets/Scripts/PokeCore/NewBattleSystem.cs" Line="301" Column="6" />
+      <File FileName="Assets/Scripts/PokeCore/ActionSort.cs" Line="13" Column="81" />
+      <File FileName="Assets/Scripts/Abilities/AbilityFactory.cs" Line="56" Column="46" />
+      <File FileName="Assets/Scripts/Abilities/Ability.cs" Line="90" Column="3" />
+      <File FileName="Assets/Scripts/Abilities/AbilityUse.cs" Line="20" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/ITurnAction.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="StarTransition.cs" selected="True" />
+              <Node name="Abilities" expanded="True" />
+              <Node name="PokeCore" expanded="True">
+                <Node name="ActionSort.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>

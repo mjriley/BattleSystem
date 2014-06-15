@@ -9,6 +9,8 @@ public class NoTurnAction : ITurnAction
 		Subject = subject;
 	}
 	
+	public string Name { get { return "NoTurnAction"; } }
+	
 	public ICharacter Subject { get; protected set; }
 	
 	public int Priority { get { return 0; } } 

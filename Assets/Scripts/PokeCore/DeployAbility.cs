@@ -21,6 +21,8 @@ public class DeployAbility : ITurnAction
 		m_subject = player.Pokemon[newIndex];
 	}
 	
+	public string Name { get { return "DeployUse"; } }
+	
 	public ICharacter Subject { get { return m_subject; } }
 	
 	public int Priority { get { return 6; } }

@@ -16,6 +16,8 @@ public class AbilityUse : ITurnAction
 		m_ability = ability;
 	}
 	
+	public string Name { get { return m_ability.Name; } }
+	
 	public virtual ICharacter Subject { get { return m_actor; } }
 	
 	public virtual ActionStatus Execute()

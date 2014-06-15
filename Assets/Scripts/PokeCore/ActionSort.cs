@@ -8,6 +8,11 @@ public class ActionSort
 	// if two actions would execute at the same time, one is determined to go first randomly
 	public static int ByPriority(ITurnAction x, ITurnAction y, IRandom generator=null)
 	{
+		if (System.Object.ReferenceEquals(x, y))
+		{
+			return 0;
+		}
+		
 		if (x.Priority != y.Priority)
 		{
 			return x.Priority.CompareTo(y.Priority);

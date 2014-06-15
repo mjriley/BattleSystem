@@ -16,6 +16,8 @@ public class ItemUse : ITurnAction
 		m_inventory = inventory;
 	}
 	
+	public string Name { get { return "ItemUse"; } }
+	
 	public virtual ICharacter Subject { get { return m_context.Player.ActivePokemon; } }
 	
 	public virtual ActionStatus Execute()

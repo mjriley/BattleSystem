@@ -18,6 +18,7 @@ namespace Tests
 	
 	class ActionStub : ITurnAction
 	{
+		public string Name { get { return ""; } }
 		public ICharacter Subject { get; set; }
 		public int Priority { get; set; }
 		public ActionStatus Execute() { return null; }
