@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,7 +52,6 @@ public class Character : ICharacter
 	public const int MIN_STAGE = -6;
 	
 	private int m_currentHP;
-	//private List<AbstractAbility> m_abilities = new List<AbstractAbility>();
 	private List<Ability> m_abilities = new List<Ability>();
 	private string m_name;
 	
@@ -63,16 +62,12 @@ public class Character : ICharacter
 		set { m_refOwner = new WeakReference(value); }
 	}
 	
-	//private List<BattleType> m_types = new List<BattleType>();
-	
 	private bool m_isInvisible = false;
 	public bool IsInvisible
 	{
 		get { return m_isInvisible; }
 		set { m_isInvisible = value; }
 	}
-	
-	private IAttackStrategy m_strategy;
 	
 	public string Name
 	{
@@ -97,14 +92,12 @@ public class Character : ICharacter
 	PokemonDefinition m_definition;
 	
 	public Character(string name, PokemonDefinition definition, Pokemon.Gender gender, uint level, 
-		IAttackStrategy strategy, Dictionary<Stat, int> ivs=null, Dictionary<Stat, int> evs=null, Nature nature=null)
+		Dictionary<Stat, int> ivs=null, Dictionary<Stat, int> evs=null, Nature nature=null)
 	{
 		m_name = name;
 		m_definition = definition;
 		m_gender = gender;
 		Level = level;
-		
-		m_strategy = strategy;
 		
 		if (ivs == null)
 		{
@@ -230,12 +223,69 @@ public class Character : ICharacter
 		return difference;
 	}
 	
-	public void TakeDamage(int damage)
+	public static string GetStageModificationMessage(string name, Stat stat, int stage_change, bool isIncrease)
 	{
+		string suffix;
+		if (isIncrease)
+		{
+			switch (stage_change)
+			{
+				case 0: 
+					suffix = L18N.Get("STAGE_INCREASE_0");
+					break;
+				case 1:
+					suffix = L18N.Get("STAGE_INCREASE_1");
+					break;
+				case 2:
+					suffix = L18N.Get("STAGE_INCREASE_2");
+					break;
+				default:
+					suffix = L18N.Get("STAGE_INCREASE_3");
+					break;
+			}
+		}
+		else
+		{
+			switch (stage_change)
+			{
+				case 0:
+					suffix = L18N.Get("STAGE_DECREASE_0");
+					break;
+				case -1:
+					suffix = L18N.Get("STAGE_DECREASE_1");
+					break;
+				case -2:
+					suffix = L18N.Get("STAGE_DECREASE_2");
+					break;
+				default:
+					suffix = L18N.Get("STAGE_DECREASE_3");
+					break;
+			}
+		}
+		
+		string format = L18N.Get("STAT_CHANGE");
+		string result = String.Format(format, name, stat.LocalName(), suffix);
+		
+		return result;
+	}
+	
+	// Applies the provided amount of "damage" (can heal)
+	// and returns the actual amount that occurred
+	public int TakeDamage(int damage)
+	{
+		int initialHP = m_currentHP;
 		m_currentHP -= damage;
 		
 		m_currentHP = Mathf.Min(m_currentHP, MaxHP);
 		m_currentHP = Mathf.Max(m_currentHP, 0);
+		
+		
+		// REMOVE, just to speed up testing
+		m_currentHP = 0;
+		
+		
+		//return (initialHP - m_currentHP);
+		return initialHP;
 	}
 	
 	public bool isDead()
@@ -243,19 +293,16 @@ public class Character : ICharacter
 		return (m_currentHP == 0);
 	}
 	
-	//public List<AbstractAbility> getAbilities()
 	public List<Ability> getAbilities()
 	{
 		return new List<Ability>(m_abilities);
 	}
 	
-	//public void addAbility(AbstractAbility ability)
 	public void addAbility(Ability ability)
 	{
 		m_abilities.Add(ability);
 	}
 	
-	//public void replaceAbility(int index, AbstractAbility ability)
 	public void replaceAbility(int index, Ability ability)
 	{
 		m_abilities[index] = ability;
@@ -266,16 +313,6 @@ public class Character : ICharacter
 	public uint getUsageCost()
 	{
 		return 1;
-	}
-	
-	public void UpdateBattleConditions(Player enemyPlayer)
-	{
-		m_strategy.UpdateConditions(this, enemyPlayer);
-	}
-	
-	public ITurnAction getTurn()
-	{
-		return m_strategy.Execute();
 	}
 	
 	public bool Burned { get; set; }
@@ -316,10 +353,13 @@ public class Character : ICharacter
 		Seeded = false;
 	}
 	
+	public bool ClearStatus(StatusType status)
+	{
+		return false;
+	}
+	
 	public void CompleteTurn(Character enemy, ref ActionStatus status)
 	{
-		//List<string> messages = new List<string>();
-		
 		if (Owner.ActivePokemon != this)
 		{
 			// only calculate effects if this pokemon is still on the field
@@ -329,7 +369,6 @@ public class Character : ICharacter
 		
 		if (Burned)
 		{
-			//messages.Add(m_name + " was damaged by the burn!");
 			status.events.Add(new StatusUpdateEventArgs(m_name + " was damaged by the burn!"));
 			int amount = (int)(1.0f / 8.0f * MaxHP);
 			TakeDamage(amount);
@@ -338,7 +377,6 @@ public class Character : ICharacter
 		
 		if (Poisoned)
 		{
-			//messages.Add(m_name + " was damaged by the poison!");
 			status.events.Add(new StatusUpdateEventArgs(m_name + " was damaged by the poison!"));
 			int amount = (int)(1.0f / 8.0f * MaxHP);
 			TakeDamage(amount);
@@ -351,7 +389,6 @@ public class Character : ICharacter
 			
 			if (!IsSleeping())
 			{
-				//messages.Add(m_name + " woke up!");
 				status.events.Add(new StatusUpdateEventArgs(m_name + " woke up!"));
 			}
 		}
@@ -360,8 +397,6 @@ public class Character : ICharacter
 		{
 			SeededStatus.ProcessStatus(this, enemy, ref status);
 		}
-		
-		//return messages;
 	}
 	
 	public bool IsStatusAfflicted()

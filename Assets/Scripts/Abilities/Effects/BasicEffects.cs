@@ -38,46 +38,9 @@ public class BasicEffects
 			Character subject = (target == Target.Self) ? actor : enemyPlayer.ActivePokemon;
 			int actual_change = subject.ModifyStage(stat, stage_change);
 			
-			string suffix;
+			string message = Character.GetStageModificationMessage(subject.Name, stat, actual_change, (stage_change > 0));
 			
-			if (stage_change > 0)
-			{
-				switch (actual_change)
-				{
-					case 0: 
-						suffix = "won't go any higher!";
-						break;
-					case 1:
-						suffix = "rose!";
-						break;
-					case 2:
-						suffix = "rose sharply!";
-						break;
-					default:
-						suffix = "rose drastically!";
-						break;
-				}
-			}
-			else
-			{
-				switch (actual_change)
-				{
-					case 0:
-						suffix = "won't go any lower!";
-						break;
-					case -1:
-						suffix = "fell!";
-						break;
-					case -2:
-						suffix = "harshly fell!";
-						break;
-					default:
-						suffix = "severely fell!";
-						break;
-				}
-			}
-			
-			status.events.Add(new StatusUpdateEventArgs(subject.Name + "'s " + stat + " " + suffix));
+			status.events.Add(new StatusUpdateEventArgs(message));
 		};
 	}
 	

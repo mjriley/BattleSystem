@@ -3,6 +3,7 @@ using UnityEngine;
 public class GUIUtils
 {
 	public delegate void DrawFunc(Rect bounds);
+	public delegate void AnonDrawFunc();
 	public delegate void BlockFunc();
 	
 	private static Texture2D m_solidTexture;
@@ -12,8 +13,13 @@ public class GUIUtils
 	//  and less error-prone. Essentially RIAA for groups
 	static public void DrawGroup(Rect bounds, DrawFunc func)
 	{
+		DrawGroup(bounds, delegate() { func(bounds); });
+	}
+	
+	static public void DrawGroup(Rect bounds, AnonDrawFunc func)
+	{
 		GUI.BeginGroup(bounds);
-		func(bounds);
+		func();
 		GUI.EndGroup();
 	}
 	

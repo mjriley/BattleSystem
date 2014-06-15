@@ -34,7 +34,12 @@ public class PokemonDefinition
 		
 		m_types = new List<BattleType>();
 		m_types.Add(type1);
-		m_types.Add(type2);
+		
+		// none is only a placeholder -- it shouldn't be part of the final type list
+		if (type2 != BattleType._None)
+		{
+			m_types.Add(type2);
+		}
 		
 		m_maleRatio = maleRatio;
 	}
@@ -68,8 +73,6 @@ public class PokemonDefinition
 	public int Speed { get { return GetStat(Stat.Speed); } }
 	
 	public float MaleRatio { get { return m_maleRatio; } }
-	
-	
 	
 	static bool m_isInit = false;
 	static Dictionary<Species, PokemonDefinition> m_definitions;

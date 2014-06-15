@@ -22,29 +22,6 @@ public class HighScoresDisplay : MonoBehaviour
 		m_solidTexture = Resources.Load<Texture2D>("Textures/white_tile");
 		m_highScores = new HighScores();
 		m_highScores.Load();
-//		for (int i=0; i < 12; ++i)
-//		{
-//			Player player = new Player("Player " + i, null);
-//			Character pikachu = new Character("Pikachu", PokemonDefinition.GetEntry(Pokemon.Species.Pikachu), Pokemon.Gender.Male, 50, null);
-//			player.AddPokemon(pikachu);
-//			
-//			Character squirtle = new Character("Squirtle", PokemonDefinition.GetEntry(Pokemon.Species.Squirtle), Pokemon.Gender.Male, 50, null);
-//			player.AddPokemon(squirtle);
-//			
-//			Character bulbasaur = new Character("Bulbasaur", PokemonDefinition.GetEntry(Pokemon.Species.Bulbasaur), Pokemon.Gender.Male, 50, null);
-//			player.AddPokemon(bulbasaur);
-//			
-//			Character charmander = new Character("Charmander", PokemonDefinition.GetEntry(Pokemon.Species.Charmander), Pokemon.Gender.Male, 50, null);
-//			player.AddPokemon(charmander);
-//			
-////			Character magikarp = new Character("Magikarp", PokemonDefinition.GetEntry(Pokemon.Species.Magikarp), Pokemon.Gender.Male, 50, null);
-////			player.AddPokemon(magikarp);
-//			
-//			Character fennekin = new Character("Fennekin", PokemonDefinition.GetEntry(Pokemon.Species.Fennekin), Pokemon.Gender.Male, 50, null);
-//			player.AddPokemon(fennekin);
-//			
-//			m_highScores.InsertScore(HighScore.CreateFromPlayer(player, i));
-//		}
 	}
 	
 	void Start()

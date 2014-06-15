@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Abilities;
 using Pokemon;
+using Items;
 
 namespace PokeCore {
 
@@ -15,18 +16,11 @@ public class NewBattleSystem
 		Splash,
 		CombatIntro,
 		BeginTurn,
-		CombatPrompt,
-		FightPrompt,
-		ItemPrompt,
-		PokemonPrompt,
-		EnemyAction,
+		GetTurnActions,
 		ProcessTurn,
 		EndTurn,
-		FriendlyPokemonDefeated,
-		EnemyPokemonDefeated,
 		Victory,
-		ReplacePokemon,
-		ReplaceEnemyPokemon
+		ReplaceDeadPokemon
 	};
 	
 	public enum CombatSelection : int
@@ -41,6 +35,7 @@ public class NewBattleSystem
 	
 	public delegate void BattleEventHandler(object sender, EventArgs e);
 	public delegate void StateChangeHandler(object sender, StateChangeArgs e);
+	public delegate bool ProcessAction(ITurnAction action);
 	
 	public event BattleEventHandler BattleProgress;
 	public event StateChangeHandler LeaveState;
@@ -61,34 +56,41 @@ public class NewBattleSystem
 	
 	private Queue<ITurnAction> m_actionQueue = new Queue<ITurnAction>();
 	private List<ITurnAction> m_turnActions = new List<ITurnAction>();
-	//private Queue<ITurnAction> m_nextTurnQueue = new Queue<ITurnAction>();
 	
 	private Random m_generator = new Random();
-	private RandomAttackStrategy m_enemyStrategy;
 	
 	private bool m_waitingForInput = false;
 	
 	bool isQueueSorted = false;
+	bool m_needPlayerPokemon = false;
+	bool m_needEnemyPokemon = false;
 	
 	int m_consecutiveVictories;
 	public int Victories { get { return m_consecutiveVictories; } }
 	
-	public NewBattleSystem()
+	bool m_hasCounterReplace;
+	
+	public NewBattleSystem(bool hasCounterReplace=true)
 	{
-		m_enemyStrategy = new RandomAttackStrategy(m_generator);
-		
+		m_hasCounterReplace = hasCounterReplace;
 		Reset();
 	}
 	
-	public void InitializePlayer(PokemonPrototype[] prototypes)
+	public void InitializePlayer(PokemonPrototype[] prototypes, IActionRequest turnRequest, IActionRequest replaceRequest, IActionRequest counterReplaceRequest)
 	{
-		m_userPlayer = new Player("Human", null);
-		
-		UserInputStrategy input = new UserInputStrategy(null, this.GetUserAbility);
+		m_userPlayer = new Player("Human", turnRequest, replaceRequest, counterReplaceRequest);
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Potion"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Super Potion"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Ether"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Max Elixir"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Antidote"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Poke Ball"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("Master Ball"));
+		m_userPlayer.Inventory.AddItem(ItemFactory.GetItem("X Attack"), 10);
 		
 		foreach (PokemonPrototype prototype in prototypes)
 		{
-			Character pokemon = PokemonFactory.CreatePokemon(prototype.Species, prototype.Level, "", prototype.Gender, input);
+			Character pokemon = PokemonFactory.CreatePokemon(prototype.Species, prototype.Level, "", prototype.Gender);
 			m_userPlayer.AddPokemon(pokemon);
 		}
 	}
@@ -98,9 +100,70 @@ public class NewBattleSystem
 		m_userChoice = choice;
 	}
 	
+	bool ActionHandler(ITurnAction action)
+	{
+		List<string> messages;
+		
+		if (!action.Verify(out messages))
+		{
+			foreach (string message in messages)
+			{
+				m_pendingEvents.Enqueue(new StatusUpdateEventArgs(message));
+			}
+			return false;
+		}
+		
+		m_turnActions.Add(action);
+		
+		return true;
+	}
+	
+	bool ReplacementHandler(ITurnAction action)
+	{
+		if (action.Subject.Owner == m_userPlayer)
+		{
+			m_needPlayerPokemon = false;
+			
+			if (m_hasCounterReplace && !m_needEnemyPokemon)
+			{
+				m_needEnemyPokemon = true;
+				m_enemyPlayer.GetCounterPokemon(m_userPlayer, this.CounterReplaceHandler);
+			}
+		}
+		else if (action.Subject.Owner == m_enemyPlayer)
+		{
+			m_needEnemyPokemon = false;
+			
+			if (m_hasCounterReplace && !m_needPlayerPokemon)
+			{
+				m_needPlayerPokemon = true;
+				m_userPlayer.GetCounterPokemon(m_enemyPlayer, this.CounterReplaceHandler);
+			}
+		}
+		
+		m_actionQueue.Enqueue(action);
+		
+		return true;
+	}
+	
+	bool CounterReplaceHandler(ITurnAction action)
+	{
+		if (action.Subject.Owner == m_userPlayer)
+		{
+			m_needPlayerPokemon = false;
+		}
+		else if (action.Subject.Owner == m_enemyPlayer)
+		{
+			m_needEnemyPokemon = false;
+		}
+		
+		m_actionQueue.Enqueue(action);
+		
+		return true;
+	}
+	
 	bool NeedPlayerAction(Player player)
 	{
-		//return !m_actionQueue.Any(p => (p.Subject == player.ActivePokemon));
 		return !m_turnActions.Any(p => (p.Subject == player.ActivePokemon));
 	}
 	
@@ -182,13 +245,9 @@ public class NewBattleSystem
 			{
 				isQueueSorted = false;
 				
-				if (NeedPlayerAction(m_userPlayer))
+				if (NeedPlayerAction(m_userPlayer) || NeedPlayerAction(m_enemyPlayer))
 				{
-					m_nextState = State.CombatPrompt;
-				}
-				else if (NeedPlayerAction(m_enemyPlayer))
-				{
-					m_nextState = State.EnemyAction;
+					m_nextState = State.GetTurnActions;
 				}
 				else
 				{
@@ -196,122 +255,34 @@ public class NewBattleSystem
 				}
 				break;
 			}
-			case State.CombatPrompt:
+			case State.GetTurnActions:
 			{
 				if (!m_waitingForInput)
 				{
 					m_userChoice = -1;
 					
-					// update the players with the battle conditions
-					m_userPlayer.UpdateConditions(m_enemyPlayer);
-					m_enemyPlayer.UpdateConditions(m_userPlayer);
 					
-					AddStatusMessage("What will " + m_userPlayer.ActivePokemon.Name + " do?");
+					if (NeedPlayerAction(m_userPlayer))
+					{
+						m_userPlayer.GetTurnAction(m_enemyPlayer, this.ActionHandler);
+						AddStatusMessage("What will " + m_userPlayer.ActivePokemon.Name + " do?");
+					}
+					
+					if (NeedPlayerAction(m_enemyPlayer))
+					{
+						m_enemyPlayer.GetTurnAction(m_userPlayer, this.ActionHandler);
+					}
+					
 					m_waitingForInput = true;
 				}
-				else if (ValidateInput())
+				else
 				{
-					switch (m_userChoice)
+					if (!NeedPlayerAction(m_userPlayer) && (!NeedPlayerAction(m_enemyPlayer)))
 					{
-						case (int)CombatSelection.Fight:
-						{
-							m_nextState = State.FightPrompt;
-							break;
-						}
-						case (int)CombatSelection.Item:
-						{
-							m_nextState = State.ItemPrompt;
-							break;
-						}
-						case (int)CombatSelection.Run:
-						{
-							// do nothing
-							break;
-						}
-						case (int)CombatSelection.Pokemon:
-						{
-							m_nextState = State.PokemonPrompt;
-							break;
-						}
+						m_waitingForInput = false;
+						m_nextState = State.ProcessTurn;
 					}
 				}
-				break;
-			}
-			case State.FightPrompt:
-			{
-				if (!m_waitingForInput)
-				{
-					m_userChoice = -1;
-					AddStatusMessage("Chose to Fight!");
-					m_waitingForInput = true;
-				}
-				else if (ValidateInput())
-				{
-					if (m_userChoice == -2)
-					{
-						m_nextState = State.CombatPrompt;
-					}
-					else
-					{
-						//m_actionQueue.Enqueue(m_userPlayer.GetTurnAction());
-						m_turnActions.Add(m_userPlayer.GetTurnAction());
-						
-						m_nextState = State.EnemyAction;
-					}
-				}
-				break;
-			}
-			case State.ItemPrompt:
-			{
-				if (!m_waitingForInput)
-				{
-					m_userChoice = -1;
-					AddStatusMessage("Chose to use an item!");
-					m_waitingForInput = true;
-				}
-				else if (ValidateInput())
-				{
-					if (m_userChoice == -2)
-					{
-						m_nextState = State.CombatPrompt;
-					}
-				}
-				break;
-			}
-			case State.PokemonPrompt:
-			{
-				if (!m_waitingForInput)
-				{
-					m_userChoice = -1;
-					AddStatusMessage("Choose a pokemon");
-					m_waitingForInput = true;
-				}
-				else if (ValidateInput())
-				{
-					if (m_userChoice == -2)
-					{
-						m_nextState = State.CombatPrompt;
-					}
-					else
-					{
-						// Assemble a recall action
-						SwapAbility swap = new SwapAbility(m_userPlayer, m_userChoice);
-						m_actionQueue.Enqueue(swap);
-						m_nextState = State.EnemyAction;
-					}
-				}
-				break;
-			}
-			case State.EnemyAction:
-			{
-				if (NeedPlayerAction(m_enemyPlayer))
-				{
-					ITurnAction enemyAction = m_enemyPlayer.GetTurnAction();
-					//m_actionQueue.Enqueue(enemyAction);
-					m_turnActions.Add(enemyAction);
-				}
-				
-				m_nextState = State.ProcessTurn;
 				break;
 			}
 			case State.ProcessTurn:
@@ -346,7 +317,6 @@ public class NewBattleSystem
 						
 						if (!status.isComplete)
 						{
-							//m_nextTurnQueue.Enqueue(action);
 							m_turnActions.Add(action);
 						}
 					}
@@ -370,36 +340,12 @@ public class NewBattleSystem
 					m_pendingEvents.Enqueue(eventArgs);
 				}
 				
-				if (m_userPlayer.ActivePokemon.isDead())
+				if (m_userPlayer.ActivePokemon.isDead() || m_enemyPlayer.ActivePokemon.isDead())
 				{
-					if (m_userPlayer.IsDefeated())
-					{
-						AddStatusMessage("You've lost!");
-						m_nextState = State.Splash;
-					}
-					else
-					{
-						m_nextState = State.FriendlyPokemonDefeated;
-					}
-				}
-				else if (m_enemyPlayer.ActivePokemon.isDead())
-				{
-					if (m_enemyPlayer.IsDefeated())
-					{
-						m_nextState = State.Victory;
-					}
-					else
-					{
-						m_nextState = State.EnemyPokemonDefeated;
-					}
+					m_nextState = State.ReplaceDeadPokemon;
 				}
 				else
 				{
-					// swap queues -- make the next turn the current one
-//					Queue<ITurnAction> temp = m_actionQueue;
-//					m_actionQueue = m_nextTurnQueue;
-//					m_nextTurnQueue = temp;
-					
 					m_nextState = State.BeginTurn;
 				}
 				break;
@@ -440,82 +386,47 @@ public class NewBattleSystem
 				}
 				break;
 			}
-			case State.FriendlyPokemonDefeated:
+			case State.ReplaceDeadPokemon:
 			{
 				if (!m_waitingForInput)
 				{
-					m_userChoice = -1;
-					AddStatusMessage("Battle using which Pokemon?");
-					m_waitingForInput = true;
-				}
-				else
-				{
-					if (m_userChoice != -1)
+					if (m_userPlayer.ActivePokemon.isDead())
 					{
-						m_waitingForInput = false;
-						m_actionQueue.Enqueue(new DeployAbility(m_userPlayer, m_userChoice, true));
-						m_nextState = State.ProcessTurn;
-					}
-				}
-				break;
-			}
-			case State.EnemyPokemonDefeated:
-			{
-				if (!m_waitingForInput)
-				{
-					m_userChoice = -1;
-					int pokemonIndex = m_enemyPlayer.GetNextPokemon(m_userPlayer);
-					
-					AddStatusMessage(m_enemyPlayer.Name + " is about to send in " + m_enemyPlayer.Pokemon[pokemonIndex].Name + ".\n Will you switch your Pokemon?");
-					
-					m_waitingForInput = true;
-				}
-				else
-				{
-					if (m_userChoice != -1)
-					{
-						m_waitingForInput = false;
-						if (m_userChoice == 1)
-						{	
-							m_nextState = State.ReplacePokemon;
+						if (m_userPlayer.IsDefeated())
+						{
+							AddStatusMessage("You've lost!");
+							m_nextState = State.Splash;
 						}
 						else
 						{
-							m_nextState = State.ReplaceEnemyPokemon;
+							m_needPlayerPokemon = true;
+							m_userPlayer.GetNextPokemon(m_enemyPlayer, this.ReplacementHandler);
 						}
 					}
-				}
-				break;
-			}
-			case State.ReplacePokemon:
-			{
-				if (!m_waitingForInput)
-				{
-					m_userChoice = -1;
-					AddStatusMessage("Choose a Pokemon");
+					
+					if (m_enemyPlayer.ActivePokemon.isDead())
+					{
+						if (m_enemyPlayer.IsDefeated())
+						{
+							m_nextState = State.Victory;
+						}
+						else
+						{
+							m_needEnemyPokemon = true;
+							m_enemyPlayer.GetNextPokemon(m_userPlayer, this.ReplacementHandler);
+						}
+					}
+					
 					m_waitingForInput = true;
 				}
 				else
 				{
-					if (m_userChoice != -1)
+					if (!m_needPlayerPokemon && !m_needEnemyPokemon)
 					{
 						m_waitingForInput = false;
-						if (m_userChoice != -2)
-						{
-							SwapAbility ability = new SwapAbility(m_userPlayer, m_userChoice);
-							m_actionQueue.Enqueue(ability);
-						}
-						m_nextState = State.ReplaceEnemyPokemon;
+						m_nextState = State.ProcessTurn;
 					}
 				}
-				break;
-			}
-			case State.ReplaceEnemyPokemon:
-			{
-				int pokemonIndex = m_enemyPlayer.GetNextPokemon(m_userPlayer);
-				m_actionQueue.Enqueue(new DeployAbility(m_enemyPlayer, pokemonIndex, false));
-				
-				m_nextState = State.ProcessTurn;
 				break;
 			}
 		}
@@ -551,18 +462,21 @@ public class NewBattleSystem
 		m_enemyTrainer = new Trainer(TrainerDefinition.TrainerType.RandomClass, Pokemon.Gender.Random, -1);
 		string trainerName = m_enemyTrainer.Title + " " + m_enemyTrainer.Name;
 		
-		Player player = new Player(trainerName, new SequentialPokemonStrategy());
+		RandomMoveRequest moveRequest = new RandomMoveRequest();
+		SequentialPokemonRequest nextPokemonRequest = new SequentialPokemonRequest();
+		NoCounterRequest counterRequest = new NoCounterRequest();
+		Player player = new Player(trainerName, moveRequest, nextPokemonRequest, counterRequest);
 		
 		Pokemon.Species[] speciesOptions = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
 		speciesOptions = speciesOptions.Where(x => x != Pokemon.Species.None).ToArray();
-		//for (int i = 0; i < 3; ++i)
-		for (int i = 0; i < 1; ++i)
+		for (int i = 0; i < 3; ++i)
+		//for (int i = 0; i < 1; ++i)
 		{
 			int index = m_generator.Next(0, speciesOptions.Length);
 			
 			Pokemon.Species species = speciesOptions[index];
 			
-			Character enemy = PokemonFactory.CreatePokemon(species, 50, "", Pokemon.Gender.Random, m_enemyStrategy);
+			Character enemy = PokemonFactory.CreatePokemon(species, 50, "", Pokemon.Gender.Random);
 			
 			player.AddPokemon(enemy);
 		}
@@ -577,7 +491,6 @@ public class NewBattleSystem
 			return null;
 		}
 		
-		//AbstractAbility selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
 		Ability selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
 		
 		return new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, selectedAbility);

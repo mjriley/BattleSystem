@@ -14,6 +14,7 @@ public class PokemonSwitchButton
 	
 	static GUIStyle m_nameStyle;
 	static GUIStyle m_detailsStyle;
+	static GUIStyle m_emptyStyle;
 	
 	const int HEALTH_WIDTH = 84;
 	
@@ -31,12 +32,14 @@ public class PokemonSwitchButton
 		m_healthTexture = Resources.Load<Texture2D>("Textures/Buttons/PokemonSwitch/Health");
 		
 		m_nameStyle = new GUIStyle();
-		m_nameStyle.fontSize = 14;
+		m_nameStyle.fontSize = 16;
 		
 		m_detailsStyle = new GUIStyle();
 		m_detailsStyle.fontSize = 12;
 		m_detailsStyle.normal.textColor = Color.white;
 		m_detailsStyle.fontStyle = FontStyle.Bold;
+		
+		m_emptyStyle = new GUIStyle();
 		
 		m_isInit = true;
 	}
@@ -51,6 +54,8 @@ public class PokemonSwitchButton
 	{
 		Init();
 		
+		bool pressed = false;
+		
 		GUIUtils.DrawGroup(bounds, delegate(Rect group)
 		{
 			Rect backBounds;
@@ -63,6 +68,11 @@ public class PokemonSwitchButton
 				backBounds = new Rect(0.0f, 0.0f, m_backgroundTexture.width, m_backgroundTexture.height);
 			}
 			
+			if (GUI.Button(new Rect(0, 0, group.width, group.height), "", m_emptyStyle))
+			{
+				pressed = true;
+			}
+			
 			GUI.DrawTexture(backBounds, m_backgroundTexture);
 			
 			float x = drawReversed ? 11 : 0;
@@ -73,10 +83,9 @@ public class PokemonSwitchButton
 				int detailsOffsetY = 33;
 				int startNameX = thumbOffsetX + thumbnail.width + 5;
 				GUI.DrawTexture(new Rect(thumbOffsetX, 4, thumbnail.width, thumbnail.height), thumbnail);
-				GUI.Label(new Rect(startNameX, 10, 100, 30), pokemon.Name, m_nameStyle);
+				GUI.Label(new Rect(startNameX, 7, 100, 30), pokemon.Name, m_nameStyle);
 				GUIContent level = new GUIContent("Lv. " + pokemon.Level.ToString());
 				Vector2 detailSize = m_detailsStyle.CalcSize(level);
-				//GUI.Label(new Rect(thumbOffsetX + 10, detailsOffsetY, detailSize.x, detailSize.y), level, m_detailsStyle);
 				CustomGUI.BorderedLabel(new Rect(thumbOffsetX + 10, detailsOffsetY, detailSize.x, detailSize.y), level, 1, Color.black, m_detailsStyle);
 				
 				GUI.DrawTexture(new Rect(70, 26, m_hpFrameTexture.width, m_hpFrameTexture.height), m_hpFrameTexture);
@@ -85,7 +94,6 @@ public class PokemonSwitchButton
 				
 				GUIContent health = new GUIContent(pokemon.CurrentHP + " / " + pokemon.MaxHP);
 				Vector2 healthSize = m_detailsStyle.CalcSize(health);
-				//GUI.Label(new Rect(70 + m_hpFrameTexture.width - healthSize.x, detailsOffsetY, healthSize.x, detailSize.y), health, m_detailsStyle);
 				CustomGUI.BorderedLabel(new Rect(70 + m_hpFrameTexture.width - healthSize.x, detailsOffsetY, healthSize.x, detailSize.y), health, 1, Color.black, m_detailsStyle);
 				
 				Texture2D genderTexture = (pokemon.Gender == Pokemon.Gender.Male) ? m_maleTexture : m_femaleTexture;
@@ -94,6 +102,6 @@ public class PokemonSwitchButton
 			
 		});
 		
-		return false;
+		return pressed;
 	}
 }

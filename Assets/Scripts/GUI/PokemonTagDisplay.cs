@@ -41,11 +41,6 @@ public class PokemonTagDisplay
 		return new Vector2(m_backgroundTexture.width, m_backgroundTexture.height);
 	}
 	
-//	public static bool Button(Rect screenRect, Character pokemon, bool drawReversed)
-//	{
-//		return Button(screenRect, pokemon, drawReversed, m_internalStyle);
-//	}
-	
 	public static bool Button(Rect screenRect, Character pokemon, bool drawReversed, GUIStyle style, int nameOffsetX, int nameOffsetY, int statOffsetX, int statOffsetY, GUIStyle statStyle)
 	{
 		Init();

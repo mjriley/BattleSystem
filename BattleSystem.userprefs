@@ -1,22 +1,30 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/PokemonSwitchButton.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PokeCore/SequentialPokemonStrategy.cs">
     <Files>
-      <File FileName="Assets/Scripts/PokeCore/Player.cs" Line="22" Column="1" />
-      <File FileName="Assets/Scripts/GUI/PokemonListState.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/RosterState.cs" Line="75" Column="1" />
-      <File FileName="Assets/Scripts/GUI/BattleDisplay.cs" Line="318" Column="76" />
-      <File FileName="Assets/Scripts/GUI/PokemonSwitchButton.cs" Line="66" Column="61" />
-      <File FileName="Assets/Scripts/GUI/PokemonTagDisplay.cs" Line="14" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/NewBattleSystem.cs" Line="468" Column="43" />
+      <File FileName="Assets/Scripts/PokeCore/NoCounterRequest.cs" Line="11" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/NoTurnAction.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/Player.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/RandomMoveRequest.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/RequestType.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/RunUse.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/SequentialPokemonRequest.cs" Line="59" Column="1" />
+      <File FileName="Assets/Scripts/PokeCore/SequentialPokemonStrategy.cs" Line="6" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="GUI" expanded="True">
-                <Node name="PokemonSwitchButton.cs" selected="True" />
+              <Node name="PokeCore" expanded="True">
+                <Node name="SequentialPokemonStrategy.cs" selected="True" />
               </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Editor" expanded="True">
+              <Node name="Tests" expanded="True" />
             </Node>
           </Node>
         </State>

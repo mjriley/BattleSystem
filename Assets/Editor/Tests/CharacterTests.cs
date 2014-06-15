@@ -176,7 +176,7 @@ namespace Tests
 			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
 			Dictionary<Stat, int> iv = new Dictionary<Stat, int> { {Stat.Attack, 10} };
 			
-			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, ivs: iv);
+			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, ivs: iv);
 			
 			Assert.AreEqual(65, pokemon.Atk);
 		}

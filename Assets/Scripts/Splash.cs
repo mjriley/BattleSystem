@@ -17,20 +17,15 @@ public class Splash : MonoBehaviour
 	private float windOffset = 0.0f;
 	public float windSpeed = 0.1f;
 	
-	//private Texture2D trainer;
-	
 	Rect m_topScreen = new Rect(0, 0, 400, 240);
 	Rect m_bottomScreen = new Rect(0, 240, 400, 240);
 
 	void Start()
 	{
-		//trainer = Resources.Load<Texture2D>("Textures/Trainers/VSFurisode_Girl_2");
 	}
 	
 	void DoShift()
 	{
-		// move left at X speed for Y time
-		// then move right at Z speed for A time which should move the trainer off the screen
 	}
 	
 	void Update()
@@ -97,9 +92,6 @@ public class Splash : MonoBehaviour
 			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.8f);
 			GUI.DrawTextureWithTexCoords(new Rect(0, 0, bounds.width, bounds.height), windTexture, new Rect(windOffset, 0.0f, 0.5f, 1.0f));
 			GUI.color = prevColor;
-			
-			// Trainer
-			//GUI.DrawTexture(new Rect(0.0f, 0.0f, bounds.width, bounds.height), trainer);
 		});
 	}
 	

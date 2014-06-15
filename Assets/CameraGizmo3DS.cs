@@ -9,6 +9,5 @@ public class CameraGizmo3DS : MonoBehaviour
 		
 		Gizmos.color = Color.cyan;
 		Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y, 0), new Vector3(400, 240, 0));
-		//Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y - 120, 0), new Vector3(400, 240, 0));
 	}
 }

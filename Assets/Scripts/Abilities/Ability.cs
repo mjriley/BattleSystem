@@ -37,6 +37,17 @@ public class Ability
 		CurrentPP = MaxPP;
 	}
 	
+	// replenishes a specific amount of PP, returning the actual amount replenished
+	public int Replenish(int amount)
+	{
+		int previousPP = CurrentPP;
+		
+		int newPP = CurrentPP + amount;
+		CurrentPP = Math.Min(newPP, MaxPP);
+		
+		return CurrentPP - previousPP;
+	}
+	
 	void PerformEligibilityChecks(Character actor, ref ActionStatus status)
 	{
 		if (actor.isDead())

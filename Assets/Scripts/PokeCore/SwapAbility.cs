@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace PokeCore {
 
+// Differs from Deploy ability with the intent that this needs to swap an existing (alive) pokemon for another one
 public class SwapAbility : ITurnAction
 {
 	private int m_newIndex;
@@ -51,6 +52,12 @@ public class SwapAbility : ITurnAction
 		}
 		
 		return result;
+	}
+	
+	public bool Verify(out List<string> messages)
+	{
+		messages = new List<string>();
+		return true;
 	}
 }
 

@@ -1,5 +1,10 @@
+using System.Collections.Generic;
+
 namespace PokeCore {
 
+// Represents only the deploy action of putting a pokemon onto the field to start a battle,
+// or replacing a dead pokemon that has already been removed from the field.
+// This could probably be combined with the SwapAbility
 public class DeployAbility : ITurnAction
 {
 	Player m_player;
@@ -39,6 +44,12 @@ public class DeployAbility : ITurnAction
 		result.events.Add(new DeployEventArgs(m_player.ActivePokemon));
 		
 		return result;
+	}
+	
+	public bool Verify(out List<string> messages)
+	{
+		messages = new List<string>();
+		return true;
 	}
 }
 

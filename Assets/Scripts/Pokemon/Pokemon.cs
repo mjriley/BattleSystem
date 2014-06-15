@@ -5,35 +5,6 @@ namespace Pokemon {
 
 public class Pokemon
 {
-//	public enum Species
-//	{
-//		Chespin,
-//		Quilladin,
-//		Chesnaught,
-//		Fennekin,
-//		Braixen,
-//		Delphox,
-//		Froakie,
-//		Frogadier,
-//		Greninja,
-//		Bunnelby,
-//		Diggersby,
-//		Zigzagoon,
-//		Bulbasaur,
-//		Charmander,
-//		Magikarp,
-//		Pikachu,
-//		Squirtle,
-//		None
-//	};
-	
-//	public enum Gender
-//	{
-//		Male,
-//		Female,
-//		Random
-//	};
-	
 	public static int GetStat(Species species, Stat stat, uint level)
 	{
 		PokemonDefinition defintion = PokemonDefinition.GetEntry(species);

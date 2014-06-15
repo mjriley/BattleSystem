@@ -19,7 +19,7 @@ namespace Tests
 		{
 			m_actor = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50);
 			m_enemy = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50);
-			m_enemyPlayer = new Player("", null);
+			m_enemyPlayer = new Player("", null, null, null);
 			m_enemyPlayer.AddPokemon(m_enemy);
 			
 			m_status = new ActionStatus();

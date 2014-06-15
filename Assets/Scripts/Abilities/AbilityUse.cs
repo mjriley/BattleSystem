@@ -1,4 +1,5 @@
 using PokeCore;
+using System.Collections.Generic;
 
 namespace Abilities {
 
@@ -6,10 +7,8 @@ public class AbilityUse : ITurnAction
 {
 	public Character m_actor;
 	public Player m_targetPlayer;
-	//public AbstractAbility m_ability;
 	public Ability m_ability;
 	
-	//public AbilityUse(Character actor, Player targetPlayer, AbstractAbility ability)
 	public AbilityUse(Character actor, Player targetPlayer, Ability ability)
 	{
 		m_actor = actor;
@@ -25,6 +24,12 @@ public class AbilityUse : ITurnAction
 	}
 	
 	public int Priority { get { return m_ability.Priority; } } 
+	
+	public bool Verify(out List<string> messages)
+	{
+		messages = new List<string>();
+		return true;
+	}
 }
 
 }

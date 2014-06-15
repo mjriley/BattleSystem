@@ -9,7 +9,7 @@ namespace Pokemon {
 
 public class PokemonFactory
 {
-	public static Character CreatePokemon(Species species, uint level, string name="", Gender gender=Gender.Random, IAttackStrategy strategy=null)
+	public static Character CreatePokemon(Species species, uint level, string name="", Gender gender=Gender.Random)
 	{
 		PokemonDefinition definition = PokemonDefinition.GetEntry(species);
 		
@@ -25,7 +25,7 @@ public class PokemonFactory
 			gender = (rand < definition.MaleRatio) ? Gender.Male : Gender.Female;
 		}
 		
-		Character pokemon = new Character(name, definition, gender, level, strategy);
+		Character pokemon = new Character(name, definition, gender, level);
 		
 		for (int i = 0; i < 4; ++i)
 		{
@@ -37,7 +37,6 @@ public class PokemonFactory
 				break;
 			}
 			
-			//AbstractAbility ability = AbilityFactory.GetAbility(abilityName);
 			Ability ability = AbilityFactory.GetAbility(abilityName);
 			pokemon.addAbility(ability);
 		}

@@ -1,22 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WhiteOut : MonoBehaviour {
+public class WhiteOut : MonoBehaviour
+{
 
 	Texture2D m_flatTexture;
 	
-	//public float Opacity { get; set; }
 	public float Opacity;
 
-	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		m_flatTexture = Resources.Load<Texture2D>("Textures/white_tile");
 		Opacity = 0.0f;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 	
 	void OnGUI()

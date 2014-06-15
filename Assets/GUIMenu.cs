@@ -86,8 +86,6 @@ public class GUIMenu : MonoBehaviour
 					GUI.Label(new Rect((bounds.width - fontWidth) / 2.0f - textBounds.x, y, textBounds.x, textBounds.y), cursor, optionsStyle);
 				}
 			}
-			
-			//GUI.Label(new Rect((Screen.width - fontWidth) / 2.0f - textBounds.x, textVerticalStart + optionSelectedIndex * textBounds.y, textBounds.x, textBounds.y), cursor, optionsStyle);
 		});
 	}
 

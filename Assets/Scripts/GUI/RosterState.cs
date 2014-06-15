@@ -69,7 +69,6 @@ public class RosterState : IDisplayState
 					float offsetY = (x % 2 == 0) ? 0 : buttonSize.y / 2;
 					float offsetX = (x % 2 == 0) ? 0 : bounds.width - buttonSize.x;
 					
-					//int index = NUM_COLUMNS * y + x;
 					int index = GetIndex(y, x);
 					
 					PokemonPrototype prototype = m_controller.GetRosterSlot(index);
@@ -147,14 +146,12 @@ public class RosterState : IDisplayState
 				});
 				
 				Rect levelUpRect = new Rect(m_offsetX, 3 * m_offsetY + m_buttonHeight * 2, m_buttonWidth, m_buttonHeight);
-				//if (GUI.RepeatButton(levelUpRect, "Increase Level"))
 				if (AccelerationButton.Display(levelUpRect, new GUIContent("Increase Level")))
 				{
 					m_controller.ModifyLevel(activeIndex, 1);
 				}
 				
 				Rect levelDownRect = new Rect(bounds.width - m_offsetX - m_buttonWidth, 3 * m_offsetY + m_buttonHeight * 2, m_buttonWidth, m_buttonHeight);
-				//if (GUI.RepeatButton(levelDownRect, "Decrease Level"))
 				if (AccelerationButton.Display(levelDownRect, new GUIContent("Decrease Level")))
 				{
 					m_controller.ModifyLevel(activeIndex, -1);

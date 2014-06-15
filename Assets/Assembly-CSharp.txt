@@ -58,3 +58,82 @@ Veteran_Female=Veteran
 Worker_Male=Worker
 Child_Male=Youngster
 Child_Female=Lass
+
+#Item Categories
+ITEM_CATEGORY_Resource=HP/PP Restore
+ITEM_CATEGORY_Balls=Poké Balls
+ITEM_CATEGORY_Status=Status Restore
+ITEM_CATEGORY_Battle=Battle Items
+
+# Pokemon Select Screen Prompts
+POKEMON_SELECT_CHOOSE=Choose a Pokémon.
+POKEMON_SELECT_REPLACE=Battle using which Pokémon?
+
+# Items
+ITEM_POTION=Potion
+ITEM_DESC_POTION=A spray-type medicine for treating wounds. It can be used to restore 20 HP to an injured Pokémon.
+ITEM_SUPER_POTION=Super Potion
+ITEM_DESC_SUPER_POTION=A spray-type medicine for treating wounds. It can be used to restore 50 HP to an injured Pokémon.
+ITEM_HYPER_POTION=Hyper Potion
+ITEM_DESC_HYPER_POTION=A spray-type medicine for treating wounds. It can be used to restore 200 HP to an injured Pokémon.
+ITEM_ETHER=Ether
+ITEM_DESC_ETHER=This medicine can restore 10 PP to a single selected move that has been learned by a Pokémon.
+ITEM_MAX_ETHER=Max Ether
+ITEM_DESC_MAX_ETHER=This medicine can fully restore the PP of a single selected move that has been learned by a Pokémon.
+ITEM_ELIXIR=Elixir
+ITEM_DESC_ELIXIR=This medicine can restore 10 PP to each of the moves that have been learned by a Pokémon.
+ITEM_MAX_ELIXIR=Max Elixir
+ITEM_DESC_MAX_ELIXIR=This medicine can fully restore the PP of all of the moves that have been learned by a Pokémon.
+ITEM_POKE_BALL=Poké Ball
+ITEM_DESC_POKE_BALL=A device for catching wild Pokémon. It's thrown like a ball at a Pokémon, comfortably encapsulating its target.
+ITEM_GREAT_BALL=Great Ball
+ITEM_DESC_GREAT_BALL=A good, high-performance Poké Ball that provides a higher Pokémon catch rate than a standard Poké Ball can.
+ITEM_ULTRA_BALL=Ultra Ball
+ITEM_DESC_ULTRA_BALL=An ultra-high performance Poké Ball that provides a higher success rate for catching Pokémon than a Great Ball.
+ITEM_MASTER_BALL=Master Ball
+ITEM_DESC_MASTER_BALL=The best Poké Ball with the ultimate level of performance. With it, you will catch any wild Pokémon without fail.
+ITEM_ANTIDOTE=Antidote
+ITEM_DESC_ANTIDOTE=A spray-type medicine used for poisoning. It can be used once to lift the effects of being posioned from a Pokémon.
+ITEM_PARALYZE_HEAL=Paralyze Heal
+ITEM_DESC_PARALYZE_HEAL=A spray-type medicine for paralysis. It can be used once to free a Pokémon that has been paralyzed.
+ITEM_AWAKENING=Awakening
+ITEM_DESC_AWAKENING=A spray-type medicine used againt sleep. It can be used once to rouse a Pokémon from the clutches of sleep.
+ITEM_BURN_HEAL=Burn Heal
+ITEM_DESC_BURN_HEAL=A spray-type medicine for treating burns. It can be used once to heal a Pokémon suffering from a burn.
+ITEM_ICE_HEAL=Ice Heal
+ITEM_DESC_ICE_HEAL=A spray-type medicine for freezing. It can be used once to defrost a Pokémon that has been frozen solid.
+ITEM_X_ATTACK=X Attack
+ITEM_DESC_X_ATTACK=An item that boosts the Attack stat of a Pokémon during a battle. It wears off once the Pokémon is withdrawn.
+ITEM_X_DEFENSE=X Defense
+ITEM_DESC_X_DEFENSE=An item that boosts the Defense stat of a Pokémon during a battle. It wears off once the Pokémon is withdrawn.
+ITEM_X_SP._ATK=X Sp. Atk
+ITEM_DESC_X_SP._ATK=An item that boosts the Sp. Atk stat of a Pokémon during a battle. It wears off once the Pokémon is withdrawn.
+ITEM_X_SP._DEF=X Sp. Def
+ITEM_DESC_X_SP._DEF=An item that boosts the Sp. Def stat of a Pokémon during a battle. It wears off once the Pokémon is withdrawn.
+ITEM_X_SPEED=X Speed
+ITEM_DESC_X_SPEED=An item that boosts the Speed stat of a Pokémon during a battle. It wears off once the Pokémon is withdrawn.
+ITEM_X_ACCURACY=X Accuracy
+ITEM_DESC_X_ACCURACY=An item that boosts the Accuracy stat of a Pokémon during a battle. It wears off once the Pokémon is withdrawn.
+
+# Stats
+STAT_ATTACK=Attack
+STAT_DEFENSE=Defense
+STAT_SPECIAL_ATTACK=Sp. Atk
+STAT_SPECIAL_DEFENSE=Sp. Def
+STAT_SPEED=Speed
+STAT_ACCURACY=Accuracy
+STAT_EVASION=Evasion
+
+# Stat Stage Changes
+STAGE_INCREASE_0=won't go any higher
+STAGE_INCREASE_1=rose
+STAGE_INCREASE_2=rose sharply
+STAGE_INCREASE_3=rose drastically
+STAGE_DECREASE_0=won't go any lower
+STAGE_DECREASE_1=fell
+STAGE_DECREASE_2=harshly fell
+STAGE_DECREASE_3=severely fell
+
+# Status Messages
+FLEE_PROHIBITED=No! There's no running from a Trainer battle!
+STAT_CHANGE={0}'s {1} {2}!

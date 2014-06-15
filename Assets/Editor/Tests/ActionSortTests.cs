@@ -1,12 +1,14 @@
 using System;
 using NUnit.Framework;
 using PokeCore;
+using System.Collections.Generic;
 
 namespace Tests
 {
 	class CharacterStub : ICharacter
 	{
 		public int Spd { get; set; }
+		public Player Owner { get { return null; } }
 		public CharacterStub(int speed)
 		{
 			Spd = speed;
@@ -18,6 +20,7 @@ namespace Tests
 		public ICharacter Subject { get; set; }
 		public int Priority { get; set; }
 		public ActionStatus Execute() { return null; }
+		public bool Verify(out List<string> messages) { messages = new List<string>(); return true; }
 		
 		public ActionStub(int priority, int speed)
 		{
