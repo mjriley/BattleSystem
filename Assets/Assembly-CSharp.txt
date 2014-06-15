@@ -135,5 +135,6 @@ STAGE_DECREASE_2=harshly fell
 STAGE_DECREASE_3=severely fell
 
 # Status Messages
+COUNTER_REPLACE_PROMPT={0} is about to send in {1}. Will you switch your Pokémon?
 FLEE_PROHIBITED=No! There's no running from a Trainer battle!
 STAT_CHANGE={0}'s {1} {2}!

@@ -136,6 +136,9 @@ public class NewBattleSystem
 			
 			if (m_hasCounterReplace && !m_needPlayerPokemon)
 			{
+				string format = L18N.Get("COUNTER_REPLACE_PROMPT");
+				string message = String.Format(format, m_enemyPlayer.Name, action.Subject.Name);
+				m_pendingEvents.Enqueue(new StatusUpdateEventArgs(message));
 				m_needPlayerPokemon = true;
 				m_userPlayer.GetCounterPokemon(m_enemyPlayer, this.CounterReplaceHandler);
 			}
@@ -213,7 +216,6 @@ public class NewBattleSystem
 		
 		// all status events must be processed before we can handle state logic
 		ChangeState(m_nextState);
-		//m_currentState = m_nextState;
 		
 		switch (m_currentState)
 		{

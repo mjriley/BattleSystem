@@ -8,6 +8,7 @@ namespace Tests
 	class CharacterStub : ICharacter
 	{
 		public int Spd { get; set; }
+		public string Name { get { return ""; } }
 		public Player Owner { get { return null; } }
 		public CharacterStub(int speed)
 		{

@@ -5,6 +5,7 @@ public interface ICharacter
 {
 	Player Owner { get; }
 	int Spd { get; }
+	string Name { get; }
 }
 
 }
