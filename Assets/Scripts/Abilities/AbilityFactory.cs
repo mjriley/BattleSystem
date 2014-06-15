@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using Abilities.Power;
 using Abilities.Effects;
 using Pokemon;
+using PokeCore;
 
 namespace Abilities {
 
 public class AbilityFactory
 {
 	static Dictionary<string, Ability> m_abilities;
-	static IAbilityDescriptions m_descriptions;
 	
 	static bool m_isInit = false;
 	
@@ -25,13 +25,13 @@ public class AbilityFactory
 	
 	private static void AddAbility(AbstractAbility ability)
 	{
-		ability.Description = m_descriptions.GetDescription(ability.Name);
+		string abilityKey = ability.Name.ToUpper().Replace(' ', '_');
+		ability.Description = L18N.Get(abilityKey);
 		m_abilities[ability.Name] = new Ability(ability, ability.MaxPP);
 	}
 	
 	public static void Init()
 	{
-		m_descriptions = new AbilityDescriptionsEnglish();
 		m_abilities = new Dictionary<string, Ability>();
 		
 		AddAbility(new DamageAbility("Thunder Shock", AbilityType.Special, BattleType.Electric, 30, 40, 100, 
