@@ -92,6 +92,7 @@ public class NewBattleSystem
 		{
 			Character pokemon = PokemonFactory.CreatePokemon(prototype.Species, prototype.Level, "", prototype.Gender);
 			m_userPlayer.AddPokemon(pokemon);
+			break;
 		}
 	}
 	
@@ -405,6 +406,7 @@ public class NewBattleSystem
 						{
 							AddStatusMessage(L18N.Get("MSG_LOSE"));
 							m_nextState = State.Splash;
+							break;
 						}
 						else
 						{
@@ -418,6 +420,7 @@ public class NewBattleSystem
 						if (m_enemyPlayer.IsDefeated())
 						{
 							m_nextState = State.Victory;
+							break;
 						}
 						else
 						{
