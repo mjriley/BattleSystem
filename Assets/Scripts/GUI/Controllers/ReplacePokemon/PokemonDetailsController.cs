@@ -76,7 +76,15 @@ public class PokemonDetailsController : IScreenController
 		{
 			case Options.Submit:
 			{
-				DeployAbility action = new DeployAbility(m_system.UserPlayer, m_pokemonIndex, true);
+				ITurnAction action;
+				if (m_request.RequestType == RequestType.Replace)
+				{
+					action = new DeployAbility(m_system.UserPlayer, m_pokemonIndex, true);
+				}
+				else
+				{
+					action = new SwapAbility(m_system.UserPlayer, m_pokemonIndex);
+				}
 				m_request.SubmitAction(action);
 				return;
 			}
