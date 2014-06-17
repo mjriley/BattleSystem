@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Abilities;
+using Moves;
 using Pokemon;
 using Items;
 
@@ -496,16 +496,16 @@ public class NewBattleSystem
 		return player;
 	}
 	
-	private ITurnAction GetUserAbility()
+	private ITurnAction GetUserAction()
 	{
 		if (m_userChoice == -1)
 		{
 			return null;
 		}
 		
-		Ability selectedAbility = m_userPlayer.ActivePokemon.getAbilities()[m_userChoice];
+		Move selectedMove = m_userPlayer.ActivePokemon.getMoves()[m_userChoice];
 		
-		return new AbilityUse(m_userPlayer.ActivePokemon, m_enemyPlayer, selectedAbility);
+		return new MoveUse(m_userPlayer.ActivePokemon, m_enemyPlayer, selectedMove);
 	}
 }
 

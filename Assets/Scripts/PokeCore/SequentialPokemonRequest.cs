@@ -38,7 +38,7 @@ public class SequentialPokemonRequest : IActionRequest
 		
 		if (foundPokemon)
 		{
-			action = new DeployAbility(player, nextIndex, false);
+			action = new DeployAction(player, nextIndex, false);
 		}
 		else
 		{

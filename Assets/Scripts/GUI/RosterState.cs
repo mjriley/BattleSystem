@@ -129,8 +129,8 @@ public class RosterState : IDisplayState
 					m_controller.DisplayDetails(activeIndex);
 				}
 				
-				Rect abilitiesRect = new Rect(m_offsetX, 2 * m_offsetY + m_buttonHeight, m_buttonWidth, m_buttonHeight);
-				GUI.Button(abilitiesRect, "Abilities");
+				Rect movesRect = new Rect(m_offsetX, 2 * m_offsetY + m_buttonHeight, m_buttonWidth, m_buttonHeight);
+				GUI.Button(movesRect, "Moves");
 				
 				GUIUtils.DrawEnabled((m_controller.GetRosterSize() != 1), delegate()
 				{

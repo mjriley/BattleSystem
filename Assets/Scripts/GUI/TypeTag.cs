@@ -1,5 +1,5 @@
 using UnityEngine;
-using Abilities;
+using Moves;
 
 public class TypeTag
 {

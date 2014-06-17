@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Abilities;
+using Moves;
 
 namespace PokeCore {
 
@@ -18,26 +18,26 @@ public class RandomMoveRequest : IActionRequest
 		m_generator = generator;
 	}
 	
-	Ability DetermineAbility(Character actor)
+	Move DetermineMove(Character actor)
 	{
 		uint cost = actor.getUsageCost();
 		
-		List<Ability> abilities = actor.getAbilities();
+		List<Move> moves = actor.getMoves();
 		
-		Ability ability = null;
+		Move move = null;
 		
-		while (abilities.Count > 0)
+		while (moves.Count > 0)
 		{
-			int abilityIndex = m_generator.Next(0, abilities.Count);
-			ability = abilities[abilityIndex];
+			int moveIndex = m_generator.Next(0, moves.Count);
+			move = moves[moveIndex];
 			
-			if (ability.CurrentPP < cost)
+			if (move.CurrentPP < cost)
 			{
-				abilities.Remove(ability);
+				moves.Remove(move);
 			}
 			else
 			{
-				return ability;
+				return move;
 			}
 		}
 		
@@ -52,8 +52,8 @@ public class RandomMoveRequest : IActionRequest
 	
 	public void GetAction(Player player, Player enemyPlayer, NewBattleSystem.ProcessAction actionCallback)
 	{
-		Ability ability = DetermineAbility(player.ActivePokemon);
-		AbilityUse action = new AbilityUse(player.ActivePokemon, enemyPlayer, ability);
+		Move move = DetermineMove(player.ActivePokemon);
+		MoveUse action = new MoveUse(player.ActivePokemon, enemyPlayer, move);
 		actionCallback(action);
 	}
 	

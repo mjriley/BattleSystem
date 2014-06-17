@@ -4,8 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-using Abilities;
-using Abilities.Status;
+using Moves;
+using Moves.Status;
 using Pokemon;
 
 namespace PokeCore {
@@ -52,7 +52,7 @@ public class Character : ICharacter
 	public const int MIN_STAGE = -6;
 	
 	private int m_currentHP;
-	private List<Ability> m_abilities = new List<Ability>();
+	private List<Move> m_moves = new List<Move>();
 	private string m_name;
 	
 	private WeakReference m_refOwner;
@@ -293,23 +293,23 @@ public class Character : ICharacter
 		return (m_currentHP == 0);
 	}
 	
-	public List<Ability> getAbilities()
+	public List<Move> getMoves()
 	{
-		return new List<Ability>(m_abilities);
+		return new List<Move>(m_moves);
 	}
 	
-	public void addAbility(Ability ability)
+	public void addMove(Move move)
 	{
-		m_abilities.Add(ability);
+		m_moves.Add(move);
 	}
 	
-	public void replaceAbility(int index, Ability ability)
+	public void replaceMove(int index, Move move)
 	{
-		m_abilities[index] = ability;
+		m_moves[index] = move;
 	}
 	
 	// Stubbed to only return 1 right now,
-	// but accounts for ability costs changes that occur due to something like the 'Pressure' ability
+	// but accounts for move costs changes that occur due to something like the 'Pressure' ability
 	public uint getUsageCost()
 	{
 		return 1;

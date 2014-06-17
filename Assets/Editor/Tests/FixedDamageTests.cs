@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Abilities;
+using Moves;
 using Pokemon;
 using PokeCore;
 
@@ -8,7 +8,7 @@ namespace Tests
 	[TestFixture]
 	public class FixedDamageTests
 	{
-		DamageAbility m_ability;
+		DamageMove m_move;
 		Character m_attacker;
 		const uint POWER = 40;
 		
@@ -21,7 +21,7 @@ namespace Tests
 		[SetUp]
 		public void Init()
 		{
-			m_ability = new DamageAbility("Test Ability", AbilityType.Special, BattleType.Dragon, 20, POWER, 100);
+			m_move = new DamageMove("Test Move", MoveType.Special, BattleType.Dragon, 20, POWER, 100);
 			m_attacker = PokemonFactory.CreatePokemon(Species.Pikachu, 50, "Attacker");
 		}
 		
@@ -31,7 +31,7 @@ namespace Tests
 			// Dragon vs Normal is 1.0 effectiveness
 			Character defender = CreateTypedPokemon(BattleType.Normal);
 			
-			DamageResult result = DamageCalculations.FixedDamageFormula(m_attacker, defender, m_ability, null);
+			DamageResult result = DamageCalculations.FixedDamageFormula(m_attacker, defender, m_move, null);
 			
 			Assert.AreEqual(POWER, result.amount);
 		}
@@ -42,7 +42,7 @@ namespace Tests
 			// Dragon vs Dragon is 2x effective
 			Character defender = CreateTypedPokemon(BattleType.Dragon);
 			
-			DamageResult result = DamageCalculations.FixedDamageFormula(m_attacker, defender, m_ability, null);
+			DamageResult result = DamageCalculations.FixedDamageFormula(m_attacker, defender, m_move, null);
 			
 			Assert.AreEqual(POWER, result.amount);
 		}
@@ -53,7 +53,7 @@ namespace Tests
 			// Dragon vs Fairy, Fairy is immune
 			Character defender = CreateTypedPokemon(BattleType.Fairy);
 			
-			DamageResult result = DamageCalculations.FixedDamageFormula(m_attacker, defender, m_ability, null);
+			DamageResult result = DamageCalculations.FixedDamageFormula(m_attacker, defender, m_move, null);
 			
 			System.Console.WriteLine("Types are: " + defender.Types.Count);
 			System.Console.WriteLine("Multiplier is: " + DamageCalculations.getDamageMultiplier(BattleType.Dragon, defender.Types));

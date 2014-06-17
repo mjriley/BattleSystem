@@ -1,6 +1,6 @@
 using NUnit.Framework;
-using Abilities;
-using Abilities.Effects;
+using Moves;
+using Moves.Effects;
 using Pokemon;
 using PokeCore;
 
@@ -28,7 +28,7 @@ namespace Tests
 		[Test]
 		public void TargetEffectTest()
 		{
-			EffectAbility.BasicEffect effect = BasicEffects.StatEffect(Target.Enemy, Stat.Attack, 1);
+			EffectMove.BasicEffect effect = BasicEffects.StatEffect(Target.Enemy, Stat.Attack, 1);
 			effect(null, m_actor, m_enemyPlayer, ref m_status);
 			
 			// Pikachu's base attack is 75 @ 50, 112 with a stage boost
@@ -38,7 +38,7 @@ namespace Tests
 		[Test]
 		public void SelfEffectTest()
 		{
-			EffectAbility.BasicEffect effect = BasicEffects.StatEffect(Target.Self, Stat.Attack, 1);
+			EffectMove.BasicEffect effect = BasicEffects.StatEffect(Target.Self, Stat.Attack, 1);
 			effect(null, m_actor, m_enemyPlayer, ref m_status);
 			
 			Assert.AreEqual(112, m_actor.Atk);

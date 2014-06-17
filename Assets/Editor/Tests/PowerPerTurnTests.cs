@@ -1,24 +1,24 @@
 using NUnit.Framework;
-using Abilities;
-using Abilities.Power;
+using Moves;
+using Moves.Power;
 using PokeCore;
 
 namespace Tests
 {
 
-class DummyRepeatAbility : Abilities.IRepeatAbility
+class DummyRepeatMove : Moves.IRepeatMove
 {
 	public void Reset() { }
-	public ActionStatus Execute(Character actor, Player targetPlayer, IAbilityImpl parentAbility) { return new ActionStatus(); }
+	public ActionStatus Execute(Character actor, Player targetPlayer, IMoveImpl parentMove) { return new ActionStatus(); }
 	public int CurrentTurn { get; set; }
 	public int MaxTurns { get { return 0; } }
-	public DummyRepeatAbility(int currentTurn) { CurrentTurn = currentTurn; }
+	public DummyRepeatMove(int currentTurn) { CurrentTurn = currentTurn; }
 }
 
 [TestFixture]
 public class PowerPerTurnTests
 {
-	RepeatAbility m_repeatAbility;
+	RepeatMove m_repeatMove;
 	PowerPerTurn m_powerObject;
 	
 	[SetUp]
@@ -30,7 +30,7 @@ public class PowerPerTurnTests
 	[Test]
 	public void BasePowerOnFirstTurn()
 	{
-		DummyRepeatAbility parent = new DummyRepeatAbility(0);
+		DummyRepeatMove parent = new DummyRepeatMove(0);
 		uint power = m_powerObject.GetPower(null, null, null, parent);
 		Assert.AreEqual(30, power);
 	}
@@ -38,7 +38,7 @@ public class PowerPerTurnTests
 	[Test]
 	public void PowerOnTurnFour()
 	{
-		DummyRepeatAbility parent = new DummyRepeatAbility(3);
+		DummyRepeatMove parent = new DummyRepeatMove(3);
 		uint power = m_powerObject.GetPower(null, null, null, parent);
 		Assert.AreEqual(240, power);
 	}

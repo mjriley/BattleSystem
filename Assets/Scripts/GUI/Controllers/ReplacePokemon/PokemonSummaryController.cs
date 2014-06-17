@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using PokemonGUI;
 using System;
 
-public class PokemonSummaryController : IScreenController, IAbilityController
+public class PokemonSummaryController : IScreenController, IMoveController
 {
 	ScreenManager m_manager;
 	GameObject m_gameObject;
@@ -37,13 +37,13 @@ public class PokemonSummaryController : IScreenController, IAbilityController
 		
 		StatDisplay statDisplay = gameObject.GetComponentsInChildren<StatDisplay>(true)[0];
 		statDisplay.SetController(this);
-		AbilityExtendedDisplay abilityDisplay = gameObject.GetComponentsInChildren<AbilityExtendedDisplay>(true)[0];
-		abilityDisplay.SetController(this);
+		MoveExtendedDisplay moveDisplay = gameObject.GetComponentsInChildren<MoveExtendedDisplay>(true)[0];
+		moveDisplay.SetController(this);
 		
 		m_displays = new Dictionary<ActiveScreen, IGameScreen>
 		{
 			{ActiveScreen.Summary, statDisplay},
-			{ActiveScreen.Moves, abilityDisplay}
+			{ActiveScreen.Moves, moveDisplay}
 		};
 	}
 	
@@ -63,9 +63,9 @@ public class PokemonSummaryController : IScreenController, IAbilityController
 	{
 		if (m_activeScreen == ActiveScreen.Moves)
 		{
-			AbilityDetailsController nextScreen = new AbilityDetailsController(m_manager, m_gameObject, m_system, m_request);
+			MoveDetailsController nextScreen = new MoveDetailsController(m_manager, m_gameObject, m_system, m_request);
 			nextScreen.SetPokemon(m_system.UserPlayer.Pokemon[m_pokemonIndex]);
-			nextScreen.SetAbilityIndex(selection);
+			nextScreen.SetMoveIndex(selection);
 			m_manager.LoadScreen(nextScreen);
 		}
 	}

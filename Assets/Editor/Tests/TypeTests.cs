@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using Abilities;
+using Moves;
 
 namespace Tests
 {

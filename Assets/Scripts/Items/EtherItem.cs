@@ -1,21 +1,21 @@
 using PokeCore;
-using Abilities;
+using Moves;
 using System.Collections.Generic;
 
 namespace Items {
 
 public class EtherItem : BaseItem
 {
-	public EtherItem(string name, int amount, bool allAbilities = false)
+	public EtherItem(string name, int amount, bool allMoves = false)
 	: base(name, ItemCategory.Resource)
 	{
 		Name = name;
 		Amount = amount;
-		AllAbilities = allAbilities;
+		AllMoves = allMoves;
 	}
 	
 	public int Amount { get; protected set; }
-	public bool AllAbilities { get; protected set; }
+	public bool AllMoves { get; protected set; }
 	
 	public override ActionStatus Use(ItemContext context)
 	{
@@ -28,23 +28,23 @@ public class EtherItem : BaseItem
 		string moveName;
 		
 		Character pokemon = context.Target;
-		List<Ability> abilities;
-		if (!AllAbilities)
+		List<Move> moves;
+		if (!AllMoves)
 		{
-			int index = context.AbilityIndex;
-			abilities = new List<Ability> {pokemon.getAbilities()[index]};
-			moveName = pokemon.getAbilities()[index].Name;
+			int index = context.MoveIndex;
+			moves = new List<Move> {pokemon.getMoves()[index]};
+			moveName = pokemon.getMoves()[index].Name;
 		}
 		else
 		{
-			abilities = pokemon.getAbilities();
+			moves = pokemon.getMoves();
 			moveName = L18N.Get("MSG_ITEM_PP_ALL"); // all its moves
 		}
 		
 		int totalReplenished = 0;
-		foreach (Ability ability in abilities)
+		foreach (Move move in moves)
 		{
-			totalReplenished += ability.Replenish(Amount);
+			totalReplenished += move.Replenish(Amount);
 		}
 		
 		if (totalReplenished > 0)

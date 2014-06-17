@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Abilities;
+using Moves;
 using PokeCore;
 
 namespace Pokemon {
@@ -29,16 +29,16 @@ public class PokemonFactory
 		
 		for (int i = 0; i < 4; ++i)
 		{
-			string abilityName = definition.GetAbility(i);
+			string moveName = definition.GetMove(i);
 			
-			if (abilityName == "")
+			if (moveName == "")
 			{
-				// If it's an empty string, there are no more abilities to fetch
+				// If it's an empty string, there are no more moves to fetch
 				break;
 			}
 			
-			Ability ability = AbilityFactory.GetAbility(abilityName);
-			pokemon.addAbility(ability);
+			Move move = MoveFactory.GetMove(moveName);
+			pokemon.addMove(move);
 		}
 		
 		return pokemon;

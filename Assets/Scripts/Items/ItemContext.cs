@@ -9,12 +9,12 @@ public class ItemContext
 	{
 		this.Player = player;
 		Target = target;
-		AbilityIndex = 0;
+		MoveIndex = 0;
 	}
 	
 	public Player Player { get; set; }
 	public Character Target { get; set; }
-	public int AbilityIndex { get; set; }
+	public int MoveIndex { get; set; }
 }
 
 }

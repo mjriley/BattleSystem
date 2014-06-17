@@ -79,11 +79,11 @@ public class PokemonDetailsController : IScreenController
 				ITurnAction action;
 				if (m_request.RequestType == RequestType.Replace)
 				{
-					action = new DeployAbility(m_system.UserPlayer, m_pokemonIndex, true);
+					action = new DeployAction(m_system.UserPlayer, m_pokemonIndex, true);
 				}
 				else
 				{
-					action = new SwapAbility(m_system.UserPlayer, m_pokemonIndex);
+					action = new SwapAction(m_system.UserPlayer, m_pokemonIndex);
 				}
 				m_request.SubmitAction(action);
 				return;
@@ -105,7 +105,6 @@ public class PokemonDetailsController : IScreenController
 			}
 			case Options.Moves:
 			{
-				//AbilityDetailsController nextScreen = new AbilityDetailsController(m_controller, m_gameObject, m_system);
 				PokemonSummaryController nextScreen = new PokemonSummaryController(m_manager, m_gameObject, m_system,
 					PokemonSummaryController.ActiveScreen.Moves, new WeakReference(this), m_request);
 				nextScreen.SetPokemonIndex(m_pokemonIndex);

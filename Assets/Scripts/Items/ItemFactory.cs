@@ -17,8 +17,8 @@ namespace Items
 			AddItem(new RestoreItem("Hyper Potion", 200));
 			AddItem(new EtherItem("Ether", 10));
 			AddItem(new EtherItem("Max Ether", 255));
-			AddItem(new EtherItem("Elixir", 10, allAbilities: true));
-			AddItem(new EtherItem("Max Elixir", 255, allAbilities: true));
+			AddItem(new EtherItem("Elixir", 10, allMoves: true));
+			AddItem(new EtherItem("Max Elixir", 255, allMoves: true));
 			
 			AddItem(new StatusItem("Antidote", StatusType.Poison));
 			AddItem(new StatusItem("Paralyze Heal", StatusType.Paralysis));

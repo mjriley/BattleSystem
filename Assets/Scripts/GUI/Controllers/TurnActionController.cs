@@ -36,7 +36,7 @@ public class TurnActionController : IScreenController
 		{
 			case Options.Fight:
 				int pokemonIndex = m_system.UserPlayer.Pokemon.IndexOf(m_system.UserPlayer.ActivePokemon);
-				nextScreen = new AbilityController(m_manager, m_gameObject, m_system, m_request, pokemonIndex);
+				nextScreen = new MoveController(m_manager, m_gameObject, m_system, m_request, pokemonIndex);
 				m_manager.LoadScreen(nextScreen);
 				break;
 			case Options.Bag:

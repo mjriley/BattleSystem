@@ -1,4 +1,4 @@
-using Abilities.Power;
+using Moves.Power;
 using NUnit.Framework;
 
 using Pokemon;

@@ -77,11 +77,11 @@ public class StatDisplay : MonoBehaviour, IGameScreen
 	public int m_itemHeight = 26;
 	public GUIStyle m_itemStyle;
 	
-	public int m_abilityX = 0;
-	public int m_abilityY = 100;
-	public int m_abilityWidth = 300;
-	public int m_abilityHeight = 60;
-	public GUIStyle m_abilityStyle;
+	public int m_moveX = 0;
+	public int m_moveY = 100;
+	public int m_moveWidth = 300;
+	public int m_moveHeight = 60;
+	public GUIStyle m_moveStyle;
 	
 	public int m_boxY = 40;
 	public int m_boxHeight = 160;
@@ -129,10 +129,10 @@ public class StatDisplay : MonoBehaviour, IGameScreen
 				GUI.Label(new Rect(m_hpBarX + healthSize.x - 100, m_levelY, 100, m_statHeight), healthRatio, m_numberStyle);
 			});
 			
-			// placeholder for ability
+			// placeholder for move
 			prevColor = GUI.backgroundColor;
 			GUI.backgroundColor = Color.green;
-			GUI.Label(new Rect(m_abilityX, m_abilityY, m_abilityWidth, m_abilityHeight), "<Ability>", m_abilityStyle);
+			GUI.Label(new Rect(m_moveX, m_moveY, m_moveWidth, m_moveHeight), "<move>", m_moveStyle);
 			GUI.backgroundColor = prevColor;
 			
 			// placeholder for held item

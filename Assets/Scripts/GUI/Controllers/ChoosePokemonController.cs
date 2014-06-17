@@ -30,9 +30,9 @@ public class ChoosePokemonController : ISelectPokemonController
 		if (m_item is EtherItem)
 		{
 			EtherItem ether = (EtherItem)m_item;
-			if (!ether.AllAbilities)
+			if (!ether.AllMoves)
 			{
-				IScreenController nextScreen = new RestoreAbilityController(m_manager, m_gameObject, m_system, m_request, m_item, pokemon);
+				IScreenController nextScreen = new RestoreMoveController(m_manager, m_gameObject, m_system, m_request, m_item, pokemon);
 				m_manager.LoadScreen(nextScreen);
 				return;
 			}

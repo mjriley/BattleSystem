@@ -1,5 +1,5 @@
 using UnityEngine;
-using Abilities;
+using Moves;
 using System.Collections.Generic;
 
 public class TypeColor
