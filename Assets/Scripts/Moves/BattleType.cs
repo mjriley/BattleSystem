@@ -1,3 +1,4 @@
+namespace PokeCore {
 namespace Moves {
 
 public enum BattleType
@@ -23,4 +24,4 @@ public enum BattleType
 	_None
 };
 
-}
+}}

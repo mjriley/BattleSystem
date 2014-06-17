@@ -1,7 +1,8 @@
 using System;
-using Pokemon;
+using PokeCore.Pokemon;
 using PokeCore;
 
+namespace PokeCore {
 namespace Moves {
 namespace Effects {
 
@@ -46,4 +47,4 @@ public class BasicEffects
 	
 }
 
-}}
+}}}

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using Moves;
+using PokeCore.Moves;
 
 namespace Tests
 {

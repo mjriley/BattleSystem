@@ -1,9 +1,9 @@
 using PokeCore;
-using Moves;
 using System;
 using System.Collections.Generic;
 
 
+namespace PokeCore {
 namespace Moves {
 
 public struct DamageResult
@@ -366,4 +366,4 @@ public class DamageCalculations
 	
 }
 
-}
+}}

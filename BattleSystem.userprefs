@@ -1,28 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/AccelerationButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/Tests/ActionSortTests.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/AccelerationButton.cs" Line="10" Column="41" />
+      <File FileName="Assets/Scripts/Moves/Effects/BasicEffects.cs" Line="24" Column="72" />
+      <File FileName="Assets/Scripts/PokemonGUI/Controls/PokemonSelectionButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Battle/BallZoneIn.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Roster/PokemonListState.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Roster/RosterController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Scores/HighScoresDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Controls/PokemonRosterButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Controls/PlayerStatusDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Controls/PokemonSwitchButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/PlayerRoster.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Battle/DetailElements.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Battle/Screens/PokemonDetailsDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Battle/Screens/RestoreDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PokemonGUI/Scenes/Roster/PokemonDetailsState.cs" Line="1" Column="1" />
+      <File FileName="Assets/Editor/Tests/BasicEffectsTests.cs" Line="1" Column="1" />
+      <File FileName="Assets/Editor/Tests/CharacterTests.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Moves/MoveFactory.cs" Line="4" Column="15" />
+      <File FileName="Assets/Editor/Tests/ActionSortTests.cs" Line="23" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="GUI" expanded="True">
-                <Node name="AccelerationButton.cs" selected="True" />
-              </Node>
-              <Node name="Items" expanded="True" />
-              <Node name="PokeCore" expanded="True" />
-              <Node name="Pokemon" expanded="True" />
-            </Node>
-            <Node name="UnityTestTools" expanded="True" />
-          </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Editor" expanded="True">
-              <Node name="Tests" expanded="True" />
-            </Node>
-          </Node>
+          <Node name="Assembly-CSharp" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">

@@ -1,3 +1,4 @@
+namespace PokeCore {
 namespace Moves {
 
 public enum MoveType
@@ -7,4 +8,4 @@ public enum MoveType
 	Status
 }
 
-}
+}}

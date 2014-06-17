@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PokeCore;
 
+namespace PokeCore {
 namespace Moves {
 namespace Effects {
 
@@ -104,4 +105,4 @@ public class OnHitEffects
 	
 }
 
-}}
+}}}

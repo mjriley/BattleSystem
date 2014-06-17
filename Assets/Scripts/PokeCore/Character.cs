@@ -4,11 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-using Moves;
-using Moves.Status;
-using Pokemon;
-
 namespace PokeCore {
+	using Pokemon;
+	using Moves;
+	using Moves.Status;
 
 public class Character : ICharacter
 {

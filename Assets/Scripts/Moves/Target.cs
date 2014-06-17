@@ -1,3 +1,4 @@
+namespace PokeCore {
 namespace Moves {
 
 public enum Target
@@ -6,4 +7,4 @@ public enum Target
 	Enemy
 }
 
-}
+}}

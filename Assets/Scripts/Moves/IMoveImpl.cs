@@ -1,5 +1,4 @@
-using PokeCore;
-
+namespace PokeCore {
 namespace Moves {
 
 public interface IMoveImpl
@@ -8,5 +7,5 @@ public interface IMoveImpl
 	ActionStatus Execute(Character actor, Player targetPlayer, IMoveImpl parentMove);
 }
 
-}
+}}
 

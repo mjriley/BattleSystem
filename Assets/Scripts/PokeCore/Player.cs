@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Items;
+using PokeCore.Items;
 
 namespace PokeCore {
 

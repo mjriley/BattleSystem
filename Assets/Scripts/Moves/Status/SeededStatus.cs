@@ -1,5 +1,4 @@
-using PokeCore;
-
+namespace PokeCore {
 namespace Moves {
 namespace Status {
 
@@ -26,5 +25,4 @@ namespace Status {
 		}
 	}
 	
-}}
-
+}}}

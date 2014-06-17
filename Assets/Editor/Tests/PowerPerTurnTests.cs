@@ -1,12 +1,12 @@
 using NUnit.Framework;
-using Moves;
-using Moves.Power;
+using PokeCore.Moves;
+using PokeCore.Moves.Power;
 using PokeCore;
 
 namespace Tests
 {
 
-class DummyRepeatMove : Moves.IRepeatMove
+class DummyRepeatMove : IRepeatMove
 {
 	public void Reset() { }
 	public ActionStatus Execute(Character actor, Player targetPlayer, IMoveImpl parentMove) { return new ActionStatus(); }

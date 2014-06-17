@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Moves;
 
 namespace PokeCore {
+	using Moves;
 
 public class RandomMoveRequest : IActionRequest
 {

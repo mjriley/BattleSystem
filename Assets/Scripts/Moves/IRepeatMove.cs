@@ -1,3 +1,4 @@
+namespace PokeCore {
 namespace Moves {
 
 public interface IRepeatMove : IMoveImpl
@@ -6,5 +7,4 @@ public interface IRepeatMove : IMoveImpl
 	int MaxTurns { get; }
 }
 
-}
-
+}}

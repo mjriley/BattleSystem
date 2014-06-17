@@ -1,6 +1,6 @@
 using System;
-using PokeCore;
 
+namespace PokeCore {
 namespace Moves {
 
 public class Move
@@ -115,4 +115,4 @@ public class Move
 	}
 }
 
-}
+}}

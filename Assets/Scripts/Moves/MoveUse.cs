@@ -1,6 +1,6 @@
-using PokeCore;
 using System.Collections.Generic;
 
+namespace PokeCore {
 namespace Moves {
 
 public class MoveUse : ITurnAction
@@ -34,4 +34,4 @@ public class MoveUse : ITurnAction
 	}
 }
 
-}
+}}

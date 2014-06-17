@@ -2,11 +2,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Moves;
-using Pokemon;
-using Items;
+using PokeGame;
 
 namespace PokeCore {
+	using Items;
+	using Pokemon;
+	using Moves;
 
 public class NewBattleSystem
 {
@@ -390,7 +391,7 @@ public class NewBattleSystem
 							}
 							
 							// TODO: Figure out some way to not include this in this file
-							UnityEngine.Application.LoadLevel("HighScores");
+							UnityEngine.Application.LoadLevel("Scores");
 						}
 					}
 				}

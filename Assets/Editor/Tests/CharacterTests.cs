@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-using Pokemon;
+using PokeCore.Pokemon;
 using PokeCore;
 
 namespace Tests
@@ -151,10 +151,10 @@ namespace Tests
 		[Test]
 		public void BeneficialNature()
 		{
-			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			PokemonDefinition def = PokemonDefinition.GetEntry(Species.Pikachu);
 			// Lonely increases attack and decreases Defense
 			Nature nature = NatureFactory.GetNature(Nature.Type.Lonely);
-			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, nature: nature);
+			Character pokemon = new Character("", def, Gender.Male, 50, null, nature: nature);
 			
 			Assert.AreEqual(83, pokemon.Atk);
 		}
@@ -162,10 +162,10 @@ namespace Tests
 		[Test]
 		public void DetrimentalNature()
 		{
-			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			PokemonDefinition def = PokemonDefinition.GetEntry(Species.Pikachu);
 			// Bold increases defense and decreases Attack
 			Nature nature = NatureFactory.GetNature(Nature.Type.Bold);
-			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, nature: nature);
+			Character pokemon = new Character("", def, Gender.Male, 50, null, nature: nature);
 			
 			Assert.AreEqual(67, pokemon.Atk);
 		}
@@ -173,10 +173,10 @@ namespace Tests
 		[Test]
 		public void HandleIVs()
 		{
-			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			PokemonDefinition def = PokemonDefinition.GetEntry(Species.Pikachu);
 			Dictionary<Stat, int> iv = new Dictionary<Stat, int> { {Stat.Attack, 10} };
 			
-			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, ivs: iv);
+			Character pokemon = new Character("", def, Gender.Male, 50, ivs: iv);
 			
 			Assert.AreEqual(65, pokemon.Atk);
 		}
@@ -184,10 +184,10 @@ namespace Tests
 		[Test]
 		public void HandleEVs()
 		{
-			PokemonDefinition def = PokemonDefinition.GetEntry(Pokemon.Species.Pikachu);
+			PokemonDefinition def = PokemonDefinition.GetEntry(Species.Pikachu);
 			Dictionary<Stat, int> ev = new Dictionary<Stat, int> { {Stat.Attack, 200} };
 			
-			Character pokemon = new Character("", def, Pokemon.Gender.Male, 50, null, evs: ev);
+			Character pokemon = new Character("", def, Gender.Male, 50, null, evs: ev);
 			
 			Assert.AreEqual(100, pokemon.Atk);
 		}

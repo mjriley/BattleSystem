@@ -1,5 +1,4 @@
-using PokeCore;
-
+namespace PokeCore {
 namespace Moves {
 
 public class NoOpMove : AbstractMove
@@ -26,4 +25,4 @@ public class NoOpMove : AbstractMove
 	}
 }
 
-}
+}}

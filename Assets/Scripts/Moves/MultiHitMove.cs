@@ -1,6 +1,6 @@
 using System;
-using PokeCore;
 
+namespace PokeCore {
 namespace Moves {
 
 // An attack that hits multiple (variable) times within the same turn. The distribution_gen parameter allows the user
@@ -88,4 +88,4 @@ public class MultiHitMove : DamageMove
 	}
 }
 
-}
+}}

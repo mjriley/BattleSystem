@@ -1,5 +1,4 @@
-using PokeCore;
-
+namespace PokeCore {
 namespace Moves {
 namespace Power {
 
@@ -9,5 +8,4 @@ namespace Power {
 		uint GetPower(Character attacker, Character defender, DamageMove move, IMoveImpl parentMove);
 	}
 	
-}}
-
+}}}

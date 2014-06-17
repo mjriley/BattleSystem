@@ -1,3 +1,4 @@
+namespace PokeCore {
 namespace Moves {
 
 public enum Effectiveness
@@ -8,4 +9,4 @@ public enum Effectiveness
 	Immune
 };
 
-}
+}}

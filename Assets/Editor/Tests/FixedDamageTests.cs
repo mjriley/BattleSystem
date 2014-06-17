@@ -1,6 +1,6 @@
 using NUnit.Framework;
-using Moves;
-using Pokemon;
+using PokeCore.Moves;
+using PokeCore.Pokemon;
 using PokeCore;
 
 namespace Tests

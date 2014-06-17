@@ -1,4 +1,4 @@
-using Items;
+using PokeCore.Items;
 using System.Collections.Generic;
 
 namespace PokeCore {

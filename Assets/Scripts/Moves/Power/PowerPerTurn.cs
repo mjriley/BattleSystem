@@ -1,5 +1,4 @@
-using PokeCore;
-
+namespace PokeCore {
 namespace Moves {
 namespace Power {
 
@@ -27,4 +26,4 @@ public class PowerPerTurn : IPowerCalculation
 	}
 }
 
-}}
+}}}

@@ -1,7 +1,7 @@
-using Moves.Power;
+using PokeCore.Moves.Power;
 using NUnit.Framework;
 
-using Pokemon;
+using PokeCore.Pokemon;
 using PokeCore;
 
 namespace Tests

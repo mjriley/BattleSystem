@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using Moves;
-using Moves.Effects;
-using Pokemon;
+using PokeCore.Moves;
+using PokeCore.Moves.Effects;
+using PokeCore.Pokemon;
 using PokeCore;
 
 namespace Tests
@@ -17,8 +17,8 @@ namespace Tests
 		[SetUp]
 		public void Init()
 		{
-			m_actor = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50);
-			m_enemy = PokemonFactory.CreatePokemon(Pokemon.Species.Pikachu, 50);
+			m_actor = PokemonFactory.CreatePokemon(Species.Pikachu, 50);
+			m_enemy = PokemonFactory.CreatePokemon(Species.Pikachu, 50);
 			m_enemyPlayer = new Player("", null, null, null);
 			m_enemyPlayer.AddPokemon(m_enemy);
 			

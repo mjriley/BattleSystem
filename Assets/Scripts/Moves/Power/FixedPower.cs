@@ -1,5 +1,6 @@
 using PokeCore;
 
+namespace PokeCore {
 namespace Moves {
 namespace Power {
 
@@ -24,5 +25,4 @@ namespace Power {
 		}
 	}
 	
-}}
-
+}}}

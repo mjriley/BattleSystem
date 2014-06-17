@@ -1,6 +1,6 @@
-using PokeCore;
 using System;
 
+namespace PokeCore {
 namespace Moves {
 
 public class EffectMove : AbstractMove
@@ -56,4 +56,4 @@ public class EffectMove : AbstractMove
 	}
 }
 
-}
+}}

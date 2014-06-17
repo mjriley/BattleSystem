@@ -1,6 +1,7 @@
 using System;
 using PokeCore;
 
+namespace PokeCore {
 namespace Moves {
 
 public abstract class AbstractMove : IMoveImpl
@@ -42,4 +43,4 @@ public abstract class AbstractMove : IMoveImpl
 	protected abstract ActionStatus ExecuteImpl(Character actor, Player targetPlayer, ref ActionStatus status, IMoveImpl parentMove=null);
 }
 
-}
+}}

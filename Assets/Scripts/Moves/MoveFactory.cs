@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Moves.Power;
-using Moves.Effects;
-using Pokemon;
-using PokeCore;
+using PokeCore.Pokemon;
 
+namespace PokeCore {
 namespace Moves {
+	using Power;
+	using Effects;
 
 public class MoveFactory
 {
@@ -135,4 +135,4 @@ public class MoveFactory
 	}
 }
 
-}
+}}

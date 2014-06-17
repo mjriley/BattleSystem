@@ -1,8 +1,8 @@
 using System;
-using PokeCore;
-using Moves.Power;
 
+namespace PokeCore {
 namespace Moves {
+	using Power;
 
 public class DamageMove : AbstractMove
 {
@@ -138,4 +138,4 @@ public class DamageMove : AbstractMove
 	}
 }
 
-}
+}}
