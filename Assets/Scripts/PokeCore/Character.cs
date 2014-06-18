@@ -278,13 +278,7 @@ public class Character : ICharacter
 		m_currentHP = Mathf.Min(m_currentHP, MaxHP);
 		m_currentHP = Mathf.Max(m_currentHP, 0);
 		
-		
-		// REMOVE, just to speed up testing
-		m_currentHP = 0;
-		
-		
-		//return (initialHP - m_currentHP);
-		return initialHP;
+		return (initialHP - m_currentHP);
 	}
 	
 	public bool isDead()

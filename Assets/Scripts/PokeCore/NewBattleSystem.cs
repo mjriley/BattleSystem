@@ -93,7 +93,6 @@ public class NewBattleSystem
 		{
 			Character pokemon = PokemonFactory.CreatePokemon(prototype.Species, prototype.Level, "", prototype.Gender);
 			m_userPlayer.AddPokemon(pokemon);
-			break;
 		}
 	}
 	
@@ -483,7 +482,6 @@ public class NewBattleSystem
 		Pokemon.Species[] speciesOptions = (Pokemon.Species[])Enum.GetValues(typeof(Pokemon.Species));
 		speciesOptions = speciesOptions.Where(x => x != Pokemon.Species.None).ToArray();
 		for (int i = 0; i < 3; ++i)
-		//for (int i = 0; i < 1; ++i)
 		{
 			int index = m_generator.Next(0, speciesOptions.Length);
 			
